@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter');
+     header {
+         background-color: #353535;
+         text-align:center;
+         padding:10px;
+         margin-bottom:10px;
+         box-shadow: 0 2px 3px #111;
+     }
+     body {
+         margin:0;
+         background-color: #1B1B1B;
+         user-select:none;
+         color:white;
+         font-family: 'Inter', Arial;
+     }
+     e {
+         display:block;
+         margin:1em;
+         font-size: 0.9em
+     }
+     p2 {
+         display:block;
+         margin: 0.8em;
+         font-weight: bold;
+     }
+     p1 {
+         font-size:36px
+     }
+     button {
+       background-color: #353535;
+       padding: 0.7em;
+       border: 2px solid #808080;
+       border-radius: 5px;
+       color: white;
+       margin: 10px;
+       cursor: pointer;
+     }
+     :focus {
+       outline: 0;
+     }
