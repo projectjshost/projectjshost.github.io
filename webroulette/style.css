@@ -26,14 +26,22 @@
      p1 {
          font-size:36px
      }
+     .difficulty {
+       border: 2px solid #808080;
+       border-radius: 5px;
+       margin: 15px;
+     }
      button {
        background-color: #353535;
-       padding: 0.7em;
+       padding: 10px;
        border: 2px solid #808080;
        border-radius: 5px;
        color: white;
-       margin: 10px;
+       margin: 5px;
        cursor: pointer;
+     }
+     button:hover {
+       border: 2px solid white;
      }
      :focus {
        outline: 0;

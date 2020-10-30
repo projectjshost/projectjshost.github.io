@@ -9,12 +9,17 @@
         <p1>Web Roulette</p1>
     </header>
           <e>Tijd voor een spel van Web Roulette!</e>
-          <e>Het is net als Russian Roulette, maar in plaats van dat je dood gaat crasht je browser.</e>
-          <e>De kans dat je wint is 83.3%</e>
-          <p2 id='1'>Status: Niet gespeeld</p2>
-          <p2 id='2'>Keer gespeeld: 0</p2>
-          <p2 id='2'>HighScore: 0</p2>
-          <button onclick='roulette()'>Speel</button>
-
+          <e>Het is Russian Roulette, maar dan voor browsers.</e>
+          <p2 id='1'>Status: Not Played Yet</p2>
+          <p2 id='2'>Times Played: 0</p2>
+          <div class="difficulty">
+            <e id='3'>Difficulty: Normal</e>
+            <e id="4">Win chance: 83.3%</e>
+          <button onclick='setdiff(12)'>Easy</button>
+          <button onclick='setdiff(6)'>Normal</button>
+          <button onclick='setdiff(3)'>Hard</button>
+          <button onclick='setdiff(2)'>Ulra</button>
+        </div>
+          <button onclick='roulette()'>Roulette!</button>
 </body>
 </html>
