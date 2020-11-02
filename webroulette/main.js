@@ -36,6 +36,10 @@ function setdiff(d) {
       document.getElementById('3').innerHTML = 'Difficulty: Hard';
       document.getElementById('4').innerHTML = 'Win chance: 66.6%';
       break;
+    case 2:
+      document.getElementById('3').innerHTML = 'Difficulty: Ultra';
+      document.getElementById('4').innerHTML = 'Win chance: 50.0%';
+      break;
     default:
       // code block
   }
