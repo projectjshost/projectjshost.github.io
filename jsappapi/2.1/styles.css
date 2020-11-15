@@ -10,7 +10,7 @@
          margin:0;
          background-color: #1B1B1B;
          user-select:none;
-         color:white;
+         color: #fff;
          font-family: 'Inter', Arial;
      }
 	 e {
@@ -30,9 +30,9 @@
         color: gray
     }
      p2 {
-         display:block;
-         margin: 0.8em;
-         font-weight: bold;
+     	display: block;
+        font-size: 25px;
+        margin-left: 10px
      }
      p1 {
          font-size:36px
@@ -59,14 +59,14 @@
      	background-color: #222;
      }
      :focus {
-       outline: 0;
+        outline: 0;
      }
      f {
-            position: fixed;
-            bottom: 0;
-            text-align: center;
-            width: 100%;
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 5px
+        position: fixed;
+		bottom: 0;
+		text-align: center;
+        width: 100%;
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px
         }
