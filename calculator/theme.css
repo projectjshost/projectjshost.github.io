@@ -1,3 +1,4 @@
+@import url('https://projectjshost.github.io/fonts/inter.css');
 html, body {
     
  -webkit-user-select: none; /* Safari */        
@@ -12,12 +13,6 @@ html, body {
     overflow-x: hidden;
     color: #fff;
 }
-header {
-    background-color: #35a135;
-    border-bottom: 2px solid #18580f;
-    top: 0;
-    overflow: hidden;
-}
 p1 {
     float: left;
     margin: 5px;
@@ -26,7 +21,7 @@ p1 {
 }
 /* used white colour for foreground so that disabled button is not visible to the screen */
 button:disabled{
-    color: #f1f1f1;
+    color: grey;
 }
 /* made the hover background color to white so the annoying hover in empty space is removed */
 
@@ -39,8 +34,9 @@ button:disabled:hover{
 }
 
 body {
-    font-family: monospace;
+    font-family: Inter;
     background-color: black;
+    overflow: hidden;
 }
 
 h1 {
@@ -52,13 +48,11 @@ h1 {
 .container {
     justify-content: center;
     align-items: center;
-    margin: auto;
-    height: 410px;
-    width: 340px;
-    margin-top: 30px;
+    margin: 0;
+    height: 100%;
+    width: 100%;
     background: #222;
-    border: 2px solid #666;
-    border-radius: 10px;
+    overflow: hidden;
 }
 
 .output {
@@ -75,20 +69,23 @@ input {
 
 #display {
     outline: none;
-    width: 280px;
+    width: -webkit-fill-available;
     height: 40px;
     background: #444;
     border: 2px solid #666;
     border-radius: 5px;
     color: white;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .keyboard {
-    width: 330px;
     position: relative;
     top: 40px;
-    margin: 10px;
     text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
  /* it Removes Outline of all Button */
 *:focus {
@@ -106,7 +103,7 @@ button {
     padding: 12px;
     outline: none;
     border-radius: 5px;
-    width: 49px;
+    width: 20%;
     height: 45px;
 }
 
