@@ -13,11 +13,22 @@
          color:white;
          font-family: 'Inter', Arial;
      }
-     e {
-         display:block;
-         margin:1em;
-         font-size: 0.9em
-     }
+	 e {
+        display: block;
+        border-left: 2px solid #80808000;
+        padding: 0.7em;
+        font-size: 0.9em
+    }
+
+     e:hover {
+        border-left: 2px solid #848484;
+        background-color: #353535;
+    }
+
+     r {
+        float: right;
+        color: gray
+    }
      p2 {
          display:block;
          margin: 0.8em;
@@ -43,6 +54,19 @@
      button:hover {
        border: 2px solid white;
      }
+     button:active {
+     	cursor:  default;
+     	background-color: #222;
+     }
      :focus {
        outline: 0;
      }
+     f {
+            position: fixed;
+            bottom: 0;
+            text-align: center;
+            width: 100%;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px
+        }
