@@ -50,7 +50,10 @@ header {
     overflow: auto;
     max-height: 300px;
   }
-
+  .members-count {
+    font-weight: bold;
+    user-select: none;
+  }
   .message {
     padding: 5px 0;
   }
@@ -64,7 +67,7 @@ header {
     padding-right: 10px;
     position: relative;
   }
-  .member:after {
+  .message .member:after {
       content: ":"
   }
 
@@ -92,9 +95,7 @@ header {
         margin: 5px;
         cursor: pointer;
       }
-    .message-form__button:hover {
-        border-color: white;
-      }
+    
     .message-form__button:active {
         cursor: default;
      	background-color: #222;
@@ -111,6 +112,18 @@ header {
       }
   :focus {
       outline: 0;
+  }
+  @media(hover: hover) {
+    .message-form__button:hover {
+      border-color: white;
+    }
+  }
+  @media(max-width: 400px) {
+    header {
+      text-align: left;
+      padding: 5px;
+      font-size:24px;
+    }
   }
   f {
     position: fixed;
