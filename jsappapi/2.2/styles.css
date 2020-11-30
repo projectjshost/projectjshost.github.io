@@ -1,0 +1,86 @@
+@import url('https://projectjshost.github.io/fonts/inter.css');
+     header {
+         background-color: #353535;
+         text-align:center;
+         padding:10px;
+         margin-bottom:10px;
+         box-shadow: 0 2px 3px #111;
+     }
+     body {
+         margin:0;
+         background-color: #1B1B1B;
+         user-select:none;
+         color: #fff;
+         font-family: 'Inter', Arial;
+     }
+	 e {
+        display: block;
+        border-left: 2px solid #80808000;
+        padding: 0.7em;
+        font-size: 0.9em
+    }
+     r {
+        float: right;
+        color: gray
+    }
+    p {
+      font-size: 14px;
+      margin: 15px;
+    }
+     p2 {
+     	display: block;
+      font-size: 25px;
+      margin-left: 10px;
+     }
+     p1 {
+         font-size:36px
+     }
+     .area {
+       border: 2px solid #808080;
+       border-radius: 5px;
+       margin: 15px;
+     }
+     button {
+       background-color: #353535;
+       padding: 10px;
+       border: 2px solid #808080;
+       border-radius: 5px;
+       color: white;
+       margin: 5px;
+       cursor: pointer;
+     }
+     
+     button:active {
+     	cursor: default;
+     	background-color: #222;
+     }
+     :focus {
+        outline: 0;
+     }
+     f {
+        position: fixed;
+		    bottom: 0;
+	    	text-align: center;
+        width: 100%;
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px
+    }
+  @media(hover: hover) {
+      e:hover {
+        border-left: 2px solid #848484;
+        background-color: #353535;
+      }
+      button:hover {
+        border: 2px solid white;
+      }
+    }
+    @media(max-width: 400px) {
+      p1 {
+        font-size:24px;
+      }
+      header {
+        text-align: left;
+        padding: 5px;
+      }
+    }
