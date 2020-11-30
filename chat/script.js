@@ -69,6 +69,7 @@ function getRandomColor() {
 }
 
 //------------- DOM STUFF
+window.onload=init;
 
 const DOM = {
   membersCount: document.querySelector('.members-count'),
