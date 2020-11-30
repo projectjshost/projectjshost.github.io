@@ -1,3 +1,6 @@
+function init() {
+
+
 const CLIENT_ID = 'APKeRCIm34bkZzY3';
 
 const drone = new ScaleDrone(CLIENT_ID, {
@@ -69,7 +72,7 @@ function getRandomColor() {
 }
 
 //------------- DOM STUFF
-window.onload=init;
+
 
 const DOM = {
   membersCount: document.querySelector('.members-count'),
@@ -126,3 +129,7 @@ function addMessageToListDOM(text, member) {
     el.scrollTop = el.scrollHeight - el.clientHeight;
   }
 }
+}
+
+
+window.onload=init;
