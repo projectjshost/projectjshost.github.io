@@ -186,8 +186,10 @@ input[type="radio"] {
    @-moz-keyframes logo_anim { from {    -moz-transform: rotate(-180deg);opacity:0; } }
 
 .fps {
-	margin-top: 20px;
-	margin-left: 432px;
+	margin-top: 460px;
+    margin-left: 544px;
+    font-weight: bold;
+    font-family: sans-serif;
 }
 .mask {
 	background: rgba(0, 0, 0, 0.7);
