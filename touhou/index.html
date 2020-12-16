@@ -400,10 +400,6 @@
 	<!-- creating background css with toDataUrl -->
 	<script id="gen_bgcss">
 		(function(RES) {
-			/*
-			 * canvas.toDataURL() will not work in chrome when the html file is opened in a local disk
-			 * see http://stackoverflow.com/questions/10187306/canvas-todataurl-throws-security-exception-despite-image-being-local
-			 */
 			ieach($('canvas[bg-css]'), function(i, cv, ss) {
 				var s = $attr(cv, 'bg-css'),
 					r = 'background-image: url(' + cv.toDataURL() + ')';
@@ -1341,7 +1337,7 @@
 			</div>
 		</div>
 		<div class="fps absolute" style="color:white">
-			<div>fps: <span class="ui" ui-bind="(+GAME.fps).toFixed(2)+' / '+GAME.tick"></span></div>
+			<div><span class="ui" ui-bind="(+GAME.fps).toFixed(2)"></span>fps</div>
 		</div>
 	</div>
 	<div class="screen select absolute no-overflow ui"
