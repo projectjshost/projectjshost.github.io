@@ -352,17 +352,17 @@ input[type="radio"] {
 	background-position:  0		-160px;
 }
 .menu-pause-continue {
-	width: 64px;
+	width: 91px;
 	margin-top: 28px;
 	background-position: -0     -176px;
 }
 .menu-pause-title {
-	width: 96px;
+	width: 108px;
 	background-position: -0     -192px;
 }
 .menu-pause-quit {
-	width: 30px;
-	background-position: -48px  -208px;
+	width: 43px;
+    background-position: -4px -191px;
 }
 
 /*
