@@ -4,8 +4,10 @@
 
 //      Project JS App Stuff
 
-// Loading Screen Fade
+// Loading Screen
 $(document).ready(function(){
+    $("body").append("<div id='loadingscreen'><div id='loadingtext'></div></div>");
+    document.getElementById('loadingtext').innerHTML = appname;
     setTimeout(
         function() 
         {
