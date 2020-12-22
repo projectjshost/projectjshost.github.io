@@ -17,6 +17,11 @@ $(document).ready(function(){
   });
 
 
+// Anti Cloudwise COOL
+if (document.getElementById("lock-template")) {
+    document.getElementById("lock-template").remove();
+  }
+
 //      Extra Functionality
 
 // Random Number Generator
