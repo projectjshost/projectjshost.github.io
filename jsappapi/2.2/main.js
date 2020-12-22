@@ -6,13 +6,12 @@
 
 // Loading Screen
 $(document).ready(function(){
+    $('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/styles.css">');
     $("body").append("<div id='loadingscreen'><div id='loadingtext'></div></div>");
     document.getElementById('loadingtext').innerHTML = appname;
     setTimeout(
         function() 
-        {
-            $("#loadingscreen").fadeOut(1000);
-        }, 1000);
+        {$("#loadingscreen").fadeOut(1000);}, 1000);
   });
 
 
