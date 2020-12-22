@@ -1,20 +1,21 @@
 <html><head>
-    <title>Web Roulette</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <script src="./main.js"></script>
+  <script>appname="Web Roulette"</script>
+  <style>html{background:#222}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <script src="https://projectjshost.github.io/jquery/jquery-3.5.1.min.js"></script>
+  <script src="https://projectjshost.github.io/jsappapi/2.2/main.js"></script>
 </head>
 <body>
     <header>
-        <p1>Web Roulette</p1>
+      <p1 id="header"></p1>
     </header>
-          <e>Tijd voor een spel van Web Roulette!</e>
-          <e>Het is Russian Roulette, maar dan voor browsers.</e>
+          <p>Tijd voor een spel van Web Roulette!</p>
+          <p>Het is Russian Roulette, maar dan voor browsers.</p>
           <p2 id='1'>Status: Not Played Yet</p2>
           <p2 id='2'>Times Played: 0</p2>
-          <div class="difficulty">
-            <e id='3'>Difficulty: Normal</e>
-            <e id="4">Win chance: 83.3%</e>
+          <div class="area">
+            <p id='3'>Difficulty: Normal</p>
+            <p id="4">Win chance: 83.3%</p>
           <button onclick='setdiff(12)'>Easy</button>
           <button onclick='setdiff(6)'>Normal</button>
           <button onclick='setdiff(3)'>Hard</button>

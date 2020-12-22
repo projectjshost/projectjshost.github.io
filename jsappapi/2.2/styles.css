@@ -28,9 +28,9 @@
       margin: 15px;
     }
      p2 {
-     	display: block;
-      font-size: 25px;
-      margin-left: 10px;
+      display: block;
+      margin: 13px;
+      font-weight: bold;
      }
      p1 {
          font-size:36px
@@ -48,6 +48,7 @@
        color: white;
        margin: 5px;
        cursor: pointer;
+       transition: 0.1s;
      }
      
      button:active {
@@ -74,6 +75,7 @@
       left:0;
       right:0;
       text-align: center;
+
     }
     #loadingtext {
       font-size: 48px;
@@ -82,12 +84,30 @@
       margin-top:auto;
       margin-bottom: auto;
     }
+    select {
+      background-color: #353535;
+      padding: 10px;
+      border: 2px solid #808080;
+      border-radius: 5px;
+      color: white;
+      margin: 5px;
+      cursor: pointer;
+      min-width: 100px;
+      transition: 0.1s;
+    }
+    select:active {
+      background-color: #222222;
+      border: 2px solid #808080!important;
+    }
   @media(hover: hover) {
       e:hover {
         border-left: 2px solid #848484;
         background-color: #353535;
       }
       button:hover {
+        border: 2px solid white;
+      }
+      select:hover {
         border: 2px solid white;
       }
     }
