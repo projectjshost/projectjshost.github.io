@@ -1,5 +1,20 @@
 // Project JS App Api
+// Ver 2.2
 // @2020 Alex.W
+
+//      Project JS App Stuff
+
+// Loading Screen Fade
+$(document).ready(function(){
+    setTimeout(
+        function() 
+        {
+            $("#loadingscreen").fadeOut(1000);
+        }, 1000);
+  });
+
+
+//      Extra Functionality
 
 // Random Number Generator
 function random(min, max) {
@@ -16,11 +31,3 @@ function background(id, background) {
     document.getElementById(id).style.background = background;
 }
 
-// Loading Screen Fade
-$(document).ready(function(){
-    setTimeout(
-        function() 
-        {
-            $("#loadingscreen").fadeOut(1000);
-        }, 1000);
-  });
