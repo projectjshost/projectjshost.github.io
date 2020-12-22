@@ -5,7 +5,7 @@
 //      Project JS App Stuff
 
 // Initialize App
-
+$(document).ready(function(){
     $('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/styles.css">');
     $("body").append("<div id='loadingscreen'><div id='loadingtext'></div></div>");
     document.getElementById('loadingtext').innerHTML = appname;
@@ -14,6 +14,7 @@
         function() 
         {$("#loadingscreen").fadeOut(1000);}, 1000);
     document.getElementById('header').innerHTML = appname;
+  });
 
 
 //      Extra Functionality
