@@ -6,8 +6,8 @@
 
 // Initialize App
 $(document).ready(function(){
-    //$('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/styles.css">');
-    $('head').append('<link rel="stylesheet" href="./dark.css">');
+    $('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/dark.css">');
+    // $('head').append('<link rel="stylesheet" href="./dark.css">');
     $("body").append("<div id='loadingscreen'><div id='loadingtext'></div><div id='jslogo'>Project JS</div></div>");
     document.getElementById('loadingtext').innerHTML = appname;
     document.title = appname;
@@ -16,7 +16,7 @@ $(document).ready(function(){
         {$("#loadingscreen").fadeOut(1000);}, 1200);
     document.getElementById('header').innerHTML = appname;
     if (localStorage.theme = "light") {
-        $('head').append('<link rel="stylesheet" href="./light.css">');
+        $('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/light.css">');
     }
   });
 
