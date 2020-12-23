@@ -15,7 +15,7 @@ $(document).ready(function(){
         function() 
         {$("#loadingscreen").fadeOut(1000);}, 1200);
     document.getElementById('header').innerHTML = appname;
-    if (localStorage.theme = "light") {
+    if (localStorage.theme !== "dark") {
         $('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/light.css">');
     }
   });
