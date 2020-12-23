@@ -6,12 +6,17 @@
          margin-bottom:10px;
          box-shadow: 0 2px 3px #111;
      }
+     html, body {
+       overflow: hidden;
+     }
      body {
          margin:0;
          background-color: #1B1B1B;
          user-select:none;
          color: #fff;
          font-family: 'Inter', Arial;
+         width: 100%;
+         height: 100%;
      }
 	 e {
         display: block;
@@ -31,6 +36,9 @@
       display: block;
       margin: 13px;
       font-weight: bold;
+     }
+     img {
+       border-radius: 5px;
      }
      p1 {
          font-size:36px
@@ -60,7 +68,9 @@
      }
      f {
         position: fixed;
-		    bottom: 0;
+        bottom: 0;
+        left: 0;
+        right:0;
 	    	text-align: center;
         width: 100%;
         font-size: 14px;
@@ -84,9 +94,48 @@
       margin-top:auto;
       margin-bottom: auto;
     }
+    #jslogo {
+      position: fixed;
+      font-size: 24px;
+      bottom: 10;
+      right: 10;
+      color: #888;
+    }
+    #dialog {
+      z-index: 9999;
+      padding: 10px;
+      position: fixed;
+      background: #353535;
+      border: 2px solid #808080;
+      border-radius: 5px;
+      width: 300px;
+      height: 100px;
+      top: 50%;
+      left: 50%;
+      margin-top: -50px;
+      margin-left: -150px;
+      box-shadow: 0px 0px 16px 1px #000;
+    }
+    div#dialog>button {
+      min-width: 50px;
+      right: 0px;
+      bottom: 0px;
+      position: absolute;
+    }
+    #overlay {
+      z-index: 9998;
+      position: fixed;
+      background-color: #00000086;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right:0;
+    }
     select {
       background-color: #353535;
-      padding: 10px;
+      padding: 6px;
+      padding-left: 10px;
+      padding-right: 10px;
       border: 2px solid #808080;
       border-radius: 5px;
       color: white;
@@ -98,6 +147,9 @@
     select:active {
       background-color: #222222;
       border: 2px solid #808080!important;
+      border-bottom-color: #00000000!important;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
     }
   @media(hover: hover) {
       e:hover {
@@ -119,4 +171,24 @@
         text-align: left;
         padding: 5px;
       }
+      #dialog {
+      position: fixed;
+      height: 100px;
+      top: 50%;
+      left: 0;
+      right: 0;
+      margin-top: -50px;
+      margin-left: 0;
+      width: auto;
+      }
+    }
+    @media(min-width: 800px) {
+      #dialog {
+      width: 600px!important;
+      height: 200px!important;
+      margin-top: -100px!important;
+      margin-left: -300px!important;
+
+      }
+      
     }

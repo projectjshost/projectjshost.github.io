@@ -1,4 +1,4 @@
-// Project JS App Api
+// Project JS App API
 // Ver 2.2
 // @2020 Alex.W
 
@@ -7,12 +7,12 @@
 // Initialize App
 $(document).ready(function(){
     $('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/styles.css">');
-    $("body").append("<div id='loadingscreen'><div id='loadingtext'></div></div>");
+    $("body").append("<div id='loadingscreen'><div id='loadingtext'></div><div id='jslogo'>Project JS</div></div>");
     document.getElementById('loadingtext').innerHTML = appname;
     document.title = appname;
-    setTimeout(
+   setTimeout(
         function() 
-        {$("#loadingscreen").fadeOut(1000);}, 1000);
+        {$("#loadingscreen").fadeOut(1000);}, 1200);
     document.getElementById('header').innerHTML = appname;
   });
 
@@ -27,6 +27,18 @@ setTimeout(
         
     }, 1000);
 
+
+// Dialog Box
+function dialog(message) {
+    $("body").append('<div id="overlay"></div>');
+    $("body").append(`<div id='dialog'>${message}<button onclick='closeDialog()'>Ok</button></div>`);
+}
+function closeDialog() {
+    if (document.getElementById("dialog")) {
+        document.getElementById("dialog").remove();
+        document.getElementById("overlay").remove();
+    }
+}
 
 //      Extra Functionality
 
@@ -44,4 +56,3 @@ function color(id, color) {
 function background(id, background) {
     document.getElementById(id).style.background = background;
 }
-
