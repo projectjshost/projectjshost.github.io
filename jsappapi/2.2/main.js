@@ -22,7 +22,6 @@ $(document).ready(function(){
     }
   });
 
-
 function loadTheme(theme) {
     switch(theme) {
         case "light":
