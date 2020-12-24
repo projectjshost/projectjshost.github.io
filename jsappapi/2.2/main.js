@@ -26,7 +26,9 @@ $(document).ready(function(){
 function loadTheme(theme) {
     switch(theme) {
         case "light":
+            if (!document.getElementById("lightTheme")) {
             $('head').append('<link rel="stylesheet" id="lightTheme" href="https://projectjshost.github.io/jsappapi/2.2/light.css">');
+            }
             break;
         case "dark":
             $('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/dark.css">');
