@@ -7,7 +7,6 @@
 // Initialize App
 $(document).ready(function(){
     $('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/dark.css">');
-    // $('head').append('<link rel="stylesheet" href="./dark.css">');
     $("body").append("<div id='loadingscreen'><div id='loadingtext'></div><div id='jslogo'>Project JS</div></div>");
     document.getElementById('loadingtext').innerHTML = appname;
     document.title = appname;
@@ -19,10 +18,21 @@ $(document).ready(function(){
         localStorage.theme = "dark"
     }
     if (localStorage.theme !== "dark") {
-        $('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/light.css">');
+        $('head').append('<link rel="stylesheet" id="lightTheme" href="https://projectjshost.github.io/jsappapi/2.2/light.css">');
     }
   });
 
+
+function loadTheme(theme) {
+    switch(theme) {
+        case "light":
+            $('head').append('<link rel="stylesheet" id="lightTheme" href="https://projectjshost.github.io/jsappapi/2.2/light.css">');
+            break;
+        case "dark":
+            $('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/dark.css">');
+            break;
+    }
+}
 
 // Anti Cloudwise COOL
 setTimeout(

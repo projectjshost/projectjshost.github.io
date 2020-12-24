@@ -1,9 +1,13 @@
 function setTheme(theme) {
     if (theme == "dark") {
         localStorage.theme = "dark";
-        dialog("set dark theme")
+        if (document.getElementById("lightTheme")) {
+            $("#lightTheme").remove();
+        }
+        dialog("Theme veranderd naar: Donker");
     } else {
         localStorage.theme = "light";
-        dialog("set light theme")
+        loadTheme("light");
+        dialog("Thema veranderd naar: Licht")
     }
 }
