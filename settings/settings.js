@@ -4,6 +4,9 @@ function setTheme(theme) {
         if (document.getElementById("lightTheme")) {
             $("#lightTheme").remove();
         }
+        if (document.getElementById("customTheme")) {
+            $("#customTheme").remove();
+        }
     } 
     if (theme == "light") {
         localStorage.theme = "light";
