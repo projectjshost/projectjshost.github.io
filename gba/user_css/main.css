@@ -11,6 +11,7 @@ html, body {
     margin: 0;
     padding: 0;
     background: #000;
+    color: #fff;
     overflow: hidden;
     box-sizing: border-box;
     -webkit-touch-callout: none;
@@ -56,7 +57,7 @@ canvas {
     margin: auto;
     display: block;
     padding: 0px;
-    background-color: rgb(248, 248, 248);
+    background-color: rgb(0, 0, 0);
     cursor: none;
 }
 
@@ -114,7 +115,7 @@ div#menu {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    background: #fff;
+    background: rgb(0, 0, 0);
     border-bottom: 1px solid rgba(0,0,0,.1);
     transition: .3s ease;
 	cursor: pointer;
@@ -131,7 +132,7 @@ div#menu {
     position: absolute;
     top:100%;
     left:0;
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(7, 7, 7);
     box-shadow: 0 5px 10px 0 rgba(0,0,0,.1);
     transition: .3s ease;
     z-index: 1;
@@ -191,7 +192,7 @@ li.hide {
     -webkit-appearance: none;
     border:0;
     outline: 0;
-    background: #fff;
+    background: rgb(0, 0, 0);
     opacity: 0.7;
     width: 3em;
     height: 3em;
