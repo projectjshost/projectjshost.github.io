@@ -6,13 +6,18 @@
   <script src="./settings.js"></script>
 <script src="https://projectjshost.github.io/jsappapi/2.2/main.js"></script>
 </head>
-<body>
+<body onload="settingsInit();">
     <header>
       <p1 id="header"></p1>
     </header>
           <p>Project JS Instellingen</p>
-          <p2>Thema</p2>
-          <button onclick="setTheme('dark');">Donker</button>
-          <button onclick="setTheme('light');">Licht</button>
+          <p2>Thema</p2> 
+          <select id="themeSelect">
+            <option value="dark">Donker</option>
+            <option value="light">Licht</option>
+            <option value="custom">Importeer uit CSS</option>
+          </select>
+          <button onclick="importTheme();">Importeer</button>
+          <button onclick="updateTheme();">Kies</button>
 </body>
 </html>

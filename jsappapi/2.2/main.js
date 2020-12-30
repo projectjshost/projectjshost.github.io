@@ -33,6 +33,9 @@ $(document).ready(function(){
     if (localStorage.theme == "light") {
         loadTheme("light");
     }
+    if (localStorage.theme == "custom") {
+        $('head').append("<style>" + localStorage.customThemeCSS + "</style>");
+    }
   });
 
 
