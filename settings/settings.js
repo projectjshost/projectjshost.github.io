@@ -44,7 +44,10 @@ input.onchange = e => {
         localStorage.removeItem("customThemeCSS");
       }
       localStorage.customThemeCSS = content;
-      $('head').append("<style>" + localStorage.customThemeCSS + "</style>");
+      if (document.getElementById("customTheme")) {
+        document.getElementById("customTheme").remove();
+    }
+      $('head').append("<style id='customTheme'>" + localStorage.customThemeCSS + "</style>");
       localStorage.theme = "custom";
       document.getElementById("themeSelect").selectedIndex = "2";
    }

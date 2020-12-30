@@ -34,7 +34,7 @@ $(document).ready(function(){
         loadTheme("light");
     }
     if (localStorage.theme == "custom") {
-        $('head').append("<style>" + localStorage.customThemeCSS + "</style>");
+        $('head').append("<style id='customTheme'>" + localStorage.customThemeCSS + "</style>");
     }
   });
 
