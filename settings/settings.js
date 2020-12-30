@@ -10,10 +10,16 @@ function setTheme(theme) {
     } 
     if (theme == "light") {
         localStorage.theme = "light";
+        if (document.getElementById("customTheme")) {
+            $("#customTheme").remove();
+        }
         loadTheme("light");
     }
     if (theme == "custom") {
         localStorage.theme = "custom";
+        if (document.getElementById("lightTheme")) {
+            $("#lightTheme").remove();
+        }
         loadTheme("custom");
     }
 }
