@@ -14,6 +14,12 @@ function loadTheme(theme) {
         case "dark":
             $('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/dark.css">');
             break;
+        case "custom":
+            if (document.getElementById("customTheme")) {
+                document.getElementById("customTheme").remove();
+            }
+              $('head').append("<style id='customTheme'>" + localStorage.customThemeCSS + "</style>");
+            break;
     }
 }
 

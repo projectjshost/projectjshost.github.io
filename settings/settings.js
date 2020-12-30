@@ -4,9 +4,13 @@ function setTheme(theme) {
         if (document.getElementById("lightTheme")) {
             $("#lightTheme").remove();
         }
-    } else {
+    } 
+    if (theme == "light") {
         localStorage.theme = "light";
         loadTheme("light");
+    }
+    if (theme == "custom") {
+        loadTheme("custom");
     }
 }
 
@@ -44,11 +48,10 @@ input.onchange = e => {
         localStorage.removeItem("customThemeCSS");
       }
       localStorage.customThemeCSS = content;
-      if (document.getElementById("customTheme")) {
+    if (document.getElementById("customTheme")) {
         document.getElementById("customTheme").remove();
     }
-      $('head').append("<style id='customTheme'>" + localStorage.customThemeCSS + "</style>");
-      localStorage.theme = "custom";
+      setTheme("custom");
       document.getElementById("themeSelect").selectedIndex = "2";
    }
 
