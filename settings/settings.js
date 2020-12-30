@@ -10,6 +10,7 @@ function setTheme(theme) {
         loadTheme("light");
     }
     if (theme == "custom") {
+        localStorage.theme = "custom";
         loadTheme("custom");
     }
 }
