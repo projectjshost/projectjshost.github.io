@@ -22,7 +22,6 @@ function settingsInit() {
             document.getElementById("themeSelect").selectedIndex = "2";
             break;
     }
-    }
 }
 
 function updateTheme() {
