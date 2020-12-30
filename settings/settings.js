@@ -69,3 +69,8 @@ input.onchange = e => {
 
 input.click();
 }
+
+function resetAll() {
+    localStorage.clear();
+    location.reload();
+}
