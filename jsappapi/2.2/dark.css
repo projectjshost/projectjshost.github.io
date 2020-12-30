@@ -17,17 +17,13 @@
        background-color: #1B1B1B;
      }
      body {
-         position: fixed;
          z-index: 0;
-         top: 64px;
-         bottom:0;
-         left:0;
-         right:0;
+         margin-top: 64px;
          user-select:none;
          color: #fff;
          font-family: 'Inter', Arial;
      }
-	 e {
+	   e {
         display: block;
         border-left: 2px solid #80808000;
         padding: 0.7em;
