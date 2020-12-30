@@ -115,7 +115,7 @@ div#menu {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    background: rgb(0, 0, 0);
+    background: #222;
     border-bottom: 1px solid rgba(0,0,0,.1);
     transition: .3s ease;
 	cursor: pointer;
