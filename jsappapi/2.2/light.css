@@ -7,7 +7,7 @@
          background-color: #fff;
          color: #000;
      }
-	 e {
+	   e {
         border-left: 2px solid #80808000;
     }
      r {
@@ -21,10 +21,17 @@
        border: 2px solid #888;
        color: #000;
      }
-     
+     .button {
+      background-color: #ddd;
+      border: 2px solid #888;
+      color: #000;
+    }
      button:active {
      	background-color: #bbb;
      }
+     .button:active {
+      background-color: #bbb;
+    }
      f {
         color: #ddd;
     }
@@ -52,6 +59,9 @@
         background-color: #ddd;
       }
       button:hover {
+        border: 2px solid #000;
+      }
+      .button:hover {
         border: 2px solid #000;
       }
       select:hover {

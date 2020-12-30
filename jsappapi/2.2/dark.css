@@ -67,11 +67,24 @@
        cursor: pointer;
        transition: 0.1s;
      }
-     
+     .button {
+      background-color: #353535;
+      padding: 10px;
+      border: 2px solid #808080;
+      border-radius: 5px;
+      color: white;
+      margin: 5px;
+      cursor: pointer;
+      transition: 0.1s;
+    }
      button:active {
      	cursor: default;
      	background-color: #222;
      }
+     .button:active {
+      cursor: default;
+      background-color: #222;
+    }
      :focus {
         outline: 0;
      }
@@ -168,6 +181,9 @@
         background-color: #353535;
       }
       button:hover {
+        border: 2px solid white;
+      }
+      .button:hover {
         border: 2px solid white;
       }
       select:hover {
