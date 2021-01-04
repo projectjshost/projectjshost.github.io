@@ -1,10 +1,23 @@
 @import url('https://projectjshost.github.io/fonts/inter.css');
+:root {
+  --background: #1B1B1B;
+  --background2: #111111;
+  --foreground: #ffffff;
+  --foreground2: #888888;
+  --foreground3: #555555;
+  --elementcolor: #353535;
+  --active: #222222;
+  --border: #808080;
+  --transparent: #00000000;
+  --black: #000000;
+  --darkoverlay: #00000086;
+}
      header {
-         background-color: #353535;
+         background-color: var(--elementcolor);
          text-align:center;
          padding:10px;
          margin-bottom:10px;
-         box-shadow: 0 2px 3px #111;
+         box-shadow: 0 2px 3px var(--background2);
          position: fixed;
          top:0;
          left:0;
@@ -14,24 +27,24 @@
      html, body {
        margin:0;
        padding:0;
-       background-color: #1B1B1B;
+       background-color: var(--background);
      }
      body {
          z-index: 0;
          margin-top: 80px;
          user-select:none;
-         color: #fff;
+         color: var(--foreground);
          font-family: 'Inter', Arial;
      }
 	   e {
         display: block;
-        border-left: 2px solid #80808000;
+        border-left: 2px solid var(--transparent);
         padding: 0.7em;
         font-size: 0.9em
     }
      r {
         float: right;
-        color: gray
+        color: var(--foreground2)
     }
     p {
       font-size: 14px;
@@ -49,37 +62,37 @@
          font-size:36px
      }
      .area {
-       border: 2px solid #808080;
+       border: 2px solid var(--border);
        border-radius: 5px;
        margin: 15px;
      }
      button {
-       background-color: #353535;
+       background-color: var(--elementcolor);
        padding: 10px;
-       border: 2px solid #808080;
+       border: 2px solid var(--border);
        border-radius: 5px;
-       color: white;
+       color: var(--foreground);
        margin: 5px;
        cursor: pointer;
        transition: 0.1s;
      }
      .button {
-      background-color: #353535;
+      background-color: var(--elementcolor);
       padding: 10px;
-      border: 2px solid #808080;
+      border: 2px solid var(--border);
       border-radius: 5px;
-      color: white;
+      color: var(--foreground);
       margin: 5px;
       cursor: pointer;
       transition: 0.1s;
     }
      button:active {
      	cursor: default;
-     	background-color: #222;
+     	background-color: var(--active);
      }
      .button:active {
       cursor: default;
-      background-color: #222;
+      background-color: var(--active);
     }
      :focus {
         outline: 0;
@@ -92,13 +105,13 @@
 	    	text-align: center;
         width: 100%;
         font-size: 14px;
-        color: #555;
+        color: var(--foreground3);
         margin-bottom: 5px
     }
     #loadingscreen {
       position: fixed;
-      background-color: #111;
-      color: #fff;
+      background-color: var(--background2);
+      color: var(--foreground);
       top:0;
       bottom:0;
       left:0;
@@ -119,14 +132,14 @@
       font-size: 24px;
       bottom: 10;
       right: 10;
-      color: #888;
+      color: var(--foreground2);
     }
     #dialog {
       z-index: 9999;
       padding: 10px;
       position: fixed;
-      background: #353535;
-      border: 2px solid #808080;
+      background: var(--elementcolor);
+      border: 2px solid var(--border);
       border-radius: 5px;
       width: 300px;
       height: 100px;
@@ -134,7 +147,7 @@
       left: 50%;
       margin-top: -50px;
       margin-left: -150px;
-      box-shadow: 0px 0px 16px 1px #000;
+      box-shadow: 0px 0px 16px 1px var(--black);
     }
     div#dialog>button {
       min-width: 50px;
@@ -145,45 +158,45 @@
     #overlay {
       z-index: 9998;
       position: fixed;
-      background-color: #00000086;
+      background-color: var(--darkoverlay);
       top: 0;
       bottom: 0;
       left: 0;
       right:0;
     }
     select {
-      background-color: #353535;
+      background-color: var(--elementcolor);
       padding: 6px;
       padding-left: 10px;
       padding-right: 10px;
-      border: 2px solid #808080;
+      border: 2px solid var(--border);
       border-radius: 5px;
-      color: white;
+      color: var(--foreground);
       margin: 5px;
       cursor: pointer;
       min-width: 100px;
       transition: 0.1s;
     }
     select:active {
-      background-color: #222222;
-      border: 2px solid #808080!important;
-      border-bottom-color: #00000000!important;
+      background-color: var(--active);
+      border: 2px solid var(--border)!important;
+      border-bottom-color: var(--transparent)!important;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
   @media(hover: hover) {
       e:hover {
-        border-left: 2px solid #848484;
-        background-color: #353535;
+        border-left: 2px solidvar(--foreground2);
+        background-color: var(--elementcolor);
       }
       button:hover {
-        border: 2px solid white;
+        border: 2px solid var(--foreground);
       }
       .button:hover {
-        border: 2px solid white;
+        border: 2px solid var(--foreground);
       }
       select:hover {
-        border: 2px solid white;
+        border: 2px solid var(--foreground);
       }
     }
     @media(max-width: 400px) {
