@@ -46,7 +46,7 @@
         float: right;
         color: var(--foreground2)
     }
-    #alt {
+    .alt {
       color: var(--foreground2)
   }
     p {
