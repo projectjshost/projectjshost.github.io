@@ -2,28 +2,29 @@
 var plays = 0;
 var level = 0;
 var Engine = 0;
+// Searches
 var searches = [
   //Weird Searches
-  "Test Search 1",
-  "Test Search 2",
-  "Test Search 3",
-  "Test Search 4",
-  "Test Search 5",
-  "Test Search 6",
-  //Gross Searches
-  "Test Search 7",
-  "Test Search 8",
-  "Test Search 9",
-  "Test Search 10",
-  "Test Search 11",
-  "Test Search 12",
+  "Proof the earth is flat",
+  "Are birds real?",
+  "Why does everyone hate me?",
+  "Can a watermelon seed grow in your stomach?",
+  "Does the sun exist?",
+  "How to hack google",
+  //Weirder Searches
+  "Mario rule 34",
+  "Fastest way to die",
+  "Nyan cat hentai",
+  "كيف تصبح إرهابيا",
+  "How to buy poop online",
+  "Can you eat yourself?",
   // Illegal Searches
-  "Test Search 13",
-  "Test Search 14",
-  "Test Search 15",
-  "Test Search 16",
-  "Test Search 17",
-  "Test Search 18"
+  "How to join isis",
+  "Buy gun",
+  "How to become a illegal hacker?",
+  "Best place to hide a body",
+  "Where to buy drugs?",
+  "How to make a virus?"
 ];
 
 
@@ -36,19 +37,23 @@ function roulette() {
   // Search Engines
   switch(Engine) {
     case 0:
+      // Google
       window.open("https://www.google.com/search?&q=" + searches[getRandom(level, level+6)])
       break;
     case 1:
+      // DuckDuckGo
       window.open("https://duckduckgo.com/?q=" + searches[getRandom(level, level+6)])
       break;
     case 2:
+      // Bing
       window.open("https://www.bing.com/search?q=" + searches[getRandom(level, level+6)])
       break;
     case 3:
+      // Debug
       console.log(searches[getRandom(level, level+6)])
       break;
     default:
-      // code block
+
   }
   
 
@@ -63,7 +68,7 @@ function setlevel(l) {
       document.getElementById('3').innerHTML = 'Search Weirdness Level: Weird';
       break;
     case 6:
-      document.getElementById('3').innerHTML = 'Search Weirdness Level: Gross';
+      document.getElementById('3').innerHTML = 'Search Weirdness Level: Weirder';
       break;
     case 12:
       document.getElementById('3').innerHTML = 'Search Weirdness Level: Illegal';
