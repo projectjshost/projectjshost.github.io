@@ -46,6 +46,9 @@
         float: right;
         color: var(--foreground2)
     }
+    #alt {
+      color: var(--foreground2)
+  }
     p {
       font-size: 14px;
       margin: 15px;

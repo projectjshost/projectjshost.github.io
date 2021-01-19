@@ -72,8 +72,8 @@ function closeDialog() {
 //      Extra Functionality
 
 // Random Number Generator
-function random(min, max) {
-    return Math.floor((Math.random() * max) + min);
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min) ) + min;
 }
 
 // Sets the CSS "color" property of an object
