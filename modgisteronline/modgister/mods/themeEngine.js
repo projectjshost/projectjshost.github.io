@@ -82,3 +82,5 @@ function loadSettings() {
   document.getElementById("themecurrent").innerHTML=(`Momenteel gekozen thema: ${themecurrent}`);
    
 }
+
+loadTheme();
