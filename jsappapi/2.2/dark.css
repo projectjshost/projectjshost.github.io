@@ -70,6 +70,7 @@
        margin: 15px;
      }
      button {
+       font-family: 'Inter', Arial;
        background-color: var(--elementcolor);
        padding: 10px;
        border: 2px solid var(--border);

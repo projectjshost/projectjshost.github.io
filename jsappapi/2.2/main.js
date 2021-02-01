@@ -26,6 +26,7 @@ function loadTheme(theme) {
 // Initialize App
 $(document).ready(function(){
     $('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/dark.css">');
+    // $('head').append('<link rel="stylesheet" href="./dark.css">');
     $("body").append("<div id='loadingscreen'><div id='loadingtext'></div><div id='jslogo'>Project JS</div></div>");
     document.getElementById('loadingtext').innerHTML = appname;
     document.title = appname;
