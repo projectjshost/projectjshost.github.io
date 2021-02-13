@@ -61,14 +61,21 @@ drone.on('error', error => {
 
 function getRandomName() {
   return (
-    "user" +
+    "anon" +
     "_" +
     Math.floor(Math.random() * 9999)
   );
 }
 
 function getRandomColor() {
-  return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
+  var allowedColors = [
+    '#cc0000', '#ffaa00', '#b9c145', '#35b200', '#0000cc', '#6900cc'
+ ];
+ 
+ // use _.sample
+ var randomColor = allowedColors[allowedColors.length * Math.random() | 0];
+ return(randomColor);
+
 }
 
 //------------- DOM STUFF
@@ -106,7 +113,7 @@ function createMemberElement(member) {
 }
 
 function updateMembersDOM() {
-  DOM.membersCount.innerText = `${members.length} users in room:`;
+  DOM.membersCount.innerText = `${members.length} users online:`;
   DOM.membersList.innerHTML = '';
   members.forEach(member =>
     DOM.membersList.appendChild(createMemberElement(member))
@@ -118,6 +125,8 @@ function createMessageElement(text, member) {
   el.appendChild(createMemberElement(member));
   el.appendChild(document.createTextNode(text));
   el.className = 'message';
+  var chatHistory = document.getElementById("messages");
+  chatHistory.scrollTop = chatHistory.scrollHeight;
   return el;
 }
 
