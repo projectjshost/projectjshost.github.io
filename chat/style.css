@@ -2,32 +2,32 @@
     width: 12px;
   }
   ::-webkit-scrollbar-track {
-    background: #444;
+    background: var(--foreground3);
     border-radius: 50px;
   }
   ::-webkit-scrollbar-thumb {
-    background: #777;
+    background: var(--foreground2);
     border-radius: 50px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #666;
+    background: var(--foreground3);
   }
 
   ::-webkit-scrollbar-thumb:active {
-    background: #555;
+    background: var(--foreground3);
     cursor: move;
   }
   .messages {
-    border: 1px solid #333;
+    border: 1px solid var(--elementcolor);
     padding: 5px;
     margin-bottom: 15px;
     border-radius: 10px;
-    background-color: #222;
+    background-color: var(--active);
   }
   .members-list {
-      background-color: #333;
-      border-color: #666;
+      background-color: var(--elementcolor);
+      border-color: var(--foreground3);
   }
   .messages {
     margin: 10px;
@@ -62,41 +62,41 @@
     right: 0;
   }
   .message-form__input {
-    border: 1px solid #808080;
+    border: 1px solid var(--border);
     padding: 10px 15px;
     font-size: 16px;
     border-radius: 10px;
-    background-color: #333;
-    color: white;
+    background-color: var(--elementcolor);
+    color: var(--foreground);
     transition: 0.2s;
   }
   .message-form__button {
-        background-color: #353535;
+        background-color: var(--elementcolor);
         padding: 10px;
-        border: 1px solid #808080;
+        border: 1px solid var(--border);
         border-radius: 50px;
-        color: white;
+        color: var(--foreground);
         margin: 5px;
         cursor: pointer;
       }
     
     .message-form__button:active {
         cursor: default;
-     	background-color: #222;
+     	background-color: var(--active);
     }
     .message-form__input:focus {
-          border-color: #fff;
+          border-color: var(--foreground);
       }
       .chatusers {
-          background-color: #333;
+          background-color: var(--elementcolor);
           padding: 10px;
-          border: 1px solid #555;
+          border: 1px solid var(--foreground3);
           border-radius: 10px;
           margin: 10px
       }
   @media(hover: hover) {
     .message-form__button:hover {
-      border-color: white;
+      border-color: var(--foreground);
     }
   }
   @media(max-width: 400px) {
