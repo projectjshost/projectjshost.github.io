@@ -78,6 +78,7 @@
   color: var(--foreground);
   transition: 0.2s;
   width: -webkit-fill-available;
+  width: -moz-available;
   height: 20px;
   margin-right: 5px;
 }
@@ -105,7 +106,7 @@
         border-radius: 0;
         box-shadow: 0 3px 3px var(--background2);
         position: fixed;
-        top: 64px;
+        top: 62px;
         z-index: 998;
         left: 0px;
         right: 0px;
@@ -116,9 +117,7 @@
   }
 }
 @media(max-width: 400px) {
-  header {
-    text-align: left;
-    padding: 5px;
-    font-size:24px;
+  .chatusers {
+    top: 38px;
   }
 }
