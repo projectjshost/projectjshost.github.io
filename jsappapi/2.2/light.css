@@ -1,10 +1,11 @@
 :root {
   --background: #ffffff;
   --background2: #dddddd;
+  --shadow: #aaaaaa;
   --foreground: #000000;
   --foreground2: #888888;
   --foreground3: #666666;
-  --elementcolor: #ddd;
+  --elementcolor: #dddddd;
   --active: #dddddd;
   --border: #888888;
   --transparent: #00000000;
