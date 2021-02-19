@@ -72,11 +72,11 @@ input {
 #display {
     outline: none;
     width: -webkit-fill-available;
+    width: -moz-available;
     height: 40px;
-    background: #444;
-    border: 2px solid var(--foreground3);
+    background: var(--elementcolor);
+    border: 2px solid var(--border);
     border-radius: 5px;
-    color: white;
     margin-left: 15px;
     margin-right: 15px;
 }
@@ -102,8 +102,6 @@ button {
     font-family: Inter, Arial, sans-serif;
     font-weight: bolder;
     font-size: 22px;
-    color: #fff;
-    background: #444;
     border: none;
     margin: 6px;
     padding: 12px;
@@ -115,28 +113,28 @@ button {
 
 button:nth-child(1) {
     background: var(--foreground3);
-    color: #fff;
+
 }
 
 button:nth-child(2) {
     font-weight: 550;
     background: var(--foreground3);
-    color: #fff;
+
 }
 
 button:nth-child(3) {
     background: var(--foreground3);
-    color: #fff;
+
 }
 
 button:nth-child(4) {
     background: var(--foreground3);
-    color: #fff;
+
 }
 
 button:nth-child(8) {
     background: var(--foreground3);
-    color: #fff;
+
 }
 
 button:nth-child(12) {
@@ -144,25 +142,18 @@ button:nth-child(12) {
     font-size: 30px;
     font-family: monospace;
     background: var(--foreground3);
-    color: #fff;
+
 }
 
 button:nth-child(16) {
     background: var(--foreground3);
-    color: #fff;
+
     font-size: 25px;
 }
 
 button:nth-child(20) {
     background: var(--foreground3);
-    color: #fff;
+
 }
 
-button:hover {
-    background: #555;
-}
-button:active {
-    background: #444;
-    color: #fff;
-}
 
