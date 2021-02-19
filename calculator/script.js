@@ -1,8 +1,8 @@
-var input = document.getElementById("display");
+  var input = document.getElementById("display");
 
 //script to detect if enter button is clicked to evaluate the result
 
-input.addEventListener("keyup", function(event) {
+document.addEventListener("keyup", function(event) {
   
     // Number 13 is the "Enter" key on the keyboard
   
@@ -23,8 +23,15 @@ function calculate(operation) {
 
   if ( result === 0 || isFinite(result) && Boolean(result) ) {
     document.getElementById('display').value = result;
+    window.lastresult = result;
   } else {
-    document.getElementById('display').value = 'Invalid operation';
+    document.getElementById('display').value = 'Syntax ERROR';
   }
 
 } 
+
+function calcAns() {
+  if (typeof lastresult !== 'undefined') {
+    document.getElementById('display').value +=lastresult;
+}
+}
