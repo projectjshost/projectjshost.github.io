@@ -9,9 +9,9 @@ html, body {
     height: 100%;
     width:100%;
     padding: 0;
-    margin: 0;
-    overflow-x: hidden;
-    color: #fff;
+    margin: 0!important;
+    overflow: hidden;
+    color: var(--foreground);
 }
 p1 {
     float: left;
@@ -32,10 +32,12 @@ button:disabled:hover{
 .noHover{
     pointer-events: none;
 }
-
+header {
+    display:none;
+}
 body {
     font-family: Inter;
-    background-color: black;
+    background-color: var(--background);
     overflow: hidden;
 }
 
@@ -51,7 +53,7 @@ h1 {
     margin: 0;
     height: 100%;
     width: 100%;
-    background: #222;
+    background: transparent;
     overflow: hidden;
 }
 
@@ -72,7 +74,7 @@ input {
     width: -webkit-fill-available;
     height: 40px;
     background: #444;
-    border: 2px solid #666;
+    border: 2px solid var(--foreground3);
     border-radius: 5px;
     color: white;
     margin-left: 15px;
@@ -112,28 +114,28 @@ button {
 }
 
 button:nth-child(1) {
-    background: #666;
+    background: var(--foreground3);
     color: #fff;
 }
 
 button:nth-child(2) {
     font-weight: 550;
-    background: #666;
+    background: var(--foreground3);
     color: #fff;
 }
 
 button:nth-child(3) {
-    background: #666;
+    background: var(--foreground3);
     color: #fff;
 }
 
 button:nth-child(4) {
-    background: #666;
+    background: var(--foreground3);
     color: #fff;
 }
 
 button:nth-child(8) {
-    background: #666;
+    background: var(--foreground3);
     color: #fff;
 }
 
@@ -141,18 +143,18 @@ button:nth-child(12) {
     padding: 0px;
     font-size: 30px;
     font-family: monospace;
-    background: #666;
+    background: var(--foreground3);
     color: #fff;
 }
 
 button:nth-child(16) {
-    background: #666;
+    background: var(--foreground3);
     color: #fff;
     font-size: 25px;
 }
 
 button:nth-child(20) {
-    background: #666;
+    background: var(--foreground3);
     color: #fff;
 }
 
