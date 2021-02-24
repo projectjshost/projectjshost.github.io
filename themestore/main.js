@@ -1,6 +1,9 @@
 function installTheme(css) {
     localStorage.theme = "custom";
     localStorage.customThemeCSS = css;
+    if (document.getElementById("lightTheme")) {
+        document.getElementById("lightTheme").remove();
+    }
     if (document.getElementById("customTheme")) {
         document.getElementById("customTheme").remove();
     }
@@ -11,5 +14,8 @@ function resetTheme(css) {
     localStorage.removeItem("customThemeCSS");
     if (document.getElementById("customTheme")) {
         document.getElementById("customTheme").remove();
+    }
+    if (document.getElementById("lightTheme")) {
+        document.getElementById("lightTheme").remove();
     }
 }

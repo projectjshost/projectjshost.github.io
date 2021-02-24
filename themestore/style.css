@@ -1,8 +1,15 @@
 .theme button {
     float:right;
 }
-e {
+.theme e {
     overflow: hidden;
     font-size: 20px!important;
     line-height: 44px;
+    border-bottom: 2px solid var(--border);
+    padding: 6px;
+    padding-left: 10px;
+}
+
+.theme e:last-child {
+    border-bottom: 0;
 }

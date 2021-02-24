@@ -1,4 +1,5 @@
-    a {
+@import url('https://projectjshost.github.io/fonts/inter.css');
+a {
         background-color: #353535aa;
         backdrop-filter: saturate(180%) blur(10px);
         float: left;
@@ -11,7 +12,7 @@
         text-align: center;
         color: #fff;
         border-radius: 10px;
-        transition: 0.2s;
+        transition: 0.1s;
     }
     a:hover {
         border: 2px solid #fff;
@@ -29,7 +30,7 @@
     body {
         margin: 0;
         background: url('./Wallpapers/1.png') no-repeat;
-        background-size: 100% auto;
+        background-size: cover;
         background-position: center;
         font-family: Inter, Arial;
         background-color: #4e7fb1;
