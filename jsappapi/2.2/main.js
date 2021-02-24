@@ -36,7 +36,7 @@ function loadTheme(theme) {
 function firstRun() {
     localStorage.theme = "dark";
     localStorage.customThemeCSS = "";
-    localStorage.hideTab = false;
+    localStorage.hideTab = "false";
 }
 
 // Initialize App
@@ -59,7 +59,7 @@ $(document).ready(function(){
     if (localStorage.theme == "custom") {
         $('head').append("<style id='customTheme'>" + localStorage.customThemeCSS + "</style>");
     }
-    if (localStorage.hideTab == true) {
+    if (localStorage.hideTab == "true") {
         setStealth("​", "https://projectjshost.github.io/icons/blank.png");
     }
   });
