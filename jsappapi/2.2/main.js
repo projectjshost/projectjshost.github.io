@@ -1,8 +1,18 @@
 // Project JS App API
 // Ver 2.2
-// @2020 Alex.W
+// @2020 TechnoByte
 
 //      Project JS App Stuff
+
+// Tab Stealth
+function setStealth(title, icon) {
+    var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        link.href = icon;
+        document.getElementsByTagName('head')[0].appendChild(link);
+        document.title = title;
+}
 
 function loadTheme(theme) {
     switch(theme) {
@@ -23,6 +33,12 @@ function loadTheme(theme) {
     }
 }
 
+function firstRun() {
+    localStorage.theme = "dark";
+    localStorage.customThemeCSS = "";
+    localStorage.hideTab = false;
+}
+
 // Initialize App
 $(document).ready(function(){
     $('head').append('<link rel="stylesheet" href="https://projectjshost.github.io/jsappapi/2.2/dark.css">');
@@ -35,7 +51,7 @@ $(document).ready(function(){
         {$("#loadingscreen").fadeOut(1000);}, 1200);
     document.getElementById('header').innerHTML = appname;
     if (!localStorage.theme) {
-        localStorage.theme = "dark"
+        firstRun();
     }
     if (localStorage.theme == "light") {
         loadTheme("light");
@@ -43,9 +59,12 @@ $(document).ready(function(){
     if (localStorage.theme == "custom") {
         $('head').append("<style id='customTheme'>" + localStorage.customThemeCSS + "</style>");
     }
+    if (localStorage.hideTab == true) {
+        setStealth("​", "https://projectjshost.github.io/icons/blank.png");
+    }
   });
 
-
+  
 
 // Anti Cloudwise COOL
 setTimeout(

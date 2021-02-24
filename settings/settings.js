@@ -1,3 +1,10 @@
+var hideTabCB = document.getElementById("hideTabCB");
+function updatehideTab() {
+    localStorage.hideTab = document.getElementById("hideTabCB").checked;
+}
+
+
+
 function setTheme(theme) {
     if (theme == "dark") {
         localStorage.theme = "dark";
@@ -34,6 +41,14 @@ function settingsInit() {
             break;
         case "custom":
             document.getElementById("themeSelect").selectedIndex = "2";
+            break;
+    }
+    switch(localStorage.hideTab) {
+        case "true":
+            document.getElementById("hideTabCB").checked = true;
+            break;
+        case "false":
+            document.getElementById("hideTabCB").checked = false;
             break;
     }
 }
