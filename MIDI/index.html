@@ -1,0 +1,28 @@
+<html><head>
+  <script>appname="MIDI"</script>
+  <style>html{background:#222}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <script src="https://projectjshost.github.io/jquery/jquery-3.5.1.min.js"></script>
+  <script src="https://projectjshost.github.io/jsappapi/2.2/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/webmidi"></script>
+  <script src="./main.js"></script>
+</head>
+<body>
+    <header>
+      <p1 id="header"></p1>
+    </header>
+          <p>Project JS MIDI Demo</p>
+          <p2 id="istr">Waveform: square</p2>
+          <p2 id="voices">Active Voices: 0</p2>
+          <p2 id="pitch">Last frequency: -</p2>
+          <p2 id="pitchbend">Pitchbend: 0Hz</p2>
+          <div class="area">
+            <p2>Select Waveform</p2>
+            <button onclick="setOscillatorType('square')">Square</button>
+            <button onclick="setOscillatorType('sine')">Sine</button>
+            <button onclick="setOscillatorType('sawtooth')">Sawtooth</button>
+            <button onclick="setOscillatorType('triangle')">Triangle</button>
+          </div>
+          
+</body>
+</html>
