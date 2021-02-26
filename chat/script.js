@@ -1,6 +1,11 @@
 function init() {
 
 
+function secureRandomNumber() {
+    SECarray = new Uint32Array(1);
+    return window.crypto.getRandomValues(SECarray);
+}
+
 const CLIENT_ID = 'APKeRCIm34bkZzY3';
 
 const drone = new ScaleDrone(CLIENT_ID, {
@@ -23,7 +28,7 @@ drone.on('open', error => {
     if (error) {
       return console.error(error);
     }
-    console.log('Successfully joined room');
+    console.log('Successfully joined chat room');
   });
 
   room.on('members', m => {
@@ -63,7 +68,7 @@ function getRandomName() {
   return (
     "anon" +
     "_" +
-    Math.floor(Math.random() * 9999)
+    secureRandomNumber()
   );
 }
 
@@ -72,7 +77,6 @@ function getRandomColor() {
     '#cc0000', '#ffaa00', '#b9c145', '#35b200', '#0000cc', '#6900cc'
  ];
  
- // use _.sample
  var randomColor = allowedColors[allowedColors.length * Math.random() | 0];
  return(randomColor);
 
@@ -93,13 +97,15 @@ DOM.form.addEventListener('submit', sendMessage);
 
 function sendMessage() {
   const value = DOM.input.value;
+  const Evalue = btoa(value);
+  console.log(Evalue);
   if (value === '') {
     return;
   }
   DOM.input.value = '';
   drone.publish({
     room: 'observable-room',
-    message: value,
+    message: Evalue,
   });
 }
 
@@ -123,7 +129,7 @@ function updateMembersDOM() {
 function createMessageElement(text, member) {
   const el = document.createElement('div');
   el.appendChild(createMemberElement(member));
-  el.appendChild(document.createTextNode(text));
+  el.appendChild(document.createTextNode(atob(text)));
   el.className = 'message';
   var chatHistory = document.getElementById("messages");
   chatHistory.scrollTop = chatHistory.scrollHeight;
