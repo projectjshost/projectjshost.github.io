@@ -1,0 +1,28 @@
+textarea {
+    background-color: var(--background);
+    border: 2px solid var(--border);
+    color: var(--foreground);
+    border-radius: 5px;
+    width: -webkit-fill-available;
+    width: -moz-available;
+    height: 260px;
+    resize: none;
+    transition: 0.1s;
+}
+input {
+    background-color: var(--background);
+    border: 2px solid var(--border);
+    color: var(--foreground);
+    border-radius: 5px;
+    padding: 5px;
+    height: 40px;
+    width: 280;
+    transition: 0.1s;
+
+}
+input:focus {
+    border-color: var(--foreground);
+}
+textarea:focus {
+    border-color: var(--foreground);
+}
