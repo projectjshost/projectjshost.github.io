@@ -84,13 +84,13 @@ function setSE(se) {
 
   switch(Engine) {
     case 0:
-      document.getElementById('4').innerHTML = 'Search Engine: Google';
-      break;
-    case 1:
       document.getElementById('4').innerHTML = 'Search Engine: DuckDuckGo';
       break;
+    case 1:
+      document.getElementById('4').innerHTML = 'Search Engine: Qwant';
+      break;
     case 2:
-      document.getElementById('4').innerHTML = 'Search Engine: Bing';
+      document.getElementById('4').innerHTML = 'Search Engine: Google';
       break;
     case 3:
       document.getElementById('4').innerHTML = 'Search Engine: Console Output (Debug)';
