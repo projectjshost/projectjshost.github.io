@@ -1,7 +1,7 @@
 //Set Variables
 var plays = 0;
 var level = 0;
-var Engine = 1;
+var Engine = 0;
 // Searches
 var searches = [
   //Weird Searches
@@ -21,10 +21,10 @@ var searches = [
   // Illegal Searches
   "How to join isis",
   "Buy gun",
-  "How to become a illegal hacker?",
+  "How to become a illegal hacker",
   "Best place to hide a body",
   "Where to buy drugs?",
-  "How to make a virus?"
+  "How to make a virus"
 ];
 
 
@@ -37,16 +37,16 @@ function roulette() {
   // Search Engines
   switch(Engine) {
     case 0:
-      // Google
-      window.open("https://www.google.com/search?&q=" + searches[getRandom(level, level+6)])
-      break;
-    case 1:
       // DuckDuckGo
       window.open("https://duckduckgo.com/?q=" + searches[getRandom(level, level+6)])
       break;
+    case 1:
+      // Qwant
+      window.open("https://www.qwant.com/?q=" + searches[getRandom(level, level+6)])
+      break;
     case 2:
-      // Bing
-      window.open("https://www.bing.com/search?q=" + searches[getRandom(level, level+6)])
+      // Google
+      window.open("https://www.google.com/search?q=" + searches[getRandom(level, level+6)])
       break;
     case 3:
       // Debug
