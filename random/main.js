@@ -1,3 +1,13 @@
+var worker = new Worker('worker.js');
+worker.addEventListener('message', function(e) {
+    document.getElementById("randomPassResult").innerText = e.data;
+});
+
+function randomPassGen() {
+    var PassLen = document.getElementById("randomPassLen").value;
+    worker.postMessage(PassLen);
+}
+
 function getRandom(min, max) {
     var min1 = parseInt(min);
     var max1 = parseInt(max)+1;
@@ -12,22 +22,10 @@ function randomNumGen() {
     document.getElementById("randomNumResult").innerText = result;
 }
 
-function getRandomStr(length) {
-    // Declare all characters
-    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*';
 
-    // Pick characers randomly
-    let str = '';
-    for (let i = 0; i < length; i++) {
-        str += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
+// var t0 = performance.now()
 
-    return str;
+// getRandomStr(1200);
 
-};
-
-function randomPassGen() {
-    var PassLen = document.getElementById("randomPassLen").value;
-    var result = getRandomStr(PassLen);
-    document.getElementById("randomPassResult").innerText = result;
-}
+// var t1 = performance.now()
+// alert("OLD Call to doSomething took " + (t1 - t0) + " milliseconds.")
