@@ -81,7 +81,7 @@
       resize: none;
       transition: 0.1s;
      }
-    input {
+     input:not([type="checkbox"]) {
       background-color: var(--background);
       border: 2px solid var(--border);
       color: var(--foreground);

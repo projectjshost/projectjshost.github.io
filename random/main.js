@@ -4,21 +4,21 @@ worker.addEventListener('message', function(e) {
 });
 
 function randomPassGen() {
-    var PassLen = document.getElementById("randomPassLen").value;
+    let PassLen = document.getElementById("randomPassLen").value;
     worker.postMessage(PassLen);
 }
 
 function getRandom(min, max) {
-    var min1 = parseInt(min);
-    var max1 = parseInt(max)+1;
-    var num = Math.random() * (max1 - min1) + min1;
+    let min1 = parseInt(min);
+    let max1 = parseInt(max)+1;
+    let num = Math.random() * (max1 - min1) + min1;
 
     return Math.floor(num);
 };
 function randomNumGen() {
-    var randomNumMin = document.getElementById("randomNumMin").value;
-    var randomNumMax = document.getElementById("randomNumMax").value;
-    var result = getRandom(randomNumMin, randomNumMax);
+    let randomNumMin = document.getElementById("randomNumMin").value;
+    let randomNumMax = document.getElementById("randomNumMax").value;
+    let result = getRandom(randomNumMin, randomNumMax);
     document.getElementById("randomNumResult").innerText = result;
 }
 

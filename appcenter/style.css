@@ -1,0 +1,18 @@
+.appTile {
+    display: block;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 10px;
+    width: 200px;
+    height: 140px;
+    text-align: center;
+    cursor: pointer;
+}
+.appTile p {
+    font-size: 15px;
+}
+
+.appTile:hover {
+    border-color: var(--foreground);
+}
