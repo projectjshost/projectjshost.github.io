@@ -1,0 +1,1 @@
+apiHost = location.host;

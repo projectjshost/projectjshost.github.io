@@ -3,20 +3,29 @@ function updatehideTab() {
     localStorage.hideTab = document.getElementById("hideTabCB").checked;
 }
 
+var classicInterface = document.getElementById("classicInterface");
+function updateClassic() {
+    localStorage.classicInterface = document.getElementById("classicInterface").checked;
+    location.reload();
+}
 
 
 function setTheme(theme) {
     if (theme == "dark") {
         localStorage.theme = "dark";
-        if (document.getElementById("lightTheme")) {
-            $("#lightTheme").remove();
+        if (document.getElementById("JStheme")) {
+            $("#JStheme").remove();
         }
         if (document.getElementById("customTheme")) {
             $("#customTheme").remove();
         }
+        loadTheme("dark");
     } 
     if (theme == "light") {
         localStorage.theme = "light";
+        if (document.getElementById("JStheme")) {
+            $("#JStheme").remove();
+        }
         if (document.getElementById("customTheme")) {
             $("#customTheme").remove();
         }
@@ -24,8 +33,8 @@ function setTheme(theme) {
     }
     if (theme == "custom") {
         localStorage.theme = "custom";
-        if (document.getElementById("lightTheme")) {
-            $("#lightTheme").remove();
+        if (document.getElementById("JStheme")) {
+            $("#JStheme").remove();
         }
         loadTheme("custom");
     }
@@ -41,6 +50,14 @@ function settingsInit() {
             break;
         case "custom":
             document.getElementById("themeSelect").selectedIndex = "2";
+            break;
+    }
+    switch(localStorage.classicInterface) {
+        case "true":
+            document.getElementById("classicInterface").checked = true;
+            break;
+        case "false":
+            document.getElementById("classicInterface").checked = false;
             break;
     }
     switch(localStorage.hideTab) {
@@ -69,6 +86,7 @@ input.onchange = e => {
 
    reader.onload = readerEvent => {
       var content = readerEvent.target.result; 
+      content = content.replace(/</g, "_").replace(/>/g, "_");
       if (localStorage.customThemeCSS) { 
         localStorage.removeItem("customThemeCSS");
       }

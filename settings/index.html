@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
   <script src="https://projectjshost.github.io/jquery/jquery-3.5.1.min.js"></script>
   <script src="./settings.js"></script>
-<script src="https://projectjshost.github.io/jsappapi/2.2/main.js"></script>
+<script src="/jsappapi/2.3/main.js"></script>
 </head>
 <body onload="settingsInit();">
     <header>
@@ -22,6 +22,9 @@
           <p2>Security</p2>
             <input type="checkbox" id="hideTabCB" onclick="updatehideTab()">
             <label for="hideTabCB">Hide app name and icon</label>
+          <p2>Interface</p2>
+            <input type="checkbox" id="classicInterface" onclick="updateClassic()">
+            <label for="classicInterface">Use classic interface.</label>
           <p2>Reset</p2>
           <p>This will also delete all app data!</p>
           <button onclick="resetAll()">Reset all settings</button>
