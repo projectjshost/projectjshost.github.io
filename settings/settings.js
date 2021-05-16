@@ -1,12 +1,30 @@
-var hideTabCB = document.getElementById("hideTabCB");
 function updatehideTab() {
     localStorage.hideTab = document.getElementById("hideTabCB").checked;
+    if(localStorage.hideTab=="true") {
+        setStealth("​", "/icons/blank.png");
+    } else {
+        setStealth(appname, "/favicon.ico");
+    }
 }
 
-var classicInterface = document.getElementById("classicInterface");
 function updateClassic() {
-    localStorage.classicInterface = document.getElementById("classicInterface").checked;
-    location.reload();
+    var checkValue = document.getElementById("classicInterface").checked;
+    if(checkValue==true) {
+        localStorage.interface="classic";
+        switchInterface("classic");
+    } else {
+        localStorage.interface="modern";
+        switchInterface("modern");
+    }
+}
+
+function updateloadingScreen() {
+    var checkValue = document.getElementById("loadingScreen").checked;
+    if(checkValue==true) {
+        localStorage.loadingScreen="false";
+    } else {
+        localStorage.loadingScreen="true";
+    }
 }
 
 
@@ -52,11 +70,11 @@ function settingsInit() {
             document.getElementById("themeSelect").selectedIndex = "2";
             break;
     }
-    switch(localStorage.classicInterface) {
-        case "true":
+    switch(localStorage.interface) {
+        case "classic":
             document.getElementById("classicInterface").checked = true;
             break;
-        case "false":
+        case "modern":
             document.getElementById("classicInterface").checked = false;
             break;
     }
@@ -68,6 +86,14 @@ function settingsInit() {
             document.getElementById("hideTabCB").checked = false;
             break;
     }
+    switch(localStorage.loadingScreen) {
+        case "true":
+            document.getElementById("loadingScreen").checked = false;
+            break;
+        case "false":
+            document.getElementById("loadingScreen").checked = true;
+            break;
+    }
 }
 
 function updateTheme() {
@@ -76,17 +102,22 @@ function updateTheme() {
 
 function importTheme() {
     var input = document.createElement('input');
-input.type = 'file';
+    input.type = 'file';
+    input.accept = '.css';
 
-input.onchange = e => { 
+    input.onchange = e => { 
    var file = e.target.files[0]; 
 
    var reader = new FileReader();
    reader.readAsText(file,'UTF-8');
 
    reader.onload = readerEvent => {
-      var content = readerEvent.target.result; 
+      var content = readerEvent.target.result;
+      if (content.includes("<script")||content.includes("</script>")) {
+        dialog("Warning: this theme may contain dangerous code.")
+    }
       content = content.replace(/</g, "_").replace(/>/g, "_");
+      
       if (localStorage.customThemeCSS) { 
         localStorage.removeItem("customThemeCSS");
       }
@@ -104,6 +135,10 @@ input.click();
 }
 
 function resetAll() {
+    var resetAlld = confirm("Are you sure? This cannot be undone.");
+if (resetAlld == true) {
     localStorage.clear();
-    location.reload();
+    document.write("All data has been successfully deleted.")
+}
+    
 }

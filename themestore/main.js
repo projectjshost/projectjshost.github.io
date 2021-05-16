@@ -1,8 +1,8 @@
 function installTheme(css) {
     localStorage.theme = "custom";
     localStorage.customThemeCSS = css;
-    if (document.getElementById("lightTheme")) {
-        document.getElementById("lightTheme").remove();
+    if (document.getElementById("JStheme")) {
+        document.getElementById("JStheme").remove();
     }
     if (document.getElementById("customTheme")) {
         document.getElementById("customTheme").remove();
@@ -11,11 +11,12 @@ function installTheme(css) {
 }
 function resetTheme(css) {
     localStorage.theme = "dark";
-    localStorage.removeItem("customThemeCSS");
+    localStorage.customThemeCSS = "";
     if (document.getElementById("customTheme")) {
         document.getElementById("customTheme").remove();
     }
-    if (document.getElementById("lightTheme")) {
-        document.getElementById("lightTheme").remove();
+    if (document.getElementById("JStheme")) {
+        document.getElementById("JStheme").remove();
     }
+    loadTheme(localStorage.theme);
 }

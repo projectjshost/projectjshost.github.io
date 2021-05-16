@@ -1,31 +1,18 @@
-@import url('https://projectjshost.github.io/fonts/inter.css');
+@font-face {
+    font-family: 'Cursed Timer ULiL';
+    src: url('./fonts/CursedTimerULiL.woff2') format('woff2'),
+        url('./fonts/CursedTimerULiL.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 html, body {
-    @font-face {
-        font-family: 'Cursed Timer ULiL';
-        src: url('./fonts/CursedTimerULiL.woff2') format('woff2'),
-            url('./fonts/CursedTimerULiL.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-    }
-    
- -webkit-user-select: none; /* Safari */        
- -moz-user-select: none; /* Firefox */
- -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
-    
     height: 100%;
     width:100%;
     padding: 0;
     margin: 0!important;
     overflow: hidden;
     color: var(--foreground);
-}
-p1 {
-    float: left;
-    margin: 5px;
-    font-size: 25px;
-    margin-left: 10px
 }
 /* used white colour for foreground so that disabled button is not visible to the screen */
 button:disabled{
@@ -40,8 +27,8 @@ button:disabled:hover{
 .noHover{
     pointer-events: none;
 }
-header {
-    display:none;
+.headerButton {
+    background-color: transparent!important;
 }
 body {
     font-family: Inter;
@@ -49,16 +36,11 @@ body {
     overflow: hidden;
 }
 
-h1 {
-    padding: 25px;
-    margin: 20px;
-    text-align: center;
-}
-
 .container {
     justify-content: center;
     align-items: center;
     margin: 0;
+    margin-top: 50px;
     height: 100%;
     width: 100%;
     background: transparent;
@@ -78,21 +60,22 @@ input {
 }
 
 #display {
-    color: black;
+    color: var(--foreground);
     outline: none;
     width: -webkit-fill-available;
     width: -moz-available;
     height: 40px;
-    background: #7a847c;
-    border: 2px solid var(--border);
-    border-radius: 5px;
+    background: var(--background2);
+    border: 1px solid var(--border);
     margin-left: 15px;
     margin-right: 15px;
     font-family: 'Cursed Timer ULiL';
     font-size: 34px;
-    text-shadow: 2px 2px 2px #00000045;
 }
 
+#display:focus {
+    border-color: var(--accent);
+}
 .keyboard {
     position: relative;
     top: 40px;
@@ -112,12 +95,12 @@ input {
 button {
     font-family: Inter, Arial, sans-serif;
     font-weight: bolder;
-    font-size: 22px;
+    font-size: 24px!important;
+    font-weight: 300;
     border: none;
     margin: 6px;
     padding: 12px;
     outline: none;
-    border-radius: 5px;
     width: 20%;
     height: 45px;
 }
@@ -128,7 +111,6 @@ button:nth-child(1) {
 }
 
 button:nth-child(2) {
-    font-weight: 550;
     background: var(--foreground3);
 
 }
@@ -165,10 +147,4 @@ button:nth-child(16) {
 button:nth-child(20) {
     background: var(--foreground3);
 
-}
-
-
-::selection {
-    color: #7a847c;
-    background-color: black;
 }

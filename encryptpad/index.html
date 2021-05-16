@@ -1,10 +1,10 @@
 <html><head>
-  <script>appname="EncryptPad"</script>
+  <script>appname="EncryptPad";accentColor="#deaaff"</script>
   <style>html{background:#222}</style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-  <script src="/jquery/jquery-3.5.1.min.js"></script>
+  <script src="/jquery/jquery-3.6.0.min.js"></script>
   <script src="/jsappapi/2.3/main.js"></script>
-  <script src="../crypto-js/crypto-js.js"></script>
+  <script src="/crypto-js/crypto-js.js"></script>
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -15,13 +15,13 @@
     <textarea spellcheck="false" id="text"></textarea><br>
          <p>Decrypt saved content:</p>
           <input type="password" id="DEpassw" placeholder="Password">
-          <button onclick='decryptContents()'>Decrypt saved content</button>
+          <button onclick='decryptContents()'><span class="Icon">lock_open</span>Decrypt saved content</button>
 
           <p>Encrypt and save current content:</p>
           <input type="password" id="ENpassw" placeholder="Password">
-          <button onclick='encryptContents()'>Encrypt current content</button>
+          <button onclick='encryptContents()'><span class="Icon">lock</span>Encrypt current content</button>
           <br>
-          <button onclick='deleteContents()'>Delete all content</button>
+          <button onclick='deleteContents()'><span class="Icon">delete</span>Delete all content</button>
           <script src="./main.js"></script>
 </body>
 </html>

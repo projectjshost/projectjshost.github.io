@@ -6,8 +6,9 @@ input {
     margin-left: 5px!important;
 }
 .user-select {
-    user-select: text!important;
+    user-select: all!important;
     font-family: monospace!important;
+    font-size: 16px;
 }
 #randomPassResult {
     line-break: anywhere;

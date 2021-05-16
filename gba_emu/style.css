@@ -19,8 +19,7 @@
     align-items: center;
 }
 .appTile p {
-    font-size: 16px;
-    margin: 6px;
+    font-size: 15px;
 }
 
 .appTile:hover {

@@ -1,25 +1,25 @@
 <html><head>
-    <script>appname="Theme Store"</script>
+    <script>appname="Theme Store";accentColor="#92b372"</script>
     <style>html{background:#222}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <script src="https://projectjshost.github.io/jquery/jquery-3.5.1.min.js"></script>
+    <script src="/jquery/jquery-3.6.0.min.js"></script>
     <script src="/jsappapi/2.3/main.js"></script>
-    <script src="./main.js"></script>
-    <link type="text/css" href="./style.css" rel="stylesheet">
+    <script src="main.js"></script>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
     <header>
         <p1 id="header"></p1>
     </header>
-          <p>Project JS Theme Store</p>
-          <button onclick="resetTheme()">Reset Theme</button>
+          <button onclick="resetTheme()"><span class="Icon">restart_alt</span>Reset Theme</button>
             <p><b>Available Themes:</b></p>
             <div class="area theme">
-              <e>Arc<button onclick="installTheme(':root{--background:#3f4551;--background2:#3f4551;--shadow:#282c37;--foreground:#fff;--foreground2:#888;--foreground3:#3f4551;--elementcolor:#353944;--active:#282c37;--border:#282c37;--transparent:#00000000;--black:#000;--darkoverlay:#00000086}')">Install</button></e>
-              <e>High Contrast Dark<button  onclick="installTheme(':root{--background:#000;--background2:#000;--shadow:#000;--foreground:#fff;--foreground2:#fff;--foreground3:#fff;--elementcolor:#000;--active:#000;--border:#fff;--transparent:#00000000;--black:#000;--darkoverlay:#000}')">Install</button></e>
-              <e>High Contrast Light<button onclick="installTheme(':root{--background:#fff;--background2:#fff;--shadow:#fff;--foreground:#000;--foreground2:#000;--foreground3:#fff;--elementcolor:#fff;--active:#000;--border:#000;--transparent:#ffffff00;--black:#fff;--darkoverlay:#fff}')">Install</button></e>
-              <e>Simple Blue<button  onclick="installTheme(':root{--background:#c5efff;--background2:#c5efff;--shadow:#4980b391;--foreground:#044c67;--foreground2:#448ca7;--foreground3:#c5efff;--elementcolor:#66d6ff82;--active:#448ca7;--border:#448ca7;--transparent:#00000000;--black:#666;--darkoverlay:#00000086}header{background-color:#8de0ff;background-image:repeating-linear-gradient(-45deg,#66d6ff,#66d6ff 10px,#cff2ff00 10px,#cff2ff00 40px)}')">Install</button></e>
-              <e>Simple Green<button onclick="installTheme(':root{--background:#c5ffef;--background2:#c5ffef;--shadow:#49b38091;--foreground:#04674c;--foreground2:#44a78c;--foreground3:#c5ffef;--elementcolor:#66ffd682;--active:#44a78c;--border:#44a78c;--transparent:#00000000;--black:#666;--darkoverlay:#00000086}header{background-color:#8dffe0;background-image:repeating-linear-gradient(-45deg,#66ffd6,#66ffd6 10px,#cff2ff00 10px,#cff2ff00 40px)}')">Install</button></e>
+              <e>Arc<button onclick="installTheme(':root{--background:#3f4551;--background2:#3f4551;--shadow:#282c37;--foreground:#fff;--foreground2:#888;--foreground3:#353944;--elementcolor:#353944;--active:#282c37;--border:#282c37;--transparent:#00000000;--black:#000;--darkoverlay:#00000086;--accent:#fff!important;--accent2:#fff!important}')"><span class="icon">download</span>Install</button></e>
+              <e>High Contrast Dark<button  onclick="installTheme(':root{--background:#000;--background2:#000;--shadow:#000;--foreground:#fff;--foreground2:#fff;--foreground3:#fff;--elementcolor:#000;--active:#000;--border:#fff;--transparent:#00000000;--black:#000;--darkoverlay:#000;--accent:#fff;--accent2:#fff}')"><span class="icon">download</span>Install</button></e>
+              <e>High Contrast Light<button onclick="installTheme(':root{--background:#fff;--background2:#fff;--shadow:#fff;--foreground:#000;--foreground2:#000;--foreground3:#fff;--elementcolor:#fff;--active:#000;--border:#000;--transparent:#ffffff00;--black:#fff;--darkoverlay:#fff;--accent:#000;--accent2:#000}')"><span class="icon">download</span>Install</button></e>
+              <e>Light Blue<button onclick="installTheme(':root{--accent:#448ca7!important;--accent2:#448ca7!important;--background:#c5efff;--background2:#c5efff;--shadow:#4980b391;--foreground:#044c67;--foreground2:#448ca7;--foreground3:#66d6ff;--elementcolor:#66d6ff82;--active:#448ca7;--border:#448ca7;--transparent:#00000000;--black:#666;--darkoverlay:#00000086}header{background-color:#8de0ff!important;background-image:repeating-linear-gradient(-45deg,#66d6ff,#66d6ff 10px,#cff2ff00 10px,#cff2ff00 40px)}')"><span class="icon">download</span>Install</button></e>
+              <e>Mint Green<button onclick="installTheme(':root{--accent:#44a78c!important;--accent2:#44a78c!important;--background:#c5ffef;--background2:#c5ffef;--shadow:#49b38091;--foreground:#04674c;--foreground2:#44a78c;--foreground3:#66ffd6;--elementcolor:#66ffd682;--active:#44a78c;--border:#44a78c;--transparent:#00000000;--black:#666;--darkoverlay:#00000086}header{background-color:#8dffe0!important;background-image:repeating-linear-gradient(-45deg,#66ffd6,#66ffd6 10px,#cff2ff00 10px,#cff2ff00 40px)}')"><span class="icon">download</span>Install</button></e>
+              <e>Cyan Night<button onclick="installTheme(':root{--background:#000c09;--background2:#00231b;--shadow:#00231b;--foreground:#00ffc4;--foreground2:#008062;--foreground3:#004c3a;--elementcolor:#00231b;--active:#00231b;--border:#008868;--transparent:#00000000;--black:#000;--darkoverlay:#00000086;--accent:#00ffc4!important;--accent2:var(--accent)!important}')"><span class="icon">download</span>Install</button></e>
             </div>
           
           

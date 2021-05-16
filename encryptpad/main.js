@@ -1,6 +1,6 @@
 // Check if there is any stored content
-if(localStorage.EncryptPadcontents) {
-  document.getElementById("encryptTextLabel").innerHTML = "Status: Encrypted text found.";
+if(localStorage.encryptPadContent) {
+  document.getElementById("encryptTextLabel").innerHTML = "Status: Encrypted content found.";
 }
 // Delete all objects
 function secureDelete() {
@@ -18,7 +18,7 @@ function encryptContents() {
     if(encryptThis.length<1){
       document.getElementById("encryptTextLabel").innerHTML = "Status: Text field cannot be empty!";
     } else {
-      localStorage.EncryptPadcontents = CryptoJS.AES.encrypt(encryptThis, ENpassw);
+      localStorage.encryptPadContent = CryptoJS.AES.encrypt(encryptThis, ENpassw);
       document.getElementById("ENpassw").value = "";
       document.getElementById("text").value = "";
       secureDelete();
@@ -33,7 +33,7 @@ function encryptContents() {
 // Decrypt text area contents
 function decryptContents() {
   DEpassw = document.getElementById("DEpassw").value;
-  decrypted = CryptoJS.AES.decrypt(localStorage.EncryptPadcontents, DEpassw);
+  decrypted = CryptoJS.AES.decrypt(localStorage.encryptPadContent, DEpassw);
   if(decrypted.toString(CryptoJS.enc.Utf8)=="") {
     document.getElementById("encryptTextLabel").innerHTML = "Status: Wrong Password!";
   } else {
@@ -46,7 +46,7 @@ function decryptContents() {
 
 // Delete all content
 function deleteContents() {
-  localStorage.removeItem("EncryptPadcontents");
+  localStorage.removeItem("encryptPadContent");
   document.getElementById("ENpassw").value = "";
   document.getElementById("DEpassw").value = "";
   document.getElementById("text").value = "";

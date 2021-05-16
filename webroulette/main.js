@@ -1,17 +1,18 @@
-//Set Variables
+// Set Variables
 var plays = 0;
 var diff = 6;
 
 // Roulette Game
 function roulette() {
-  plays = plays + 1;
+  plays++;
   var roulette = Math.floor((Math.random() * diff) + 1);
   // If you lose
   if (roulette == 1) {
     // Attempts to crash your browser when you lose.
-        while (true) {
-            document.title = Math.floor(Math.random() * (99999999999999999 - 11111111111111111) + 11111111111111111);
-        }
+      while (true) {
+        document.title = Math.floor(Math.random() * (99999999999999999 - 11111111111111111) + 11111111111111111);
+      }
+        
 }
 // If you win
 else {
@@ -19,10 +20,9 @@ else {
    document.getElementById('2').innerHTML = 'Times Played: '+ plays;
  }
 }
-// Set the difficulty
-function setdiff(d) {
-  diff = d;
 
+// Set the difficulty
+function setdiff(diff) {
   switch(diff) {
     case 12:
       document.getElementById('3').innerHTML = 'Difficulty: Easy';

@@ -21,11 +21,3 @@ function randomNumGen() {
     let result = getRandom(randomNumMin, randomNumMax);
     document.getElementById("randomNumResult").innerText = result;
 }
-
-
-// var t0 = performance.now()
-
-// getRandomStr(1200);
-
-// var t1 = performance.now()
-// alert("OLD Call to doSomething took " + (t1 - t0) + " milliseconds.")

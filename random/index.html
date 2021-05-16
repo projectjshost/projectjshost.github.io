@@ -1,9 +1,9 @@
 <html>
 <head>
-    <script>appname = "Project JS Random"</script>
+    <script>appname = "Random";accentColor="#58b4b7"</script>
     <style>html{background: #222}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <script src="https://projectjshost.github.io/jquery/jquery-3.5.1.min.js"></script>
+    <script src="/jquery/jquery-3.6.0.min.js"></script>
     <script src="/jsappapi/2.3/main.js"></script>
     <script src="./main.js"></script>
     <link rel="stylesheet" href="./style.css">
@@ -19,14 +19,14 @@
         <input type="number" min="0" value="1" id="randomNumMin">
         <p>Max:</p>
         <input type="number" min="1" value="10" id="randomNumMax"><br>
-        <button onclick="randomNumGen()">Generate</button>
+        <button onclick="randomNumGen()"><span class="Icon">play_arrow</span>Generate</button>
         <p>Result: </p><b><p id="randomNumResult" class="user-select"></p></b>
     </div>
     <div class="area">
         <p2>Random Password</p2>
         <p>Length:</p>
         <input type="number" min="0" value="12" id="randomPassLen">
-        <button onclick="randomPassGen()">Generate</button>
+        <button onclick="randomPassGen()"><span class="Icon">play_arrow</span>Generate</button>
         <p>Result: </p><b><p id="randomPassResult" class="user-select"></p></b>
     </div>
 
