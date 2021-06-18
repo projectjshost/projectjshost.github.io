@@ -11,7 +11,7 @@ const projectJS = {
     build: 210615,
     theme: localStorage.theme,
     interface: localStorage.interface,
-    launcher:"/"+localStorage.laucher+"/"
+    launcher:"/"+localStorage.launcher+"/"
 };
 
 if (projectJS.type=="Release") {
@@ -59,9 +59,15 @@ function firstRun() {
     localStorage.interface = "material";
     localStorage.hideTab = "false";
     localStorage.customThemeCSS = "";
-    localStorage.laucher = "appcenter";
+    localStorage.launcher = "appcenter";
     localStorage.loadingScreen = "true";
     location.reload()
+}
+
+// Fix launcher spelling mistake
+if(localStorage.getItem("laucher")!==null) {
+    localStorage.launcher=localStorage.laucher;
+    localStorage.removeItem("laucher");
 }
 
 // Initialize App
