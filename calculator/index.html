@@ -1,75 +1,44 @@
-<!DOCTYPE html><head>
-    <script>appname="Calculator"</script>
+<html><head>
+    <script>appname="Calculator";accentColor="#b39272"</script>
     <style>html{background:#222}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <script src="/jquery/jquery-3.6.0.min.js"></script>
-    <script src="/jsappapi/2.3/main.js"></script>
-    <link href="theme.css" rel="stylesheet">
-    <script src="script.js"></script>
-    </head>
+    <script src="/apiLoader/main.js"></script>
+    <script src="main.js"></script>
+    <link href="./style.css" rel="stylesheet">
+    <script>window.resizeTo(400,675)</script>
+</head>
 <body>
     <header>
         <p1 id="header"></p1>
-      </header>
-    <div class="container">
-        <div class="output">
-            <input id="display" type="text" name="answer" spellcheck="false" autocomplete="false" autofocus>
-        </div>
-        <div class="keyboard">
-            <button id="CE" onclick="document.getElementById('display').value = display.value.slice(0,-1)">DEL</button>
-
-            <button id="clear" onclick="document.getElementById('display').value =''">AC</button>
-
-            <button id="div" onclick="document.getElementById('display').value += '/'">÷</button>
-
-            <button id="mod" onclick="document.getElementById('display').value += '%'">%</button>
-
-            <button id="power" onclick="document.getElementById('display').value +='**'">^</button>
-
-            <button id="one" onclick="document.getElementById('display').value +='sin '">sin</button>
-
-            <button id="one" onclick="document.getElementById('display').value +='cos '">cos</button>
-
-            <button id="one" onclick="document.getElementById('display').value +='tan '">tan</button>
-
-            <button id="seven" onclick="document.getElementById('display').value +='7'">7</button>
-
-            <button id="eight" onclick="document.getElementById('display').value +='8'">8</button>
-
-            <button id="nine" onclick="document.getElementById('display').value +='9'">9</button>
-
-            <button id="add" onclick="document.getElementById('display').value +='+'">+</button>
-
-
-            <button id="four" onclick="document.getElementById('display').value +='4'">4</button>
-
-            <button id="five" onclick="document.getElementById('display').value +='5'">5</button>
-
-            <button id="six" onclick="document.getElementById('display').value +='6'">6</button>
-
-            <button id="minus" onclick="document.getElementById('display').value +='-'">-</button>
-
-            
-            <button id="one" onclick="document.getElementById('display').value +='1'">1</button>
-
-            <button id="two" onclick="document.getElementById('display').value +='2'">2</button>
-
-            <button id="three" onclick="document.getElementById('display').value +='3'">3</button>
-
-            <button id="multiply" onclick="document.getElementById('display').value +='*'">×</button>
-
-            <button id="zero" onclick="document.getElementById('display').value +='0'">0</button>
-
-            <button id="dot" onclick="document.getElementById('display').value +='.'">.</button>
-
-            <button id="ans" onclick="calcAns()">Ans</button>
-
-            <button id="equal" type="submit" onclick="calculate(display.value)">=</button>
-
-        </div>
-    </div>
-
-
+    </header>
+          <p2 id="display">0</p2>
+          <div class="calcButtonsTop">
+            <button onclick="addChar(`(`)">(</button>
+            <button onclick="addChar(`)`)">)</button>
+            <button onclick="addChar('π')">π</button>
+            <button onclick="addChar('**')">^</button>
+          </div>
+          <div class="calcButtons">
+            <button class="buttonAlt2" onclick="display.innerText='0'">AC</button>
+            <button class="buttonAlt" onclick="addChar(lastresult)">Ans</button>
+            <button class="buttonAlt" onclick="addChar('/')">÷</button>
+            <button class="buttonAlt" onclick="backspace()"><span class="Icon">backspace</span></button>
+            <button onclick="addChar('7')">7</button>
+            <button onclick="addChar('8')">8</button>
+            <button onclick="addChar('9')">9</button>
+            <button class="buttonAlt" onclick="addChar('*')">×</button>
+            <button onclick="addChar('4')">4</button>
+            <button onclick="addChar('5')">5</button>
+            <button onclick="addChar('6')">6</button>
+            <button class="buttonAlt" onclick="addChar('-')">-</button>
+            <button onclick="addChar('1')">1</button>
+            <button onclick="addChar('2')">2</button>
+            <button onclick="addChar('3')">3</button>
+            <button class="buttonAlt" onclick="addChar('+')">+</button>
+            <button onclick="addChar('0')">0</button>
+            <button onclick="addChar('.')">.</button>
+            <button class="buttonWide buttonAlt2" onclick="calculate(display.innerText);">=</button>
+          </div>
 </body>
-
 </html>

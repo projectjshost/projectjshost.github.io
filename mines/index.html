@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
-  <title>Mines</title>
+  <script>appname="Minesweeper"</script>
   <link rel="stylesheet" href="style.css"></link>
   <script src="app.js" charset="utf-8"></script>
+  <script src="/jquery/jquery-3.6.0.min.js"></script>
+  <script src="/apiLoader/main.js"></script>
+  <script>window.resizeTo(492,620)</script>
 </head>
 <body>
-
+  <header>
+    <p1 id="header"></p1>
+</header>
   <div class="container">
     <button onclick="location.reload()">Restart</button>
     <div class="grid"></div>

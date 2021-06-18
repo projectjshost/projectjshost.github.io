@@ -7,17 +7,6 @@ function updatehideTab() {
     }
 }
 
-function updateClassic() {
-    var checkValue = document.getElementById("classicInterface").checked;
-    if(checkValue==true) {
-        localStorage.interface="classic";
-        switchInterface("classic");
-    } else {
-        localStorage.interface="modern";
-        switchInterface("modern");
-    }
-}
-
 function updateloadingScreen() {
     var checkValue = document.getElementById("loadingScreen").checked;
     if(checkValue==true) {
@@ -27,39 +16,8 @@ function updateloadingScreen() {
     }
 }
 
-
-function setTheme(theme) {
-    if (theme == "dark") {
-        localStorage.theme = "dark";
-        if (document.getElementById("JStheme")) {
-            $("#JStheme").remove();
-        }
-        if (document.getElementById("customTheme")) {
-            $("#customTheme").remove();
-        }
-        loadTheme("dark");
-    } 
-    if (theme == "light") {
-        localStorage.theme = "light";
-        if (document.getElementById("JStheme")) {
-            $("#JStheme").remove();
-        }
-        if (document.getElementById("customTheme")) {
-            $("#customTheme").remove();
-        }
-        loadTheme("light");
-    }
-    if (theme == "custom") {
-        localStorage.theme = "custom";
-        if (document.getElementById("JStheme")) {
-            $("#JStheme").remove();
-        }
-        loadTheme("custom");
-    }
-}
-
 function settingsInit() {
-    switch(localStorage.theme) {
+    switch(projectJS.theme) {
         case "light":
             document.getElementById("themeSelect").selectedIndex = "1";
             break;
@@ -70,12 +28,15 @@ function settingsInit() {
             document.getElementById("themeSelect").selectedIndex = "2";
             break;
     }
-    switch(localStorage.interface) {
-        case "classic":
-            document.getElementById("classicInterface").checked = true;
+    switch(projectJS.interface) {
+        case "material":
+            document.getElementById("interfaceSelect").selectedIndex = "0";
             break;
         case "modern":
-            document.getElementById("classicInterface").checked = false;
+            document.getElementById("interfaceSelect").selectedIndex = "1";
+            break;
+        case "classic":
+            document.getElementById("interfaceSelect").selectedIndex = "2";
             break;
     }
     switch(localStorage.hideTab) {
@@ -97,7 +58,12 @@ function settingsInit() {
 }
 
 function updateTheme() {
-    setTheme(document.getElementById("themeSelect").value)
+    if (localStorage.interface!==document.getElementById("interfaceSelect").value) {
+        setInterface(document.getElementById("interfaceSelect").value);
+    }
+    if (localStorage.theme!==document.getElementById("themeSelect").value) {
+        setTheme(document.getElementById("themeSelect").value);
+    }
 }
 
 function importTheme() {
@@ -117,28 +83,19 @@ function importTheme() {
         dialog("Warning: this theme may contain dangerous code.")
     }
       content = content.replace(/</g, "_").replace(/>/g, "_");
-      
-      if (localStorage.customThemeCSS) { 
-        localStorage.removeItem("customThemeCSS");
-      }
       localStorage.customThemeCSS = content;
-    if (document.getElementById("customTheme")) {
-        document.getElementById("customTheme").remove();
-    }
       setTheme("custom");
       document.getElementById("themeSelect").selectedIndex = "2";
    }
 
 }
-
-input.click();
+    input.click();
 }
 
 function resetAll() {
-    var resetAlld = confirm("Are you sure? This cannot be undone.");
-if (resetAlld == true) {
-    localStorage.clear();
-    document.write("All data has been successfully deleted.")
-}
-    
+    var resetAlld = confirm("Are you sure? This can't be undone.");
+    if (resetAlld == true) {
+        localStorage.clear();
+        document.write("All data has been successfully deleted.")
+    }
 }

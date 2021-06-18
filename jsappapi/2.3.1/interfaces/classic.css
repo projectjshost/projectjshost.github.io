@@ -1,19 +1,4 @@
-:root {
-    --background: #ffffff;
-    --background2: #dddddd;
-    --shadow: #aaaaaa;
-    --foreground: #000000;
-    --foreground2: #888888;
-    --foreground3: #dddddd;
-    --elementcolor: #dddddd;
-    --active: #aaaaaa;
-    --border: #888888;
-    --transparent: #00000000;
-    --black: #666666;
-    --darkoverlay: #00000086;
-    --accent:#666;
-    --accent2:#666
-  }
+@import "/fonts/fonts.css";
 
 header {
     background-color: var(--elementcolor);
@@ -26,7 +11,7 @@ header {
     left: 0;
     right: 0;
     z-index: 990;
-    font-family: Arial
+    font-family: "Inter", Arial
 }
 
 html,
@@ -41,7 +26,7 @@ body {
     margin-top: 80px;
     user-select: none;
     color: var(--foreground);
-    font-family:  Arial
+    font-family: 'Inter', Arial
 }
 
 e {
@@ -99,7 +84,7 @@ textarea {
     transition: .1s
 }
 
-input[type="password"], input[type="text"] {
+/* input[type="password"], input[type="text"] {
   background-color: var(--background);
   border: 2px solid var(--border);
   border-radius: 5px;
@@ -108,7 +93,7 @@ input[type="password"], input[type="text"] {
   height: 40px;
   width: 280px;
   transition: .1s
-}
+} */
 
 input:focus {
     border-color: var(--foreground)
@@ -119,7 +104,7 @@ textarea:focus {
 }
 
 button {
-    font-family: Arial;
+    font-family: 'Inter', Arial;
     background-color: var(--elementcolor);
     padding: 10px;
     border: 2px solid var(--border);
@@ -272,20 +257,67 @@ select:active {
     margin: 3px;
 }
 
-.Icon {
-    display: none;
+button>.icon {
+    font-size: 18px;
+    vertical-align: bottom;
+    margin-right: 2px;
 }
 
-input[type="password"], input[type="text"], input[type="number"] {
-  background-color: var(--background);
-  border: 2px solid var(--border);
-  border-radius: 5px;
-  color: var(--foreground);
-  padding: 5px;
-  height: 40px;
-  width: 280px;
-  transition: 0.1s
+p2>.icon {
+    font-size: 20px;
+    vertical-align: bottom;
+    margin-right: 2px;
 }
+
+@media(hover: hover) {
+    e:hover {
+        background-color: var(--elementcolor)
+    }
+
+    button:hover {
+        border: 2px solid var(--foreground)
+    }
+
+    .button:hover {
+        border: 2px solid var(--foreground)
+    }
+
+    select:hover {
+        border: 2px solid var(--foreground)
+    }
+}
+
+@media(max-width: 400px) {
+    p1 {
+        font-size: 24px
+    }
+
+    header {
+        text-align: left;
+        padding: 5px
+    }
+
+    #dialog {
+        position: fixed;
+        height: 100px;
+        top: 50%;
+        left: 0;
+        right: 0;
+        margin-top: -50px;
+        margin-left: 0;
+        width: auto
+    }
+}
+
+@media(min-width: 800px) {
+    #dialog {
+        width: 600px !important;
+        height: 200px !important;
+        margin-top: -100px !important;
+        margin-left: -300px !important
+    }
+}
+
 
 /* Toggle switch */
 .switch {
@@ -352,51 +384,41 @@ input:checked+.slider:before {
     justify-content: flex-start;
     align-items: center;
 }
-@media(hover: hover) {
-    e:hover {
-        background-color: var(--elementcolor)
-    }
 
-    button:hover {
-        border: 2px solid var(--foreground)
-    }
 
-    .button:hover {
-        border: 2px solid var(--foreground)
-    }
-
-    select:hover {
-        border: 2px solid var(--foreground)
-    }
+.appTile {
+    display: flex;
+    vertical-align: middle;
+    background: var(--elementcolor);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+    width: 180px;
+    height: 100px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.1s;
+    float:left;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.appTile p {
+    font-size: 16px;
+    margin: 5px;
 }
 
-@media(max-width: 400px) {
-    p1 {
-        font-size: 24px
-    }
-
-    header {
-        text-align: left;
-        padding: 5px
-    }
-
-    #dialog {
-        position: fixed;
-        height: 100px;
-        top: 50%;
-        left: 0;
-        right: 0;
-        margin-top: -50px;
-        margin-left: 0;
-        width: auto
-    }
+.appTile:hover {
+    border-color: var(--foreground);
+}
+.appTile:active {
+    background: var(--active);
+    cursor: default;
 }
 
-@media(min-width: 800px) {
-    #dialog {
-        width: 600px !important;
-        height: 200px !important;
-        margin-top: -100px !important;
-        margin-left: -300px !important
-    }
+.appIcon {
+    font-size: 60px;
 }

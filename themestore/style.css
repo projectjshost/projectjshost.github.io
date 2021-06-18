@@ -8,8 +8,13 @@
     border-bottom: 1px solid var(--border);
     padding: 6px;
     padding-left: 10px;
+    margin: 0;
 }
 
 .theme e:last-child {
     border-bottom: 0;
 }
+
+.area {
+    padding: 0;
+} 

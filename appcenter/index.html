@@ -1,10 +1,10 @@
 <html>
 <head>
-    <script>appname = "App Center";accentColor="#c33b23"</script>
+    <script>appname = "App Center";accentColor="#e6543b"</script>
     <style>html{background: #222}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <script src="/jquery/jquery-3.6.0.min.js"></script>
-    <script src="/jsappapi/2.3/main.js"></script>
+    <script src="/apiLoader/main.js"></script>
     <script>window.resizeTo(492,600)</script>
 </head>
 
@@ -17,16 +17,14 @@
             <div class="appTile" onclick="openApp('themestore')"><div class="appIcon Icon">format_paint</div><p>Theme Store</p></div>
             
         <p2>Tools</p2>
-            <div class="appTile" onclick="openApp('encryptpad')"><div class="appIcon Icon">edit_note</div><p>EncryptPad</p></div>
+            <div class="appTile" onclick="openApp('quicknote')"><div class="appIcon Icon">edit_note</div><p>QuickNote</p></div>
+            <div class="appTile" onclick="openApp('encryptpad')"><div class="appIcon Icon">lock</div><p>EncryptPad</p></div>
             <div class="appTile" onclick="openApp('calculator')"><div class="appIcon Icon">calculate</div><p>Calculator</p></div>
             <div class="appTile" onclick="openApp('random')"><div class="appIcon Icon">casino</div><p>Random</p></div>
             
         <p2>Games</p2>
         <div class="appTile" onclick="openApp('mines')"><div class="appIcon Icon">flag</div><p>Minesweeper</p></div>
         <div class="appTile" onclick="openApp('webroulette')"><div class="appIcon Icon">warning_amber</div><p>Web Roulette</p></div>
-            
-        <p2>Communication</p2>
-        <div class="appTile" onclick="openApp('chat')"><div class="appIcon Icon">forum</div><p>Chat</p></div>
 
         <p2>Extra</p2>
         <div class="appTile" onclick="window.resizeTo(1280,720);openApp('start')"><div class="appIcon Icon">apps</div><p>Project JS Start</p></div>
@@ -37,11 +35,11 @@
         
         <p2>3rd Party Tools</p2>
         <div class="appTile" onclick="location.replace('https://appsco.pe/')"><div class="appIcon Icon">shopping_bag</div><p>AppScope</p></div>
-        <div class="appTile" onclick="location.replace('https://editor.method.ac/')"><div class="appIcon Icon">draw</div><p>Method Draw</p></div>
+        <div class="appTile" onclick="window.resizeTo(921,644);location.replace('https://editor.method.ac/')"><div class="appIcon Icon">draw</div><p>Method Draw</p></div>
             
         <p2>3rd Party Games</p2>
-        <div class="appTile" onclick="location.replace('https://projectjshost.github.io/mario/')"><div class="appIcon Icon">games</div><p>Fullscreen Mario</p></div>
-        <div class="appTile" onclick="location.replace('https://hexgl.bkcore.com/play/')"><div class="appIcon Icon">games</div><p>HexGL</p></div>
+        <div class="appTile" onclick="window.resizeTo(1280,720);location.replace('https://projectjshost.github.io/mario/')"><div class="appIcon Icon">games</div><p>Fullscreen Mario</p></div>
+        <div class="appTile" onclick="window.resizeTo(1280,720);location.replace('https://hexgl.bkcore.com/play/')"><div class="appIcon Icon">games</div><p>HexGL</p></div>
             
         
-</html><link rel="stylesheet" href="style.css">
+</html>

@@ -4,47 +4,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
   <script src="/jquery/jquery-3.6.0.min.js"></script>
   <script src="./settings.js"></script>
-  <script src="/jsappapi/2.3/main.js"></script>
+  <script src="/apiLoader/main.js"></script>
 </head>
 <body onload="settingsInit();">
     <header>
       <p1 id="header"></p1>
     </header>
-          <p2><span class="icon">style</span>Theme and Interface</p2> 
-          <select id="themeSelect">
-            <option value="dark">Dark</option>
-            <option value="light">Light</option>
-            <option value="custom">Other (CSS)</option>
-          </select>
-          <button onclick="updateTheme();"><span class="icon">check</span>Apply</button>
-          <button onclick="importTheme();"><span class="icon">file_upload</span>Import from .CSS file</button>
-          <br>
-          <div class="toggleSwitchContainer">
-            <label class="switch">
-              <input type="checkbox" id="classicInterface" onclick="updateClassic()">
-              <span class="slider"></span>
-            </label>
-              <label for="classicInterface">Use classic interface</label>
+          <div class="area">
+            <p2><span class="icon">style</span>Theme and Interface</p2> 
+            <select id="themeSelect">
+              <option value="dark">Dark</option>
+              <option value="light">Light</option>
+              <option value="custom">Custom</option>
+            </select>
+            <select id="interfaceSelect">
+              <option value="material">Material</option>
+              <option value="modern">Modern</option>
+              <option value="classic">Classic</option>
+            </select>
+            <button onclick="updateTheme();"><span class="icon">check</span>Apply</button>
+            <button onclick="importTheme();"><span class="icon">file_upload</span>Import from file</button>
+            
           </div>
           
-          <p2><span class="icon">lock</span>Security</p2>
-          <div class="toggleSwitchContainer">
-            <label class="switch">
-              <input type="checkbox" id="hideTabCB" onclick="updatehideTab()">
-              <span class="slider"></span>
-            </label>
-            <label for="hideTabCB">Hide app name and icon</label>
+
+          <div class="area">
+            <p2><span class="icon">lock</span>Security</p2>
+            <div class="toggleSwitchContainer">
+              <label class="switch">
+                <input type="checkbox" id="hideTabCB" onclick="updatehideTab()">
+                <span class="slider"></span>
+              </label>
+              <label for="hideTabCB">Hide app name and icon</label>
+            </div>
           </div>
-          <p2><span class="icon">tune</span>Tweaks</p2>
-          <div class="toggleSwitchContainer">
-            <label class="switch">
-              <input type="checkbox" id="loadingScreen" onclick="updateloadingScreen()">
-              <span class="slider"></span>
-            </label>
-            <label for="loadingScreen">Disable loading screen</label>
+          
+          
+          <div class="area">
+            <p2><span class="icon">tune</span>Tweaks</p2>
+            <div class="toggleSwitchContainer">
+              <label class="switch">
+                <input type="checkbox" id="loadingScreen" onclick="updateloadingScreen()">
+                <span class="slider"></span>
+              </label>
+              <label for="loadingScreen">Disable splash screen</label>
+            </div>
           </div>
-          <p2><span class="icon">restart_alt</span>Reset</p2>
-          <p>All data from all apps will be deleted permanently!</p>
-          <button onclick="resetAll()"><span class="icon">warning_amber</span>Reset settings and delete all data</button>
+          
+          <div class="area">
+            <p2><span class="icon">restart_alt</span>Reset</p2>
+            <p>All data from all apps will be deleted permanently!</p>
+            <button onclick="resetAll()"><span class="icon">warning_amber</span>Reset settings and delete all data</button>
+          </div>
+          
 </body>
 </html>

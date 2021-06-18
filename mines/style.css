@@ -1,32 +1,9 @@
 .container {
-  width: 500px;
+  width: 100%;
   align-content: center;
-  background: #c0c0c0;
 }
-button {
-  font-family: monospace;
-  background-color: #c0c0c0;
-  color: #000;
-  border: 4px solid;
-  border-top-color: #fff;
-  border-left-color: #fff;
-  border-right-color: #797979;
-  border-bottom-color: #797979;
-  font-size: 20px;
-  height: 36px;
-}
-button:active {
-  border-bottom-color: #fff;
-  border-right-color: #fff;
-  border-left-color: #797979;
-  border-top-color: #797979;
-}
-:focus {
-  outline: 0!important;
-}
+
 body {
-  background: #c0c0c0;
-  zoom: 0.6;
   overflow: hidden;
 }
 .grid {
@@ -34,43 +11,41 @@ body {
   width: 400px;
   display: flex;
   flex-wrap: wrap;
-  background-color: #c0c0c0;
-  margin-left: 50px;
-  margin-top: 10px;
-  border: 5px solid;
-  border-color: #797979 #ffffff #ffffff #797979;
-  margin-bottom: 10px;
+  margin: 10px auto;
 }
 
 div {
-  font-size: 25px;
+  font-size: 20px;
   text-align: center;
-  font-family: monospace;
-  user-select: none;
 }
 .valid {
-  height: 40px;
-  width: 40px;
-  border: 5px solid;
-  border-color: #ffffff #797979 #797979 #ffffff;
+  height: 36px;
+  width: 36px;
+  background: var(--elementcolor);
+  margin: 2px;
   box-sizing: border-box;
+  border-radius: 10px;
+  cursor: pointer
 }
 
 .checked {
-  height: 40px;
-  width: 40px;
-  border: 2px solid;
-  background-color: #c0c0c0;
-  border-color: #9c998d;
+  height: 36px;
+  width: 36px;
+  margin: 2px;
+  background-color: var(--foreground3);
   box-sizing: border-box;
+  border-radius: 10px;
+  cursor: default
 }
 
 .bomb {
-  height: 40px;
-  width: 40px;
-  border: 5px solid;
-  border-color: #ffffff #797979 #797979 #ffffff;
+  height: 36px;
+  width: 36px;
+  background: var(--elementcolor);
+  margin: 2px;
   box-sizing: border-box;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .one {
@@ -82,7 +57,7 @@ div {
 }
 
 .three {
-  color: #245725;
+  color: #259127;
 }
 
 .four{
