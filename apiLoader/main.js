@@ -2,7 +2,7 @@
 apiLoader = {
     version: "1.0",
     host: "/jsappapi/",
-    defaultApi: "2.3.1"
+    defaultApi: "2.3.2"
 };
 if(!localStorage.allowCustomApi) {
     localStorage.allowCustomApi="false";

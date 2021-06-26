@@ -1,5 +1,5 @@
 // Upgrades JS 2.2/3 localstorage to JS 2.3.1 localstorage
-localStorage.lastUsedVersion = "2.3.1";
+localStorage.lastUsedVersion = "2.3.2";
 localStorage.launcher = "appcenter";
 
 if(localStorage.getItem("EncryptPadcontents")!==null) {

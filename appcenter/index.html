@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <script src="/jquery/jquery-3.6.0.min.js"></script>
     <script src="/apiLoader/main.js"></script>
-    <script>window.resizeTo(492,600)</script>
+    <script>resizeApp(492,600)</script>
 </head>
 
 <body>
@@ -15,31 +15,33 @@
         <p2>Main</p2>
             <div class="appTile" onclick="openApp('settings')"><div class="appIcon Icon">settings</div><p>Settings</p></div>
             <div class="appTile" onclick="openApp('themestore')"><div class="appIcon Icon">format_paint</div><p>Theme Store</p></div>
-            
+            <!-- <div class="appTile" onclick="openApp('desktop')"><div class="appIcon Icon">desktop_windows</div><p>Desktop</p></div> -->
+
         <p2>Tools</p2>
             <div class="appTile" onclick="openApp('quicknote')"><div class="appIcon Icon">edit_note</div><p>QuickNote</p></div>
             <div class="appTile" onclick="openApp('encryptpad')"><div class="appIcon Icon">lock</div><p>EncryptPad</p></div>
+            <div class="appTile" onclick="openApp('codepad')"><div class="appIcon Icon">code</div><p>CodePad</p></div>
             <div class="appTile" onclick="openApp('calculator')"><div class="appIcon Icon">calculate</div><p>Calculator</p></div>
             <div class="appTile" onclick="openApp('random')"><div class="appIcon Icon">casino</div><p>Random</p></div>
+            <div class="appTile" onclick="openApp('MIDI')"><div class="appIcon Icon">piano</div><p>MIDI</p></div>
+
+        <p2>Minigames</p2>
+            <div class="appTile" onclick="openApp('mines')"><div class="appIcon Icon">flag</div><p>Minesweeper</p></div>
+            <div class="appTile" onclick="openApp('webroulette')"><div class="appIcon Icon">warning_amber</div><p>Web Roulette</p></div>
             
         <p2>Games</p2>
-        <div class="appTile" onclick="openApp('mines')"><div class="appIcon Icon">flag</div><p>Minesweeper</p></div>
-        <div class="appTile" onclick="openApp('webroulette')"><div class="appIcon Icon">warning_amber</div><p>Web Roulette</p></div>
-
-        <p2>Extra</p2>
-        <div class="appTile" onclick="window.resizeTo(1280,720);openApp('start')"><div class="appIcon Icon">apps</div><p>Project JS Start</p></div>
+            <div class="appTile" onclick="resizeApp(1280,720);location.replace('https://projectjshost.github.io/mario/')"><div class="appIcon Icon">help_center</div><p>Fullscreen Mario</p></div>
+            <div class="appTile" onclick="resizeApp(1280,720);location.replace('https://hexgl.bkcore.com/play/')"><div class="appIcon Icon">sports_score</div><p>HexGL</p></div>
+            <div class="appTile" onclick="resizeApp(1280,720);location.replace('https://2048-opera-pwa.surge.sh/')"><div class="appIcon Icon">looks_two</div><p>2048</p></div>
+            <div class="appTile" onclick="resizeApp(1280,720);location.replace('https://tmaiadev-snake.netlify.app/')"><div class="appIcon Icon">gesture</div><p>Snake</p></div>
+            <div class="appTile" onclick="resizeApp(1280,720);location.replace('https://tmaiadev-tetra.netlify.app/')"><div class="appIcon Icon">grid_view</div><p>Tetra</p></div>
+            <div class="appTile" onclick="resizeApp(1280,720);location.replace('https://mahjong.jull.dev/')"><div class="appIcon Icon">payments</div><p>Mahjong</p></div>
         
         <p2>Emulators</p2>
-        <div class="appTile" onclick="location.replace('https://game.nfam.me/')"><div class="appIcon Icon">videogame_asset</div><p>NES Emulator</p></div>
-        <div class="appTile" onclick="openApp('gba_emu')"><div class="appIcon Icon">videogame_asset</div><p>GBA Emulator</p></div>
+            <div class="appTile" onclick="location.replace('https://game.nfam.me/')"><div class="appIcon Icon">videogame_asset</div><p>NES Emulator</p></div>
+            <div class="appTile" onclick="openApp('gba_emu')"><div class="appIcon Icon">videogame_asset</div><p>GBA Emulator</p></div>
         
         <p2>3rd Party Tools</p2>
-        <div class="appTile" onclick="location.replace('https://appsco.pe/')"><div class="appIcon Icon">shopping_bag</div><p>AppScope</p></div>
-        <div class="appTile" onclick="window.resizeTo(921,644);location.replace('https://editor.method.ac/')"><div class="appIcon Icon">draw</div><p>Method Draw</p></div>
-            
-        <p2>3rd Party Games</p2>
-        <div class="appTile" onclick="window.resizeTo(1280,720);location.replace('https://projectjshost.github.io/mario/')"><div class="appIcon Icon">games</div><p>Fullscreen Mario</p></div>
-        <div class="appTile" onclick="window.resizeTo(1280,720);location.replace('https://hexgl.bkcore.com/play/')"><div class="appIcon Icon">games</div><p>HexGL</p></div>
-            
-        
+            <div class="appTile" onclick="location.replace('https://appsco.pe/')"><div class="appIcon Icon">shopping_bag</div><p>AppScope</p></div>
+            <div class="appTile" onclick="resizeApp(921,644);location.replace('https://editor.method.ac/')"><div class="appIcon Icon">draw</div><p>Method Draw</p></div>
 </html>

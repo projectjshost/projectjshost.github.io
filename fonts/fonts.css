@@ -54,4 +54,5 @@
     white-space: nowrap;
     word-wrap: normal;
     direction: ltr;
-  }
+    display: inline;
+}

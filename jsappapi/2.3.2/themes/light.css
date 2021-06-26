@@ -1,0 +1,14 @@
+:root {
+  --background: #ffffff;
+  --background2: #ccc;
+  --shadow: #aaaaaa;
+  --foreground: #000000;
+  --foreground2: #888888;
+  --foreground3: #bbb;
+  --elementcolor: #ddd;
+  --active: #aaaaaa;
+  --border: #888888;
+  --transparent: #00000000;
+  --black: #666666;
+  --darkoverlay: #00000086;
+}
