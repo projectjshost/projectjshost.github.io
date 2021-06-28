@@ -3,19 +3,33 @@ var context = new AudioContext(),
 
 var oscillatorType = "square";
 
+var gainNode = context.createGain();
+gainNode.gain.value = 0;
+gainNode.connect(context.destination);
+
 var pitchShift = 0;
 
 var lastFrequency = 0;
 
 var voices = 0;
 
+var MIDIchannel = 0;
+
+function setMIDIChannel(channel) {
+    MIDIchannel = channel-1;
+}
+
+function setChannel() {
+    setMIDIChannel(document.getElementById("channelSelect").value);
+}
+
 function setOscillatorType(type) {
     oscillatorType = type;
     document.getElementById("istr").innerText = "Waveform: " + type;
 }
 function setVoices(amount) {
-voices = amount;
-document.getElementById("voices").innerText = "Active Voices: " + amount;
+    voices = amount;
+    document.getElementById("voices").innerText = "Active Voices: " + amount;
 }
 if (navigator.requestMIDIAccess) {
     navigator.requestMIDIAccess()
@@ -33,23 +47,24 @@ function success (midi) {
 }
  
 function failure () {
-    alert('No access to your midi devices.')
+    dialog('No access to your midi devices.')
 }
  
 function onMIDIMessage (message) {
+    console.log(message);
     var frequency = midiNoteToFrequency(message.data[1]);
  
-    if (message.data[0] === 144 && message.data[2] > 0) {
+    if (message.data[0] === 144+MIDIchannel && message.data[2] > 0) {
         playNote(frequency);
         lastFrequency = frequency;
         setVoices(voices+1);
     }
  
-    if (message.data[0] === 128 || message.data[2] === 0) {
+    if (message.data[0] === 128+MIDIchannel || message.data[2] === 0) {
         stopNote(frequency);
         setVoices(voices-1);
     }
-    if (message.data[0] === 224) {
+    if (message.data[0] === 224+MIDIchannel) {
       pitchShift = (message.data[2]-64)*2;
       oscillators[lastFrequency].frequency.value = lastFrequency+pitchShift;
       document.getElementById("pitchbend").innerText = "Pitchbend: " + pitchShift + "Hz";
@@ -57,7 +72,7 @@ function onMIDIMessage (message) {
 }
  
 function midiNoteToFrequency (note) {
-    return Math.pow(2, ((note - 69) / 12)) * 451;
+    return Math.pow(2, ((note - 69) / 12)) * 440;
 }
  
 function playNote (frequency) {
@@ -65,6 +80,7 @@ function playNote (frequency) {
     oscillators[frequency].type = oscillatorType;
     oscillators[frequency].frequency.value = frequency+pitchShift;
     oscillators[frequency].connect(context.destination);
+    oscillators[frequency].connect(gainNode);
     oscillators[frequency].start(context.currentTime);
     document.getElementById("pitch").innerText = "Last frequency: " + Math.abs(Math.trunc(frequency+pitchShift)) + "Hz";
 }
