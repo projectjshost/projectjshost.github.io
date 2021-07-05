@@ -82,7 +82,7 @@ function importTheme() {
       if (content.includes("<script")||content.includes("</script>")) {
         dialog("Warning: this theme may contain dangerous code.")
     }
-      content = content.replace(/</g, "_").replace(/>/g, "_");
+    //   content = content.replace(/</g, "_").replace(/>/g, "_");
       localStorage.customThemeCSS = content;
       setTheme("custom");
       document.getElementById("themeSelect").selectedIndex = "2";
