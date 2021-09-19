@@ -1,0 +1,38 @@
+{
+    "short_name": "Project JS",
+    "name": "Project JS App Center",
+    "icons": [
+      {
+        "src": "/icon192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "/icon512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/",
+    "background_color": "#1a1a1a",
+    "display": "fullscreen",
+    "scope": "/",
+    "theme_color": "#1a1a1a",
+    "shortcuts": [
+      {
+        "name": "Settings",
+        "short_name": "Settings",
+        "description": "Change settings",
+        "url": "/settings/",
+        "icons": [{ "src": "/icons/settings.png", "sizes": "192x192" }]
+      },
+      {
+        "name": "Theme Store",
+        "short_name": "Theme Store",
+        "description": "Download Themes",
+        "url": "/themestore/",
+        "icons": [{ "src": "/icons/store.png", "sizes": "192x192" }]
+      }
+    ],
+    "description": "Project JS Apps"
+  }
