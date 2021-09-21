@@ -1,0 +1,32 @@
+<html><head>
+  <script>appname="Melody Maker"</script>
+  <style>html{background:#222}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+  <script src="/jquery/jquery-3.6.0.min.js"></script>
+  <script src="/apiLoader/main.js"></script>
+  <script src="./main.js"></script>
+</head>
+<body>
+    <header>
+      <p1 id="header"></p1>
+    </header>
+          <div class="area">
+            <p2 id="istr">Waveform: square</p2>
+            <p2 id="pitch">Last frequency: -</p2>
+          </div>
+          <div class="area">
+            <p2>Select Waveform:</p2>
+            <button onclick="setOscillatorType('square')">Square</button>
+            <button onclick="setOscillatorType('sine')">Sine</button>
+            <button onclick="setOscillatorType('sawtooth')">Sawtooth</button>
+            <button onclick="setOscillatorType('triangle')">Triangle</button>
+          </div>
+          <div class="area">
+            <p2>Generate Melody:</p2>
+            <button onclick="generateMelody()"><span class="Icon">play_arrow</span>Generate</button>
+            <p>Notes played:</p>
+            <b><p id="notesPlayed"></p></b>
+          </div>
+          
+</body>
+</html>

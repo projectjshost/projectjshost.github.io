@@ -22,16 +22,30 @@
       {
         "name": "Settings",
         "short_name": "Settings",
-        "description": "Change settings",
+        "description": "Change settings.",
         "url": "/settings/",
         "icons": [{ "src": "/icons/settings.png", "sizes": "192x192" }]
       },
       {
-        "name": "Theme Store",
-        "short_name": "Theme Store",
-        "description": "Download Themes",
-        "url": "/themestore/",
-        "icons": [{ "src": "/icons/store.png", "sizes": "192x192" }]
+        "name": "QuickNote",
+        "short_name": "QuickNote",
+        "description": "Take notes quickly.",
+        "url": "/quicknote/",
+        "icons": [{ "src": "/icons/note.png", "sizes": "192x192" }]
+      },
+      {
+        "name": "Calculator",
+        "short_name": "Calculator",
+        "description": "Calculate things easily.",
+        "url": "/calculator/",
+        "icons": [{ "src": "/icons/calculator.png", "sizes": "192x192" }]
+      },
+      {
+        "name": "Random",
+        "short_name": "Random",
+        "description": "Generate random numbers and passwords.",
+        "url": "/random/",
+        "icons": [{ "src": "/icons/random.png", "sizes": "192x192" }]
       }
     ],
     "description": "Project JS Apps"
