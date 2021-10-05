@@ -1,5 +1,5 @@
 <html><head>
-  <script>appname="Settings"</script>
+  <script>appname="Settings";appInfo="Project JS Settings\nVersion: 2.3.3"</script>
   <style>html{background:#222}</style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
   <script src="/jquery/jquery-3.6.0.min.js"></script>
@@ -26,6 +26,14 @@
             <button onclick="importTheme();"><span class="icon">file_upload</span>Import from file</button>
             
           </div>
+
+          <div class="area">
+            <p2><span class="icon">wallpaper</span>Wallpaper</p2>
+            <p id="wallpaperName">Current Wallpaper: None</p>
+            <button onclick="importWallpaper();"><span class="icon">file_upload</span>Import</button>
+            <button onclick="clearWallpaper();"><span class="icon">clear</span>Clear</button>
+            <button onclick="restoreWallpaper();"><span class="icon">refresh</span>Restore</button>
+          </div>
           
 
           <div class="area">
@@ -48,6 +56,13 @@
                 <span class="slider"></span>
               </label>
               <label for="loadingScreen">Disable splash screen</label>
+            </div>
+            <div class="toggleSwitchContainer">
+              <label class="switch">
+                <input type="checkbox" id="forceWallpaper" onclick="updateforceWallpaper()">
+                <span class="slider"></span>
+              </label>
+              <label for="loadingScreen">Display wallpaper on all apps</label>
             </div>
           </div>
           

@@ -1,5 +1,5 @@
-// Upgrades JS 2.2/3 localstorage to JS 2.3.1 localstorage
-localStorage.lastUsedVersion = "2.3.2";
+// Upgrades JS localStorage
+localStorage.lastUsedVersion = "2.3.3";
 localStorage.launcher = "appcenter";
 
 if(localStorage.getItem("EncryptPadcontents")!==null) {
@@ -15,7 +15,7 @@ if(localStorage.getItem("loadingScreen")!==null) {
     localStorage.loadingScreen="true"
 }
 
-if(localStorage.interface == "modern") {
+if(!localStorage.interface) {
     localStorage.interface= "material";
 }
 setTimeout(

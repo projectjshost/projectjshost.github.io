@@ -16,6 +16,15 @@ function updateloadingScreen() {
     }
 }
 
+function updateforceWallpaper() {
+    var checkValue = document.getElementById("forceWallpaper").checked;
+    if(checkValue==true) {
+        localStorage.forceWallpaper="true";
+    } else {
+        localStorage.forceWallpaper="false";
+    }
+}
+
 function settingsInit() {
     switch(projectJS.theme) {
         case "light":
@@ -55,6 +64,23 @@ function settingsInit() {
             document.getElementById("loadingScreen").checked = true;
             break;
     }
+    switch(localStorage.forceWallpaper) {
+        case "true":
+            document.getElementById("forceWallpaper").checked = true;
+            break;
+        case "false":
+            document.getElementById("forceWallpaper").checked = false;
+            break;
+    }
+    updateWallpaper()
+}
+
+function updateWallpaper() {
+    if (localStorage.getItem("wallpaperName")!==null) {
+        $("#wallpaperName").text("Current Wallpaper: " + localStorage.wallpaperName);
+    } else {
+        $("#wallpaperName").text("Current Wallpaper: None");
+    }
 }
 
 function updateTheme() {
@@ -90,6 +116,46 @@ function importTheme() {
 
 }
     input.click();
+}
+
+function importWallpaper() {
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.png,.jpg,.gif';
+
+    input.onchange = e => { 
+   var file = e.target.files[0]; 
+
+   var reader = new FileReader();
+   reader.readAsDataURL(file);
+   localStorage.wallpaperName = file.name;
+
+   reader.onloadend = readerEvent => {
+      var content = readerEvent.target.result;
+      try {
+        localStorage.setItem("wallpaper",content);
+      }
+      catch(err) {
+        dialog(err.message,"error");
+        clearWallpaper()
+      }
+      updateWallpaper()
+   }
+
+}
+    input.click();
+}
+
+function clearWallpaper() {
+    localStorage.removeItem("wallpaper");
+    localStorage.removeItem("wallpaperName");
+    updateWallpaper()
+}
+
+function restoreWallpaper() {
+    localStorage.wallpaperName = "mountain-landscape.jpg";
+    localStorage.wallpaper = defaultWallpaper;
+    updateWallpaper()
 }
 
 function resetAll() {

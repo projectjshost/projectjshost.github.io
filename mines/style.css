@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   align-content: center;
+  text-align: center;
 }
 
 body {
@@ -12,11 +13,6 @@ body {
   display: flex;
   flex-wrap: wrap;
   margin: 10px auto;
-}
-
-div {
-  font-size: 20px;
-  text-align: center;
 }
 .valid {
   height: 36px;

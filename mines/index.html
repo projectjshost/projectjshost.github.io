@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
-  <script>appname="Minesweeper"</script>
+  <script>appname="Minesweeper";appInfo="Minesweepr\nVersion: 2.1\nBased On: <a href='https://github.com/kubowania/minesweeper'>minesweeper</a>"</script>
   <link rel="stylesheet" href="style.css"></link>
   <script src="app.js" charset="utf-8"></script>
   <script src="/jquery/jquery-3.6.0.min.js"></script>
@@ -13,7 +13,7 @@
     <p1 id="header"></p1>
 </header>
   <div class="container">
-    <button onclick="location.reload()">Restart</button>
+    <button onclick="location.reload()"><span class="icon">refresh</span>Restart</button>
     <div class="grid"></div>
     <div>Flags left: <span id='flags-left'></span></div>
     <div id="result"></div>
