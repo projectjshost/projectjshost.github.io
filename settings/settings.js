@@ -20,8 +20,10 @@ function updateforceWallpaper() {
     var checkValue = document.getElementById("forceWallpaper").checked;
     if(checkValue==true) {
         localStorage.forceWallpaper="true";
+        createWallpaper(localStorage.wallpaper)
     } else {
         localStorage.forceWallpaper="false";
+        deleteWallpaper()
     }
 }
 
@@ -149,7 +151,8 @@ function importWallpaper() {
 function clearWallpaper() {
     localStorage.removeItem("wallpaper");
     localStorage.removeItem("wallpaperName");
-    updateWallpaper()
+    updateWallpaper();
+    deleteWallpaper()
 }
 
 function restoreWallpaper() {

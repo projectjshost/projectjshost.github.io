@@ -32,6 +32,18 @@
      id="defs1011">
     <linearGradient
        inkscape:collect="always"
+       id="linearGradient1077">
+      <stop
+         style="stop-color:#9999ff;stop-opacity:1"
+         offset="0"
+         id="stop1073" />
+      <stop
+         style="stop-color:#6666ff;stop-opacity:1"
+         offset="1"
+         id="stop1075" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
        id="linearGradient5831">
       <stop
          style="stop-color:#e6e6e6;stop-opacity:1"
@@ -51,6 +63,24 @@
        x2="20.084745"
        y2="21.991526"
        gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1077"
+       id="linearGradient879"
+       x1="8"
+       y1="9"
+       x2="10"
+       y2="11"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1077"
+       id="linearGradient1721"
+       x1="14"
+       y1="9"
+       x2="16"
+       y2="11"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -65,9 +95,9 @@
      inkscape:window-height="1019"
      id="namedview1009"
      showgrid="true"
-     inkscape:zoom="39.333334"
-     inkscape:cx="12.622881"
-     inkscape:cy="9.4957626"
+     inkscape:zoom="45.254834"
+     inkscape:cx="8.6510095"
+     inkscape:cy="10.065223"
      inkscape:window-x="0"
      inkscape:window-y="33"
      inkscape:window-maximized="1"
@@ -94,14 +124,15 @@
        style="fill:url(#linearGradient5833);fill-opacity:1"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="scscsssssssssccs" />
-    <circle
-       style="opacity:1;fill:#3377ff;fill-opacity:0.69999999;stroke:none;stroke-width:0.709743"
+    <ellipse
+       style="opacity:1;fill:url(#linearGradient879);fill-opacity:1;stroke:none;stroke-width:0.709743"
        id="path5835"
        cx="9.0334997"
        cy="10"
-       r="1.0335" />
+       rx="1.033"
+       ry="1.0335" />
     <circle
-       style="opacity:1;fill:#3377ff;fill-opacity:0.69999999;stroke:none;stroke-width:0.709743"
+       style="opacity:1;fill:url(#linearGradient1721);fill-opacity:1.0;stroke:none;stroke-width:0.71;stroke-miterlimit:4;stroke-dasharray:none"
        id="path5835-3"
        cx="15.0335"
        cy="10"

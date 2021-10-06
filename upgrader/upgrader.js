@@ -11,7 +11,7 @@ if(localStorage.getItem("laucher")!==null) {
     localStorage.removeItem("laucher");
 }
 
-if(localStorage.getItem("loadingScreen")!==null) {
+if(localStorage.getItem("loadingScreen")==null) {
     localStorage.loadingScreen="true"
 }
 

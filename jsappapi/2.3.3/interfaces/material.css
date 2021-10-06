@@ -2,7 +2,8 @@
 @import "/icons/icons.css";
 
 header {
-    background: var(--elementcolor);
+    background: var(--appTile);
+    backdrop-filter: blur(10px);
     text-align: left;
     float: left;
     padding: 10px;
@@ -194,8 +195,7 @@ button:active, .button:active {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 16px 1px var(--shadow);
-    user-select:text;
+    box-shadow: 0 0 16px 1px var(--shadow)
 }
 
 .dialog>button {
