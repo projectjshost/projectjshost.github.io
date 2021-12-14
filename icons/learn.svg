@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="24px"
+   viewBox="0 0 24 24"
+   width="24px"
+   fill="#000000"
+   version="1.1"
+   id="svg6"
+   sodipodi:docname="learn.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs10">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient7349">
+      <stop
+         style="stop-color:#e6e6e6;stop-opacity:1"
+         offset="0"
+         id="stop7345" />
+      <stop
+         style="stop-color:#919191;stop-opacity:1"
+         offset="1"
+         id="stop7347" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6506"
+       id="linearGradient863"
+       x1="0"
+       y1="0"
+       x2="24"
+       y2="24"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient6506">
+      <stop
+         style="stop-color:#5ce55c;stop-opacity:1"
+         offset="0"
+         id="stop6502" />
+      <stop
+         style="stop-color:#338033;stop-opacity:1"
+         offset="1"
+         id="stop6504" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7349"
+       id="linearGradient7351"
+       x1="7.3671131"
+       y1="12.020374"
+       x2="17.433502"
+       y2="17.46694"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     showgrid="false"
+     inkscape:zoom="32"
+     inkscape:cx="13.515625"
+     inkscape:cy="16.984375"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="33"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg6" />
+  <path
+     d="M0 0h24v24H0z"
+     fill="none"
+     id="path2" />
+  <path
+     d="M 12,11.55 C 9.64,9.35 6.48,8 3,8 v 11 c 3.48,0 6.64,1.35 9,3.55 C 14.36,20.36 17.52,19 21,19 V 8 c -3.48,0 -6.64,1.35 -9,3.55 z M 12,8 C 13.66,8 15,6.66 15,5 15,3.34 13.66,2 12,2 10.34,2 9,3.34 9,5 c 0,1.66 1.34,3 3,3 z"
+     id="path4"
+     style="fill:url(#linearGradient863);fill-opacity:1" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.28581px;line-height:1.25;font-family:'Inter V';-inkscape-font-specification:'Inter V, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#99ff99;fill-opacity:1;stroke:none;stroke-width:0.182;stroke-miterlimit:4;stroke-dasharray:none"
+     x="7.1410732"
+     y="17.383694"
+     id="text3112"
+     transform="scale(0.96806631,1.0329871)"><tspan
+       sodipodi:role="line"
+       id="tspan3110"
+       x="7.1410732"
+       y="17.383694"
+       style="stroke-width:0.182;fill:#99ff99;fill-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;-inkscape-font-specification:'Inter V, Normal';font-family:'Inter V';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:7.28580999px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">J S</tspan></text>
+</svg>

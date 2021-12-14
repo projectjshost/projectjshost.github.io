@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>appname = "JS Learn";accentColor="#74a574";appInfo="JS Learn\nVersion: 1.0"</script>
+        <script src="/jquery/jquery-3.6.0.min.js"></script>
+        <script src="/apiLoader/main.js"></script>
+        <script src="lz-string.min.js"></script>
+        <script src="main.js"></script>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header>
+            <p1 id="header"></p1>
+        </header>
+        <div class="actionBar">
+            <button id="importFile" onclick="importFile()"><span class="icon">open_in_browser</span>Open File</button>
+            <button id="hideDefinitionsButton" onclick="hideDefinitions()"><span class="icon">visibility_off</span>Hide Definitions</button>
+            <button id="showDefinitionsButton" onclick="showDefinitions()"><span class="icon">visibility</span>Show Definitions</button>
+            <button id="shareFile" onclick="shareUrl()"><span class="icon">share</span>Share</button>
+        </div>
+        
+        <div id="terms">
+
+        </div>
+    </body>
+</html>

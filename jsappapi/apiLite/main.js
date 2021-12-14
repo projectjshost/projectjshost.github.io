@@ -46,7 +46,7 @@ var apiLite = {
     apiLite.versionFull = "apiLite " + apiLite.version + " " + apiLite.type + ", build " + apiLite.build;
 
 // projectJS compatibility
-projectJS=apiLite;
+const projectJS=apiLite;
 
 // Theme stuff
 function loadTheme(theme) {
@@ -66,9 +66,17 @@ function loadTheme(theme) {
     }
 }
 
-// Settheme compatibility
-function setTheme(name) {
-    loadTheme(name)
+// Theme compatibility
+// Sets a theme
+function setTheme(theme) {
+    localStorage.theme = theme;
+    apiLite.theme = theme;
+}
+
+// Sets an interface
+function setInterface(name) {
+    localStorage.interface = name;
+    apiLite.interface = name;
 }
 
 function error(type,func,desc) {
@@ -86,9 +94,58 @@ function error(type,func,desc) {
 }
 
 const apiLiteResizeTo = window.resizeTo;
-window.resizeTo = function(x,y) {
-    var resizeToConfirm = confirm("This app tried to resize itself to " + x + "x" + y + "\n Press OK to allow or press cancel to deny.");
-    if (resizeToConfirm == true) {
-        apiLiteResizeTo(x,y);
+resizeApp = function(x,y) {
+    // var resizeToConfirm = confirm("This app tried to resize itself to " + x + "x" + y + "\n Press OK to allow or press cancel to deny.");
+    // if (resizeToConfirm == true) {
+        // apiLiteResizeTo(x,y);
+    // }
+    return true;
+}
+
+// Gets app Parameters
+function getAppParams() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+function getAppParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = getAppParams()[parameter];
+        }
+    return urlparameter;
+}
+
+// Wallpaper Placeholder
+function createWallpaper(x) {
+    return x
+}
+
+function deleteWallpaper(x) {
+    return x
+}
+
+// Changes the title of the current App
+function setAppName(name) {
+    $("#header").text(name);
+    if (localStorage.hideTab!=="true") {
+        document.title=name
     }
+}
+
+// Downloads a string as a file
+function downloadAsFile(fileName, content) {
+    let element = document.createElement('a');
+    element.href = 'data:application/octet-stream;base64,' + btoa(content);
+    element.target = '_blank';
+    element.download = fileName;
+    element.click();
+}
+
+// Random Number Generator
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
 }

@@ -1,6 +1,8 @@
 // Upgrades JS localStorage
-localStorage.lastUsedVersion = "2.3.3";
-localStorage.launcher = "appcenter";
+localStorage.lastUsedVersion = "2.3.4";
+if (!localStorage.launcher) {
+    localStorage.launcher = "appcenter";
+}
 
 if(localStorage.getItem("EncryptPadcontents")!==null) {
     localStorage.encryptPadContent=localStorage.EncryptPadcontents;

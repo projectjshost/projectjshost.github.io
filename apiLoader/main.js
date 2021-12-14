@@ -1,8 +1,8 @@
-// Project JS apiLoader ver 1.1
+// Project JS apiLoader ver 1.2
 apiLoader = {
-    version: "1.1",
+    version: "1.2",
     host: "/jsappapi/",
-    defaultApi: "2.3.3"
+    defaultApi: "2.3.4"
 };
 if(!localStorage.allowCustomApi) {
     localStorage.allowCustomApi="false";
@@ -11,8 +11,14 @@ if(localStorage.allowCustomApi=="true") {
     if(!localStorage.apiName) {
         localStorage.apiName=apiLoader.defaultApi;
     }
+    if(!localStorage.apiHost) {
+        localStorage.apiHost=apiLoader.host;
+    } else {
+        apiLoader.host = localStorage.apiHost;
+    }
 } else {
     localStorage.removeItem("apiName");
+    localStorage.removeItem("apiHost");
 }
 
 if(localStorage.allowCustomApi=="true") {

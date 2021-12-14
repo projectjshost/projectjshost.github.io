@@ -99,3 +99,13 @@
     background-repeat: no-repeat;
     background-size: cover
 }
+.icon-desktop {
+    background: url("/icons/desktop.svg");
+    background-repeat: no-repeat;
+    background-size: cover
+}
+.icon-learn {
+    background: url("/icons/learn.svg");
+    background-repeat: no-repeat;
+    background-size: cover
+}

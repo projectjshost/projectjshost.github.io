@@ -1,12 +1,3 @@
-function updatehideTab() {
-    localStorage.hideTab = document.getElementById("hideTabCB").checked;
-    if(localStorage.hideTab=="true") {
-        setStealth("​", "/icons/blank.png");
-    } else {
-        setStealth(appname, "/favicon.ico");
-    }
-}
-
 function updateloadingScreen() {
     var checkValue = document.getElementById("loadingScreen").checked;
     if(checkValue==true) {
@@ -108,7 +99,7 @@ function importTheme() {
    reader.onload = readerEvent => {
       var content = readerEvent.target.result;
       if (content.includes("<script")||content.includes("</script>")) {
-        dialog("Warning: this theme may contain dangerous code.")
+        dialog("This theme may contain dangerous code.", "warn")
     }
     //   content = content.replace(/</g, "_").replace(/>/g, "_");
       localStorage.customThemeCSS = content;
@@ -156,7 +147,7 @@ function clearWallpaper() {
 }
 
 function restoreWallpaper() {
-    localStorage.wallpaperName = "mountain-landscape.jpg";
+    localStorage.wallpaperName = defaultWallpaperName;
     localStorage.wallpaper = defaultWallpaper;
     updateWallpaper()
 }

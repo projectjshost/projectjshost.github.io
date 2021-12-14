@@ -1,14 +1,14 @@
 <html>
 <head>
     <link rel="manifest" href="/manifest.json">
-    <script>appname = "App Center";accentColor="#e6543b";appInfo="Project JS App Center\nVersion: 2.3.3"</script>
+    <script>appname = "App Center";accentColor="#e6543b";appInfo="Project JS App Center\nVersion: 2.3.4"</script>
     <style>html{background: #222}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <script src="/jquery/jquery-3.6.0.min.js"></script>
     <script src="/apiLoader/main.js"></script>
     <script>
         resizeApp(492,600);
-        if(localStorage.wallpaper) {
+        if(localStorage.wallpaper&&getAppParam("platform", "default")!=="JSdesktop") {
             createWallpaper(localStorage.wallpaper)
         }
     </script>
@@ -18,9 +18,10 @@
     <header>
         <p1 id="header"></p1>
     </header>
-        <p2>System</p2>
+        <p2>Main</p2>
             <div class="appTile" onclick="openApp('settings')"><div class="appIcon icon-settings"></div><p>Settings</p></div>
             <div class="appTile" onclick="openApp('themestore')"><div class="appIcon icon-store"></div><p>Theme Store</p></div>
+            <div class="appTile" onclick="openApp('desktop')"><div class="appIcon icon-desktop"></div><p>Desktop</p></div>
 
         <p2>Tools</p2>
             <div class="appTile" onclick="openApp('quicknote')"><div class="appIcon icon-note"></div><p>QuickNote</p></div>
@@ -29,7 +30,8 @@
             <div class="appTile" onclick="openApp('calculator')"><div class="appIcon icon-calculator"></div><p>Calculator</p></div>
             <div class="appTile" onclick="openApp('random')"><div class="appIcon icon-dice"></div><p>Random</p></div>
             <div class="appTile" onclick="openApp('MIDI')"><div class="appIcon icon-piano"></div><p>MIDI</p></div>
-	    <div class="appTile" onclick="openApp('melodymaker')"><div class="appIcon icon-music"></div><p>Melody Maker</p></div>
+            <div class="appTile" onclick="openApp('melodymaker')"><div class="appIcon icon-music"></div><p>Melody Maker</p></div>
+            <div class="appTile" onclick="openApp('jslearn')"><div class="appIcon icon-learn"></div><p>JS Learn</p></div>
 
         <p2>Minigames</p2>
             <div class="appTile" onclick="openApp('mines')"><div class="appIcon icon-mines"></div><p>Minesweeper</p></div>

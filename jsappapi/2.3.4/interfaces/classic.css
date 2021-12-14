@@ -1,19 +1,5 @@
-:root {
-    --background: #ffffff;
-    --background2: #dddddd;
-    --shadow: #aaaaaa;
-    --foreground: #000000;
-    --foreground2: #888888;
-    --foreground3: #dddddd;
-    --elementcolor: #dddddd;
-    --active: #aaaaaa;
-    --border: #888888;
-    --transparent: #00000000;
-    --black: #666666;
-    --darkoverlay: #00000086;
-    --accent:#666;
-    --accent2:#666
-  }
+@import "/fonts/fonts.css";
+@import "/icons/icons.css";
 
 header {
     background-color: var(--elementcolor);
@@ -26,11 +12,10 @@ header {
     left: 0;
     right: 0;
     z-index: 990;
-    font-family: Arial
+    font-family: "Inter", Arial
 }
 
-html,
-body {
+html,body {
     margin: 0;
     padding: 0;
     background-color: var(--background)
@@ -41,7 +26,14 @@ body {
     margin-top: 80px;
     user-select: none;
     color: var(--foreground);
-    font-family:  Arial
+    font-family: 'Inter', Arial
+}
+
+html {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center
 }
 
 e {
@@ -82,6 +74,7 @@ p1 {
 }
 
 .area {
+    background: var(--background);
     border: 2px solid var(--border);
     border-radius: 5px;
     margin: 15px
@@ -96,9 +89,10 @@ textarea {
     width: -moz-available;
     height: 240px;
     resize: none;
+    transition: .1s
 }
 
-input[type="password"], input[type="text"] {
+/* input[type="password"], input[type="text"] {
   background-color: var(--background);
   border: 2px solid var(--border);
   border-radius: 5px;
@@ -106,7 +100,8 @@ input[type="password"], input[type="text"] {
   padding: 5px;
   height: 40px;
   width: 280px;
-}
+  transition: .1s
+} */
 
 input:focus {
     border-color: var(--foreground)
@@ -116,8 +111,8 @@ textarea:focus {
     border-color: var(--foreground)
 }
 
-button, .button {
-    font-family: Arial;
+button {
+    font-family: 'Inter', Arial;
     background-color: var(--elementcolor);
     padding: 10px;
     border: 2px solid var(--border);
@@ -125,9 +120,26 @@ button, .button {
     color: var(--foreground);
     margin: 5px;
     cursor: pointer;
+    transition: .1s
 }
 
-button:active, .button:active {
+.button {
+    background-color: var(--elementcolor);
+    padding: 10px;
+    border: 2px solid var(--border);
+    border-radius: 5px;
+    color: var(--foreground);
+    margin: 5px;
+    cursor: pointer;
+    transition: .1s
+}
+
+button:active {
+    cursor: default;
+    background-color: var(--active)
+}
+
+.button:active {
     cursor: default;
     background-color: var(--active)
 }
@@ -176,37 +188,42 @@ f {
     color: var(--foreground2)
 }
 
-#dialog {
+.dialog {
     z-index: 9999;
     padding: 10px;
     position: fixed;
-    background: var(--elementcolor);
+    background: var(--background);
     border: 2px solid var(--border);
-    border-radius: 5px;
-    width: 300px;
-    height: 100px;
+    font-size: 15px!important;
+    border-radius: 10px;
+    width: 80%;
+    height: 50%;
     top: 50%;
     left: 50%;
-    margin-top: -50px;
-    margin-left: -150px;
-    box-shadow: 0 0 16px 1px var(--shadow)
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 16px 1px var(--shadow);
+    user-select:text;
 }
 
-div#dialog>button {
+.dialog>button {
     min-width: 50px;
     right: 0;
     bottom: 0;
-    position: absolute
+    position: absolute;
+    font-size: 14px!important;
+    height: max-content;
+    user-select: none;
 }
 
-#overlay {
+.dialogOverlay {
     z-index: 9998;
     position: fixed;
-    background-color: var(--darkoverlay);
+    background: var(--darkoverlay);
     top: 0;
     bottom: 0;
     left: 0;
-    right: 0
+    right: 0;
+    backdrop-filter: blur(10px)saturate(0.8);
 }
 
 select {
@@ -220,6 +237,7 @@ select {
     margin: 5px;
     cursor: pointer;
     min-width: 100px;
+    transition: .1s
 }
 
 select:active {
@@ -252,19 +270,45 @@ select:active {
     margin: 3px;
 }
 
-/* Hides all icons */
-.Icon, .icon, .appIcon {
-    display: none;
+button>.icon {
+    font-size: 18px;
+    vertical-align: bottom;
+    margin-right: 2px;
 }
 
-input[type="password"], input[type="text"], input[type="number"] {
-  background-color: var(--background);
-  border: 2px solid var(--border);
-  border-radius: 5px;
-  color: var(--foreground);
-  padding: 5px;
-  height: 40px;
-  width: 280px;
+p2>.icon {
+    font-size: 20px;
+    vertical-align: bottom;
+    margin-right: 2px;
+}
+
+@media(hover: hover) {
+    e:hover {
+        background-color: var(--elementcolor)
+    }
+
+    button:hover {
+        border: 2px solid var(--foreground)
+    }
+
+    .button:hover {
+        border: 2px solid var(--foreground)
+    }
+
+    select:hover {
+        border: 2px solid var(--foreground)
+    }
+}
+
+@media(max-width: 350px) {
+    p1 {
+        font-size: 24px
+    }
+
+    header {
+        text-align: left;
+        padding: 5px
+    }
 }
 
 /* Toggle switch */
@@ -289,6 +333,7 @@ input[type="password"], input[type="text"], input[type="number"] {
     right: 0;
     bottom: 0;
     background-color: #aa1010;
+    transition: .2s;
     border-radius: 50px;
     cursor: pointer;
 }
@@ -301,6 +346,7 @@ input[type="password"], input[type="text"], input[type="number"] {
     left: 2px;
     bottom: 2px;
     background-color: #fff;
+    transition: .2s;
     border-radius: 50px;
 }
 
@@ -331,6 +377,7 @@ input:checked+.slider:before {
     align-items: center;
 }
 
+
 .appTile {
     display: flex;
     vertical-align: middle;
@@ -360,51 +407,17 @@ input:checked+.slider:before {
     border-color: var(--foreground);
 }
 
-@media(hover: hover) {
-    e:hover {
-        background-color: var(--elementcolor)
-    }
-
-    button:hover {
-        border: 2px solid var(--foreground)
-    }
-
-    .button:hover {
-        border: 2px solid var(--foreground)
-    }
-
-    select:hover {
-        border: 2px solid var(--foreground)
-    }
+.appTile:active {
+    background: var(--active);
+    cursor: default;
 }
 
-@media(max-width: 400px) {
-    p1 {
-        font-size: 24px
-    }
-
-    header {
-        text-align: left;
-        padding: 5px
-    }
-
-    #dialog {
-        position: fixed;
-        height: 100px;
-        top: 50%;
-        left: 0;
-        right: 0;
-        margin-top: -50px;
-        margin-left: 0;
-        width: auto
-    }
+.appIcon {
+    font-size: 60px;
+	height: 70px;
+    width: 70px
 }
 
-@media(min-width: 800px) {
-    #dialog {
-        width: 600px !important;
-        height: 200px !important;
-        margin-top: -100px !important;
-        margin-left: -300px !important
-    }
+* {
+    -webkit-tap-highlight-color: transparent;
 }

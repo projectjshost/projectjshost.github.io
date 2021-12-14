@@ -1,0 +1,215 @@
+/* Project JSDesktop */
+@import url('/fonts/inter.css');
+
+html, body {
+    font-family: Inter, Arial, sans-serif;
+    user-select: none;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background: transparent;
+}
+body {
+    padding-top: 40px;
+    background: none!important;
+    padding-right: 304px;
+}
+header {
+    background: #333333a0;
+    backdrop-filter: blur(20px);
+    display: inline;
+    position: absolute;
+    padding: 5px;
+    height: 30px;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 41;
+}
+.title {
+    font-size: 24px;
+    margin: 0;
+    padding: 5px;
+    width: max-content;
+    line-break:strict;
+    display: none;
+}
+p {
+    display: inline;
+}
+.small {
+    opacity: 0.8;
+    font-size: 12px;
+}
+.appDrawer {
+    position: fixed;
+    top: 46px;
+    left: 0;
+    backdrop-filter: blur(20px);
+    background-color: #222222a0;
+    border-top: 0;
+    border-radius: 10px;
+    height: 500px;
+    z-index: 42;
+    transition: 0.1s;
+}
+.appDrawer>iframe {
+    border: 0;
+    height: 500px;
+    width: 435px;
+}
+.appTile {
+    padding: 0;
+    padding-top: 8px;
+    margin: 0;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+}
+.appTile:hover {
+    border-color: #ccc;
+    cursor: pointer;
+}
+.appTile p {
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+}
+.appIcon {
+    width: 32px;
+}
+button {
+    background-color: #222222a0;
+    color: #fff;
+    border: 1px solid #ffffff40;
+    border-radius: 50px;
+    padding: 5px;
+    margin: 2px;
+    transition: 0.1s;
+    font-family: Inter;
+}
+button:hover {
+    background-color: #111111a0;
+}
+button:active {
+    background-color: #000000a0;
+}
+.headerbuttons {
+    display: flex;
+    justify-content: left;
+}
+:focus {
+    outline: 0!important;
+}
+.sidebar {
+    position: fixed;
+    top: 40px;
+    z-index: 40;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    padding: 2px;
+    background-color: #333333a0;
+    backdrop-filter: blur(20px);
+}
+.block {
+    background-color: #222222a0;
+    border-radius: 10px;
+    padding: 7px;
+    margin: 4px;
+    height: max-content;
+    min-height: 100px;
+    flex: 1;
+}
+.window {
+    position: fixed;
+    background-color: #222222a0;
+    backdrop-filter: blur(20px);
+    /* border: 1px solid #ffffff40; */
+    border-radius: 10px;
+    margin: 4px;
+    min-height: 120px;
+    min-width: 200px;
+    width: 400px;
+    height: 500px;
+    box-shadow: 0 0 11px -2px black;
+    overflow: hidden;
+}
+.active {
+    color: #fff;
+}
+.inactive {
+    color: #aaa;
+}
+.windowTitle {
+    height: 35px;
+    line-height: 35px;
+    font-size: 20px;
+    padding-left: 10px;
+    font-weight: 300;
+    background: transparent;
+    /* border-bottom: 1px solid #ffffff40; */
+}
+h3 {
+    font-size: 17px;
+    padding: 0;
+    font-weight: 400;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+#time {
+    font-size: 36px;
+    font-weight: 200;
+}
+.JSappcontent {
+    border: 0;
+    width: 100%;
+    height: -webkit-fill-available;
+}
+.close {
+    width: 30px;
+    height: 30px;
+    line-height: 5px;
+    font-size: 24px;
+    margin: 2px;
+    float:right;
+    background-color: transparent;
+    border: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: 0.1s;
+}
+.close:hover {
+    background-color: #d82020a0;
+}
+
+.watermark {
+    z-index: -1;
+    font-weight: 200;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    color: #ffffff40;
+    font-size: 26px;
+}
+
+.ui-resizable-handle.ui-resizable-se.ui-icon.ui-icon-gripsmall-diagonal-se {
+    position: absolute;
+    width: 12px;
+    bottom: 0;
+    right: 0;
+    height: 12px;
+    background: black;
+    cursor: se-resize;
+}

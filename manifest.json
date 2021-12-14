@@ -23,29 +23,25 @@
         "name": "Settings",
         "short_name": "Settings",
         "description": "Change settings.",
-        "url": "/settings/",
-        "icons": [{ "src": "/icons/settings.svg", "sizes": "24x24" }]
+        "url": "/settings/"
       },
       {
         "name": "QuickNote",
         "short_name": "QuickNote",
         "description": "Take notes quickly.",
-        "url": "/quicknote/",
-        "icons": [{ "src": "/icons/note.svg", "sizes": "24x24" }]
+        "url": "/quicknote/"
       },
       {
         "name": "Calculator",
         "short_name": "Calculator",
         "description": "Calculate things easily.",
-        "url": "/calculator/",
-        "icons": [{ "src": "/icons/calculator.svg", "sizes": "24x24" }]
+        "url": "/calculator/"
       },
       {
         "name": "Random",
         "short_name": "Random",
         "description": "Generate random numbers and passwords.",
-        "url": "/random/",
-        "icons": [{ "src": "/icons/dice.svg", "sizes": "24x24" }]
+        "url": "/random/"
       }
     ],
     "description": "Project JS Apps"
