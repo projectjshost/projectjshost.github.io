@@ -1,7 +1,9 @@
+body {
+    padding-top: 80px!important;
+}
 .card {
     background: var(--area);
-    border: 1px solid var(--border);
-    border-top: 0;
+    border-bottom: 1px solid var(--border);
     margin: 0 5px;
     padding: 10px;
     display: flex;
@@ -14,14 +16,17 @@
 }
 .card:first-of-type {
     border-radius: 5px 5px 0 0;
-    border-top: 1px solid var(--border);
 }
 
 .card:last-of-type {
     border-radius: 0 0 5px 5px;
+    border-bottom: 0;
     margin-bottom: 40px;
 }
 
+#terms {
+    margin-top: 10px;
+}
 .term {
     float: left;
     flex: 40%;
@@ -35,4 +40,22 @@
 }
 input[type="file"] {
     padding: 5px;
+}
+
+.libraryItem {
+    background: var(--elementcolor);
+    display: flex;
+    margin: 5px;
+    border-radius: 5px;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+}
+.libraryItem>p {
+    cursor: pointer;
+}
+.libraryItem>p:hover {
+    text-decoration: underline;
 }

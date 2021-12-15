@@ -7,7 +7,6 @@ header {
     text-align: left;
     float: left;
     padding: 10px;
-    margin-bottom: 10px;
     position: fixed;
     border-radius: 15px;
     top: 5px;
@@ -19,6 +18,31 @@ header {
     font-size: 32px;
     box-shadow: 0 1px 7px -2px var(--shadow);
     transition: 0.2s;
+}
+
+header>.actionBar {
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    background: none;
+}
+
+header>.actionBar>button {
+    margin: 0;
+    padding: 0 5px;
+    box-shadow: none;
+    background: none!important;
+    opacity: 0.6;
+}
+
+header>.actionBar>p {
+    margin: 0 5px;
+    opacity: 0.6;
+    font-weight: 400;
+}
+
+header>.actionBar>button:hover {
+    opacity: 1;
 }
 
 html,body {
@@ -85,8 +109,8 @@ p2 {
     box-shadow: 0 0 4px 0px var(--shadow);
     background: var(--area);
     border-radius: 10px;
-    margin: 10px;
-    margin-top: 13px;
+    margin: 5px;
+    margin-top: 10px;
     margin-bottom: 0;
     padding: 5px;
     overflow: hidden;
@@ -303,6 +327,10 @@ p2>.icon {
     font-size: 24px;
     vertical-align: sub;
     margin-right: 2px;
+}
+
+p>.icon {
+    vertical-align: text-top
 }
 
 a {

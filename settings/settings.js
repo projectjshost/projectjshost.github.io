@@ -6,6 +6,14 @@ function updateloadingScreen() {
         localStorage.loadingScreen="true";
     }
 }
+function updatehideTab() {
+    var checkValue = document.getElementById("hideTabCB").checked;
+    if(checkValue==true) {
+        localStorage.hideTab="true";
+    } else {
+        localStorage.hideTab="false";
+    }
+}
 
 function updateforceWallpaper() {
     var checkValue = document.getElementById("forceWallpaper").checked;
