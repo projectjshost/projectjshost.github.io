@@ -148,6 +148,9 @@ function textToCards(text, name) {
     if(typeof currentFileName!=="undefined"&&!checkLibrary(LZString.compressToBase64(currentFileName))) {
         $(".actionBar").append(`<button id="addToLibraryButton" onclick="addToLibrary()"><span class="icon">add</span>Add to Library</button>`)
     }
+    if(checkLibrary(LZString.compressToBase64(currentFileName))) {
+        $(".actionBar").append("<p><span class='icon'>check</span>In library</p>")
+    }
 }
 
 function addToLibrary() {
@@ -218,7 +221,7 @@ $(function() {
                 temp1++;
                 var name = LZString.decompressFromBase64(item.substr(14));
                 var text = localStorage.getItem(item);
-                $("#library").append(`<div id="libraryItem${temp1}" class="libraryItem"><p onclick="B64textToCards('${text}', '${name}')">${name}</p><button onclick="deleteLibraryItem('${item}', ${temp1})"><span class="icon">clear</span>Delete</button></div>`)
+                $("#library").append(`<div id="libraryItem${temp1}" class="libraryItem"><p onclick="B64textToCards('${text}', '${name}')">${name}</p><button onclick="deleteLibraryItem('${item}', ${temp1})"><span class="icon">clear</span>Remove</button></div>`)
             })
         } else {
             $("#library").remove()

@@ -46,7 +46,7 @@ input[type="file"] {
     background: var(--elementcolor);
     display: flex;
     margin: 5px;
-    border-radius: 5px;
+    border-radius: 7.5px;
     flex-wrap: nowrap;
     flex-direction: row;
     align-content: center;

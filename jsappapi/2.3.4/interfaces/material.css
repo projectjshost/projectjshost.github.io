@@ -15,7 +15,7 @@ header {
     z-index: 990;
     font-family: "Inter", Arial, sans-serif;
     font-weight: 300;
-    font-size: 32px;
+    font-size: 30px;
     box-shadow: 0 1px 7px -2px var(--shadow);
     transition: 0.2s;
     white-space: nowrap;
@@ -295,7 +295,7 @@ select:active {
 .headerButtons {
     background: var(--transparent);
     position: fixed;
-    top:15px;
+    top:14px;
     right:10px;
     display: flex;
     justify-content: space-evenly;
@@ -331,7 +331,8 @@ p2>.icon {
 }
 
 p>.icon {
-    vertical-align: text-top
+    vertical-align: text-top;
+    margin-right: 2px
 }
 
 a {
