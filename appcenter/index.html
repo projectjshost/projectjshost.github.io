@@ -1,55 +1,43 @@
 <html>
 <head>
     <link rel="manifest" href="/manifest.json">
-    <script>appname = "App Center";accentColor="#e6543b";appInfo="Project JS App Center\nVersion: 2.3.4"</script>
-    <style>html{background: #222}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <script src="/jquery/jquery-3.6.0.min.js"></script>
-    <script src="/apiLoader/main.js"></script>
-    <script>
-        resizeApp(492,600);
-        if(localStorage.wallpaper&&getAppParam("platform", "default")!=="JSdesktop") {
-            createWallpaper(localStorage.wallpaper)
-        }
-    </script>
+	<style>html{background:#000}</style>
+    <script>appname = "App Center"</script>
+    <script src="/lib/jquery-3.6.1.min.js"></script>
+	<script src="/apiLoader/main.js"></script>
 </head>
-
 <body>
-    <header>
-        <p1 id="header"></p1>
-    </header>
+    <header><p1 id="header"></p1></header>
+    <div class="appOverview">
         <p2>Main</p2>
+        <div class="area">
             <div class="appTile" onclick="openApp('settings')"><div class="appIcon icon-settings"></div><p>Settings</p></div>
-            <div class="appTile" onclick="openApp('themestore')"><div class="appIcon icon-store"></div><p>Theme Store</p></div>
-            <div class="appTile" onclick="openApp('desktop')"><div class="appIcon icon-desktop"></div><p>Desktop</p></div>
+            <div class="appTile" onclick="openApp('themeManager')"><div class="appIcon icon-themes"></div><p>Themes</p></div>
+			<div class="appTile" onclick="openApp('terminal')"><div class="appIcon icon-terminal"></div><p>Terminal</p></div>
+		</div>
 
         <p2>Tools</p2>
+        <div class="area">
             <div class="appTile" onclick="openApp('quicknote')"><div class="appIcon icon-note"></div><p>QuickNote</p></div>
             <div class="appTile" onclick="openApp('encryptpad')"><div class="appIcon icon-note_secure"></div><p>EncryptPad</p></div>
+			<div class="appTile" onclick="openApp('safeencrypt')"><div class="appIcon icon-key"></div><p>SafeEncrypt</p>
+            </div>
             <div class="appTile" onclick="openApp('codepad')"><div class="appIcon icon-code"></div><p>CodePad</p></div>
             <div class="appTile" onclick="openApp('calculator')"><div class="appIcon icon-calculator"></div><p>Calculator</p></div>
             <div class="appTile" onclick="openApp('random')"><div class="appIcon icon-dice"></div><p>Random</p></div>
-            <div class="appTile" onclick="openApp('MIDI')"><div class="appIcon icon-piano"></div><p>MIDI</p></div>
-            <div class="appTile" onclick="openApp('melodymaker')"><div class="appIcon icon-music"></div><p>Melody Maker</p></div>
-            <div class="appTile" onclick="openApp('jslearn')"><div class="appIcon icon-learn"></div><p>JS Learn</p></div>
-
-        <p2>Minigames</p2>
-            <div class="appTile" onclick="openApp('mines')"><div class="appIcon icon-mines"></div><p>Minesweeper</p></div>
-            <div class="appTile" onclick="openApp('webroulette')"><div class="appIcon icon-dangerous"></div><p>Web Roulette</p></div>
-            
+			</div>
         <p2>Games</p2>
+		<div class="area">
             <div class="appTile" onclick="resizeApp(1280,720);location.replace('https://mario.xpixv.com/')"><div class="appIcon icon-questionblock"></div><p>FullScreen Mario</p></div>
             <div class="appTile" onclick="resizeApp(1280,720);location.replace('https://hexgl.bkcore.com/play/')"><div class="appIcon icon-hexgl"></div><p>HexGL</p></div>
             <div class="appTile" onclick="resizeApp(1280,720);location.replace('https://2048-opera-pwa.surge.sh/')"><div class="appIcon icon-2048"></div><p>2048</p></div>
             <div class="appTile" onclick="resizeApp(1280,720);location.replace('https://tmaiadev-tetra.netlify.app/')"><div class="appIcon icon-tetra"></div><p>Tetra</p></div>
             <div class="appTile" onclick="resizeApp(1280,720);location.replace('https://mahjong.jull.dev/')"><div class="appIcon icon-mahjong"></div><p>Mahjong</p></div>
-            <div class="appTile" onclick="resizeApp(1280,720);openApp('th06')"><div class="appIcon icon-th06"></div><p>東方紅魔郷</p></div>
-        
-        <p2>Emulators</p2>
-            <div class="appTile" onclick="location.replace('https://game.nfam.me/')"><div class="appIcon icon-nes"></div><p>NES Emulator</p></div>
-            <div class="appTile" onclick="openApp('gba_emu')"><div class="appIcon icon-gba"></div><p>GBA Emulator</p></div>
-        
+        </div>
         <p2>3rd Party Tools</p2>
+		<div class="area">
             <div class="appTile" onclick="location.replace('https://appsco.pe/')"><div class="appIcon icon-appscope"></div><p>Appscope</p></div>
             <div class="appTile" onclick="resizeApp(921,644);location.replace('https://editor.method.ac/')"><div class="appIcon icon-methoddraw"></div><p>Method Draw</p></div>
+		</div>
 </html>

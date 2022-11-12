@@ -1,9 +1,9 @@
 <html>
 <head>
-    <script>appname = "Random";accentColor="#58b4b7";appInfo="Project JS Random\nGenerate random numbers and passwords.\nVersion: 1.1"</script>
+    <script>appname = "Random"</script>
     <style>html{background: #222}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <script src="/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/lib/jquery-3.6.1.min.js"></script>
     <script src="/apiLoader/main.js"></script>
     <script src="./main.js"></script>
     <link rel="stylesheet" href="./style.css">
@@ -24,7 +24,6 @@
     </div>
     <div class="area">
         <p2>Random Password</p2>
-        <p class="alt">Tip: Use EncryptPad to safely store the generated passwords.</p>
         <p>Length:</p>
         <input type="number" min="0" value="12" id="randomPassLen">
         <button onclick="randomPassGen()"><span class="Icon">play_arrow</span>Generate</button>

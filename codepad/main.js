@@ -3,11 +3,7 @@ var CodeMirrorTheme;
 var CodeMirrorMode;
 var CodeMirrorContent;
 
-if (localStorage.theme=="light") {
-    CodeMirrorTheme="eclipse";
-} else {
-    CodeMirrorTheme="material-darker"
-}
+CodeMirrorTheme="material-darker"
 
 function runCode() {
     let codetoRun = myCodeMirror.getValue().replace(/\/\*[\s\S]*?\*\/|\/\/.*/g,'').trim();
@@ -53,7 +49,7 @@ function CodeMirrorInit(mode) {
         $("body").append("<button onclick='runCode()'><span class='icon'>play_arrow</span>Run</button>");
     }
     $("body").append("<button onclick='saveCode()'><span class='icon'>check</span>Save Code</button><button onclick='deleteCode()'><span class='icon'>clear</span>Delete Code</button><button onclick='downloadCode()'><span class='icon'>download</span>Download Code</button>");
-    $("head").append('<link rel="stylesheet" href="/codemirror/theme/' + CodeMirrorTheme + '.css">')
+    $("head").append('<link rel="stylesheet" href="/lib/codemirror/theme/' + CodeMirrorTheme + '.css">')
     myCodeMirror = CodeMirror(document.body, {
         value: CodeMirrorContent,
         mode: mode,

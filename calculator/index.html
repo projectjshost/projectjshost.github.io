@@ -1,9 +1,9 @@
 <html><head>
 <meta charset="utf-8">
-    <script>appname="Calculator";accentColor="#b39272";appInfo="Project JS Calculator\nVersion: 2.0"</script>
-    <style>html{background:#222}</style>
+    <script>appname="Calculator"</script>
+    <style>html{background:#000}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <script src="/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/lib/jquery-3.6.1.min.js"></script>
     <script src="/apiLoader/main.js"></script>
     <script src="main.js"></script>
     <link href="./style.css" rel="stylesheet">
@@ -13,14 +13,15 @@
     <header>
         <p1 id="header"></p1>
     </header>
-          <p2 id="display">0</p2>
-          <div class="calcButtonsTop">
-            <button onclick="addChar(`(`)">(</button>
-            <button onclick="addChar(`)`)">)</button>
-            <button onclick="addChar('π')">π</button>
-            <button onclick="addChar('**')">^</button>
-          </div>
-          <div class="calcButtons">
+	<div class="area">
+		<p2 id="display">0</p2>
+		<div class="calcButtonsTop">
+			<button onclick="addChar(`(`)">(</button>
+			<button onclick="addChar(`)`)">)</button>
+			<button onclick="addChar('π')">π</button>
+			<button onclick="addChar('**')">^</button>
+		</div>
+		<div class="calcButtons">
             <button class="buttonAlt2" onclick="display.innerText='0'">AC</button>
             <button class="buttonAlt" onclick="addChar(lastresult)">Ans</button>
             <button class="buttonAlt" onclick="addChar('/')">÷</button>
@@ -40,6 +41,7 @@
             <button onclick="addChar('0')">0</button>
             <button onclick="addChar('.')">.</button>
             <button class="buttonWide buttonAlt2" onclick="calculate(display.innerText);">=</button>
-          </div>
+		</div>
+	</div>
 </body>
 </html>

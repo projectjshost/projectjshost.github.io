@@ -1,3 +1,6 @@
+body {
+	max-width: max-content!important;
+}
 #display {
     font-size: 70px;
     font-weight: 240;
@@ -37,7 +40,7 @@
     font-size: 20px;
     font-weight: 300;
     border-radius: 50px;
-    background: var(--elementcolor);
+    background: var(--element);
     font-family: "Inter";
 }
 .calcButtons>button {
@@ -46,8 +49,7 @@
     font-size: 30px;
     font-weight: 300;
     border-radius: 50px;
-    background: var(--elementcolor);
-    font-family: "Quicksand";
+    background: var(--element);
 }
 .buttonWide {
     width: 151px!important;
@@ -57,20 +59,12 @@
 }
 
 .buttonAlt {
-    background: var(--foreground3)!important;
-}
-
-.buttonAlt:hover {
-    filter: brightness(0.9)saturate(1.5)
+    filter: brightness(1.5);
 }
 
 .buttonAlt2 {
     background: var(--accent)!important;
-    color: #fff!important;
-}
-
-.buttonAlt2:hover {
-    filter: brightness(0.9)saturate(1.5)
+    color: var(--background);
 }
 
 .calcButtons>button:active {

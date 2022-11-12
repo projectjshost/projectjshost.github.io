@@ -1,0 +1,37 @@
+/* ----- Catppuccin Colours ----- */
+:root {
+    --rosewater:  10,  56%,  91%;
+    --flamingo:    0,  59%,  88%;
+    --mauve:     279,  70%,  83%;
+    --pink:      316,  72%,  86%;
+    --maroon:    349,  60%,  77%;
+    --red:       342,  79%,  75%;
+    --peach:      24,  88%,  78%;
+    --yellow:     41,  88%,  84%;
+    --green:     128,  58%,  79%;
+    --teal:      171,  53%,  81%;
+    --blue:      207,  93%,  79%;
+    --sky:       189,  71%,  73%;
+    --lavender:  238, 100%,  89%;
+    --black0:    254,  25%,  10%;
+    --black1:    249,  23%,  12%;
+    --black2:    240,  21%,  15%;
+    --black3:    249,  18%,  22%;
+    --black4:    254,  12%,  36%;
+    --black5:    254,  16%,  26%;
+    --gray0:     247,   8%,  46%;
+    --gray1:     274,  11%,  59%;
+    --gray2:     285,  10%,  75%;
+    --white:     220,  38%,  89%;
+}
+
+:root {
+    --background: hsl(var(--black0));
+    --background2: hsl(var(--black2));
+    --foreground: hsl(var(--white));
+    --foreground2: hsl(var(--gray2));
+    --border: hsl(var(--black4));
+    --element: hsl(var(--black3));
+    --active: hsl(var(--black5));
+    --accent: hsl(var(--peach));
+}

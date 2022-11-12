@@ -3,11 +3,6 @@
     background-repeat: no-repeat;
     background-size: cover
 }
-.icon-store {
-    background: url("/icons/store.svg");
-    background-repeat: no-repeat;
-    background-size: cover
-}
 .icon-note {
     background: url("/icons/note.svg");
     background-repeat: no-repeat;
@@ -30,26 +25,6 @@
 }
 .icon-dice {
     background: url("/icons/dice.svg");
-    background-repeat: no-repeat;
-    background-size: cover
-}
-.icon-piano {
-    background: url("/icons/piano.svg");
-    background-repeat: no-repeat;
-    background-size: cover
-}
-.icon-music {
-    background: url("/icons/music.svg");
-    background-repeat: no-repeat;
-    background-size: cover
-}
-.icon-mines {
-    background: url("/icons/mines.svg");
-    background-repeat: no-repeat;
-    background-size: cover
-}
-.icon-dangerous {
-    background: url("/icons/dangerous.svg");
     background-repeat: no-repeat;
     background-size: cover
 }
@@ -79,16 +54,6 @@
     background-repeat: no-repeat;
     background-size: cover
 }
-.icon-nes {
-    background: url("/icons/NES.svg");
-    background-repeat: no-repeat;
-    background-size: cover
-}
-.icon-gba {
-    background: url("/icons/GBA.png");
-    background-repeat: no-repeat;
-    background-size: cover
-}
 .icon-appscope {
     background: url("/icons/appscope.svg");
     background-repeat: no-repeat;
@@ -99,18 +64,23 @@
     background-repeat: no-repeat;
     background-size: cover
 }
-.icon-desktop {
-    background: url("/icons/desktop.svg");
-    background-repeat: no-repeat;
-    background-size: cover
-}
 .icon-learn {
     background: url("/icons/learn.svg");
     background-repeat: no-repeat;
     background-size: cover
 }
-.icon-th06 {
-    background: url("/icons/kouma.png");
+.icon-key {
+    background: url("/icons/key.svg");
+    background-repeat: no-repeat;
+    background-size: cover
+}
+.icon-terminal {
+    background: url("/icons/terminal.svg");
+    background-repeat: no-repeat;
+    background-size: cover
+}
+.icon-themes {
+    background: url("/icons/themes.svg");
     background-repeat: no-repeat;
     background-size: cover
 }

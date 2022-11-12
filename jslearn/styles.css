@@ -43,7 +43,7 @@ input[type="file"] {
 }
 
 .libraryItem {
-    background: var(--elementcolor);
+    background: var(--element);
     display: flex;
     margin: 5px;
     border-radius: 7.5px;
