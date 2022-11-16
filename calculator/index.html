@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html><head>
 <meta charset="utf-8">
     <script>appname="Calculator"</script>
@@ -5,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <script src="/lib/jquery-3.6.1.min.js"></script>
     <script src="/apiLoader/main.js"></script>
-    <script src="main.js"></script>
     <link href="./style.css" rel="stylesheet">
     <script>resizeApp(400,675)</script>
 </head>
@@ -19,10 +19,10 @@
 			<button onclick="addChar(`(`)">(</button>
 			<button onclick="addChar(`)`)">)</button>
 			<button onclick="addChar('π')">π</button>
-			<button onclick="addChar('**')">^</button>
+			<button onclick="addChar('**')">ᐱ</button>
 		</div>
 		<div class="calcButtons">
-            <button class="buttonAlt2" onclick="display.innerText='0'">AC</button>
+            <button class="buttonAlt2" onclick="AC()">AC</button>
             <button class="buttonAlt" onclick="addChar(lastresult)">Ans</button>
             <button class="buttonAlt" onclick="addChar('/')">÷</button>
             <button class="buttonAlt" onclick="backspace()"><span class="Icon">backspace</span></button>
@@ -44,4 +44,5 @@
 		</div>
 	</div>
 </body>
+<script src="main.js"></script>
 </html>
