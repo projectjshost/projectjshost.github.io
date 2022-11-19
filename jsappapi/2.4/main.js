@@ -3,11 +3,10 @@
 // @2022 TechnoByte
 
 //      Project JS App Stuff
-let dialogID = 0;
 const projectJS = {
 	version: "2.4",
-	type: "Beta",
-	build: 221112,
+	type: "Release",
+	build: 221119,
 	launcher: "appcenter",
 	theme: localStorage.theme,
 };
@@ -48,8 +47,8 @@ const createWallpaper = (source) => {
 const deleteWallpaper = () => {
 	wallpaperCreated = false;
 	$("#wallpaper").remove()
+	$("#wallpaperElement").remove()
 }
-
 
 // Resize app to a resolution
 const resizeApp = (x, y) => {
@@ -92,7 +91,7 @@ $(document).ready(() =>{
 	if (localStorage.forceWallpaper == "true" && localStorage.wallpaper) {
 		createWallpaper(localStorage.wallpaper)
 	}
-	switchInterface();
+	$('head').append(`<link rel="stylesheet" id="JSinterface" href="/jsappapi/${projectJS.version}/interfaces/luna.css">`);
 	setAppName(appname)
 	getUiShadows();
 });
@@ -103,6 +102,8 @@ const getUiShadows = () => {
 		$('head').append(`<style id="uiShadow">:root {--shadow: 0 0px 5px 0px var(--background)}</style>`)
 	}
 }
+
+let dialogID = 0;
 
 // Opens a dialog box
 const dialog = (message, type, customTitle) => {
@@ -142,11 +143,7 @@ const closeDialog = (id) => {
 
 // Opens an App
 const openApp = (appName) => {
-	if (getAppParam("platform", "default") == "JSdesktop") {
-		window.parent.openApp(appName);
-	} else {
-		location.pathname = "/" + appName + "/";
-	}
+	location.pathname = "/" + appName + "/";
 }
 
 const themeEngine = {
@@ -200,12 +197,8 @@ themeEngine.loadTheme();
 const setAppName = (name) => {
 	appname=name
 	$("#header").text(name);
-	if (localStorage.hideTab !== "true") {
-		document.title = `${name} - Project JS Apps`
-	}
+	document.title = `${name} - Project JS Apps`
 }
-
-const setTitle = setAppName;
 
 // Downloads a string as a file
 const downloadAsFile = (fileName, content) => {
@@ -214,12 +207,6 @@ const downloadAsFile = (fileName, content) => {
 	hiddenElement.target = '_blank';
 	hiddenElement.download = fileName;
 	hiddenElement.click();
-}
-
-// Switches the interface
-const switchInterface = () => {
-	$("#JSinterface").remove();
-	$('head').append(`<link rel="stylesheet" id="JSinterface" href="/jsappapi/${projectJS.version}/interfaces/luna.css">`);
 }
 
 //      Extra Functionality
