@@ -410,7 +410,20 @@ a {
 }
 
 ::-webkit-scrollbar {
-	display: none!important
+	width: 10px;
+	height: 10px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 50px;
+}
+::-webkit-scrollbar-thumb {
+	background: var(--active);
+	border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:active {
+	background: var(--element);
 }
 
 /* Toggle switch */
@@ -570,4 +583,59 @@ td, th {
 	border-radius: 50px;
 	margin-right: 10px;
 	box-shadow: var(--shadow);
+}
+#wallpaperList {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	overflow: auto;
+	padding: 5px;
+}
+
+.wallpaperItem {
+	border-radius: 5px;
+	border: 2px solid var(--border);
+	box-shadow: var(--shadow);
+	cursor: pointer;
+	transition: 0.1s;
+	margin-right: 5px;
+}
+
+.wallpaperItem:hover {
+	border-color: var(--foreground2);
+}
+
+.wallpaperItem:active {
+	filter:brightness(0.8)
+}
+
+.wallpaperItem > img {
+	border-radius: 5px;
+	width: 150px;
+	height: 85px;
+}
+
+.wallpaperItem > .wallpaperOverlay {
+	position: relative;
+	height: 85px;
+	top: -85;
+	margin-bottom: -85px;
+	background: linear-gradient(0deg, rgba(0,0,0,0) 0%, var(--background) 100%);
+	padding: 0 5px;
+	z-index: 100;
+	opacity: 0;
+	transition: 0.2s;
+	font-size: 14px;
+	line-height: 25px;
+	border-radius: 5px;
+}
+
+.wallpaperItem > .wallpaperOverlay>.small {
+	font-size: 10px;
+	line-height: 10px;
+	color: var(--foreground2);
+}
+
+.wallpaperItem > .wallpaperOverlay:hover {
+	opacity: 1;
 }

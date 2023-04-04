@@ -1,12 +1,12 @@
 // Project JS App API
 // Ver 2.4
-// @2022 TechnoByte
+// @2023 TechnoByte
 
 //      Project JS App Stuff
 const projectJS = {
 	version: "2.4",
 	type: "Release",
-	build: 221119,
+	build: 230404,
 	launcher: "appcenter",
 	theme: localStorage.theme,
 };
@@ -136,8 +136,8 @@ const dialog = (message, type, customTitle) => {
 // Close a dialog box with a specific id
 const closeDialog = (id) => {
 	$("#scrollDisable" + id).remove();
-    $("#overlay" + id).fadeOut("25", ()=>{$(this).remove()});
-    $("#dialog" + id).slideUp("fast", ()=>{$(this).remove()});
+    $("#overlay" + id).remove();
+    $("#dialog" + id).remove();
 	dialogID--
 }
 

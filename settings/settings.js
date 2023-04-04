@@ -35,6 +35,12 @@ const updateWallpaper = () => {
 	} else {
 		$("#wallpaperName").text("Current Wallpaper: None");
 	}
+
+	if(!localStorage.wallpaperSource) {
+		$("#getSource").hide();
+	} else {
+		$("#getSource").show();
+	}
 }
 
 const importWallpaper = () => {
@@ -53,6 +59,7 @@ const importWallpaper = () => {
 			let content = readerEvent.target.result;
 			try {
 				localStorage.setItem("wallpaper", content);
+				localStorage.removeItem("wallpaperSource");
 			} catch (err) {
 				dialog(err.message, "error");
 				clearWallpaper()
@@ -64,16 +71,69 @@ const importWallpaper = () => {
 	input.click();
 }
 
-function clearWallpaper() {
+const clearWallpaper = () => {
 	localStorage.removeItem("wallpaper");
 	localStorage.removeItem("wallpaperName");
+	localStorage.removeItem("wallpaperSource");
 	updateWallpaper();
 	deleteWallpaper()
 }
 
-function resetAll() {
-	var resetAlld = confirm("Are you sure? This can't be undone.");
-	if (resetAlld == true) {
+const getSource = () => {
+	dialog(`<a href="${localStorage.wallpaperSource}">${localStorage.wallpaperSource}</a>`,"custom","Image Source")
+}
+
+const downloadWallpaper = () => {
+	if(localStorage.wallpaper) {
+		let title = "";
+		if(localStorage.wallpaperSource) {
+			title = localStorage.wallpaperName + ".png";
+		} else {
+			title = localStorage.wallpaperName;
+		}
+		dialog(`<a href="${localStorage.wallpaper}" download>${title}</a>`,"custom","Download Wallpaper")
+	} else {
+		dialog("Select a wallpaper first!", "error")
+	}
+}
+
+const getWallpaperList = async () => {
+	try {
+		let response = await fetch(`/lib/wallpapers.json`);
+		if (response.ok) {
+			let json = await response.json();
+			renderWallpaperList(json);
+		} else {
+			console.error(response);
+			$("#wallpaperList").append(`${response.status} ${response.statusText}`);
+		}
+	} catch (e) {
+		$("#wallpaperList").append(`${e}`);
+	}
+	
+}
+
+const renderWallpaperList = (source) => {
+	for(let i = 0; i<source.length; i++) {
+		let img = source[i];
+		let url = `/lib/wallpapers/${img.name}.png`;
+		let thumb = `/lib/wallpapers/thumbnails/${img.name}.jpg`;
+		let codeName = img.name.replaceAll(" ", "_");
+		$("#wallpaperList").append(`<div class="wallpaperItem" id="wallpaperItem${codeName}"></div>`);
+		$(`#wallpaperItem${codeName}`).append(`<img src="${thumb}" alt="${img.name}">`);
+		$(`#wallpaperItem${codeName}`).append(`<div class="wallpaperOverlay">${img.name}<div class="small">${img.author}</div></div>`);
+		$(`#wallpaperItem${codeName}`).on('click', () => {
+			localStorage.setItem("wallpaper", url);
+			localStorage.setItem("wallpaperName", img.name);
+			localStorage.setItem("wallpaperSource", img.source);
+			updateWallpaper();
+			recreateWallpaper();
+		})
+	}
+}
+
+const resetAll = () => {
+	if (confirm("Are you sure? This can't be undone.")) {
 		localStorage.clear();
 		document.write("All data has been successfully deleted.")
 	}
@@ -83,3 +143,5 @@ document.getElementById("forceWallpaper").checked = localStorage.forceWallpaper=
 document.getElementById("blurWallpaper").checked = localStorage.blurWallpaper=="true";
 document.getElementById("uiShadows").checked = localStorage.uiShadows=="true";
 updateWallpaper()
+
+getWallpaperList();
