@@ -13,6 +13,12 @@ const updateCheckBoxes = () => {
 		localStorage.blurWallpaper = "false";
 	}
 
+	if (document.getElementById("darkenWallpaper").checked == true) {
+		localStorage.darkenWallpaper = "true";
+	} else {
+		localStorage.darkenWallpaper = "false";
+	}
+
 	if (document.getElementById("uiShadows").checked == true) {
 		localStorage.uiShadows = "true";
 	} else {
@@ -141,6 +147,7 @@ const resetAll = () => {
 
 document.getElementById("forceWallpaper").checked = localStorage.forceWallpaper=="true";
 document.getElementById("blurWallpaper").checked = localStorage.blurWallpaper=="true";
+document.getElementById("darkenWallpaper").checked = localStorage.darkenWallpaper=="true";
 document.getElementById("uiShadows").checked = localStorage.uiShadows=="true";
 updateWallpaper()
 

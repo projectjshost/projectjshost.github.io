@@ -6,7 +6,7 @@
 const projectJS = {
 	version: "2.4",
 	type: "Release",
-	build: 230404,
+	build: 230405,
 	launcher: "appcenter",
 	theme: localStorage.theme,
 };
@@ -34,13 +34,15 @@ let wallpaperCreated = false;
 const createWallpaper = (source) => {
 	if (!wallpaperCreated&&typeof source!=="undefined") {
 		wallpaperCreated = true;
+		$('html').append(`<div id="wallpaperElement"></div>`)
 		if(localStorage.blurWallpaper=="true") {
-			$('html').append(`<div class="blur" id="wallpaperElement"></div>`)
-		} else {
-			$('html').append(`<div id="wallpaperElement"></div>`)
+			$('#wallpaperElement').addClass('blur');
+		}
+		if(localStorage.darkenWallpaper=="true") {
+			$('#wallpaperElement').addClass('dark');
 		}
 		
-		$('head').append(`<style id="wallpaper">#wallpaperElement{background-image:url("` + source + `")!important}html,body{background:transparent!important}</style>`)
+		$('head').append(`<style id="wallpaper">#wallpaperElement{background-image:url("` + source + `")!important}body{background:transparent!important}</style>`)
 	}
 }
 
@@ -66,6 +68,7 @@ const firstRun = () => {
 	localStorage.theme = "mirai";
 	localStorage.forceWallpaper = "false";
 	localStorage.blurWallpaper = "false";
+	localStorage.darkenWallpaper = "false";
 	localStorage.uiShadows = "false";
 	location.reload()
 }

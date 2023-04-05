@@ -67,7 +67,7 @@ body {
 }
 div#wallpaperElement {
     position: fixed;
-    top: 0px;
+    top: 45px;
     bottom: -20px;
     left: -20px;
     right: -20px;
@@ -76,9 +76,18 @@ div#wallpaperElement {
     background-position: center;
     background-repeat: no-repeat;
     pointer-events: none;
+	background-color: var(--background);
 }
 div#wallpaperElement.blur {
-	filter: brightness(0.8)blur(10px);
+	filter: blur(10px);
+}
+
+div#wallpaperElement.dark {
+	filter: brightness(0.5);
+}
+
+div#wallpaperElement.blur.dark {
+	filter: blur(10px)brightness(0.5);
 }
 
 .appOverview {
