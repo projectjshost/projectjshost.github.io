@@ -82,13 +82,17 @@ $(document).ready(() =>{
 	if (typeof appname == 'undefined') {
 		appname = "Project JS App"
 	}
-	if (document.getElementById("header")) {
-		$("body").append(`<div class='headerButtons'><button class='headerButton icon' id='launcherButton' onclick='openApp(projectJS.launcher)'>home</button></div>`);
-	}
+
+	$("header").append(`<div class='headerButtons'></div>`);
+
 	if (location.pathname == `/${projectJS.launcher}/`) {
-		$("#launcherButton").remove();
 		if(localStorage.wallpaper) {
 			createWallpaper(localStorage.wallpaper);
+		}
+	} else {
+		$(".headerButtons").append(`<button class='headerButton icon' id='launcherButton' title='Return to home' onclick='openApp(projectJS.launcher)'>home</button>`);
+		if(appname!=="Settings") {
+			$(".headerButtons").append(`<button class='headerButton icon' title='Settings' onclick='openApp("settings")'>settings</button>`);
 		}
 	}
 	if (localStorage.forceWallpaper == "true" && localStorage.wallpaper) {

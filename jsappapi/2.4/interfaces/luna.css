@@ -15,7 +15,6 @@ header {
     display: flex;
     flex-flow: row;
     flex-wrap: nowrap;
-    align-content: center;
     justify-content: center;
     align-items: center;
 	border-bottom: 2px solid var(--border);
@@ -288,9 +287,8 @@ button.deleteButton.main {position: absolute;right: 80px;}
 
 .headerButtons {
     background: var(--transparent);
-    position: fixed;
-    top: 7px;
-    right: 5px;
+	position: absolute;
+	left: 10px;
     display: flex;
     justify-content: space-evenly;
     z-index: 999;
@@ -394,23 +392,6 @@ a {
         transform: scale(1.1);
     }
 
-}
-
-@media(max-width: 350px) {
-    header {
-        font-size: 24px;
-        padding: 5px;
-		padding-left: 10px
-    }
-
-    body {
-        padding-top: 48px
-    }
-
-    .headerButtons {
-        top: 7px;
-        right: 7px;
-    }
 }
 
 ::selection {
@@ -598,6 +579,7 @@ td, th {
 	flex-direction: row;
 	flex-wrap: nowrap;
 	overflow: auto;
+	overflow-y: hidden;
 	padding: 5px;
 }
 
