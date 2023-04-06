@@ -601,7 +601,7 @@ td, th {
 }
 
 .wallpaperItem > img {
-	border-radius: 5px;
+	border-radius: 3px;
 	width: 150px;
 	height: 85px;
 }
@@ -618,7 +618,7 @@ td, th {
 	transition: 0.2s;
 	font-size: 14px;
 	line-height: 25px;
-	border-radius: 5px;
+	border-radius: 3px;
 }
 
 .wallpaperItem > .wallpaperOverlay>.small {
