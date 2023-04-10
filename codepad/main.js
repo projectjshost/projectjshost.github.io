@@ -3,7 +3,7 @@ var CodeMirrorTheme;
 var CodeMirrorMode;
 var CodeMirrorContent;
 
-CodeMirrorTheme="material-darker"
+CodeMirrorTheme="dynamic"
 
 function runCode() {
     let codetoRun = myCodeMirror.getValue().replace(/\/\*[\s\S]*?\*\/|\/\/.*/g,'').trim();
@@ -12,7 +12,12 @@ function runCode() {
 }
 
 function saveCode() {
-    localStorage.setItem("CodePad_" + CodeMirrorMode, btoa(myCodeMirror.getValue()))
+	try {
+		localStorage.setItem("CodePad_" + CodeMirrorMode, btoa(myCodeMirror.getValue()));
+	} catch (e) {
+		dialog(e.toString(), "error");
+	}
+    
 }
 
 function deleteCode() {
@@ -46,7 +51,7 @@ function CodeMirrorInit(mode) {
     }
     CodeMirrorMode=mode;
     if (mode=="javascript") {
-        $("body").append("<button onclick='runCode()'><span class='icon'>play_arrow</span>Run</button>");
+        $("body").append("<button class='main' onclick='runCode()'><span class='icon'>play_arrow</span>Run</button>");
     }
     $("body").append("<button onclick='saveCode()'><span class='icon'>check</span>Save Code</button><button onclick='deleteCode()'><span class='icon'>clear</span>Delete Code</button><button onclick='downloadCode()'><span class='icon'>download</span>Download Code</button>");
     $("head").append('<link rel="stylesheet" href="/lib/codemirror/theme/' + CodeMirrorTheme + '.css">')

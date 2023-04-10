@@ -6,9 +6,8 @@
 const projectJS = {
 	version: "2.4",
 	type: "Release",
-	build: 230405,
+	build: 230410,
 	launcher: "appcenter",
-	theme: localStorage.theme,
 };
 
 // Gets app Parameters
