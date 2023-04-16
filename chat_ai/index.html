@@ -1,0 +1,46 @@
+<html>
+<head>
+    <script>appname = "Chat AI"</script>
+    <style>html{background: #222}</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <script src="/lib/jquery-3.6.1.min.js"></script>
+    <script src="/apiLoader/main.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <p1 id="header"></p1>
+    </header>
+	<div id="charCount"></div>
+    <div class="area">
+        <p2><span class="icon">info</span>Info</p2>
+		<p>This tool can be used to turn the powerful AI <a href="https://perplexity.ai" target="_blank">perplexity.ai</a> into a very customizable chatbot.</p>
+		<p>It uses a fine-tuned prompt to make the AI think it's a human with real thoughts and emotions.</p>
+    </div>
+
+	<div class="area">
+        <p2><span class="icon">person</span>Person A</p2>
+		<p>This is the chatbot, enter the details about it here:</p>
+		<textarea spellcheck="false" id="person_A" autofocus></textarea>
+    </div>
+
+	<div class="area">
+        <p2><span class="icon">person</span>Person B</p2>
+		<p>This is you, enter any details that you want the chatbot to know about you here:</p>
+		<textarea spellcheck="false" id="person_B" autofocus></textarea>
+    </div>
+
+	<div class="area">
+        <p2><span class="icon">help_outline</span>Context</p2>
+		<p>Person A (the chatbot) starts the conversation because:</p><input type="text" id="context" spellcheck="false" placeholder="Text">
+    </div>
+
+	<div class="area">
+		<button class="main" onclick="generateBot()"><span class="icon">launch</span>Create Chatbot</button>
+		<button onclick="initialize()"><span class="icon">restart_alt</span>Reset</button>
+    </div>
+
+</body>
+<script src="main.js"></script>
+</html>

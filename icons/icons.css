@@ -84,3 +84,8 @@
     background-repeat: no-repeat;
     background-size: cover
 }
+.icon-chat_ai {
+    background: url("/icons/message-circle.svg");
+    background-repeat: no-repeat;
+    background-size: cover
+}
