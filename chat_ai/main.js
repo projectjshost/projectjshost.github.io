@@ -5,7 +5,7 @@ const context = document.getElementById("context");
 let currentOutput = ''
 
 const initialize = () => {
-	person_A.value = "Name:John\nMood:Suprised\nLikes:Cats,Programming";
+	person_A.value = "Name:John\nMood:Surprised\nLikes:Cats,Programming";
 	person_B.value = "Name:Jane";
 	context.value = "he wants to chat with Person B";
 }
