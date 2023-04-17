@@ -12,3 +12,8 @@
 textarea {
 	min-height: 120px!important;
 }
+
+input {
+	width: -webkit-fill-available!important;
+	width: -moz-available!important;
+}
