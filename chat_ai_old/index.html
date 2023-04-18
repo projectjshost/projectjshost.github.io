@@ -1,6 +1,6 @@
 <html>
 <head>
-    <script>appname = "Chat AI"</script>
+    <script>appname = "Chat AI (Old Version)"</script>
     <style>html{background: #222}</style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <script src="/lib/jquery-3.6.1.min.js"></script>
@@ -12,11 +12,15 @@
     <header>
         <p1 id="header"></p1>
     </header>
+	<div id="charCount"></div>
+	<div class="area">
+        <p2><span class="icon">info</span>This is the old version of Chat AI</p2>
+		<button class="main" onclick="openApp('chat_ai')"><span class="icon">launch</span>Open new version</button>
+    </div>
     <div class="area">
         <p2><span class="icon">info</span>Info</p2>
-		<p>This tool can be used to turn the powerful AI <a href="https://perplexity.ai" target="_blank">perplexity.ai</a> into a customizable chatbot.</p>
+		<p>This tool can be used to turn the powerful AI <a href="https://perplexity.ai" target="_blank">perplexity.ai</a> into a very customizable chatbot.</p>
 		<p>It uses a fine-tuned prompt to make the AI pretend it's a real person with thoughts and emotions.</p>
-		<p>You might want to check out <a href="/chat_ai_old">the old version</a> in which the AI starts the conversation.</p>
     </div>
 
 	<div class="area">
@@ -32,8 +36,8 @@
     </div>
 
 	<div class="area">
-        <p2><span class="icon">chat</span>First message</p2>
-		<p>This is the message you send to start the conversation:</p><input type="text" id="firstMessage" spellcheck="false" placeholder="message">
+        <p2><span class="icon">help_outline</span>Context</p2>
+		<p>Person A (the chatbot) starts the conversation because:</p><input type="text" id="context" spellcheck="false" placeholder="Text">
     </div>
 
 	<div class="area">
