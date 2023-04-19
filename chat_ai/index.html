@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <script>appname = "Chat AI"</script>
@@ -12,6 +13,9 @@
     <header>
         <p1 id="header"></p1>
     </header>
+
+	<div id="charCount"></div>
+
     <div class="area">
         <p2><span class="icon">info</span>Info</p2>
 		<p>This tool can be used to turn the powerful AI <a href="https://perplexity.ai" target="_blank">perplexity.ai</a> into a customizable chatbot.</p>
@@ -22,18 +26,23 @@
 	<div class="area">
         <p2><span class="icon">person</span>Person A</p2>
 		<p>This is the chatbot, enter the details about it here:</p>
-		<textarea spellcheck="false" id="person_A" autofocus></textarea>
+		<input type="text" id="person_A" spellcheck="false" placeholder="Person A's details">
     </div>
 
 	<div class="area">
         <p2><span class="icon">person</span>Person B</p2>
 		<p>This is you, enter any details that you want the chatbot to know about you here:</p>
-		<textarea spellcheck="false" id="person_B"></textarea>
+		<input type="text" id="person_B" spellcheck="false" placeholder="Person B's details">
+    </div>
+
+	<div class="area">
+        <p2><span class="icon">people</span>Relation</p2>
+		<p>Person A and Person B are:</p><input type="text" id="relation" spellcheck="false" placeholder="Relation">
     </div>
 
 	<div class="area">
         <p2><span class="icon">chat</span>First message</p2>
-		<p>This is the message you send to start the conversation:</p><input type="text" id="firstMessage" spellcheck="false" placeholder="message">
+		<p>This is the message you send to start the conversation:</p><input type="text" id="firstMessage" spellcheck="false" placeholder="Your message">
     </div>
 
 	<div class="area">
