@@ -93,11 +93,11 @@ const downloadWallpaper = () => {
 	if(localStorage.wallpaper) {
 		let title = "";
 		if(localStorage.wallpaperSource) {
-			title = localStorage.wallpaperName + ".png";
+			title = localStorage.wallpaperName + ".jpg";
 		} else {
 			title = localStorage.wallpaperName;
 		}
-		dialog(`<a href="${localStorage.wallpaper}" download>${title}</a>`,"custom","Download Wallpaper")
+		dialog(`Download file: <a href="${localStorage.wallpaper}" download>${title}</a><br>Please note that the quality of the source is better.`,"custom","Download Wallpaper")
 	} else {
 		dialog("Select a wallpaper first!", "error")
 	}
@@ -122,7 +122,7 @@ const getWallpaperList = async () => {
 const renderWallpaperList = (source) => {
 	for(let i = 0; i<source.length; i++) {
 		let img = source[i];
-		let url = `/lib/wallpapers/${img.name}.png`;
+		let url = `/lib/wallpapers/${img.name}.jpg`;
 		let thumb = `/lib/wallpapers/thumbnails/${img.name}.jpg`;
 		let codeName = img.name.replaceAll(" ", "_");
 		$("#wallpaperList").append(`<div class="wallpaperItem" id="wallpaperItem${codeName}"></div>`);

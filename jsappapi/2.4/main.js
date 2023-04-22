@@ -6,7 +6,7 @@
 const projectJS = {
 	version: "2.4",
 	type: "Release",
-	build: 230410,
+	build: 230422,
 	launcher: "appcenter",
 };
 
@@ -163,7 +163,7 @@ const themeEngine = {
 			}
 		}
 		// Unload CSS theme
-		$("#CSStheme").remove();
+		$("#JStheme").remove();
 		// Unload custom theme
 		document.querySelector(':root').removeAttribute('style');
 		// If the theme is custom use the loadFromJSON function else load it normally
