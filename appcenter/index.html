@@ -10,12 +10,11 @@
 <body>
     <header><p1 id="header"></p1></header>
     <div class="appOverview">
-        <p2>Main</p2>
+        <p2>System</p2>
         <div class="area">
             <div class="appTile" onclick="openApp('settings')"><div class="appIcon icon-settings"></div><p>Settings</p></div>
             <div class="appTile" onclick="openApp('themeManager')"><div class="appIcon icon-themes"></div><p>Themes</p></div>
 			<div class="appTile" onclick="openApp('terminal')"><div class="appIcon icon-terminal"></div><p>Terminal</p></div>
-			<div class="appTile" onclick="openApp('chat_ai')"><div class="appIcon icon-chat_ai"></div><p>Chat AI</p></div>
 		</div>
 
         <p2>Tools</p2>
@@ -27,7 +26,15 @@
             <div class="appTile" onclick="openApp('codepad')"><div class="appIcon icon-code"></div><p>CodePad</p></div>
             <div class="appTile" onclick="openApp('calculator')"><div class="appIcon icon-calculator"></div><p>Calculator</p></div>
             <div class="appTile" onclick="openApp('random')"><div class="appIcon icon-dice"></div><p>Random</p></div>
-			</div>
+		</div>
+
+		<p2>AI Tools</p2>
+        <div class="area">
+			<div class="appTile" onclick="location.replace('https://openaccess-ai-collective-manticore-13b-chat-pyg.hf.space/?__theme=dark')"><div class="appIcon icon-chat_ai"></div><p>Manticore Chat</p></div>
+			<div class="appTile" onclick="location.replace('https://stabilityai-stable-diffusion.hf.space/?__theme=dark')"><div class="appIcon icon-image"></div><p>Stable Diffusion</p></div>
+			<div class="appTile" onclick="location.replace('https://kkinc-gsdf-counterfeit-v2-5.hf.space/?__theme=dark')"><div class="appIcon icon-image"></div><p>Counterfeit</p></div>
+		</div>
+
         <p2>Games</p2>
 		<div class="area">
             <div class="appTile" onclick="resizeApp(1280,720);location.replace('https://mario.xpixv.com/')"><div class="appIcon icon-questionblock"></div><p>FullScreen Mario</p></div>

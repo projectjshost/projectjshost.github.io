@@ -89,3 +89,8 @@
     background-repeat: no-repeat;
     background-size: cover
 }
+.icon-image {
+    background: url("/icons/image.svg");
+    background-repeat: no-repeat;
+    background-size: cover
+}
