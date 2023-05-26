@@ -94,3 +94,13 @@
     background-repeat: no-repeat;
     background-size: cover
 }
+.icon-text {
+    background: url("/icons/text.svg");
+    background-repeat: no-repeat;
+    background-size: cover
+}
+.icon-sliders {
+    background: url("/icons/sliders.svg");
+    background-repeat: no-repeat;
+    background-size: cover
+}
