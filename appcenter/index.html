@@ -11,7 +11,7 @@
 	<script>
 		appname = "App Center"
 	</script>
-	<script src="https://www.unpkg.com/jquery/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 	<script src="/apiLoader/main.js"></script>
 </head>
 
@@ -75,14 +75,18 @@
 				<div class="appIcon icon-chat_ai"></div>
 				<p>AI Chat</p>
 			</div>
-			<div class="appTile" onclick="location.replace('https://huggingface.co/spaces/multimodalart/stable-cascade')">
+			<div class="appTile" onclick="openApp('imagegenerator')">
 				<div class="appIcon icon-image"></div>
-				<p>Stable Diffusion</p>
+				<p>AI image generator</p>
 			</div>
 		</div>
 
 		<p2>Games</p2>
 		<div class="area">
+			<div class="appTile" onclick="openApp('portal')">
+				<div class="appIcon icon-portal"></div>
+				<p>Portal</p>
+			</div>
 			<div class="appTile" onclick="openApp('gettingoverit')">
 				<div class="appIcon icon-scratchcat"></div>
 				<p>Getting Over It</p>

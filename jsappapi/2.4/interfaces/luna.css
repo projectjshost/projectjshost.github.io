@@ -231,6 +231,11 @@ button, .button, select {
 	box-shadow: var(--shadow);
 }
 
+button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed!important;
+}
+
 button:active, .button:active {
     cursor: default;
     background: var(--active)!important

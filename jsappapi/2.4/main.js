@@ -6,7 +6,7 @@
 const projectJS = {
 	version: "2.4",
 	type: "Release",
-	build: 230422,
+	build: 250103,
 	launcher: "appcenter",
 };
 

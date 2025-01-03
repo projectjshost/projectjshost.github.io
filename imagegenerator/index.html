@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script>appname = "AI Image Generator"</script>
+	<link rel="manifest" href="/manifest.json">
+	<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+	<script src="/apiLoader/main.js"></script>
+	<script src="/lib/crypto-js.js"></script>
+	<script src="main.js"></script>
+	<style>
+		#imageContainer {
+			margin: 5px;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+		}
+		.generatedImage {
+			height: 256px;
+			border-radius: 10px;
+		}
+		textarea {
+			min-height: 0!important;
+		}
+		.progress-container {
+			display: block;
+			width: 256px;
+			height: 256px;
+			background: var(--background2);
+			border-radius: 10px;
+		}
+		.progress-circle {
+			width: 128px;
+			height: 128px;
+			margin: 64px auto;
+			border-radius: 50%;
+			background: var(--element);
+			transition: background 1s linear;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<p1 id="header">AI Image Generator</p1>
+	</header>
+
+	<form id="imageForm">
+		<p>Powered by: <a href="https://huggingface.co/spaces/black-forest-labs/FLUX.1-schnell">FLUX.1 [schnell]</a></p>
+		<p2><span class="icon">edit_note</span> Prompt</p2>
+		<textarea id="prompt" name="prompt" rows="5" required></textarea>
+
+		<button id="generateButton" class="main" type="submit"><span class="icon">auto_awesome</span> Generate Image</button>
+	</form>
+
+	<div id="imageContainer">
+	</div>
+
+	<script>
+		document.getElementById('imageForm').addEventListener('submit', async function (event) {
+			event.preventDefault();
+
+			// Disable the generate button
+			const generateButton = document.getElementById('generateButton');
+			generateButton.disabled = true;
+
+			// Create a placeholder with a circular progress bar
+			const placeholder = document.createElement('div');
+			placeholder.classList.add('progress-container');
+
+			const progressCircle = document.createElement('div');
+			progressCircle.classList.add('progress-circle');
+
+
+			placeholder.appendChild(progressCircle);
+			document.getElementById('imageContainer').appendChild(placeholder);
+
+			// Start the progress bar animation
+			let progress = 0;
+			const interval = setInterval(() => {
+				progress += 0.16667; // 100% over 60 seconds
+				progressCircle.style.background = `conic-gradient(var(--accent) ${progress}%, var(--element) ${progress}%)`;
+				if (progress >= 100) {
+					clearInterval(interval);
+				}
+			}, 100);
+
+			const token = atob(CryptoJS.AES.decrypt("U2FsdGVkX1+T9jEY6yn/bzREu3ECRrp49T+S9VRu9Cr5VV3Tk1mwR6W1tdVurEg/fzMao/JplpHaDVwYuFyOewN/CRAZFmpzZVFqzpB9b2U=", encryptionKey).toString(CryptoJS.enc.Utf8));
+
+			const prompt = document.getElementById('prompt').value;
+			const seed = Math.floor(Math.random() * 1000000);
+
+			try {
+				const imageBlob = await generateImage(token, prompt, seed);
+				const imageUrl = URL.createObjectURL(imageBlob);
+
+				const imageElement = document.createElement('img');
+				imageElement.src = imageUrl;
+				imageElement.classList.add('generatedImage');
+
+				// Remove the placeholder and add the generated image
+				document.getElementById('imageContainer').removeChild(placeholder);
+				document.getElementById('imageContainer').appendChild(imageElement);
+			} catch (error) {
+				console.error('Error generating image:', error);
+				// Remove the placeholder in case of error
+				document.getElementById('imageContainer').removeChild(placeholder);
+			} finally {
+				// Re-enable the generate button
+				generateButton.disabled = false;
+				clearInterval(interval); // Stop the progress bar
+			}
+		});
+	</script>
+</body>
+
+</html>

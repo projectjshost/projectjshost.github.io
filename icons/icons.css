@@ -130,3 +130,9 @@
 	background-repeat: no-repeat;
 	background-size: cover
 }
+
+.icon-portal {
+	background: url("/icons/portal.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}

@@ -2,21 +2,6 @@ body {
 	padding-bottom: 50px!important;
 }
 
-header {
-	background: none!important;
-	border: none!important;
-	justify-content: left!important;
-}
-
-.headerButtons {
-	right: 10px;
-	left: initial!important
-}
-
-.headerButton[title="Settings"] {
-	display: none
-}
-
 #bigClock {
 	text-align: center;
 	display: block;
@@ -36,10 +21,9 @@ header {
 	left: 0;
 	bottom: 0;
 	right: 0;
-	height: 50px;
+	height: 55px;
 	display: flex;
 	justify-content: center;
-	display: none;
 }
 
 .tab {
@@ -137,4 +121,37 @@ header {
 	position: absolute;
 	right: 5px;
 	background: none;
+}
+
+#timerDisplay, #stopwatchDisplay {
+    text-align: center;
+    display: block;
+    font-size: 56px;
+    margin-top: 20px;
+}
+
+#timerControls, #stopwatchControls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#timerControls button, #stopwatchControls button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background: var(--background2);
+    color: var(--foreground);
+}
+
+#timerControls button:hover, #stopwatchControls button:hover {
+    background: var(--element);
+}
+
+#timerInput {
+    width: 100px;
+	height: 40px;
 }
