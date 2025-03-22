@@ -1,6 +1,7 @@
 import bookmarks from "./Project_JS_v2.3.json" with { type: "json" };
 
 const $bookmarks = $("#bookmarks");
+const $bookmarklet = $("#bookmarklet");
 
 let parent;
 let parentOrigin;
@@ -12,6 +13,7 @@ window.addEventListener('message', (event) => {
 	parentOrigin = event.origin;
 	$('#origin').text("Connected to: " + parentOrigin.replace("https://", ""));
 	$bookmarks.show();
+	$bookmarklet.hide();
 });
 
 export const sendCommand = (JScode) => {
