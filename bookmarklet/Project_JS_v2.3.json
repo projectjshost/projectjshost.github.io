@@ -1,0 +1,598 @@
+[
+  {
+    "name": "J S",
+    "items": [
+      {
+        "name": "Tools",
+        "items": [
+          {
+            "name": "Edit",
+            "items": [
+              {
+                "name": "On",
+                "url": "javascript:document.body.contentEditable = 'true'; document.designMode='on'; void 0"
+              },
+              {
+                "name": "Off",
+                "url": "javascript:document.body.contentEditable = 'false'; void 0"
+              }
+            ]
+          },
+          {
+            "name": "School",
+            "items": [
+              {
+                "name": "Wiskunde",
+                "items": [
+                  {
+                    "name": "Oppervlakte van driehoek",
+                    "url": "javascript:(function()%7Bvar1%20%3D%20prompt('Lengte%20van%20driehoek.'%2C%20'')%3Bvar2%20%3D%20prompt('Hoogte%20van%20driehoek'%2C%20'')%3Balert('Oppervlakte%20van%20driehoek%20is%3A%20'%20%2B%20var1%20*%20var2%20%2F%202)%7D)()"
+                  },
+                  {
+                    "name": "Haakjes Wegwerken",
+                    "url": "javascript:(function()%7Bform%20%3D%20prompt('Typ%20de%20formule%20in%3A')%3Bif%20(form%20!%3D%20null)%20%7Bwindow.open('https%3A%2F%2Fwims.auto.u-psud.fr%2Fwims%2Fwims.cgi%3Fsession%3Dpopup%26wims_window%3D620x400%26module%3Dtool%2Fwcalc.en%26precision%3D12%26operation%3Dsimplify%26formula%3D'%20%2B%20form)%3B%7D%20else%20%7Bvoid(null)%7Ddelete%20form%7D)()"
+                  }
+                ]
+              },
+              {
+                "name": "WI/NL/BI",
+                "items": [
+                  {
+                    "name": "Verberg Score",
+                    "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27.learning-item__grade { font-size: 0px !important; color: #00000000 !important; line-height: 37px !important; margin-left: 8px !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+                  }
+                ]
+              },
+              {
+                "name": "Quizlet",
+                "items": [
+                  {
+                    "name": "Quizlet Adblocker",
+                    "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27span.SiteHeaderChiclet { visibility: hidden !important; } .SetPage-adz.SetPage-superiorAdz { visibility: hidden !important; } .SetPage-adz.SetPage-superiorAdz { visibility: hidden !important; } .SiteAd.SiteAd--SetSidebarV4.SiteAd--SIDEBAR.SiteAd--rightAlign { visibility: hidden !important; } .SiteAd.SiteAd--SetPageEmbedDesktopMulti04.SiteAd--BANNER.SiteAd--centerAlign { visibility: hidden !important; } .SetPageTerms-embeddedDesktopAdWrapper { visibility: hidden !important; } .ModeLayout-ad { visibility: hidden !important; } .SiteHeader-chiclet { visibility: hidden !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+                  }
+                ]
+              },
+              {
+                "name": "Dictionary",
+                "items": [
+                  {
+                    "name": "NL Woordenboek",
+                    "url": "javascript:(function()%7B(function nlwikt() %7B%2F* Try to get the parameter string from the bookmarklet%2Fsearch query.Fall back to the current text selection%2C if any. If those optionsboth fail%2C prompt the user.*%2Fvar s %3D (function () %7B %2F*%25s*%2F%3B %7D).toString().replace(%2F%5Efunction%5Cs*%5C(%5Cs*%5C)%5Cs*%5C%7B%5Cs*%5C%2F%5C*%2F%2C '').replace(%2F%5C*%5C%2F%5Cs*%5C%3B%3F%5Cs*%5C%7D%5Cs*%24%2F%2C '').replace(%2F%5Cu0025s%2F%2C '')%3B%2F*** Get the active text selection%2C diving into frames and* text controls when necessary and possible.*%2Ffunction getActiveSelection(doc) %7Bif (arguments.length %3D%3D%3D 0) %7Bdoc %3D document%3B%7Dif (!doc %7C%7C typeof doc.getSelection !%3D%3D 'function') %7Breturn ''%3B%7Dif (!doc.activeElement) %7Breturn doc.getSelection() %2B ''%3B%7Dvar activeElement %3D doc.activeElement%3B%2F* Recurse for FRAMEs and IFRAMEs. *%2Ftry %7Bif (typeof activeElement.contentDocument %3D%3D%3D 'object'%26%26 activeElement.contentDocument !%3D%3D null) %7Breturn getActiveSelection(activeElement.contentDocument)%3B%7D%7D catch (e) %7Breturn doc.getSelection() %2B ''%3B%7D%2F* Get the selection from inside a text control. *%2Fif (typeof activeElement.value %3D%3D%3D 'string') %7Bif (activeElement.selectionStart !%3D%3D activeElement.selectionEnd) %7Breturn activeElement.value.substring(activeElement.selectionStart%2C activeElement.selectionEnd)%3B%7Dreturn activeElement.value%3B%7D%2F* Get the normal selection. *%2Freturn doc.getSelection() %2B ''%3B%7Dif (s %3D%3D%3D '') %7Bs %3D getActiveSelection() %7C%7C prompt('Typ een woord in om op te zoeken in het Nederlandse woordenboek%3A')%3B%7D else %7Bs %3D s.replace(%2F(%5E%7C%5Cs%7C\")~(\"%7C%5Cs%7C%24)%2Fg%2C '%241' %2B getActiveSelection() %2B '%242')%3B%7Dif (s) %7Blocation %3D 'https%3A%2F%2Fnl.wiktionary.org%2Fwiki%2F' %2B encodeURIComponent(s)%3B%7D%7D)()%7D)()"
+                  },
+                  {
+                    "name": "EN Woordenboek",
+                    "url": "javascript:(function()%7B(function%20enwikt()%20%7B%2F*%20Try%20to%20get%20the%20parameter%20string%20from%20the%20bookmarklet%2Fsearch%20query.Fall%20back%20to%20the%20current%20text%20selection%2C%20if%20any.%20If%20those%20optionsboth%20fail%2C%20prompt%20the%20user.*%2Fvar%20s%20%3D%20(function%20()%20%7B%20%2F*%25s*%2F%3B%20%7D).toString().replace(%2F%5Efunction%5Cs*%5C(%5Cs*%5C)%5Cs*%5C%7B%5Cs*%5C%2F%5C*%2F%2C%20'').replace(%2F%5C*%5C%2F%5Cs*%5C%3B%3F%5Cs*%5C%7D%5Cs*%24%2F%2C%20'').replace(%2F%5Cu0025s%2F%2C%20'')%3B%2F***%20Get%20the%20active%20text%20selection%2C%20diving%20into%20frames%20and*%20text%20controls%20when%20necessary%20and%20possible.*%2Ffunction%20getActiveSelection(doc)%20%7Bif%20(arguments.length%20%3D%3D%3D%200)%20%7Bdoc%20%3D%20document%3B%7Dif%20(!doc%20%7C%7C%20typeof%20doc.getSelection%20!%3D%3D%20'function')%20%7Breturn%20''%3B%7Dif%20(!doc.activeElement)%20%7Breturn%20doc.getSelection()%20%2B%20''%3B%7Dvar%20activeElement%20%3D%20doc.activeElement%3B%2F*%20Recurse%20for%20FRAMEs%20and%20IFRAMEs.%20*%2Ftry%20%7Bif%20(typeof%20activeElement.contentDocument%20%3D%3D%3D%20'object'%26%26%20activeElement.contentDocument%20!%3D%3D%20null)%20%7Breturn%20getActiveSelection(activeElement.contentDocument)%3B%7D%7D%20catch%20(e)%20%7Breturn%20doc.getSelection()%20%2B%20''%3B%7D%2F*%20Get%20the%20selection%20from%20inside%20a%20text%20control.%20*%2Fif%20(typeof%20activeElement.value%20%3D%3D%3D%20'string')%20%7Bif%20(activeElement.selectionStart%20!%3D%3D%20activeElement.selectionEnd)%20%7Breturn%20activeElement.value.substring(activeElement.selectionStart%2C%20activeElement.selectionEnd)%3B%7Dreturn%20activeElement.value%3B%7D%2F*%20Get%20the%20normal%20selection.%20*%2Freturn%20doc.getSelection()%20%2B%20''%3B%7Dif%20(s%20%3D%3D%3D%20'')%20%7Bs%20%3D%20getActiveSelection()%20%7C%7C%20prompt('Typ%20een%20woord%20in%20om%20op%20te%20zoeken%20in%20het%20Engelse%20woordenboek%3A')%3B%7D%20else%20%7Bs%20%3D%20s.replace(%2F(%5E%7C%5Cs%7C%22)~(%22%7C%5Cs%7C%24)%2Fg%2C%20'%241'%20%2B%20getActiveSelection()%20%2B%20'%242')%3B%7Dif%20(s)%20%7Blocation%20%3D%20'https%3A%2F%2Fen.wiktionary.org%2Fwiki%2F'%20%2B%20encodeURIComponent(s)%3B%7D%7D)()%7D)()"
+                  },
+                  {
+                    "name": "FA Woordenboek",
+                    "url": "javascript:(function()%7B%2F***%20Look%20up%20the%20specified%20or%20selected%20text%20in%20the%20French%20Wiktionary.**%20%40title%20French%20Wiktionary*%2F(function%20frwikt()%20%7B%2F*%20Try%20to%20get%20the%20parameter%20string%20from%20the%20bookmarklet%2Fsearch%20query.Fall%20back%20to%20the%20current%20text%20selection%2C%20if%20any.%20If%20those%20optionsboth%20fail%2C%20prompt%20the%20user.*%2Fvar%20s%20%3D%20(function%20()%20%7B%20%2F*%25s*%2F%3B%20%7D).toString().replace(%2F%5Efunction%5Cs*%5C(%5Cs*%5C)%5Cs*%5C%7B%5Cs*%5C%2F%5C*%2F%2C%20'').replace(%2F%5C*%5C%2F%5Cs*%5C%3B%3F%5Cs*%5C%7D%5Cs*%24%2F%2C%20'').replace(%2F%5Cu0025s%2F%2C%20'')%3B%2F***%20Get%20the%20active%20text%20selection%2C%20diving%20into%20frames%20and*%20text%20controls%20when%20necessary%20and%20possible.*%2Ffunction%20getActiveSelection(doc)%20%7Bif%20(arguments.length%20%3D%3D%3D%200)%20%7Bdoc%20%3D%20document%3B%7Dif%20(!doc%20%7C%7C%20typeof%20doc.getSelection%20!%3D%3D%20'function')%20%7Breturn%20''%3B%7Dif%20(!doc.activeElement)%20%7Breturn%20doc.getSelection()%20%2B%20''%3B%7Dvar%20activeElement%20%3D%20doc.activeElement%3B%2F*%20Recurse%20for%20FRAMEs%20and%20IFRAMEs.%20*%2Ftry%20%7Bif%20(typeof%20activeElement.contentDocument%20%3D%3D%3D%20'object'%26%26%20activeElement.contentDocument%20!%3D%3D%20null)%20%7Breturn%20getActiveSelection(activeElement.contentDocument)%3B%7D%7D%20catch%20(e)%20%7Breturn%20doc.getSelection()%20%2B%20''%3B%7D%2F*%20Get%20the%20selection%20from%20inside%20a%20text%20control.%20*%2Fif%20(typeof%20activeElement.value%20%3D%3D%3D%20'string')%20%7Bif%20(activeElement.selectionStart%20!%3D%3D%20activeElement.selectionEnd)%20%7Breturn%20activeElement.value.substring(activeElement.selectionStart%2C%20activeElement.selectionEnd)%3B%7Dreturn%20activeElement.value%3B%7D%2F*%20Get%20the%20normal%20selection.%20*%2Freturn%20doc.getSelection()%20%2B%20''%3B%7Dif%20(s%20%3D%3D%3D%20'')%20%7Bs%20%3D%20getActiveSelection()%20%7C%7C%20prompt('Typ%20een%20woord%20in%20om%20op%20te%20zoeken%20in%20het%20Franse%20woordenboek%3A')%3B%7D%20else%20%7Bs%20%3D%20s.replace(%2F(%5E%7C%5Cs%7C%22)~(%22%7C%5Cs%7C%24)%2Fg%2C%20'%241'%20%2B%20getActiveSelection()%20%2B%20'%242')%3B%7Dif%20(s)%20%7Blocation%20%3D%20'https%3A%2F%2Ffr.wiktionary.org%2Fwiki%2F'%20%2B%20encodeURIComponent(s)%3B%7D%7D)()%7D)()"
+                  },
+                  {
+                    "name": "ES Woordenboek",
+                    "url": "javascript:(function()%7B(function eswikt() %7B%2F* Try to get the parameter string from the bookmarklet%2Fsearch query.Fall back to the current text selection%2C if any. If those optionsboth fail%2C prompt the user.*%2Fvar s %3D (function () %7B %2F*%25s*%2F%3B %7D).toString().replace(%2F%5Efunction%5Cs*%5C(%5Cs*%5C)%5Cs*%5C%7B%5Cs*%5C%2F%5C*%2F%2C '').replace(%2F%5C*%5C%2F%5Cs*%5C%3B%3F%5Cs*%5C%7D%5Cs*%24%2F%2C '').replace(%2F%5Cu0025s%2F%2C '')%3B%2F*** Get the active text selection%2C diving into frames and* text controls when necessary and possible.*%2Ffunction getActiveSelection(doc) %7Bif (arguments.length %3D%3D%3D 0) %7Bdoc %3D document%3B%7Dif (!doc %7C%7C typeof doc.getSelection !%3D%3D 'function') %7Breturn ''%3B%7Dif (!doc.activeElement) %7Breturn doc.getSelection() %2B ''%3B%7Dvar activeElement %3D doc.activeElement%3B%2F* Recurse for FRAMEs and IFRAMEs. *%2Ftry %7Bif (typeof activeElement.contentDocument %3D%3D%3D 'object'%26%26 activeElement.contentDocument !%3D%3D null) %7Breturn getActiveSelection(activeElement.contentDocument)%3B%7D%7D catch (e) %7Breturn doc.getSelection() %2B ''%3B%7D%2F* Get the selection from inside a text control. *%2Fif (typeof activeElement.value %3D%3D%3D 'string') %7Bif (activeElement.selectionStart !%3D%3D activeElement.selectionEnd) %7Breturn activeElement.value.substring(activeElement.selectionStart%2C activeElement.selectionEnd)%3B%7Dreturn activeElement.value%3B%7D%2F* Get the normal selection. *%2Freturn doc.getSelection() %2B ''%3B%7Dif (s %3D%3D%3D '') %7Bs %3D getActiveSelection() %7C%7C prompt('Typ een woord in om op te zoeken in het Spaanse woordenboek%3A')%3B%7D else %7Bs %3D s.replace(%2F(%5E%7C%5Cs%7C\")~(\"%7C%5Cs%7C%24)%2Fg%2C '%241' %2B getActiveSelection() %2B '%242')%3B%7Dif (s) %7Blocation %3D 'https%3A%2F%2Fes.wiktionary.org%2Fwiki%2F' %2B encodeURIComponent(s)%3B%7D%7D)()%7D)()"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Youtube",
+            "items": [
+              {
+                "name": "YouTube > MP3",
+                "url": "javascript:(function(){if (location.host == \"www.youtube.com\" && location.search.indexOf(\"v=\") != -1){open(\"https://www.ytmp3.net/#v=\" + location.search.split(\"v=\")[1].split(\"&\")[0]);}else if (location.host == \"www.youtube.com\" && location.pathname.indexOf(\"/embed/\") != -1){open(\"https://www.ytmp3.net/#v=\" + location.pathname.split(\"/\")[2]);}else{alert(\"To use this bookmarklet, click it while watching a YouTube video in your web browser.\");}})()"
+              },
+              {
+                "name": "Skip Ad",
+                "url": "javascript:(function(){document.getElementsByTagName(\"video\")[0].currentTime += 15;})();"
+              },
+              {
+                "name": "4:3 Aspect Ratio",
+                "url": "javascript:/*VideoAspectUnstretchTV*/((d,i,s)=>{if(!(s=d.getElementById(i)))d.body.appendChild(s=d.createElement(\"STYLE\")).id=i;s.innerHTML=\"video{transform:scaleX(0.75)!important}\"})(document,\"vidAspOvr\")"
+              },
+              {
+                "name": "YT Scroll+",
+                "url": "javascript:(function()%7B%2F* keep video on top right when scrolling *%2Ffunction videoAnchor() %7Bvar miniplayer %3D document.getElementsByClassName(\"miniplayer\")%5B0%5D%3Bif (miniplayer.parentElement.active) %7Breturn%3B%7Dvar player %3D document.getElementById(\"movie_player\")%3Bvar video %3D document.getElementsByTagName(\"video\")%5B0%5D%3Bvar control %3D document.getElementsByClassName(\"ytp-chrome-bottom\")%5B0%5D%3Bvar mastRect %3D document.getElementById(\"masthead-container\").getBoundingClientRect()%3Bvar theaterRect %3D document.getElementById(\"player-container\").getBoundingClientRect()%3Bplayer.removeAttribute(\"style\")%3B %2F* reset for theaterRect height *%2Fvar playerRect %3D player.getBoundingClientRect()%3Bvar videoRect %3D video.getBoundingClientRect()%3Bif (theaterRect.bottom < mastRect.height) %7Bvar comment %3D (document.getElementById(\"primary-inner\") %7C%7Cdocument.getElementById(\"primary\"))%3Bvar commentRect %3D comment.getBoundingClientRect()%3Bvar widthRatio %3D (window.innerWidth - commentRect.right) %2F videoRect.width%3Bvar heightRatio %3D window.innerHeight %2F videoRect.height%3Bplayer.style.position %3D \"fixed\"%3Bplayer.style.right %3D 0%3Bplayer.style.top %3D mastRect.height %2B \"px\"%3Bplayer.style.width %3D videoRect.width %2B \"px\"%3Bplayer.style.height %3D videoRect.height %2B \"px\"%3Bplayer.style.transformOrigin %3D \"right top\"%3Bplayer.style.transform %3D \"scale(\" %2B Math.min(widthRatio%2C heightRatio) %2B \")\"%3Bplayer.style.zIndex %3D 1500%3Bcontrol.style.left %3D \"12px\"%3Bcontrol.style.width %3D (videoRect.width - 24) %2B \"px\"%3Bvideo.style.left %3D 0%3B%7Delse %7Bcontrol.style.left %3D \"12px\"%3Bcontrol.style.width %3D (playerRect.width - 24) %2B \"px\"%3Bvideo.style.left %3D (playerRect.width - videoRect.width) %2F 2 %2B \"px\"%3B%7D%7D%2F* keep scroll position on timestamp click *%2Ffunction scrollAnchor() %7Bvar x %3D window.scrollX%3Bvar y %3D window.scrollY%3BrequestAnimationFrame(function () %7Bwindow.scrollTo(x%2C y)%3B%7D)%3B%7Dwindow.addEventListener(\"scroll\"%2C videoAnchor)%3Bwindow.addEventListener(\"resize\"%2C videoAnchor)%3Bwindow.addEventListener(\"click\"%2C scrollAnchor)%7D)()"
+              }
+            ]
+          },
+          {
+            "name": "Conversion",
+            "items": [
+              {
+                "name": "Lengte",
+                "items": [
+                  {
+                    "name": "Milimeters",
+                    "items": [
+                      {
+                        "name": "Milimeters naar Meters",
+                        "url": "javascript: tMpZ85rN = prompt('Lengte in Millimeters', '');if (tMpZ85rN) {    alert('Lengte in Meters is ' + tMpZ85rN / 1000)} else {    void(null)}"
+                      },
+                      {
+                        "name": "Millimeters naar Inches",
+                        "url": "javascript:tMpZ85rN=prompt('Lengte in Millimeters','');if(tMpZ85rN){alert('Lengte in Inches is '+tMpZ85rN*0.0394)}else{void(null)}"
+                      },
+                      {
+                        "name": "Milimeters naar Centimeters",
+                        "url": "javascript: tMpZ85rN = prompt('Lengte in Millimeters', '');if (tMpZ85rN) {    alert('Lengte in Centimeters is ' + tMpZ85rN / 10)} else {    void(null)}"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Meters",
+                    "items": [
+                      {
+                        "name": "Meters naar Milimeters",
+                        "url": "javascript: tMpZ85rN = prompt('Lengte in Meters', '');if (tMpZ85rN) {    alert('Lengte in Millimeters is ' + tMpZ85rN * 1000)} else {    void(null)}"
+                      },
+                      {
+                        "name": "Meters naar Yards",
+                        "url": "javascript:tMpZ85rN=prompt('Lengte in Meters','');if(tMpZ85rN){alert('Lengte in Yards is '+tMpZ85rN*1.0936)}else{void(null)}"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Inches",
+                    "items": [
+                      {
+                        "name": "Inches naar Millimeters",
+                        "url": "javascript:tMpZ85rN=prompt('Lengte in Inches','');if(tMpZ85rN){alert('Lengte in Millimeters is '+tMpZ85rN*25.38071)}else{void(null)}"
+                      },
+                      {
+                        "name": "Inches naar Centimeters",
+                        "url": "javascript:tMpZ85rN=prompt('Lengte in Inches','');if(tMpZ85rN){alert('Lengte in Centimeters is '+tMpZ85rN*2.54)}else{void(null)}"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Centimeters",
+                    "items": [
+                      {
+                        "name": "Centimeters naar Inches",
+                        "url": "javascript:tMpZ85rN=prompt('Lengte in Centimeters','');if(tMpZ85rN){alert('Lengte in Inches is '+tMpZ85rN*0.3937)}else{void(null)}"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Yards",
+                    "items": [
+                      {
+                        "name": "Yards naar Meters",
+                        "url": "javascript:tMpZ85rN=prompt('Lengte in Yards','');if(tMpZ85rN){alert('Lengte in Meters is '+tMpZ85rN*0.9144)}else{void(null)}"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Miles",
+                    "items": [
+                      {
+                        "name": "Miles naar Kilometers",
+                        "url": "javascript:tMpZ85rN=prompt('Lengte in Miles','');if(tMpZ85rN){alert('Lengte in Kilometers is '+tMpZ85rN*1.6093)}else{void(null)}"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Kilometers",
+                    "items": [
+                      {
+                        "name": "Kilometers naar Miles",
+                        "url": "javascript:tMpZ85rN=prompt('Lengte in Kilometers','');if(tMpZ85rN){alert('Lengte in Miles is '+tMpZ85rN*0.6214)}else{void(null)}"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Hectometers",
+                    "items": [
+                      {
+                        "name": "Hectometers naar Centimeters",
+                        "url": "javascript: tMpZ85rN = prompt('Lengte in Hectometers', '');if (tMpZ85rN) {    alert('Lengte in Centimeters is ' + tMpZ85rN * 10000)} else {    void(null)}"
+                      },
+                      {
+                        "name": "Hectometers naar Kilometers",
+                        "url": "javascript: tMpZ85rN = prompt('Lengte in Hectometers', '');if (tMpZ85rN) {    alert('Lengte in Kilometers is ' + tMpZ85rN / 10)} else {    void(null)}"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Decameters",
+                    "items": [
+                      {
+                        "name": "Decameters naar Kilometers",
+                        "url": "javascript: tMpZ85rN = prompt('Lengte in Decameters', '');if (tMpZ85rN) {    alert('Lengte in Kilometers is ' + tMpZ85rN / 100)} else {    void(null)}"
+                      },
+                      {
+                        "name": "Decameters naar Centimeters",
+                        "url": "javascript: tMpZ85rN = prompt('Lengte in Decameters', '');if (tMpZ85rN) {    alert('Lengte in Centimeters is ' + tMpZ85rN * 1000)} else {    void(null)}"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Temperatuur",
+                "items": [
+                  {
+                    "name": "Fahrenheit naar Celsius",
+                    "url": "javascript:tMpZ85rN=prompt('Temperatuur in Fahrenheit','');if(tMpZ85rN){alert('Temperatuur in Celsius is '+(tMpZ85rN-32)*5/9)}else{void(null)}"
+                  },
+                  {
+                    "name": "Celsius naar Fahrenheit",
+                    "url": "javascript: tMpZ85rN = prompt('Temperatuur in Celsius', '');if (tMpZ85rN) {    alert('Temperatuur in Fahrenheit is ' + ((tMpZ85rN * 9 / 5) + 32))} else {    void(null)}"
+                  }
+                ]
+              },
+              {
+                "name": "Gewicht",
+                "items": [
+                  {
+                    "name": "Fluid Ounces naar Grams",
+                    "url": "javascript:tMpZ85rN=prompt('Gewicht in Fluid Ounces','');if(tMpZ85rN){alert('Gewicht in Grams is '+tMpZ85rN*28.35)}else{void(null)}"
+                  },
+                  {
+                    "name": "Grams naar Fluid Ounces",
+                    "url": "javascript:tMpZ85rN=prompt('Gewicht in Grams','');if(tMpZ85rN){alert('Gewicht in Fluid Ounces is '+tMpZ85rN*0.0353)}else{void(null)}"
+                  },
+                  {
+                    "name": "Pounds naar Kilograms",
+                    "url": "javascript:tMpZ85rN=prompt('Gewicht in Pounds','');if(tMpZ85rN){alert('Gewicht in Kilograms is '+tMpZ85rN*0.4536)}else{void(null)}"
+                  },
+                  {
+                    "name": "Kilograms naar Pounds",
+                    "url": "javascript:tMpZ85rN=prompt('Gewicht in Kilograms','');if(tMpZ85rN){alert('Gewicht in Pounds is '+tMpZ85rN*2.2046)}else{void(null)}"
+                  }
+                ]
+              },
+              {
+                "name": "Volume",
+                "items": [
+                  {
+                    "name": "Ounces naar Milliliters",
+                    "url": "javascript:tMpZ85rN=prompt('Volume in Ounces','');if(tMpZ85rN){alert('Volume in Milliliters is '+tMpZ85rN*29.574)}else{void(null)}"
+                  },
+                  {
+                    "name": "Milliliters naar Ounces",
+                    "url": "javascript:tMpZ85rN=prompt('Volume in Milliliters','');if(tMpZ85rN){alert('Volume in Ounces is '+tMpZ85rN*0.0338)}else{void(null)}"
+                  },
+                  {
+                    "name": "Pints naar Liters",
+                    "url": "javascript:tMpZ85rN=prompt('Volume in Pints','');if(tMpZ85rN){alert('Volume in Liters is '+tMpZ85rN*0.4731)}else{void(null)}"
+                  },
+                  {
+                    "name": "Liters naar Pints",
+                    "url": "javascript:tMpZ85rN=prompt('Volume in Liters','');if(tMpZ85rN){alert('Volume in Pints is '+tMpZ85rN*2.1137)}else{void(null)}"
+                  },
+                  {
+                    "name": "Quarts naar Liters",
+                    "url": "javascript:tMpZ85rN=prompt('Volume in Quarts','');if(tMpZ85rN){alert('Volume in Liters is '+tMpZ85rN*0.9463525)}else{void(null)}"
+                  },
+                  {
+                    "name": "Liters naar Quarts",
+                    "url": "javascript:tMpZ85rN=prompt('Volume in Liters','');if(tMpZ85rN){alert('Volume in Quarts is '+tMpZ85rN*1.0566887)}else{void(null)}"
+                  },
+                  {
+                    "name": "Gallons naar Liters",
+                    "url": "javascript:tMpZ85rN=prompt('Volume in Gallons','');if(tMpZ85rN){alert('Volume in Liters is '+tMpZ85rN*3.78541)}else{void(null)}"
+                  },
+                  {
+                    "name": "Liters naar Gallons",
+                    "url": "javascript:tMpZ85rN=prompt('Volume in Liters','');if(tMpZ85rN){alert('Volume in Gallons is '+tMpZ85rN*0.2641722)}else{void(null)}"
+                  }
+                ]
+              },
+              {
+                "name": "Oppervlakte",
+                "items": [
+                  {
+                    "name": "Square Feet naar Square Meters",
+                    "url": "javascript:tMpZ85rN=prompt('Oppervlakte in Square Feet','');if(tMpZ85rN){alert('Oppervlakte in Square Meters is '+tMpZ85rN*0.0929)}else{void(null)}"
+                  },
+                  {
+                    "name": "Square Meters naar Square Feet",
+                    "url": "javascript:tMpZ85rN=prompt('Oppervlakte in Square Meters','');if(tMpZ85rN){alert('Oppervlakte in Square Feet is '+tMpZ85rN/0.0929)}else{void(null)}"
+                  },
+                  {
+                    "name": "Square Miles naar Square Kilometers",
+                    "url": "javascript:tMpZ85rN=prompt('Oppervlakte in Square Miles','');if(tMpZ85rN){alert('Oppervlakte in Square Kilometers is '+tMpZ85rN*2.59)}else{void(null)}"
+                  },
+                  {
+                    "name": "Square Kilometers naar Square Miles",
+                    "url": "javascript:tMpZ85rN=prompt('Oppervlakte in Square Kilometers','');if(tMpZ85rN){alert('Oppervlakte in Square Miles is '+tMpZ85rN*0.3861)}else{void(null)}"
+                  },
+                  {
+                    "name": "Acres naar Hectares",
+                    "url": "javascript:tMpZ85rN=prompt('Oppervlakte in Acres','');if(tMpZ85rN){alert('Oppervlakte in Hectares is '+tMpZ85rN*0.4047)}else{void(null)}"
+                  },
+                  {
+                    "name": "Hectares naar Acres",
+                    "url": "javascript:tMpZ85rN=prompt('Oppervlakte in Hectares','');if(tMpZ85rN){alert('Oppervlakte in Acres is '+tMpZ85rN*2.4711)}else{void(null)}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Open all links",
+            "url": "javascript:(function(){ var n_to_open,dl,dll,i; var got = {}; function linkIsSafe(u) { if (u.substr(0,7)=='mailto:') return false; if (u.substr(0,11)=='javascript:') return false; if (got[u]==1) return false; got[u] = 1; return true; } n_to_open = 0; dl = document.links; dll = dl.length; for(i = 0; i < dll; ++i) { if (linkIsSafe(dl[i].href)) ++n_to_open; } if (!n_to_open) { alert ('geen links gevonden'); } else { if (confirm('' + n_to_open + ' links openen?')) { for (var url in got) { window.open(url); } } } })();"
+          },
+          {
+            "name": "Ontgrendel Tabblad",
+            "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27.lock-overlay.fade-in.lock-bg { visibility: hidden !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+          },
+          {
+            "name": "Find&Replace",
+            "url": "javascript:var count=0;function htmlreplace(a,b,element){if(!element)element=document.body;var nodes=element.childNodes;for(var n=0;n<nodes.length;n++){   if(nodes[n].type&&nodes[n].type.toLowerCase()=='textarea'){      var r=new RegExp(a,'gim');      if(nodes[n].value.match(r)){        count++;      }      nodes[n].value=nodes[n].value.replace(r,b)    }    else if(nodes[n].nodeValue && nodes[n].nodeValue.length > 0){      var r=new RegExp(a,'gim');      if(nodes[n].nodeValue.match(r)){        count++;      }      nodes[n].nodeValue=nodes[n].nodeValue.replace(r,b)    }    else{      htmlreplace(a,b,nodes[n])    }  }}htmlreplace(prompt('find'),prompt('replace'));alert('replaced '+count+' words.');"
+          }
+        ]
+      },
+      {
+        "name": "Stealth",
+        "items": [
+          {
+            "name": "MS Office",
+            "url": "javascript:(function(){setInterval(function(){var link=document.querySelector(\"link[rel*='icon']\")||document.createElement('link');link.type='image/x-icon';link.rel='shortcut icon';link.href='https://projectjshost.github.io/icons/MSoffice.png';document.getElementsByTagName('head')[0].appendChild(link);document.title=\"Startpagina van Microsoft Office\";},300);})();"
+          },
+          {
+            "name": "Google",
+            "url": "javascript:(function(){setInterval(function(){var link=document.querySelector(\"link[rel*='icon']\")||document.createElement('link');link.type='image/x-icon';link.rel='shortcut icon';link.href='https://projectjshost.github.io/icons/google.png';document.getElementsByTagName('head')[0].appendChild(link);document.title=\"Google\";},300);})();"
+          },
+          {
+            "name": "Magister",
+            "url": "javascript: (function() {setInterval(function() {var link = document.querySelector(\"link[rel*='icon']\") || document.createElement('link');link.type = 'image/x-icon';link.rel = 'shortcut icon';link.href = 'https://isw.magister.net/magister/assets/images/appicon-2.png';document.getElementsByTagName('head')[0].appendChild(link);document.title = \"Vandaag - Magister\";}, 300);})();"
+          },
+          {
+            "name": "Gepersonaliseerd Leren",
+            "url": "javascript:(function(){setInterval(function(){var link=document.querySelector(\"link[rel*='icon']\")||document.createElement('link');link.type='image/x-icon';link.rel='shortcut icon';link.href='https://projectjshost.github.io/icons/gepersonaliseerdleren.png';document.getElementsByTagName('head')[0].appendChild(link);document.title=\"Gepersonaliseerd Leren\";},300);})();"
+          },
+          {
+            "name": "Nova",
+            "url": "javascript:(function(){setInterval(function(){var link=document.querySelector(\"link[rel*='icon']\")||document.createElement('link');link.type='image/x-icon';link.rel='shortcut icon';link.href='https://projectjshost.github.io/icons/nova.png';document.getElementsByTagName('head')[0].appendChild(link);document.title=\"Nova\";},300);})();"
+          },
+          {
+            "name": "Memo",
+            "url": "javascript:(function(){setInterval(function(){var link=document.querySelector(\"link[rel*='icon']\")||document.createElement('link');link.type='image/x-icon';link.rel='shortcut icon';link.href='https://projectjshost.github.io/icons/nova.png';document.getElementsByTagName('head')[0].appendChild(link);document.title=\"Memo\";},300);})();"
+          },
+          {
+            "name": "Classcraft",
+            "url": "javascript:(function() { setInterval(function() { var link = document.querySelector(\"link[rel*='icon']\") || document.createElement('link'); link.type = 'image/x-icon'; link.rel = 'shortcut icon'; link.href = 'https://files.classcraft.com/classcraft-assets/favicon/favicon-32x32.png'; document.getElementsByTagName('head')[0].appendChild(link); document.title = \"Classcraft\"; }, 300); })();"
+          },
+          {
+            "name": "Invisible Tab",
+            "url": "javascript:(function(){setInterval(function(){var link=document.querySelector(\"link[rel*='icon']\")||document.createElement('link');link.type='image/x-icon';link.rel='shortcut icon';link.href='https://projectjshost.github.io/icons/blank.png';document.getElementsByTagName('head')[0].appendChild(link);document.title=\"%E2%80%8B\";},300);})();"
+          },
+          {
+            "name": "Title Edit",
+            "url": "javascript:(function(){var pagetitle=prompt(\"Enter new title:\",document.title);if(!pagetitle==\"\"){document.title=pagetitle;}})();"
+          },
+          {
+            "name": "Safe Mode",
+            "url": "javascript:(function(){var safemode=window.open(\"\",\"\",\"width=\"+screen.availWidth+\",height=\"+screen.availHeight);safemode.document.write(\"<head><title>VM</title><style>*{margin:0;padding:0;}</style></head><iframe src='https://whoogle.sdf.org/' style='height:100%;width:100%;border:0;'></iframe>\");})();"
+          }
+        ]
+      },
+      {
+        "name": "Styles",
+        "items": [
+          {
+            "name": "Fonts",
+            "items": [
+              {
+                "name": "Cursive",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27@import url(\\%27https://fonts.googleapis.com/css?family=Yeon+Sung&display=swap\\%27) !important; *{ font-family: \\%27Yeon Sung\\%27, cursive !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "Monospace",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { font-family: monospace !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "Serif",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { font-family: serif !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "Italic",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { font-style: Italic !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "Bold",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { font-weight: bold !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "Lowercase",
+                "url": "javascript:(function(){ var i,t,D=document; for(i=0;t=D.getElementsByTagName('textarea')[i];++i)t.value=t.value.toLowerCase();/*(in ie, text-transform only applies to first line of textarea)*/ var newSS,styles='*{text-transform:lowercase}input,textarea{text-transform:none}';if(D.createStyleSheet){D.createStyleSheet(\"javascript:'\"+styles+\"'\");}else{newSS=D.createElement('link'); newSS.rel='stylesheet';newSS.href='data:text/css,'+escape(styles);D.getElementsByTagName(\"head\")[0].appendChild(newSS);}})()"
+              }
+            ]
+          },
+          {
+            "name": "Nyan Cat",
+            "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { background-image: url(https://i.imgur.com/HLYE26o.png) !important; color: white !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+          },
+          {
+            "name": "Rainbow",
+            "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27html,body { background:0 !important; background-color: transparent !important; background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo) !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+          },
+          {
+            "name": "Black",
+            "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { background-color: black !important; color: white !important; text-color: white !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+          },
+          {
+            "name": "Dark Mode",
+            "url": "javascript:(function(){function RGBtoHSL(RGBColor){with(Math){var R,G,B;var cMax,cMin;var sum,diff;var Rdelta,Gdelta,Bdelta;var H,L,S;R=RGBColor[0];G=RGBColor[1];B=RGBColor[2];cMax=max(max(R,G),B);cMin=min(min(R,G),B);sum=cMax+cMin;diff=cMax-cMin;L=sum/2;if(cMax==cMin){S=0;H=0;}else{if(L<=(1/2))S=diff/sum;else S=diff/(2-sum);Rdelta=R/6/diff;Gdelta=G/6/diff;Bdelta=B/6/diff;if(R==cMax)H=Gdelta-Bdelta;else if(G==cMax)H=(1/3)+Bdelta-Rdelta;else H=(2/3)+Rdelta-Gdelta;if(H<0)H+=1;if(H>1)H-=1;}return[H,S,L];}}function getRGBColor(node,prop){var rgb=getComputedStyle(node,null).getPropertyValue(prop);var r,g,b;if(/rgb\\((\\d+),\\s(\\d+),\\s(\\d+)\\)/.exec(rgb)){r=parseInt(RegExp.$1,10);g=parseInt(RegExp.$2,10);b=parseInt(RegExp.$3,10);return[r/255,g/255,b/255];}return rgb;}function hslToCSS(hsl){return \"hsl(\"+Math.round(hsl[0]*360)+\", \"+Math.round(hsl[1]*100)+\"%, \"+Math.round(hsl[2]*100)+\"%)\";}var props=[\"color\",\"background-color\",\"border-left-color\",\"border-right-color\",\"border-top-color\",\"border-bottom-color\"];var props2=[\"color\",\"backgroundColor\",\"borderLeftColor\",\"borderRightColor\",\"borderTopColor\",\"borderBottomColor\"];if(typeof getRGBColor(document.documentElement,\"background-color\")==\"string\")document.documentElement.style.backgroundColor=\"white\";revl(document.documentElement);function revl(n){var i,x,color,hsl;if(n.nodeType==Node.ELEMENT_NODE){for(i=0;x=n.childNodes[i];++i)revl(x);for(i=0;x=props[i];++i){color=getRGBColor(n,x);if(typeof(color)!=\"string\"){hsl=RGBtoHSL(color);hsl[2]=1-hsl[2];n.style[props2[i]]=hslToCSS(hsl);}}}}})()"
+          }
+        ]
+      },
+      {
+        "name": "Fun",
+        "items": [
+          {
+            "name": "Ponies",
+            "url": "javascript: (function(srcs, cfg) {    var cbcount = 1;    var callback = function() {        --cbcount;        if (cbcount === 0) {            BrowserPonies.setBaseUrl(cfg.baseurl);            if (!BrowserPoniesBaseConfig.loaded) {                BrowserPonies.loadConfig(BrowserPoniesBaseConfig);                BrowserPoniesBaseConfig.loaded = true;            }            BrowserPonies.loadConfig(cfg);            if (!BrowserPonies.running()) BrowserPonies.start();        }    };    if (typeof(BrowserPoniesConfig) === \"undefined\") {        window.BrowserPoniesConfig = {};    }    if (typeof(BrowserPoniesBaseConfig) === \"undefined\") {        ++cbcount;        BrowserPoniesConfig.onbasecfg = callback;    }    if (typeof(BrowserPonies) === \"undefined\") {        ++cbcount;        BrowserPoniesConfig.oninit = callback;    }    var node = (document.body || document.documentElement || document.getElementsByTagName('head')[0]);    for (var id in srcs) {        if (document.getElementById(id)) continue;        if (node) {            var s = document.createElement('script');            s.type = 'text/javascript';            s.id = id;            s.src = srcs[id];            node.appendChild(s);        } else {            document.write('\\u003cscript type=\"text/javscript\" src=\"' + srcs[id] + '\" id=\"' + id + '\"\\u003e\\u003c/script\\u003e');        }    }    callback();})({    \"browser-ponies-script\": \"https://panzi.github.io/Browser-Ponies/browserponies.js\",    \"browser-ponies-config\": \"https://panzi.github.io/Browser-Ponies/basecfg.js\"}, {    \"baseurl\": \"https://panzi.github.io/Browser-Ponies/\",    \"fadeDuration\": 500,    \"volume\": 1,    \"fps\": 25,    \"speed\": 3,    \"audioEnabled\": true,    \"showFps\": false,    \"showLoadProgress\": true,    \"speakProbability\": 0.1,    \"spawn\": {        \"applejack\": 1,        \"fluttershy\": 1,        \"pinkie pie\": 1,        \"rainbow dash\": 1,        \"rarity\": 1,        \"twilight sparkle\": 1    }});void(0)"
+          },
+          {
+            "name": "fontBomb",
+            "url": "javascript:(function () {var s = document.createElement('script');s.setAttribute('src', 'https://fontbomb.ilex.ca/js/main.js');document.body.appendChild(s);}());"
+          },
+          {
+            "name": "Kick Ass",
+            "url": "javascript:var%20KICKASSVERSION='2.0';var%20s%20=%20document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='//hi.kickassapp.com/kickass.js';void(0);"
+          },
+          {
+            "name": "Let it Snow",
+            "url": "javascript:(function(){javascript:(t=>{function i(){this.D=function(){const t=h.atan(this.i/this.d);l.save(),l.translate(this.b,this.a),l.rotate(-t),l.scale(this.e,this.e*h.max(1,h.pow(this.j,.7)/15)),l.drawImage(m,-v/2,-v/2),l.restore()}}window;const h=Math,r=h.random,a=document,o=Date.now;e=(t=>{l.clearRect(0,0,_,f),l.fill(),requestAnimationFrame(e);const i=.001*y.et;y.r();const s=L.et*g;for(var n=0;n<C.length;++n){const t=C[n];t.i=h.sin(s+t.g)*t.h,t.j=h.sqrt(t.i*t.i+t.f),t.a+=t.d*i,t.b+=t.i*i,t.a>w&&(t.a=-u),t.b>b&&(t.b=-u),t.b<-u&&(t.b=b),t.D()}}),s=(t=>{for(var e=0;e<p;++e)C[e].a=r()*(f+u),C[e].b=r()*_}),n=(t=>{c.width=_=innerWidth,c.height=f=innerHeight,w=f+u,b=_+u,s()});class d{constructor(t,e=!0){this._ts=o(),this._p=!0,this._pa=o(),this.d=t,e&&this.s()}get et(){return this.ip?this._pa-this._ts:o()-this._ts}get rt(){return h.max(0,this.d-this.et)}get ip(){return this._p}get ic(){return this.et>=this.d}s(){return this._ts=o()-this.et,this._p=!1,this}r(){return this._pa=this._ts=o(),this}p(){return this._p=!0,this._pa=o(),this}st(){return this._p=!0,this}}const c=a.createElement(\"canvas\");H=c.style,H.position=\"fixed\",H.left=0,H.top=0,H.width=\"100vw\",H.height=\"100vh\",H.zIndex=\"100000\",H.pointerEvents=\"none\",a.body.insertBefore(c,a.body.children[0]);const l=c.getContext(\"2d\"),p=300,g=5e-4,u=20;let _=c.width=innerWidth,f=c.height=innerHeight,w=f+u,b=_+u;const v=15.2,m=a.createElement(\"canvas\"),E=m.getContext(\"2d\"),x=E.createRadialGradient(7.6,7.6,0,7.6,7.6,7.6);x.addColorStop(0,\"hsla(255,255%,255%,1)\"),x.addColorStop(1,\"hsla(255,255%,255%,0)\"),E.fillStyle=x,E.fillRect(0,0,v,v);let y=new d(0,!0),C=[],L=new d(0,!0);for(var j=0;j<p;++j){const t=new i;t.a=r()*(f+u),t.b=r()*_,t.c=1*(3*r()+.8),t.d=.1*h.pow(t.c,2.5)*50*(2*r()+1),t.d=t.d<65?65:t.d,t.e=t.c/7.6,t.f=t.d*t.d,t.g=r()*h.PI/1.3,t.h=15*t.c,t.i=0,t.j=0,C.push(t)}s(),EL=a.addEventListener,EL(\"visibilitychange\",()=>setTimeout(n,100),!1),EL(\"resize\",n,!1),e()})()})();"
+          },
+          {
+            "name": "Mirror",
+            "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27body { -webkit-transform: rotateY(180deg) !important; /* Safari prior 9.0 */ transform: rotateY(180deg) !important; /* Standard syntax */ }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+          },
+          {
+            "name": "Unmirror",
+            "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27body { -webkit-transform: rotateY(0deg) !important; /* Safari prior 9.0 */ transform: rotateY(0deg) !important; /* Standard syntax */ }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+          },
+          {
+            "name": "Flip",
+            "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27body { transform: rotate(180deg) !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+          },
+          {
+            "name": "3dWeb",
+            "url": "javascript:(function(){var js=document.body.appendChild(document.createElement(\"script\"));js.onerror=function(){alert(\"Deze pagina wordt niet ondersteund.\")};js.src=\"https://rawgit.com/Krazete/bookmarklets/master/tri.js\"})();"
+          },
+          {
+            "name": "jsRTC",
+            "url": "javascript:void function(){function b(){var a=Math.floor;try{for(var b,c=parent.document.body.getElementsByTagName(\"*\"),d=!1;!d;)b=c[a(Math.random()*c.length)],\"jsRTC\"!=b.id%26%26(d=!0)}catch(a){alert(\"[This website is incompatible with jsRTC] \"+a.message)}return b}function c(){var c=b().classList[0],d=b();d.classList[0],d.classList.add(c);var e=b().classList[1],f=b();d.classList[1],f.classList.add(e)}function d(){for(i=0;i<k;i++)c()}function e(){j=setInterval(function(){d()},l*(1e3/60))}function f(){clearTimeout(j)}function g(){var a=document.getElementById(\"jsRTC\");a.parentNode.removeChild(a);var b=document.createElement(\"div\");b.style.backgroundColor=\"%232C3C4C\",b.style.width=\"190px\",b.style.height=\"180px\",b.style.color=\"white\",b.style.padding=\"10px 10px 10px 10px\",b.style.position=\"fixed\",b.style.borderWidth=\"1px\",b.style.borderStyle=\"solid\",b.style.borderColor=\"black\",b.style.right=\"0px\",b.style.top=\"0px\",b.style.fontFamily=\"Arial, Helvetica, sans-serif\",b.style.zIndex=\"99999\";var c=document.createElement(\"div\");c.style.backgroundColor=\"%231B2530\",c.style.width=\"210px\",c.style.height=\"18px\",c.style.color=\"white\",c.style.position=\"fixed\",c.style.right=\"0px\",c.style.top=\"0px\",c.style.paddingLeft=\"10px\";var g=document.createElement(\"span\");g.style.fontSize=\"10px\",g.appendChild(document.createTextNode(\"jsRTC for Web pages (Safe mode)\")),c.appendChild(g),b.appendChild(c),b.appendChild(document.createElement(\"br\")),b.appendChild(document.createTextNode(\"Intensity: \"));var h=document.createElement(\"input\");h.style.width=\"105px\",h.style.marginLeft=\"10px\",h.style.backgroundColor=\"%231B2530\",h.style.color=\"white\",h.style.borderSize=\"1px\",h.setAttribute(\"type\",\"number\"),h.setAttribute(\"id\",\"nmIntensity\"),h.setAttribute(\"min\",\"1\"),h.setAttribute(\"value\",\"1\"),h.onchange=function(){k=h.value},b.appendChild(h),b.appendChild(document.createElement(\"br\")),b.appendChild(document.createElement(\"br\")),b.appendChild(document.createTextNode(\"Error Delay: \"));var j=document.createElement(\"input\");j.style.width=\"85px\",j.style.marginLeft=\"10px\",j.style.backgroundColor=\"%231B2530\",j.style.color=\"white\",j.setAttribute(\"type\",\"number\"),j.setAttribute(\"id\",\"nmErrorDelay\"),j.setAttribute(\"min\",\"1\"),j.setAttribute(\"value\",\"1\"),j.onchange=function(){l=j.value},b.appendChild(j),b.appendChild(document.createElement(\"br\")),b.appendChild(document.createElement(\"br\"));var m=document.createElement(\"button\");m.style.width=\"190px\",m.innerHTML=\"Start Auto-Corrupt\",m.style.backgroundColor=\"%231B2530\",m.style.color=\"%23FF4500\",m.style.border=\"none\",m.style.padding=\"11px 32px\",m.onclick=function(){\"Start Auto-Corrupt\"==m.innerHTML%3F(m.innerHTML=\"Stop Auto-Corrupt\",e()):(m.innerHTML=\"Start Auto-Corrupt\",f())},b.appendChild(m),b.appendChild(document.createElement(\"br\"));var n=document.createElement(\"button\");n.style.marginTop=\"5px\",n.style.width=\"190px\",n.innerHTML=\"Manual Blast\",n.style.backgroundColor=\"%231B2530\",n.style.color=\"%23FF4500\",n.style.border=\"none\",n.style.padding=\"11px 32px\",n.onclick=function(){d()},b.appendChild(n),document.body.appendChild(b)}var h,j,a=!1,k=1,l=1;(function(){var b=new Blob([\"<html><head><script>function getOne(){var e=parent.document.body.getElementsByTagName(\\\"*\\\");if(!e)return void(parent.fallbackTrigger=!0);for(var t,n=!1;!n;)t=e[Math.floor(Math.random()*e.length)],\\\"jsRTC\\\"!=t.id%26%26(n=!0);return t%3Ft:void(parent.fallbackTrigger=!0)}function corruptOneCss(){var e=getOne().classList[0],t=getOne();t.classList[0],t.classList.add(e);var n=getOne().classList[1],r=getOne();t.classList[1],r.classList.add(n)}function Blast(){for(i=0;i<intensity;i++)corruptOneCss()}function startAutoCorrupt(){t=setInterval(function(){Blast()},errordelay*(1e3/60))}function stopAutoCorrupt(){clearTimeout(t)}function displayPanel(){var e=(parent.document.body.getElementsByTagName(\\\"*\\\"),document.createElement(\\\"div\\\"));e.id=\\\"jsRtcPanel\\\",e.name=\\\"jsRtcPanel\\\",e.style.backgroundColor=\\\"%232C3C4C\\\",e.style.width=\\\"190px\\\",e.style.height=\\\"180px\\\",e.style.color=\\\"white\\\",e.style.padding=\\\"10px 10px 10px 10px\\\",e.style.position=\\\"fixed\\\",e.style.borderWidth=\\\"1px\\\",e.style.borderStyle=\\\"solid\\\",e.style.borderColor=\\\"black\\\",e.style.right=\\\"0px\\\",e.style.top=\\\"0px\\\",e.style.fontFamily=\\\"Arial, Helvetica, sans-serif\\\",e.style.zIndex=\\\"99999\\\";var t=document.createElement(\\\"div\\\");t.style.backgroundColor=\\\"%231B2530\\\",t.style.width=\\\"210px\\\",t.style.height=\\\"18px\\\",t.style.color=\\\"white\\\",t.style.position=\\\"fixed\\\",t.style.right=\\\"0px\\\",t.style.top=\\\"0px\\\",t.style.paddingLeft=\\\"10px\\\";var n=document.createElement(\\\"span\\\");n.style.fontSize=\\\"10px\\\",n.appendChild(document.createTextNode(\\\"jsRTC for Web pages\\\")),t.appendChild(n),e.appendChild(t),e.appendChild(document.createElement(\\\"br\\\")),e.appendChild(document.createTextNode(\\\"Intensity: \\\"));var r=document.createElement(\\\"input\\\");r.style.width=\\\"105px\\\",r.style.marginLeft=\\\"10px\\\",r.style.backgroundColor=\\\"%231B2530\\\",r.style.color=\\\"white\\\",r.style.borderSize=\\\"1px\\\",r.setAttribute(\\\"type\\\",\\\"number\\\"),r.setAttribute(\\\"id\\\",\\\"nmIntensity\\\"),r.setAttribute(\\\"min\\\",\\\"1\\\"),r.setAttribute(\\\"value\\\",\\\"1\\\"),r.onchange=function(){intensity=r.value},e.appendChild(r),e.appendChild(document.createElement(\\\"br\\\")),e.appendChild(document.createElement(\\\"br\\\")),e.appendChild(document.createTextNode(\\\"Error Delay: \\\"));var l=document.createElement(\\\"input\\\");l.style.width=\\\"85px\\\",l.style.marginLeft=\\\"10px\\\",l.style.backgroundColor=\\\"%231B2530\\\",l.style.color=\\\"white\\\",l.setAttribute(\\\"type\\\",\\\"number\\\"),l.setAttribute(\\\"id\\\",\\\"nmErrorDelay\\\"),l.setAttribute(\\\"min\\\",\\\"1\\\"),l.setAttribute(\\\"value\\\",\\\"1\\\"),l.onchange=function(){errordelay=l.value},e.appendChild(l),e.appendChild(document.createElement(\\\"br\\\")),e.appendChild(document.createElement(\\\"br\\\"));var o=document.createElement(\\\"button\\\");o.style.width=\\\"190px\\\",o.innerHTML=\\\"Start Auto-Corrupt\\\",o.style.backgroundColor=\\\"%231B2530\\\",o.style.color=\\\"%23FF4500\\\",o.style.border=\\\"none\\\",o.style.padding=\\\"11px 32px\\\",o.onclick=function(){\\\"Start Auto-Corrupt\\\"==o.innerHTML%3F(o.innerHTML=\\\"Stop Auto-Corrupt\\\",startAutoCorrupt()):(o.innerHTML=\\\"Start Auto-Corrupt\\\",stopAutoCorrupt())},e.appendChild(o),e.appendChild(document.createElement(\\\"br\\\"));var a=document.createElement(\\\"button\\\");a.style.marginTop=\\\"5px\\\",a.style.width=\\\"190px\\\",a.innerHTML=\\\"Manual Blast\\\",a.style.backgroundColor=\\\"%231B2530\\\",a.style.color=\\\"%23FF4500\\\",a.style.border=\\\"none\\\",a.style.padding=\\\"11px 32px\\\",a.onclick=function(){Blast()},e.appendChild(a),document.body.appendChild(e),loaded=!0}var t,intensity=1,errordelay=1,loaded=!1</script></head><body onload=displayPanel()></body></html>\"],{type:\"text/html\"}),c=window.URL.createObjectURL(b),d=document.createElement(\"iframe\");d.id=\"jsRTC\",d.name=\"jsRTC\",d.style.width=\"210px\",d.style.height=\"200px\",d.style.padding=\"0px 0px 0px 0px\",d.style.position=\"fixed\",d.style.borderWidth=\"1px\",d.style.borderStyle=\"solid\",d.style.borderColor=\"black\",d.style.right=\"0px\",d.style.top=\"0px\",d.style.zIndex=\"99999\",d.src=c,document.body.appendChild(d),h=setInterval(function(){a%26%26(clearTimeout(h),g()),a=!0;window.frames.jsRTC.document.getElementById(\"jsRtcPanel\");a=!1},1e3)})()}();"
+          },
+          {
+            "name": "Broken",
+            "url": "javascript:(function(){['', '-ms-', '-webkit-', '-o-', '-moz-'].map(function(prefix){Array.prototype.slice.call(document.querySelectorAll('div,p,span,img,a,body')).map(function(el){el.style[prefix + 'transform'] = 'rotate(' + (Math.floor(Math.random() * 3) - 1) + 'deg)';});});}())"
+          },
+          {
+            "name": "Hide text",
+            "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27*{ color: transparent!important }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+          },
+          {
+            "name": "WebCorrupt",
+            "url": "javascript:(function(){function corruptByte(){var str=document.body.innerHTML;var rin=Math.random()*str.length;var ran=str.charAt(rin);var rin2=Math.random()*str.length;var ran2=str.charAt(rin2);var res=str.replace(ran,ran2);document.body.innerHTML=res;}function repeat(func,times){func();times&&--times&&repeat(func,times);}var corruptionAmount=prompt(\"How many bytes to corrupt?\");if(Math.sign(corruptionAmount)==1){repeat(function(){corruptByte();},corruptionAmount);}})();"
+          },
+          {
+            "name": "ColorShift",
+            "url": "javascript:(function(){var colorshift=0;function colorR(){document.getElementsByTagName(\"HTML\")[0].style.filter=\"hue-rotate(\"+colorshift+\"deg)\";colorshift=colorshift+1;}setInterval(colorR,20);})();"
+          }
+        ]
+      },
+      {
+        "name": "Special",
+        "items": [
+          {
+            "name": "Filters",
+            "items": [
+              {
+                "name": "Blur",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { filter:blur(5px) !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "Acid",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { filter: saturate(150) !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "Increase Brightness",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { filter:brightness(105%) !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "Color Leak",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { filter:saturate(900) blur(1px) !important; !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "Color Switch",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { filter:hue-rotate(90deg) !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "Deep Fry",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { filter:contrast(200%) !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "E-ink Simulator",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27body { filter: blur(0.6px) contrast(250%) grayscale(100%) !important;%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "E-ink Simulator (Meer Kleur Diepte)",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27body { filter: blur(0.4px) contrast(125%) grayscale(100%) !important;%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "Ultra Helderheid",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { filter:contrast(300%) brightness(200%) !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "Zwart / Wit",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { -webkit-filter: grayscale(0%) !important; filter: grayscale(0%) !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              },
+              {
+                "name": "Invert",
+                "url": "javascript:(function(){ var style = document.createElement(%27style%27), styleContent = document.createTextNode(%27* { filter:invert(100%) !important; }%27); style.appendChild(styleContent ); var caput = document.getElementsByTagName(%27head%27); caput[0].appendChild(style); })();"
+              }
+            ]
+          },
+          {
+            "name": "Dangerous",
+            "items": [
+              {
+                "name": "Freeze Pagina",
+                "url": "javascript:(function(){while(true){document.body.contentEditable='true';document.designMode='on';void 0}})();"
+              },
+              {
+                "name": "Instant Crash",
+                "url": "javascript:(function(){while(true){document.title=Math.floor(Math.random()*(99999999999999999-11111111111111111)+11111111111111111);}})();"
+              },
+              {
+                "name": "Tab Overload",
+                "url": "javascript:(function(){setInterval(function() {window.open(location.href);},100);})();"
+              },
+              {
+                "name": "Cookie Overload",
+                "url": "javascript:(function(){function makeid(length){var result='';var characters='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-';var charactersLength=characters.length;for(var i=0;i<length;i++){result+=characters.charAt(Math.floor(Math.random()*charactersLength));}return result;}setInterval(function(){var randomNumber=Math.floor((Math.random()*100)+1);document.cookie=(makeid(randomNumber)+\"=\"+makeid(randomNumber));},100);})();"
+              }
+            ]
+          },
+          {
+            "name": "Quiz Antwoord Generator",
+            "url": "javascript:(function()%7Bvar%20antwoord%20%3D%20Math.floor((Math.random()%20*%204)%20%2B%201)%3Bif%20(antwoord%20%3D%3D%201)%7Balert(%22A%22)%3B%7D%20else%20if%20(antwoord%20%3D%3D%202)%20%7Balert(%22B%22)%3B%7D%20else%20if%20(antwoord%20%3D%3D%203)%20%7Balert(%22C%22)%3B%7D%20else%20%7Balert(%22D%22)%3B%7D%7D)()"
+          },
+          {
+            "name": "Best Choice",
+            "url": "javascript:var noch=prompt('How many choices are there?','');if (noch!=null) alert('Choose option  '+Math.round(noch*Math.random()))"
+          },
+          {
+            "name": "Fake Chrome Error",
+            "url": "javascript:(function(){var Cerror=prompt(\"Kies een error (1-5)\\n1:Chrome OS is missing or damaged\\n2:Kan niet inloggen\\n3:GPU Failure\");switch(Cerror){case \"1\":document.write(\"<img src='https://i.vgy.me/ghlcbu.png'><style>*{margin:0;padding:0;width:100%;height:100%;cursor:none;}</style>\");document.body.requestFullscreen();break;case \"2\":document.write(\"<img src='https://i.vgy.me/1YWYW5.png'><style>*{margin:0;padding:0;width:100%;height:100%;cursor:none;}</style>\");document.body.requestFullscreen();break;case \"3\":document.write(\"<img src='https://i.vgy.me/TxihYL.png'><style>*{margin:0;padding:0;width:100%;height:100%;cursor:none;}</style>\");document.body.requestFullscreen();break;default:break;}})();"
+          },
+          {
+            "name": "Used Ram",
+            "url": "javascript:alert(`${performance.memory.usedJSHeapSize / Math.pow(1000, 2)} MB`);"
+          }
+        ]
+      },
+      {
+        "name": "Extra",
+        "items": [
+          {
+            "name": "JS Info",
+            "url": "javascript: alert(\"%E2%A0%80%E2%A0%80%E2%A0%80%E2%A0%80%E2%96%88%E2%96%88%E2%96%88%E2%A0%80%E2%A0%80%E2%96%88%E2%96%88%E2%96%88%E2%96%88%E2%96%88%E2%A0%80\\n%E2%A0%80%E2%A0%80%E2%A0%80%E2%A0%80%E2%96%88%E2%96%88%E2%96%88%E2%A0%80%E2%96%88%E2%96%88%E2%A0%80%E2%A0%80%E2%A0%80%E2%A0%80%E2%A0%80\\n%E2%A0%80%E2%A0%80%E2%A0%80%E2%A0%80%E2%96%88%E2%96%88%E2%96%88%E2%A0%80%E2%A0%80%E2%96%88%E2%96%88%E2%96%88%E2%96%88%E2%96%88%E2%A0%80\\n%E2%96%88%E2%96%88%E2%A0%80%E2%A0%80%E2%96%88%E2%96%88%E2%96%88%E2%A0%80%E2%A0%80%E2%A0%80%E2%A0%80%E2%A0%80%E2%A0%80%E2%96%88%E2%96%88\\n%E2%A0%80%E2%96%88%E2%96%88%E2%96%88%E2%96%88%E2%96%88%E2%A0%80%E2%A0%80%E2%A0%80%E2%96%88%E2%96%88%E2%96%88%E2%96%88%E2%96%88%E2%A0%80\\nProject JS v2.3\");"
+          },
+          {
+            "name": "Browser Info",
+            "url": "javascript:alert(\"Your user agent is:\\n\"+ window.navigator.userAgent +\"\")"
+          }
+        ]
+      },
+      {
+        "name": "Project JS Website",
+        "url": "https://project-js.github.io/"
+      },
+      {
+        "name": "App Center",
+        "url": "javascript:window.open(\"https://projectjshost.github.io/appcenter/\",\"\",\"width=492,height=600\");"
+      },
+      {
+        "name": "About Project JS",
+        "url": "javascript: (function() {    var JSinfo = window.open(\"\", \"\", \"width=600,height=375\");    JSinfo.document.write(\"<head><title>About Project JS</title><style>*{margin:0;padding:0;}</style></head><iframe src='https://projectjshost.github.io/aboutscreens/2.3/' style='height:100%;width:100%;border:0;'></iframe>\");})();"
+      }
+    ]
+  }
+]

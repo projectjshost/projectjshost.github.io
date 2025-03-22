@@ -1,0 +1,37 @@
+<html>
+
+<head>
+	<link rel="manifest" href="/manifest.json">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<style>
+		html {
+			background: #000
+		}
+		#bookmarklet {
+			cursor: move;
+			font-size: 0;
+		}
+
+		#bookmarklet::after {
+			font-size: 16px;
+			content: "Drag me to your bookmark bar!"
+		}
+	</style>
+	<script src="main.js" type="module" defer></script>
+	<script>
+		appname = "Project JS Online";
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+	<script src="/apiLoader/main.js"></script>
+</head>
+
+<body>
+	<header>
+		<p1 id="header"></p1>
+	</header>
+	<a id="bookmarklet" href="javascript:(function(){const host='https://projectjshost.github.io';try{eval('')}catch(a){return void alert('This site is protected.')}const childWindow=window.open('https://projectjshost.github.io/bookmarklet','_blank','width=492,height=600');return childWindow?void(setInterval(()=>{childWindow.postMessage('ping',host)},1e3),window.addEventListener('message',event=>{const message=event.data;if('string'==typeof message&&message.startsWith('exec_')){const command=message.substring(5);try{eval(decodeURIComponent(atob(command)))}catch(a){alert(a)}}})):void alert('Failed to open window.')})();">JS</a>
+	<p id="origin">Not connected</p>
+	<div id="bookmarks" style="display: none;">
+	</div>
+</body>
+</html>
