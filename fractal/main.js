@@ -168,7 +168,7 @@ function main() {
     function handleResize() {
         const dpr = isMobile ? (window.devicePixelRatio || 1) * 0.5 : window.devicePixelRatio || 1;
         const newWidth = Math.floor(window.innerWidth * dpr);
-        const newHeight = Math.floor(window.innerHeight * dpr);
+        const newHeight = Math.floor(window.innerHeight * dpr) - 45;
 
         if (newWidth !== lastWidth || newHeight !== lastHeight) {
             canvas.width = newWidth;
