@@ -136,3 +136,9 @@
 	background-repeat: no-repeat;
 	background-size: cover
 }
+
+.icon-fractal {
+	background: url("/icons/fractal.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
