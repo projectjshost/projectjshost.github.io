@@ -1,0 +1,188 @@
+<html>
+
+<head>
+	<link rel="manifest" href="/manifest.json">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<style>
+		html {
+			background: #000
+		}
+	</style>
+	<script>
+		appname = "App Center"
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+	<script src="/apiLoader/main.js"></script>
+</head>
+
+<body>
+	<header>
+		<p1 id="header"></p1>
+	</header>
+	<div class="appOverview">
+		<p2>System</p2>
+		<div class="area">
+			<div class="appTile" onclick="openApp('settings')">
+				<div class="appIcon icon-settings"></div>
+				<p>Settings</p>
+			</div>
+			<div class="appTile" onclick="openApp('themeManager')">
+				<div class="appIcon icon-themes"></div>
+				<p>Themes</p>
+			</div>
+			<div class="appTile" onclick="openApp('terminal')">
+				<div class="appIcon icon-terminal"></div>
+				<p>Terminal</p>
+			</div>
+		</div>
+
+		<p2>Tools</p2>
+		<div class="area">
+			<div class="appTile" onclick="openApp('clock')">
+				<canvas class="appIcon" id="clockCanvas" width="70" height="70"></canvas>
+				<p>Clock</p>
+			</div>
+
+			<div class="appTile" onclick="openApp('quicknote')">
+				<div class="appIcon icon-note"></div>
+				<p>QuickNote</p>
+			</div>
+			<div class="appTile" onclick="openApp('encryptpad')">
+				<div class="appIcon icon-note_secure"></div>
+				<p>EncryptPad</p>
+			</div>
+			<div class="appTile" onclick="openApp('safeencrypt')">
+				<div class="appIcon icon-key"></div>
+				<p>SafeEncrypt</p>
+			</div>
+			<div class="appTile" onclick="openApp('codepad')">
+				<div class="appIcon icon-code"></div>
+				<p>CodePad</p>
+			</div>
+			<div class="appTile" onclick="openApp('calculator')">
+				<div class="appIcon icon-calculator"></div>
+				<p>Calculator</p>
+			</div>
+			<div class="appTile" onclick="openApp('random')">
+				<div class="appIcon icon-dice"></div>
+				<p>Random</p>
+			</div>
+		</div>
+
+		<p2>AI Tools</p2>
+		<div class="area">
+			<div class="appTile" onclick="location.replace('https://deepinfra.com/chat')">
+				<div class="appIcon icon-chat_ai"></div>
+				<p>AI Chat</p>
+			</div>
+			<div class="appTile" onclick="openApp('imagegenerator')">
+				<div class="appIcon icon-image"></div>
+				<p>AI image generator</p>
+			</div>
+		</div>
+
+		<p2>Games</p2>
+		<div class="area">
+			<div class="appTile" onclick="openApp('portal')">
+				<div class="appIcon icon-portal"></div>
+				<p>Portal</p>
+			</div>
+			<div class="appTile" onclick="openApp('gettingoverit')">
+				<div class="appIcon icon-scratchcat"></div>
+				<p>Getting Over It</p>
+			</div>
+			<div class="appTile" onclick="openApp('fractal')">
+				<div class="appIcon icon-fractal"></div>
+				<p>Fractal</p>
+			</div>
+			<div class="appTile" onclick="resizeApp(1280,720);location.replace('https://foss2016.github.io/')">
+				<div class="appIcon icon-questionblock"></div>
+				<p>FullScreen Mario</p>
+			</div>
+			<div class="appTile" onclick="resizeApp(1280,720);location.replace('https://hexgl.bkcore.com/play/')">
+				<div class="appIcon icon-hexgl"></div>
+				<p>HexGL</p>
+			</div>
+			<div class="appTile" onclick="resizeApp(1280,720);location.replace('https://2048-opera-pwa.surge.sh/')">
+				<div class="appIcon icon-2048"></div>
+				<p>2048</p>
+			</div>
+			<div class="appTile" onclick="resizeApp(1280,720);location.replace('https://tmaiadev-tetra.netlify.app/')">
+				<div class="appIcon icon-tetra"></div>
+				<p>Tetra</p>
+			</div>
+			<div class="appTile" onclick="resizeApp(1280,720);location.replace('https://mahjong.jull.dev/')">
+				<div class="appIcon icon-mahjong"></div>
+				<p>Mahjong</p>
+			</div>
+		</div>
+		<p2>3rd Party Tools</p2>
+		<div class="area">
+			<div class="appTile" onclick="location.replace('https://appsco.pe/')">
+				<div class="appIcon icon-appscope"></div>
+				<p>Appscope</p>
+			</div>
+			<div class="appTile" onclick="resizeApp(921,644);location.replace('https://editor.method.ac/')">
+				<div class="appIcon icon-methoddraw"></div>
+				<p>Method Draw</p>
+			</div>
+		</div>
+</div>
+<!-- Animated clock -->
+<script>
+	const canvas = document.getElementById('clockCanvas');
+	const ctx = canvas.getContext('2d');
+
+	// Set up high DPI canvas
+	const dpr = window.devicePixelRatio || 1;
+	const rect = canvas.getBoundingClientRect();
+	canvas.width = rect.width * dpr;
+	canvas.height = rect.height * dpr;
+	ctx.scale(dpr, dpr);
+
+	const centerX = rect.width / 2;
+	const centerY = rect.height / 2;
+	const radius = Math.min(centerX, centerY) - 2;
+
+	function drawClock() {
+		// Clear canvas
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		// Draw clock face
+		ctx.beginPath();
+		ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+		ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--element').trim();
+		ctx.fill();
+
+		const now = new Date();
+		const hours = now.getHours() % 12;
+		const minutes = now.getMinutes();
+		const seconds = now.getSeconds();
+
+		// Draw hour hand
+		drawHand(hours * 30 + minutes * 0.5, radius * 0.5, 2, '--foreground');
+
+		// Draw minute hand
+		drawHand(minutes * 6, radius * 0.7, 1.5, '--foreground');
+
+		// Draw second hand
+		drawHand(seconds * 6, radius * 0.9, 1, '--foreground2');
+	}
+
+	function drawHand(angle, length, width, colorVar) {
+		ctx.beginPath();
+		ctx.moveTo(centerX, centerY);
+		const radians = (angle - 90) * Math.PI / 180;
+		ctx.lineTo(centerX + length * Math.cos(radians), centerY + length * Math.sin(radians));
+		ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue(colorVar).trim();
+		ctx.lineWidth = width;
+		ctx.lineCap = 'round';
+		ctx.stroke();
+	}
+
+	// Update clock every second
+	setInterval(drawClock, 1000);
+	setTimeout(drawClock, 100);
+</script>
+</body>
+</html>

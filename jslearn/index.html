@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <script>appname = "JS Learn"</script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+        <script src="/apiLoader/main.js"></script>
+        <script src="lz-string.min.js"></script>
+        <script src="main.js"></script>
+        <link rel="stylesheet" href="styles.css">
+		<style>html{background:#000}</style>
+    </head>
+    <body>
+        <header>
+            <p1 id="header"></p1>
+            <div class="actionBar">
+                <button id="importFile" onclick="importFile()"><span class="icon">folder</span>Open File</button>
+                <button id="hideDefinitionsButton" onclick="hideDefinitions()"><span class="icon">visibility_off</span>Hide Definitions</button>
+                <button id="showDefinitionsButton" onclick="showDefinitions()"><span class="icon">visibility</span>Show Definitions</button>
+                <button id="shareFile" onclick="shareUrl()"><span class="icon">share</span>Share</button>
+            </div>
+        </header>
+        
+        <div id="terms"></div>
+        <div id="library" class="area"></div>
+    </body>
+</html>

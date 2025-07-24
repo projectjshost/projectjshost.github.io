@@ -1,0 +1,74 @@
+.cm-s-dynamic.CodeMirror {
+	background: var(--background);
+	color: var(--foreground);
+}
+
+.cm-s-dynamic div.CodeMirror-selected {
+	background: var(--background2);
+}
+
+.cm-s-dynamic .CodeMirror-line::selection,
+.cm-s-dynamic .CodeMirror-line>span::selection,
+.cm-s-dynamic .CodeMirror-line>span>span::selection {
+	background: var(--background2);
+}
+
+.cm-s-dynamic .CodeMirror-gutters {
+	background: var(--background2);
+	border-right: 0px;
+}
+
+.cm-s-dynamic .CodeMirror-guttermarker {
+	color: var(--foreground);
+}
+
+.cm-s-dynamic .CodeMirror-guttermarker-subtle {
+	color: var(--foreground2);
+}
+
+.cm-s-dynamic .CodeMirror-linenumber {
+	color: var(--foreground2);
+}
+
+.cm-s-dynamic .CodeMirror-cursor {
+	border-left: 1px solid var(--foreground);
+}
+
+.cm-s-dynamic span.cm-comment {
+	color: var(--foreground2);
+}
+
+.cm-s-dynamic span.cm-comment.cm-type {
+	color: var(--accent);
+}
+
+.cm-s-dynamic span.cm-property,
+.cm-s-dynamic span.cm-attribute {
+	color: var(--foreground2);
+}
+
+.cm-s-dynamic span.cm-keyword {
+	color: var(--accent);
+	font-weight: bold;
+}
+
+.cm-s-dynamic span.cm-string {
+	color: var(--foreground2);
+}
+
+.cm-s-dynamic span.cm-variable {
+	color: var(--foreground);
+}
+
+.cm-s-dynamic span.cm-variable-2 {
+	color: var(--foreground2);
+}
+
+.cm-s-dynamic span.cm-variable-3,
+.cm-s-dynamic span.cm-type {
+	color: var(--foreground2);
+}
+
+.cm-s-dynamic span.cm-def {
+	color: var(--foreground);
+}

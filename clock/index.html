@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
+	<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+	<script src="https://www.unpkg.com/moment/min/moment.min.js"></script>
+	<script src="https://unpkg.com/moment-timezone/builds/moment-timezone-with-data-10-year-range.min.js"></script>
+
+	<script src="main.js"></script>
+	<script src="/apiLoader/main.js"></script>
+
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<header>
+		<p1 id="header"></p1>
+	</header>
+
+	<div id="currentView"></div>
+	<div id="tabs">
+		<div class="tab" id="clock_tab" onmousedown="switchTab('clock')">
+			<span class="icon">schedule</span>
+			<span class="label">Clock</span>
+		</div>
+
+		<div class="tab" id="timer_tab" onmousedown="switchTab('timer')">
+			<span class="icon">hourglass_bottom</span>
+			<span class="label">Timer</span>
+		</div>
+
+		<div class="tab" id="stopwatch_tab" onmousedown="switchTab('stopwatch')">
+			<span class="icon">timer</span>
+			<span class="label">Stopwatch</span>
+		</div>
+	</div>
+</body>
+
+<script>switchTab("clock")</script>
+
+</html>

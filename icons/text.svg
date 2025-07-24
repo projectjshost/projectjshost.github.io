@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="24"
+   height="24"
+   viewBox="0 0 24 24"
+   fill="none"
+   stroke="currentColor"
+   stroke-width="2"
+   stroke-linecap="round"
+   stroke-linejoin="round"
+   class="feather feather-align-left"
+   version="1.1"
+   id="svg10"
+   sodipodi:docname="text.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="8.9166667"
+     inkscape:cx="13.233645"
+     inkscape:cy="13.850467"
+     inkscape:window-width="946"
+     inkscape:window-height="510"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10" />
+  <g
+     id="g856"
+     style="stroke:#bfbfbf;stroke-opacity:1">
+    <line
+       x1="17"
+       y1="10"
+       x2="3"
+       y2="10"
+       id="line2"
+       style="stroke:#bfbfbf;stroke-opacity:1" />
+    <line
+       x1="21"
+       y1="6"
+       x2="3"
+       y2="6"
+       id="line4"
+       style="stroke:#bfbfbf;stroke-opacity:1" />
+    <line
+       x1="21"
+       y1="14"
+       x2="3"
+       y2="14"
+       id="line6"
+       style="stroke:#bfbfbf;stroke-opacity:1" />
+    <line
+       x1="17"
+       y1="18"
+       x2="3"
+       y2="18"
+       id="line8"
+       style="stroke:#bfbfbf;stroke-opacity:1" />
+  </g>
+</svg>

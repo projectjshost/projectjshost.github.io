@@ -1,0 +1,157 @@
+body {
+	padding-bottom: 50px!important;
+}
+
+#bigClock {
+	text-align: center;
+	display: block;
+	font-size: 56px;
+}
+
+#currentDate {
+	display: block;
+	text-align: center;
+	font-size: 24px;
+	color: var(--foreground2)
+}
+
+#tabs {
+	background: var(--background2);
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	height: 55px;
+	display: flex;
+	justify-content: center;
+}
+
+.tab {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex: 1;
+	padding: 7px;
+	opacity: 0.5;
+	color: var(--foreground2);
+	cursor: pointer;
+	transition-property: color, opacity!important;
+	transition: 0.2s;
+	max-width: 150px;
+}
+
+.tab > .label {
+	font-size: 12px;
+}
+
+.tab > .icon {
+	font-size: 20px;
+}
+
+.tab:hover {
+	opacity: 1;
+}
+
+.tab.active {
+	color: var(--foreground);
+	opacity: 1;
+}
+
+.tab.active > .label {
+	font-weight: 500
+}
+
+#addTimezoneContainer {
+	position: fixed;
+	display: flex;
+	bottom: 60px;
+	left: 0;
+	right: 0;
+	justify-content: center;
+}
+
+#timezoneSearch {
+	position: fixed;
+	margin: 0;
+	left: 5px;
+	right: 5px;
+	width: initial;
+	width: -moz-available;
+}
+
+#searchResultBox {
+	padding: 5px;
+	padding-top: 40px;
+}
+
+.searchResult {
+	padding: 10px;
+	margin: 5px 0;
+	border-radius: 5px;
+	background: var(--background2);
+	cursor: pointer
+}
+
+.searchResult:hover {
+	background: var(--element)
+}
+
+#clocksContainer {
+	margin-top: 10px;
+}
+
+.clock {
+	background: var(--background2);
+	padding: 10px;
+	margin: 5px;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+}
+
+.clock > .label {
+	color: var(--foreground2)
+}
+
+.clock > .time {
+	font-size: 24px;
+}
+
+.clock > button {
+	position: absolute;
+	right: 5px;
+	background: none;
+}
+
+#timerDisplay, #stopwatchDisplay {
+    text-align: center;
+    display: block;
+    font-size: 56px;
+    margin-top: 20px;
+}
+
+#timerControls, #stopwatchControls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#timerControls button, #stopwatchControls button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background: var(--background2);
+    color: var(--foreground);
+}
+
+#timerControls button:hover, #stopwatchControls button:hover {
+    background: var(--element);
+}
+
+#timerInput {
+    width: 100px;
+	height: 40px;
+}

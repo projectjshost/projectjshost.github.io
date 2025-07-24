@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script>appname="SafeEncrypt";</script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+        <script src="/apiLoader/main.js"></script>
+		<script src="/lib/crypto-js.js"></script>
+        <script src="./Core/frontend.js"></script>
+		<style>html{background:#000}</style>
+    </head>
+    <body>
+        <header><p1 id="header"></p1></header>
+        <div class="area">
+            <p2>With Password</p2>
+            <input type="text" id="textpass" spellcheck="false" placeholder="Text">
+            <input type="password" id="pass" placeholder="Password">
+            <button onclick="SafeEncryptPass()"><span class="icon">lock</span>Encrypt</button>
+            <button onclick="SafedecryptPass()"><span class="icon">lock_open</span>Decrypt</button>
+            <p id="ResultPass" class="user-select"></p>
+        </div>
+        <div class="area">
+        <p2>Without Password</p2>
+            <input type="text" id="textnopass" spellcheck="false" placeholder="Text">
+            <button onclick="SafeEncryptNoPass()"><span class="icon">lock</span>Encrypt</button>
+            <button onclick="SafedecryptNoPass()"><span class="icon">lock_open</span>Decrypt</button>
+        <p id="ResultNoPass" class="user-select"></p>
+        </div>
+    </body>
+</html>

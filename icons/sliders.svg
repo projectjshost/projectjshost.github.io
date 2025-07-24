@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="24"
+   height="24"
+   viewBox="0 0 24 24"
+   fill="none"
+   stroke="currentColor"
+   stroke-width="2"
+   stroke-linecap="round"
+   stroke-linejoin="round"
+   class="feather feather-sliders"
+   version="1.1"
+   id="svg884"
+   sodipodi:docname="sliders.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs888" />
+  <sodipodi:namedview
+     id="namedview886"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="6.3050355"
+     inkscape:cx="0.63441356"
+     inkscape:cy="13.401986"
+     inkscape:window-width="946"
+     inkscape:window-height="510"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg884" />
+  <g
+     id="g1385"
+     style="stroke:#bfbfbf;stroke-opacity:1">
+    <line
+       x1="4"
+       y1="21"
+       x2="4"
+       y2="14"
+       id="line866"
+       style="stroke:#bfbfbf;stroke-opacity:1" />
+    <line
+       x1="4"
+       y1="10"
+       x2="4"
+       y2="3"
+       id="line868"
+       style="stroke:#bfbfbf;stroke-opacity:1" />
+    <line
+       x1="12"
+       y1="21"
+       x2="12"
+       y2="12"
+       id="line870"
+       style="stroke:#bfbfbf;stroke-opacity:1" />
+    <line
+       x1="12"
+       y1="8"
+       x2="12"
+       y2="3"
+       id="line872"
+       style="stroke:#bfbfbf;stroke-opacity:1" />
+    <line
+       x1="20"
+       y1="21"
+       x2="20"
+       y2="16"
+       id="line874"
+       style="stroke:#bfbfbf;stroke-opacity:1" />
+    <line
+       x1="20"
+       y1="12"
+       x2="20"
+       y2="3"
+       id="line876"
+       style="stroke:#bfbfbf;stroke-opacity:1" />
+    <line
+       x1="1"
+       y1="14"
+       x2="7"
+       y2="14"
+       id="line878"
+       style="stroke:#bfbfbf;stroke-opacity:1" />
+    <line
+       x1="9"
+       y1="8"
+       x2="15"
+       y2="8"
+       id="line880"
+       style="stroke:#bfbfbf;stroke-opacity:1" />
+    <line
+       x1="17"
+       y1="16"
+       x2="23"
+       y2="16"
+       id="line882"
+       style="stroke:#bfbfbf;stroke-opacity:1" />
+  </g>
+</svg>

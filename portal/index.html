@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+	<script>appname = "Portal"</script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rivets/0.9.6/rivets.bundled.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.10.0/nipplejs.min.js"></script>
+	<script src="/apiLoader/main.js"></script>
+</head>
+
+<body>
+	<header>
+		<p1 id="header"></p1>
+    </header>
+	<span id="loadingProgress" style="font-size: 24px;"></span>
+	<button id="startGameButton" style="display: none!important; font-size: 24px; display:block; margin: 0 auto;" onclick="startGame()">Start Game</button>
+
+    <div id="middleDiv" class="text-center">
+        <div id="canvasDiv" style="display: none;">
+            <canvas id="canvas" style="
+				height: 100vh;
+				position: fixed;
+				z-index: 991;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				right: 0;
+				bottom: 0;
+				"></canvas>
+        </div>     
+    </div>
+
+    <script src="script.js"></script>
+
+    <script type="module">
+        const path = "portal-v0.15.z64";
+        
+        try {
+            const response = await fetch(path, {
+                headers: {
+                    'Content-Type': 'text/plain; charset=x-user-defined'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Error loading ${path}: ${response.statusText}`);
+            }
+
+            const contentLength = response.headers.get('content-length');
+            let loadedLength = 0;
+            const reader = response.body.getReader();
+            const chunks = [];
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                chunks.push(value);
+                loadedLength += value.length;
+                const progress = (loadedLength / contentLength) * 100;
+                document.getElementById('loadingProgress').textContent = `Downloading data: ${progress.toFixed(2)}%`;
+            }
+
+            const arrayBuffer = new Uint8Array(loadedLength);
+            let offset = 0;
+            for (const chunk of chunks) {
+                arrayBuffer.set(chunk, offset);
+                offset += chunk.length;
+            }
+
+            if (arrayBuffer) {
+                window.gameRom = arrayBuffer;
+                $("#loadingProgress").hide();
+                $("#startGameButton").show();
+            }
+        } catch (error) {
+            console.error(error);
+            toastr.error('Error Loading ROM');
+        }
+
+        window.startGame = () => {
+            $("#startGameButton").hide();
+            myClass.LoadEmulator(gameRom);
+        }
+
+		document.getElementById("canvas").addEventListener('contextmenu', function(event) {
+			event.preventDefault();
+		});
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+.icon-settings {
+	background: url("/icons/settings.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-note {
+	background: url("/icons/note.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-note_secure {
+	background: url("/icons/note_secure.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-code {
+	background: url("/icons/code.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-calculator {
+	background: url("/icons/calculator.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-dice {
+	background: url("/icons/dice.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-questionblock {
+	background: url("/icons/questionblock.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	image-rendering: pixelated
+}
+
+.icon-hexgl {
+	background: url("/icons/HexGL.png");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-2048 {
+	background: url("/icons/2048.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-tetra {
+	background: url("/icons/tetra.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-mahjong {
+	background: url("/icons/mahjong.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-appscope {
+	background: url("/icons/appscope.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-methoddraw {
+	background: url("/icons/methoddraw.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-learn {
+	background: url("/icons/learn.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-key {
+	background: url("/icons/key.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-terminal {
+	background: url("/icons/terminal.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-themes {
+	background: url("/icons/themes.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-chat_ai {
+	background: url("/icons/message-circle.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-image {
+	background: url("/icons/image.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-text {
+	background: url("/icons/text.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-sliders {
+	background: url("/icons/sliders.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-scratchcat {
+	background: url("/icons/scratch_cat.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-portal {
+	background: url("/icons/portal.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
+
+.icon-fractal {
+	background: url("/icons/fractal.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}

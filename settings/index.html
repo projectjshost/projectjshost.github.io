@@ -1,0 +1,70 @@
+<html>
+
+<head>
+	<script>
+		appname = "Settings";
+	</script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+	<script src="/apiLoader/main.js"></script>
+	<style>html{background:#000}</style>
+</head>
+
+<body>
+	<header>
+		<p1 id="header"></p1>
+	</header>
+	<div class="area">
+		<p2><span class="icon">wallpaper</span>Wallpaper</p2>
+		<p id="wallpaperName">Current Wallpaper: None</p>
+		<button onclick="importWallpaper();"><span class="icon">file_upload</span>Import</button>
+		<button onclick="clearWallpaper();"><span class="icon">clear</span>Clear</button>
+		<button onclick="downloadWallpaper();"><span class="icon">download</span>Download</button>
+		<button id="getSource" onclick="getSource();"><span class="icon">launch</span>Source</button>
+		<div class="area" id="wallpaperList"></div>
+	</div>
+	<div class="area">
+		<p2><span class="icon">tune</span>Tweaks</p2>
+		<div class="toggleSwitchContainer">
+			<label class="switch">
+				<input type="checkbox" id="forceWallpaper" onclick="updateCheckBoxes()">
+				<span class="slider"></span>
+			</label>
+			<label for="forceWallpaper">Display wallpaper on all apps</label>
+		</div>
+
+		<div class="toggleSwitchContainer">
+			<label class="switch">
+				<input type="checkbox" id="blurWallpaper" onclick="updateCheckBoxes()">
+				<span class="slider"></span>
+			</label>
+			<label for="blurWallpaper">Blur wallpaper</label>
+		</div>
+
+		<div class="toggleSwitchContainer">
+			<label class="switch">
+				<input type="checkbox" id="darkenWallpaper" onclick="updateCheckBoxes()">
+				<span class="slider"></span>
+			</label>
+			<label for="blurWallpaper">Darken wallpaper</label>
+		</div>
+
+		<div class="toggleSwitchContainer">
+			<label class="switch">
+				<input type="checkbox" id="uiShadows" onclick="updateCheckBoxes()">
+				<span class="slider"></span>
+			</label>
+			<label for="uiShadows">UI shadows</label>
+		</div>
+	</div>
+
+	<div class="area">
+		<p2><span class="icon">restart_alt</span>Reset</p2>
+		<p>All data from all apps will be deleted permanently!</p>
+		<button onclick="resetAll()"><span class="icon">warning_amber</span>Reset settings and delete all data</button>
+	</div>
+
+</body>
+<script src="./settings.js"></script>
+
+</html>

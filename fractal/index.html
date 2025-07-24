@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="manifest" href="/manifest.json">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<style>
+			body {
+				background: black;
+			}
+
+			canvas {
+				position: fixed;
+				top: 45px;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				touch-action: none;
+			}
+
+			#info {
+				position: fixed;
+				top: 55px;
+				left: 10px;
+				color: white;
+				font-family: monospace;
+			}
+		</style>
+		<script>appname = "Fractal"</script>
+		<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+		<script src="/apiLoader/main.js"></script>
+		<script src="main.js" defer></script>
+	</head>
+
+	<body>
+		<header>
+			<p1 id="header"></p1>
+		</header>
+		<canvas id="glCanvas"></canvas>
+		<div id="info">
+			Position: <span class="position"></span><br>
+			Scale: <span class="scale"></span><br>
+			Canvas: <span class="canvasSize"></span><br>
+			FPS: <span class="fps"></span>
+		</div>
+	</body>
+
+</html>
