@@ -2,8 +2,7 @@ const encryptionKey = atob("JHJBeHRYbFlAUiFsQFJ4aWVWSE9iYUEkN0MxZGtGQEgwWUxSeDBP
 
 const generateImage = async (token, prompt, seed) => {
 	try {
-		const response = await fetch("https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-schnell", {
-			"credentials": "include",
+		const response = await fetch("https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell", {
 			"headers": {
 				"Accept": "image/jpeg",
 				"Authorization": `Bearer ${token}`,

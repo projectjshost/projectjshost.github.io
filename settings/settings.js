@@ -19,13 +19,7 @@ const updateCheckBoxes = () => {
 		localStorage.darkenWallpaper = "false";
 	}
 
-	if (document.getElementById("uiShadows").checked == true) {
-		localStorage.uiShadows = "true";
-	} else {
-		localStorage.uiShadows = "false";
-	}
 	recreateWallpaper()
-	getUiShadows()
 }
 
 const recreateWallpaper = () => {
@@ -148,7 +142,8 @@ const resetAll = () => {
 document.getElementById("forceWallpaper").checked = localStorage.forceWallpaper=="true";
 document.getElementById("blurWallpaper").checked = localStorage.blurWallpaper=="true";
 document.getElementById("darkenWallpaper").checked = localStorage.darkenWallpaper=="true";
-document.getElementById("uiShadows").checked = localStorage.uiShadows=="true";
 updateWallpaper()
 
 getWallpaperList();
+
+document.getElementById("versionString").innerText = `Version ${projectJS.version}.${projectJS.build}`;

@@ -3,9 +3,9 @@
 
 //      Project JS App Stuff
 const projectJS = {
-	version: "2.4",
+	version: "2.5",
 	type: "Release",
-	build: 250103,
+	build: 251031,
 	launcher: "appcenter",
 };
 
@@ -30,16 +30,16 @@ let wallpaperCreated = false;
 
 // Sets Wallpaper of App
 const createWallpaper = (source) => {
-	if (!wallpaperCreated&&typeof source!=="undefined") {
+	if (!wallpaperCreated && typeof source !== "undefined") {
 		wallpaperCreated = true;
 		$('html').append(`<div id="wallpaperElement"></div>`)
-		if(localStorage.blurWallpaper=="true") {
+		if (localStorage.blurWallpaper == "true") {
 			$('#wallpaperElement').addClass('blur');
 		}
-		if(localStorage.darkenWallpaper=="true") {
+		if (localStorage.darkenWallpaper == "true") {
 			$('#wallpaperElement').addClass('dark');
 		}
-		
+
 		$('head').append(`<style id="wallpaper">#wallpaperElement{background-image:url("` + source + `")!important}body{background:transparent!important}</style>`)
 	}
 }
@@ -63,16 +63,15 @@ const resizeApp = (x, y) => {
 // Firstrun (sets localstorage)
 const firstRun = () => {
 	localStorage.lastUsedVersion = projectJS.version;
-	localStorage.theme = "mirai";
+	localStorage.theme = "epilogue";
 	localStorage.forceWallpaper = "false";
 	localStorage.blurWallpaper = "false";
 	localStorage.darkenWallpaper = "false";
-	localStorage.uiShadows = "false";
 	location.reload()
 }
 
 // Initialize App
-$(document).ready(() =>{
+$(document).ready(() => {
 	if (!localStorage.lastUsedVersion) {
 		firstRun();
 	}
@@ -83,30 +82,24 @@ $(document).ready(() =>{
 
 	$("header").append(`<div class='headerButtons'></div>`);
 
+	if (appname !== "Settings") {
+		$(".headerButtons").append(`<button class='headerButton icon' title='Settings' onclick='openApp("settings")'>settings</button>`);
+	}
+
 	if (location.pathname == `/${projectJS.launcher}/`) {
-		if(localStorage.wallpaper) {
+		if (localStorage.wallpaper) {
 			createWallpaper(localStorage.wallpaper);
 		}
 	} else {
-		$(".headerButtons").append(`<button class='headerButton icon' id='launcherButton' title='Return to home' onclick='openApp(projectJS.launcher)'>home</button>`);
-		if(appname!=="Settings") {
-			$(".headerButtons").append(`<button class='headerButton icon' title='Settings' onclick='openApp("settings")'>settings</button>`);
-		}
+		$(".headerButtons").append(`<button class='headerButton icon' id='launcherButton' title='Home' onclick='openApp(projectJS.launcher)'>home</button>`);
 	}
+
 	if (localStorage.forceWallpaper == "true" && localStorage.wallpaper) {
 		createWallpaper(localStorage.wallpaper)
 	}
-	$('head').append(`<link rel="stylesheet" id="JSinterface" href="/jsappapi/${projectJS.version}/interfaces/luna.css">`);
+	$('head').append(`<link rel="stylesheet" id="JSinterface" href="/jsappapi/latest/interfaces/kan.css">`);
 	setAppName(appname)
-	getUiShadows();
 });
-
-const getUiShadows = () => {
-	$("#uiShadow").remove();
-	if(localStorage.uiShadows=="true") {
-		$('head').append(`<style id="uiShadow">:root {--shadow: 0 0px 5px 0px var(--background)}</style>`)
-	}
-}
 
 let dialogID = 0;
 
@@ -141,8 +134,8 @@ const dialog = (message, type, customTitle) => {
 // Close a dialog box with a specific id
 const closeDialog = (id) => {
 	$("#scrollDisable" + id).remove();
-    $("#overlay" + id).remove();
-    $("#dialog" + id).remove();
+	$("#overlay" + id).remove();
+	$("#dialog" + id).remove();
 	dialogID--
 }
 
@@ -152,13 +145,13 @@ const openApp = (appName) => {
 }
 
 const themeEngine = {
-	default: "mirai",
+	default: "epilogue",
 	loadTheme: (name) => {
-		if(typeof name=="undefined") {
-			if(localStorage.theme) {
-				name=localStorage.theme
+		if (typeof name == "undefined") {
+			if (localStorage.theme) {
+				name = localStorage.theme
 			} else {
-				name=themeEngine.default
+				name = themeEngine.default
 			}
 		}
 		// Unload CSS theme
@@ -166,7 +159,7 @@ const themeEngine = {
 		// Unload custom theme
 		document.querySelector(':root').removeAttribute('style');
 		// If the theme is custom use the loadFromJSON function else load it normally
-		if(name.substring(0, 12) == "customTheme_") {
+		if (name.substring(0, 12) == "customTheme_") {
 			themeEngine.loadFromJSON(JSON.parse(localStorage.getItem(name)));
 		} else {
 			$('head').append(`<link rel="stylesheet" id="JStheme" href="/themes/${name}.css">`);
@@ -174,33 +167,33 @@ const themeEngine = {
 	},
 	loadFromJSON: (json) => {
 		const documentRoot = document.querySelector(':root');
-        documentRoot.style.setProperty(`--background`, json["background"]);
-        documentRoot.style.setProperty(`--background2`, json["background2"]);
-        documentRoot.style.setProperty(`--foreground`, json["foreground"]);
-        documentRoot.style.setProperty(`--foreground2`, json["foreground2"]);
-        documentRoot.style.setProperty(`--border`, json["border"]);
-        documentRoot.style.setProperty(`--element`, json["element"]);
-        documentRoot.style.setProperty(`--active`, json["active"]);
-        documentRoot.style.setProperty(`--accent`, json["accent"]);
+		documentRoot.style.setProperty(`--background`, json["background"]);
+		documentRoot.style.setProperty(`--background2`, json["background2"]);
+		documentRoot.style.setProperty(`--foreground`, json["foreground"]);
+		documentRoot.style.setProperty(`--foreground2`, json["foreground2"]);
+		documentRoot.style.setProperty(`--border`, json["border"]);
+		documentRoot.style.setProperty(`--element`, json["element"]);
+		documentRoot.style.setProperty(`--active`, json["active"]);
+		documentRoot.style.setProperty(`--accent`, json["accent"]);
 	},
 	setTheme: (name) => {
-		if(name!==localStorage.theme) {
-			if(typeof name=="undefined") {
-				name=themeEngine.default
-			} 
-			localStorage.theme=name;
+		if (name !== localStorage.theme) {
+			if (typeof name == "undefined") {
+				name = themeEngine.default
+			}
+			localStorage.theme = name;
 			themeEngine.loadTheme(name)
 		}
-	}		
+	}
 }
-if(!localStorage.theme) {
-	localStorage.theme=themeEngine.default
+if (!localStorage.theme) {
+	localStorage.theme = themeEngine.default
 }
 themeEngine.loadTheme();
 
 // Changes the name of the app
 const setAppName = (name) => {
-	appname=name
+	appname = name
 	$("#header").text(name);
 	document.title = `${name} - Project JS Apps`
 }

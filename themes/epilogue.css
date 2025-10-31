@@ -1,0 +1,10 @@
+:root {
+	--background: hsl(240, 5%, 5%);
+	--background2: hsl(240, 5%, 10%);
+	--foreground: hsl(210, 5%, 91%);
+	--foreground2: hsl(210, 5%, 61%);
+	--border: hsl(240, 5%, 25%);
+	--element: hsl(240, 5%, 17%);
+	--active: hsl(240, 5%, 24%);
+	--accent: hsl(210, 100%, 83%);
+}
