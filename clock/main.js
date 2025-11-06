@@ -227,8 +227,10 @@ const getLocalTimezoneOffsetDifference = (timezone2) => {
 }
 
 const updateClocks = () => {
+	const time = moment().format(timeFormat);
+	document.title = time;
 	if(currentTab!=="clock") return;
-	$("#bigClock").text(moment().format(timeFormat));
+	$("#bigClock").text(time);
 
 	const clocks = document.querySelectorAll("#clocksContainer>.clock");
 
