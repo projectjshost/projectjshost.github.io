@@ -1,0 +1,27 @@
+<html>
+
+	<head>
+		<link rel="manifest" href="/manifest.json">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<script>
+			appname = "Chat"
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+		<script src="/jsappapi/latest/main.js"></script>
+		<script src="main.js" type="module" defer></script>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+
+	<body>
+		<header>
+			<p1 id="header"></p1>
+		</header>
+		<div id="messageList"></div>
+		<div class="inputContainer">
+			<textarea id="input" rows="1" placeholder="Ask anything"></textarea>
+			<button class="main" id="sendButton" disabled><span class="icon">arrow_upward</span></button>
+		</div>
+
+	</body>
+
+</html>

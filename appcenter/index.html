@@ -3,16 +3,12 @@
 	<head>
 		<link rel="manifest" href="/manifest.json">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-		<style>
-			html {
-				background: #000
-			}
-		</style>
 		<script>
 			appname = "App Center"
 		</script>
 		<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 		<script src="/jsappapi/latest/main.js"></script>
+		<script src="clock.js" defer></script>
 	</head>
 
 	<body>
@@ -42,6 +38,10 @@
 					<div class="appIcon icon-key"></div>
 					<p>Encrypt Text</p>
 				</div>
+				<div class="appTile" onclick="openApp('terminal')">
+					<div class="appIcon icon-terminal"></div>
+					<p>Terminal</p>
+				</div>
 			</div>
 
 			<p2>Create</p2>
@@ -50,6 +50,10 @@
 					<div class="appIcon icon-note"></div>
 					<p>Notes</p>
 				</div>
+				<div class="appTile" onclick="openApp('chat')">
+					<div class="appIcon icon-chat_ai"></div>
+					<p>Chat</p>
+				</div>
 				<div class="appTile" onclick="openApp('imagegenerator')">
 					<div class="appIcon icon-image"></div>
 					<p>Generate Pics</p>
@@ -57,10 +61,6 @@
 				<div class="appTile" onclick="openApp('codepad')">
 					<div class="appIcon icon-code"></div>
 					<p>Code</p>
-				</div>
-				<div class="appTile" onclick="openApp('terminal')">
-					<div class="appIcon icon-terminal"></div>
-					<p>Terminal</p>
 				</div>
 			</div>
 
@@ -116,62 +116,6 @@
 				</a>
 			</div>
 		</div>
-		<!-- Animated clock -->
-		<script>
-			const canvas = document.getElementById('clockCanvas');
-			const ctx = canvas.getContext('2d');
-
-			// Set up high DPI canvas
-			const dpr = window.devicePixelRatio || 1;
-			const rect = canvas.getBoundingClientRect();
-			canvas.width = rect.width * dpr;
-			canvas.height = rect.height * dpr;
-			ctx.scale(dpr, dpr);
-
-			const centerX = rect.width / 2;
-			const centerY = rect.height / 2;
-			const radius = Math.min(centerX, centerY) - 2;
-
-			function drawClock() {
-				// Clear canvas
-				ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-				// Draw clock face
-				ctx.beginPath();
-				ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-				ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--element').trim();
-				ctx.fill();
-
-				const now = new Date();
-				const hours = now.getHours() % 12;
-				const minutes = now.getMinutes();
-				const seconds = now.getSeconds();
-
-				// Draw hour hand
-				drawHand(hours * 30 + minutes * 0.5, radius * 0.5, 2, '--foreground');
-
-				// Draw minute hand
-				drawHand(minutes * 6, radius * 0.7, 1.5, '--foreground');
-
-				// Draw second hand
-				drawHand(seconds * 6, radius * 0.9, 1, '--foreground2');
-			}
-
-			function drawHand(angle, length, width, colorVar) {
-				ctx.beginPath();
-				ctx.moveTo(centerX, centerY);
-				const radians = (angle - 90) * Math.PI / 180;
-				ctx.lineTo(centerX + length * Math.cos(radians), centerY + length * Math.sin(radians));
-				ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue(colorVar).trim();
-				ctx.lineWidth = width;
-				ctx.lineCap = 'round';
-				ctx.stroke();
-			}
-
-			// Update clock every second
-			setInterval(drawClock, 1000);
-			setTimeout(drawClock, 100);
-		</script>
 	</body>
 
 </html>

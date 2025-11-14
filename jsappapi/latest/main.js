@@ -1,11 +1,11 @@
 // Project JS App API
-// Ver 2.4
+// Ver 2.5
 
 //      Project JS App Stuff
 const projectJS = {
 	version: "2.5",
 	type: "Release",
-	build: 251031,
+	build: 251115,
 	launcher: "appcenter",
 };
 
@@ -216,4 +216,20 @@ const getRandom = (min, max) => {
 
 const sanitizeText = (str) => {
 	return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// LLM
+
+const chat = async (messages) => {
+	const response = await fetch("https://llm-api.technobyte.workers.dev", {
+		"method": "POST",
+		"headers": {
+			"content-type": "application/json"
+		},
+		"body": JSON.stringify({
+			messages
+		})
+	});
+
+	return await response.text();
 }
