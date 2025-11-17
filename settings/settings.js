@@ -1,10 +1,8 @@
 const updateCheckBoxes = () => {
 	if (document.getElementById("forceWallpaper").checked == true) {
 		localStorage.forceWallpaper = "true";
-		createWallpaper(localStorage.wallpaper)
 	} else {
 		localStorage.forceWallpaper = "false";
-		deleteWallpaper()
 	}
 
 	if (document.getElementById("blurWallpaper").checked == true) {
@@ -24,8 +22,11 @@ const updateCheckBoxes = () => {
 
 const recreateWallpaper = () => {
 	if(wallpaperCreated) {
-		deleteWallpaper()
-		createWallpaper(localStorage.wallpaper)
+		deleteWallpaper();
+	}
+
+	if (localStorage.forceWallpaper === "true" && localStorage.wallpaper) {
+		createWallpaper(localStorage.wallpaper);
 	}
 }
 
@@ -87,7 +88,7 @@ const downloadWallpaper = () => {
 	if(localStorage.wallpaper) {
 		let title = "";
 		if(localStorage.wallpaperSource) {
-			title = localStorage.wallpaperName + ".jpg";
+			title = localStorage.wallpaperName + ".avif";
 		} else {
 			title = localStorage.wallpaperName;
 		}
@@ -116,8 +117,8 @@ const getWallpaperList = async () => {
 const renderWallpaperList = (source) => {
 	for(let i = 0; i<source.length; i++) {
 		let img = source[i];
-		let url = `/lib/wallpapers/${img.name}.jpg`;
-		let thumb = `/lib/wallpapers/thumbnails/${img.name}.jpg`;
+		let url = `/lib/wallpapers/${img.name}.avif`;
+		let thumb = `/lib/wallpapers/thumbnails/${img.name}.avif`;
 		let codeName = img.name.replaceAll(" ", "_");
 		$("#wallpaperList").append(`<div class="wallpaperItem" id="wallpaperItem${codeName}"></div>`);
 		$(`#wallpaperItem${codeName}`).append(`<img src="${thumb}" alt="${img.name}">`);

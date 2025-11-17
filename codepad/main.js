@@ -5,10 +5,9 @@ var CodeMirrorContent;
 
 CodeMirrorTheme = "dynamic"
 
-function runCode() {
-	let codetoRun = myCodeMirror.getValue().replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '').trim();
-	codetoRun = codetoRun.replace(/\"/gi, '"');
-	eval(codetoRun);
+async function runCode() {
+	const codetoRun = myCodeMirror.getValue().trim();
+	$("#output").text(await runInSandboxString(codetoRun))
 }
 
 function saveCode() {
@@ -51,10 +50,16 @@ function CodeMirrorInit(mode) {
 	}
 	CodeMirrorMode = mode;
 	if (mode == "javascript") {
-		$("body").append("<button class='main' onclick='runCode()'><span class='icon'>play_arrow</span>Run</button>");
+		$("body").append(`
+			<button class='main' onclick='runCode()'><span class='icon'>play_arrow</span>Run</button>
+		`);
 	}
-	$("body").append("<button onclick='saveCode()'><span class='icon'>check</span>Save Code</button><button onclick='deleteCode()'><span class='icon'>clear</span>Delete Code</button><button onclick='downloadCode()'><span class='icon'>download</span>Download Code</button>");
-	$("head").append('<link rel="stylesheet" href="/lib/codemirror/theme/' + CodeMirrorTheme + '.css">')
+	$("body").append(`
+		<button onclick='saveCode()'><span class='icon'>check</span>Save Code</button>
+		<button onclick='deleteCode()'><span class='icon'>clear</span>Delete Code</button>
+		<button onclick='downloadCode()'><span class='icon'>download</span>Download Code</button>
+	`);
+	$("head").append(`<link rel="stylesheet" href="/lib/codemirror/theme/${CodeMirrorTheme}.css">`)
 	myCodeMirror = CodeMirror(document.body, {
 		value: CodeMirrorContent,
 		mode: mode,
@@ -75,5 +80,11 @@ function CodeMirrorInit(mode) {
 		case "xml":
 			setAppName("XML - Code")
 			break;
+	}
+	if (mode == "javascript") {
+		$("body").append(`
+			<p>Output: </p>
+			<p id="output" class="user-select"></p>
+		`);
 	}
 }

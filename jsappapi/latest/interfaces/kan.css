@@ -109,7 +109,7 @@ p2 {
 	margin: 7px;
 	margin-left: 7px;
 	margin-bottom: 2px;
-	font-weight: 500;
+	font-weight: 300;
 	font-size: 20px;
 	width: max-content;
 }
@@ -278,19 +278,23 @@ button.deleteButton.main {
 	display: flex;
 	justify-content: space-evenly;
 	z-index: 999;
-	border-radius: 20px;
+	border-radius: 50px;
+	overflow: hidden;
 }
 
 .headerButton {
-	width: 32px;
-	height: 32px;
-	padding: 4px;
+	width: 40px;
+	height: 40px;
+	padding: 0;
 	background: none !important;
 	border-radius: 50%;
-	font-size: 18px !important;
+	font-size: 24px !important;
 	margin: 0;
-	color: var(--foreground2);
 	box-shadow: none !important;
+}
+
+.headerButton:hover {
+	background: var(--background2)!important;
 }
 
 .headerButton:active {
@@ -426,16 +430,21 @@ a {
 	background: var(--background);
 	transition: .2s;
 	border-radius: 50px;
-	border: 2px solid var(--border);
+	border: 1px solid var(--border);
 }
 
 .slider:before {
+	font-family: 'Material Icons';
+	color: var(--background);
+	scale: 1.4;
+	font-size: 13px;
+	line-height: 14px;
 	position: absolute;
 	content: "";
 	height: 13px;
 	width: 13px;
-	left: 4px;
-	bottom: 4px;
+	left: 5px;
+	bottom: 5.25px;
 	background: var(--border);
 	transition: .2s;
 	border-radius: 50px;
@@ -447,8 +456,9 @@ input:checked+.slider {
 }
 
 input:checked+.slider:before {
-	transform: translateX(11px);
-	scale: 1.4;
+	content: "check";
+	color: var(--accent);
+	transform: translateX(10.5px);
 	background: var(--background);
 }
 
@@ -497,6 +507,8 @@ input[type="range"]::-webkit-slider-thumb {
 	user-select: all !important;
 	font-family: monospace !important;
 	font-size: 16px;
+	white-space: pre;
+	overflow: auto;
 }
 
 table {
@@ -591,8 +603,9 @@ th {
 }
 
 .wallpaperItem {
-	border-radius: 5px;
-	border: 2px solid var(--border);
+	border-radius: 10px;
+	overflow: hidden;
+	min-width: max-content;
 	cursor: pointer;
 	transition: 0.1s;
 	margin-right: 5px;
@@ -607,24 +620,23 @@ th {
 }
 
 .wallpaperItem>img {
-	border-radius: 3px;
 	width: 150px;
 	height: 85px;
 }
 
 .wallpaperItem>.wallpaperOverlay {
 	position: relative;
-	height: 85px;
+	height: 80px;
 	top: -85;
 	margin-bottom: -85px;
 	background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, var(--background) 100%);
 	padding: 0 5px;
+	padding-top: 5px;
 	z-index: 100;
 	opacity: 0;
 	transition: 0.2s;
 	font-size: 14px;
-	line-height: 25px;
-	border-radius: 3px;
+	max-width: 140px;
 }
 
 .wallpaperItem>.wallpaperOverlay>.small {

@@ -6,3 +6,7 @@
     border: 1px solid var(--border);
     height: 80%;
 }
+
+#output {
+	max-height: 300px;
+}
