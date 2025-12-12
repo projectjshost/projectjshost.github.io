@@ -255,6 +255,49 @@
 				vertical-align: middle;
 			}
 
+			/* New Styles for Sliders */
+			.slider-container {
+				background-color: #333;
+				padding: 15px;
+				border-radius: 8px;
+				margin-bottom: 15px;
+				border: 1px solid var(--border);
+			}
+			
+			.slider-row {
+				display: flex;
+				align-items: center;
+				gap: 15px;
+				margin-bottom: 10px;
+			}
+
+			.slider-row:last-child {
+				margin-bottom: 0;
+			}
+
+			.slider-label {
+				flex: 1;
+				font-size: 0.85rem;
+				color: #ccc;
+			}
+
+			.slider-input {
+				flex: 2;
+			}
+
+			input[type=range] {
+				width: 100%;
+				accent-color: var(--accent);
+			}
+
+			.image-stats {
+				font-size: 0.8rem;
+				color: #888;
+				text-align: right;
+				margin-top: 5px;
+				font-family: monospace;
+			}
+
 			@keyframes spin {
 				to {
 					transform: rotate(360deg);
@@ -323,6 +366,26 @@
 					<video id="cameraStream" autoplay playsinline></video>
 				</div>
 
+				<!-- Optimization Sliders (New) -->
+				<div class="slider-container" id="optControls" style="display:none;">
+					<label style="color:#fff; border-bottom:1px solid #555; padding-bottom:5px; margin-bottom:10px;">Image Optimization</label>
+					
+					<div class="slider-row">
+						<div class="slider-label">Max Resolution: <span id="resVal">1024</span>px</div>
+						<div class="slider-input">
+							<input type="range" id="resolutionSlider" min="256" max="2048" step="64" value="1024">
+						</div>
+					</div>
+
+					<div class="slider-row">
+						<div class="slider-label">JPEG Quality: <span id="qualVal">0.8</span></div>
+						<div class="slider-input">
+							<input type="range" id="qualitySlider" min="0.1" max="1.0" step="0.05" value="0.8">
+						</div>
+					</div>
+					<div id="fileSizeStat" class="image-stats">Estimated Size: 0 KB</div>
+				</div>
+
 				<!-- Camera Actions (Only visible when camera is active) -->
 				<div id="cameraControls" style="text-align:center;">
 					<button type="button" class="camera-btn" onclick="captureImage()">Capture Photo</button>
@@ -356,7 +419,8 @@
 			const DEFAULT_USER_PROMPT = "Is the object in this image made out of plastic? Answer `true` if so, otherwise `false`.";
 
 			// --- State ---
-			let currentBase64Image = null;
+			let rawImageSource = null; // Stores the original Image object
+			let currentBase64Image = null; // Stores the compressed/resized Data URL
 			let streamObj = null;
 
 			// --- Initialization ---
@@ -369,6 +433,17 @@
 				// Auto-save listeners
 				['apiUrl', 'apiKey', 'modelName', 'sysPrompt', 'userPrompt'].forEach(id => {
 					document.getElementById(id).addEventListener('input', saveSettings);
+				});
+
+				// Slider listeners
+				document.getElementById('resolutionSlider').addEventListener('input', (e) => {
+					document.getElementById('resVal').innerText = e.target.value;
+					processImage();
+				});
+
+				document.getElementById('qualitySlider').addEventListener('input', (e) => {
+					document.getElementById('qualVal').innerText = e.target.value;
+					processImage();
 				});
 			});
 
@@ -411,28 +486,77 @@
 
 				const reader = new FileReader();
 				reader.onload = function (e) {
-					const result = e.target.result;
-					currentBase64Image = result;
-					showImagePreview(result);
+					// Create an Image object to act as the raw source
+					const img = new Image();
+					img.onload = () => {
+						rawImageSource = img;
+						// Initial processing with default/current slider values
+						processImage();
+						
+						// Show UI elements
+						document.getElementById('cameraStream').style.display = 'none';
+						document.getElementById('cameraControls').style.display = 'none';
+						document.querySelector('.upload-placeholder').style.display = 'none';
+						document.getElementById('optControls').style.display = 'block';
+						document.getElementById('analyzeBtn').disabled = false;
+						document.getElementById('output-area').style.display = 'none';
+					};
+					img.src = e.target.result;
 				};
 				reader.readAsDataURL(file);
 			}
 
-			function showImagePreview(src) {
-				const img = document.getElementById('imagePreview');
-				const vid = document.getElementById('cameraStream');
-				const controls = document.getElementById('cameraControls');
-				const placeholder = document.querySelector('.upload-placeholder');
+			// --- Core Image Processing (Resize & Compress) ---
+			function processImage() {
+				if (!rawImageSource) return;
 
-				img.src = src;
-				img.style.display = 'block';
-				vid.style.display = 'none';
-				controls.style.display = 'none';
-				placeholder.style.display = 'none';
+				const canvas = document.createElement('canvas');
+				const ctx = canvas.getContext('2d');
 
-				document.getElementById('analyzeBtn').disabled = false;
-				document.getElementById('output-area').style.display = 'none';
+				// Get slider values
+				const maxDim = parseInt(document.getElementById('resolutionSlider').value);
+				const quality = parseFloat(document.getElementById('qualitySlider').value);
+
+				// Calculate new dimensions
+				let width = rawImageSource.width;
+				let height = rawImageSource.height;
+
+				if (width > height) {
+					if (width > maxDim) {
+						height *= maxDim / width;
+						width = maxDim;
+					}
+				} else {
+					if (height > maxDim) {
+						width *= maxDim / height;
+						height = maxDim;
+					}
+				}
+
+				canvas.width = width;
+				canvas.height = height;
+
+				// Draw and resize
+				ctx.drawImage(rawImageSource, 0, 0, width, height);
+
+				// Compress to DataURL
+				const processedDataUrl = canvas.toDataURL('image/jpeg', quality);
+				
+				// Update State
+				currentBase64Image = processedDataUrl;
+
+				// Update Preview
+				const imgPreview = document.getElementById('imagePreview');
+				imgPreview.src = processedDataUrl;
+				imgPreview.style.display = 'block';
+
+				// Update Size Estimate
+				const sizeInBytes = Math.ceil((processedDataUrl.length - 22) * 0.75); // approx base64 size
+				const sizeInKb = (sizeInBytes / 1024).toFixed(1);
+				document.getElementById('fileSizeStat').innerText = 
+					`Res: ${Math.round(width)}x${Math.round(height)} | Estimated Size: ${sizeInKb} KB`;
 			}
+
 
 			// --- Webcam Handling ---
 			async function startCamera() {
@@ -441,9 +565,11 @@
 				const controls = document.getElementById('cameraControls');
 				const placeholder = document.querySelector('.upload-placeholder');
 				const analyzeBtn = document.getElementById('analyzeBtn');
+				const optControls = document.getElementById('optControls');
 
 				// Hide static image stuff
 				img.style.display = 'none';
+				optControls.style.display = 'none';
 				placeholder.style.display = 'none';
 				analyzeBtn.disabled = true;
 
@@ -478,13 +604,24 @@
 				const ctx = canvas.getContext('2d');
 				ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
 
-				// Convert to Data URL
-				const dataUrl = canvas.toDataURL('image/jpeg');
-				currentBase64Image = dataUrl;
-
-				// Stop camera and show the captured image
-				stopCameraStream();
-				showImagePreview(dataUrl);
+				// Capture full resolution first to memory
+				const rawDataUrl = canvas.toDataURL('image/jpeg', 1.0);
+				
+				const img = new Image();
+				img.onload = () => {
+					rawImageSource = img;
+					stopCameraStream(); // Turn off camera
+					
+					// Update UI
+					document.getElementById('cameraStream').style.display = 'none';
+					document.getElementById('cameraControls').style.display = 'none';
+					document.getElementById('optControls').style.display = 'block';
+					document.getElementById('analyzeBtn').disabled = false;
+					
+					// Run initial process
+					processImage();
+				};
+				img.src = rawDataUrl;
 			}
 
 			function stopCamera() {
@@ -495,9 +632,11 @@
 
 				if (currentBase64Image) {
 					document.getElementById('imagePreview').style.display = 'block';
+					document.getElementById('optControls').style.display = 'block';
 					document.getElementById('analyzeBtn').disabled = false;
 				} else {
 					document.querySelector('.upload-placeholder').style.display = 'block';
+					document.getElementById('optControls').style.display = 'none';
 				}
 			}
 
