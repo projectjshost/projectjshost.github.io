@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Plastic Detector</title>
+		<style>
+			:root {
+				--bg-color: #1a1a1a;
+				--card-bg: #2d2d2d;
+				--text-color: #e0e0e0;
+				--accent: #4caf50;
+				--accent-hover: #45a049;
+				--border: #444;
+				--code-bg: #111;
+			}
+
+			body {
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				background-color: var(--bg-color);
+				color: var(--text-color);
+				margin: 0;
+				padding: 20px;
+				display: flex;
+				justify-content: center;
+			}
+
+			.container {
+				width: 100%;
+				max-width: 800px;
+				background-color: var(--card-bg);
+				padding: 30px;
+				border-radius: 12px;
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+			}
+
+			h1,
+			h2 {
+				margin-top: 0;
+				color: #fff;
+			}
+
+			.section {
+				margin-bottom: 25px;
+				padding-bottom: 20px;
+				border-bottom: 1px solid var(--border);
+			}
+
+			label {
+				display: block;
+				margin-bottom: 5px;
+				font-weight: bold;
+				font-size: 0.9rem;
+				color: #aaa;
+			}
+
+			input[type="text"],
+			input[type="password"],
+			textarea,
+			select {
+				width: 100%;
+				padding: 10px;
+				background-color: #3d3d3d;
+				border: 1px solid var(--border);
+				border-radius: 6px;
+				color: #fff;
+				box-sizing: border-box;
+				margin-bottom: 10px;
+				font-family: monospace;
+			}
+
+			textarea {
+				resize: vertical;
+				min-height: 60px;
+			}
+
+			.row {
+				display: flex;
+				gap: 15px;
+			}
+
+			.col {
+				flex: 1;
+			}
+
+			button {
+				background-color: var(--accent);
+				color: white;
+				padding: 12px 20px;
+				border: none;
+				border-radius: 6px;
+				cursor: pointer;
+				font-size: 1rem;
+				transition: background 0.2s;
+			}
+
+			button:hover {
+				background-color: var(--accent-hover);
+			}
+
+			button:disabled {
+				background-color: #555;
+				cursor: not-allowed;
+			}
+
+			button.secondary {
+				background-color: #555;
+				font-size: 0.8rem;
+				padding: 8px 12px;
+			}
+
+			button.secondary:hover {
+				background-color: #666;
+			}
+
+			.image-preview-container {
+				text-align: center;
+				margin: 20px 0;
+				min-height: 150px;
+				border: 2px dashed var(--border);
+				border-radius: 8px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+				background-color: #252525;
+				overflow: hidden;
+			}
+
+			#imagePreview {
+				max-width: 100%;
+				max-height: 400px;
+				display: none;
+			}
+
+			.upload-placeholder {
+				color: #888;
+			}
+
+			input[type="file"] {
+				display: none;
+			}
+
+			.upload-btn {
+				display: inline-block;
+				background-color: #3d3d3d;
+				padding: 10px 15px;
+				border-radius: 6px;
+				cursor: pointer;
+				border: 1px solid var(--border);
+				text-align: center;
+				margin-top: 10px;
+			}
+
+			.upload-btn:hover {
+				background-color: #4d4d4d;
+			}
+
+			#output-area {
+				display: none;
+				margin-top: 20px;
+			}
+
+			.result-box {
+				padding: 15px;
+				border-radius: 8px;
+				text-align: center;
+				font-size: 1.5rem;
+				font-weight: bold;
+				margin-bottom: 20px;
+			}
+
+			.is-plastic {
+				background-color: rgba(76, 175, 80, 0.2);
+				color: #4caf50;
+				border: 1px solid #4caf50;
+			}
+
+			.not-plastic {
+				background-color: rgba(244, 67, 54, 0.2);
+				color: #f44336;
+				border: 1px solid #f44336;
+			}
+
+			.error-result {
+				background-color: rgba(255, 152, 0, 0.2);
+				color: #ff9800;
+				border: 1px solid #ff9800;
+			}
+
+			pre {
+				background-color: var(--code-bg);
+				padding: 15px;
+				border-radius: 6px;
+				overflow-x: auto;
+				font-size: 0.85rem;
+				color: #a5d6a7;
+				border: 1px solid #333;
+			}
+
+			.loading {
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				border: 3px solid rgba(255, 255, 255, .3);
+				border-radius: 50%;
+				border-top-color: #fff;
+				animation: spin 1s ease-in-out infinite;
+				margin-right: 10px;
+				vertical-align: middle;
+			}
+
+			@keyframes spin {
+				to {
+					transform: rotate(360deg);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="container">
+			<h1>Plastic Detector</h1>
+
+			<!-- Settings Section -->
+			<div class="section">
+				<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+					<h2>API Configuration</h2>
+				</div>
+
+				<div class="row">
+					<div class="col">
+						<label for="apiUrl">API URL</label>
+						<input type="text" id="apiUrl" placeholder="https://generativelanguage.googleapis.com/...">
+					</div>
+					<div class="col">
+						<label for="modelName">Model Name</label>
+						<input type="text" id="modelName" placeholder="gemini-2.5-flash-lite">
+					</div>
+				</div>
+				<label for="apiKey">API Key</label>
+				<input type="password" id="apiKey" placeholder="API Key">
+			</div>
+
+			<!-- Prompts Section -->
+			<div class="section">
+				<div style="display:flex; justify-content:space-between; align-items:center;">
+					<h2>Prompts</h2>
+					<button class="secondary" onclick="resetPrompts()">Reset Defaults</button>
+				</div>
+				<label for="sysPrompt">System Prompt</label>
+				<textarea id="sysPrompt"></textarea>
+
+				<label for="userPrompt">User Prompt</label>
+				<textarea id="userPrompt"></textarea>
+			</div>
+
+			<!-- Image Upload Section -->
+			<div class="section" style="border-bottom: none;">
+				<h2>Upload Image</h2>
+
+				<label for="imageInput" class="upload-btn">📂 Select Image</label>
+				<input type="file" id="imageInput" accept="image/*">
+
+				<div class="image-preview-container" id="dropZone">
+					<span class="upload-placeholder">No image selected</span>
+					<img id="imagePreview" alt="Preview">
+				</div>
+
+				<button id="analyzeBtn" onclick="analyzeImage()" disabled>Analyze Image</button>
+			</div>
+
+			<!-- Results Section -->
+			<div id="output-area">
+				<h2>Result</h2>
+				<div id="visualResult" class="result-box"></div>
+
+				<label>Raw JSON Response:</label>
+				<pre id="jsonOutput"></pre>
+			</div>
+		</div>
+
+		<script>
+			// --- Constants & Defaults ---
+			const DEFAULT_API_URL = "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions";
+			const DEFAULT_MODEL = "gemini-2.5-flash-lite";
+
+			const DEFAULT_SYS_PROMPT = "You are an object material classifier. Answer is just `true` if the object in the image is made out of plastic, otherwise `false`. Do not write anything else.";
+			const DEFAULT_USER_PROMPT = "Is the object in this image made out of plastic? Answer `true` if so, otherwise `false`.";
+
+			// --- State ---
+			let currentBase64Image = null;
+
+			// --- Initialization ---
+			document.addEventListener('DOMContentLoaded', () => {
+				loadSettings();
+
+				const fileInput = document.getElementById('imageInput');
+				fileInput.addEventListener('change', handleFileSelect);
+
+				// Auto-save listeners
+				['apiUrl', 'apiKey', 'modelName', 'sysPrompt', 'userPrompt'].forEach(id => {
+					document.getElementById(id).addEventListener('input', saveSettings);
+				});
+			});
+
+			// --- Settings Management ---
+			function loadSettings() {
+				document.getElementById('apiUrl').value = localStorage.getItem('api_url') || DEFAULT_API_URL;
+				document.getElementById('apiKey').value = localStorage.getItem('api_key') || '';
+				document.getElementById('modelName').value = localStorage.getItem('api_model') || DEFAULT_MODEL;
+
+				const savedSys = localStorage.getItem('sys_prompt');
+				const savedUser = localStorage.getItem('user_prompt');
+
+				document.getElementById('sysPrompt').value = savedSys !== null ? savedSys : DEFAULT_SYS_PROMPT;
+				document.getElementById('userPrompt').value = savedUser !== null ? savedUser : DEFAULT_USER_PROMPT;
+			}
+
+			function saveSettings() {
+				localStorage.setItem('api_url', document.getElementById('apiUrl').value);
+				localStorage.setItem('api_key', document.getElementById('apiKey').value);
+				localStorage.setItem('api_model', document.getElementById('modelName').value);
+				localStorage.setItem('sys_prompt', document.getElementById('sysPrompt').value);
+				localStorage.setItem('user_prompt', document.getElementById('userPrompt').value);
+			}
+
+			function resetPrompts() {
+				if (confirm("Reset prompts to default?")) {
+					document.getElementById('sysPrompt').value = DEFAULT_SYS_PROMPT;
+					document.getElementById('userPrompt').value = DEFAULT_USER_PROMPT;
+					saveSettings();
+				}
+			}
+
+			// --- Image Handling ---
+			function handleFileSelect(evt) {
+				const file = evt.target.files[0];
+				if (!file) return;
+
+				const reader = new FileReader();
+				reader.onload = function (e) {
+					const result = e.target.result; // This is a data URL (data:image/jpeg;base64,...)
+					currentBase64Image = result;
+
+					// Update UI
+					const img = document.getElementById('imagePreview');
+					img.src = result;
+					img.style.display = 'block';
+					document.querySelector('.upload-placeholder').style.display = 'none';
+					document.getElementById('analyzeBtn').disabled = false;
+
+					// Hide previous results
+					document.getElementById('output-area').style.display = 'none';
+				};
+				reader.readAsDataURL(file);
+			}
+
+			// --- API Logic ---
+			async function analyzeImage() {
+				const apiKey = document.getElementById('apiKey').value;
+				const apiUrl = document.getElementById('apiUrl').value;
+				const model = document.getElementById('modelName').value;
+				const sysPrompt = document.getElementById('sysPrompt').value;
+				const userPrompt = document.getElementById('userPrompt').value;
+
+				if (!apiKey) {
+					alert("Please enter an API Key.");
+					return;
+				}
+
+				const btn = document.getElementById('analyzeBtn');
+				const originalBtnText = btn.innerHTML;
+				btn.innerHTML = '<span class="loading"></span> Analyzing...';
+				btn.disabled = true;
+
+				document.getElementById('output-area').style.display = 'block';
+				document.getElementById('visualResult').className = 'result-box';
+				document.getElementById('visualResult').innerHTML = 'Processing...';
+				document.getElementById('jsonOutput').innerText = 'Waiting for response...';
+
+				try {
+
+					const payload = {
+						model: model,
+						reasoning_effort: "none",
+						messages: [
+							{
+								role: "system",
+								content: sysPrompt
+							},
+							{
+								role: "user",
+								content: [
+									{ type: "text", text: userPrompt },
+									{ type: "image_url", image_url: { url: currentBase64Image } }
+								]
+							}
+						],
+						max_tokens: 1
+					};
+
+					const response = await fetch(apiUrl, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': `Bearer ${apiKey}`
+						},
+						body: JSON.stringify(payload)
+					});
+
+					const data = await response.json();
+
+					// Show Raw JSON
+					document.getElementById('jsonOutput').innerText = JSON.stringify(data, null, 2);
+
+					// Logic Interpretation
+					if (data.error) {
+						showResult("API ERROR: " + data.error.message, "error");
+					} else if (data.choices && data.choices.length > 0) {
+						const content = data.choices[0].message.content.trim().toLowerCase();
+
+						if (content.includes("true")) {
+							showResult("✅ PLASTIC DETECTED", "true");
+						} else if (content.includes("false")) {
+							showResult("❌ NOT PLASTIC", "false");
+						} else {
+							showResult("⚠️ UNKNOWN: " + content, "error");
+						}
+					} else {
+						showResult("⚠️ Unexpected API Response format", "error");
+					}
+
+				} catch (err) {
+					console.error(err);
+					document.getElementById('jsonOutput').innerText = err.toString();
+					showResult("Network/Script Error", "error");
+				} finally {
+					btn.innerHTML = originalBtnText;
+					btn.disabled = false;
+				}
+			}
+
+			function showResult(text, type) {
+				const box = document.getElementById('visualResult');
+				box.innerText = text;
+				box.className = 'result-box';
+
+				if (type === 'true') box.classList.add('is-plastic');
+				else if (type === 'false') box.classList.add('not-plastic');
+				else box.classList.add('error-result');
+			}
+		</script>
+
+	</body>
+
+</html>
