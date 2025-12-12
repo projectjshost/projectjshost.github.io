@@ -114,13 +114,30 @@
 				background-color: #666;
 			}
 
+			button.camera-btn {
+				background-color: #2196F3;
+			}
+
+			button.camera-btn:hover {
+				background-color: #1e88e5;
+			}
+
+			button.cancel-btn {
+				background-color: #f44336;
+			}
+
+			button.cancel-btn:hover {
+				background-color: #d32f2f;
+			}
+
 			.image-preview-container {
 				text-align: center;
 				margin: 20px 0;
-				min-height: 150px;
+				min-height: 250px;
 				border: 2px dashed var(--border);
 				border-radius: 8px;
 				display: flex;
+				flex-direction: column;
 				align-items: center;
 				justify-content: center;
 				position: relative;
@@ -128,10 +145,12 @@
 				overflow: hidden;
 			}
 
-			#imagePreview {
+			#imagePreview,
+			#cameraStream {
 				max-width: 100%;
 				max-height: 400px;
 				display: none;
+				border-radius: 4px;
 			}
 
 			.upload-placeholder {
@@ -142,7 +161,14 @@
 				display: none;
 			}
 
-			.upload-btn {
+			.input-actions {
+				display: flex;
+				gap: 10px;
+				margin-top: 10px;
+			}
+
+			.upload-btn,
+			.cam-toggle-btn {
 				display: inline-block;
 				background-color: #3d3d3d;
 				padding: 10px 15px;
@@ -150,11 +176,21 @@
 				cursor: pointer;
 				border: 1px solid var(--border);
 				text-align: center;
-				margin-top: 10px;
+				color: var(--text-color);
+				font-size: 0.9rem;
+				user-select: none;
 			}
 
-			.upload-btn:hover {
+			.upload-btn:hover,
+			.cam-toggle-btn:hover {
 				background-color: #4d4d4d;
+			}
+
+			/* Camera controls overlaid or below */
+			#cameraControls {
+				display: none;
+				margin-top: 10px;
+				gap: 10px;
 			}
 
 			#output-area {
@@ -168,7 +204,15 @@
 				text-align: center;
 				font-size: 1.5rem;
 				font-weight: bold;
-				margin-bottom: 20px;
+				margin-bottom: 10px;
+			}
+
+			.timing-info {
+				text-align: center;
+				color: #888;
+				font-size: 0.85rem;
+				margin-bottom: 15px;
+				font-family: monospace;
 			}
 
 			.is-plastic {
@@ -257,30 +301,51 @@
 				<textarea id="userPrompt"></textarea>
 			</div>
 
-			<!-- Image Upload Section -->
+			<!-- Image Input Section -->
 			<div class="section" style="border-bottom: none;">
-				<h2>Upload Image</h2>
+				<h2>Image Source</h2>
 
-				<label for="imageInput" class="upload-btn">📂 Select Image</label>
-				<input type="file" id="imageInput" accept="image/*">
-
-				<div class="image-preview-container" id="dropZone">
-					<span class="upload-placeholder">No image selected</span>
-					<img id="imagePreview" alt="Preview">
+				<div class="input-actions">
+					<label for="imageInput" class="upload-btn">📂 Upload File</label>
+					<div class="cam-toggle-btn" onclick="startCamera()">📷 Use Camera</div>
 				</div>
 
-				<button id="analyzeBtn" onclick="analyzeImage()" disabled>Analyze Image</button>
+				<input type="file" id="imageInput" accept="image/*">
+
+				<!-- Preview & Camera Area -->
+				<div class="image-preview-container" id="dropZone">
+					<span class="upload-placeholder">No image selected</span>
+
+					<!-- Static Image Preview -->
+					<img id="imagePreview" alt="Preview">
+
+					<!-- Live Camera Stream -->
+					<video id="cameraStream" autoplay playsinline></video>
+				</div>
+
+				<!-- Camera Actions (Only visible when camera is active) -->
+				<div id="cameraControls" style="text-align:center;">
+					<button type="button" class="camera-btn" onclick="captureImage()">Capture Photo</button>
+					<button type="button" class="cancel-btn" onclick="stopCamera()">Cancel</button>
+				</div>
+
+				<button id="analyzeBtn" style="width:100%; margin-top:15px;" onclick="analyzeImage()" disabled>Analyze
+					Image</button>
 			</div>
 
 			<!-- Results Section -->
 			<div id="output-area">
 				<h2>Result</h2>
 				<div id="visualResult" class="result-box"></div>
+				<div id="timingResult" class="timing-info"></div>
 
 				<label>Raw JSON Response:</label>
 				<pre id="jsonOutput"></pre>
 			</div>
 		</div>
+
+		<!-- Hidden Canvas for capturing video frame -->
+		<canvas id="canvas" style="display:none;"></canvas>
 
 		<script>
 			// --- Constants & Defaults ---
@@ -292,6 +357,7 @@
 
 			// --- State ---
 			let currentBase64Image = null;
+			let streamObj = null;
 
 			// --- Initialization ---
 			document.addEventListener('DOMContentLoaded', () => {
@@ -335,27 +401,111 @@
 				}
 			}
 
-			// --- Image Handling ---
+			// --- File Image Handling ---
 			function handleFileSelect(evt) {
+				// Ensure camera is off if selecting a file
+				stopCameraStream();
+
 				const file = evt.target.files[0];
 				if (!file) return;
 
 				const reader = new FileReader();
 				reader.onload = function (e) {
-					const result = e.target.result; // This is a data URL (data:image/jpeg;base64,...)
+					const result = e.target.result;
 					currentBase64Image = result;
-
-					// Update UI
-					const img = document.getElementById('imagePreview');
-					img.src = result;
-					img.style.display = 'block';
-					document.querySelector('.upload-placeholder').style.display = 'none';
-					document.getElementById('analyzeBtn').disabled = false;
-
-					// Hide previous results
-					document.getElementById('output-area').style.display = 'none';
+					showImagePreview(result);
 				};
 				reader.readAsDataURL(file);
+			}
+
+			function showImagePreview(src) {
+				const img = document.getElementById('imagePreview');
+				const vid = document.getElementById('cameraStream');
+				const controls = document.getElementById('cameraControls');
+				const placeholder = document.querySelector('.upload-placeholder');
+
+				img.src = src;
+				img.style.display = 'block';
+				vid.style.display = 'none';
+				controls.style.display = 'none';
+				placeholder.style.display = 'none';
+
+				document.getElementById('analyzeBtn').disabled = false;
+				document.getElementById('output-area').style.display = 'none';
+			}
+
+			// --- Webcam Handling ---
+			async function startCamera() {
+				const vid = document.getElementById('cameraStream');
+				const img = document.getElementById('imagePreview');
+				const controls = document.getElementById('cameraControls');
+				const placeholder = document.querySelector('.upload-placeholder');
+				const analyzeBtn = document.getElementById('analyzeBtn');
+
+				// Hide static image stuff
+				img.style.display = 'none';
+				placeholder.style.display = 'none';
+				analyzeBtn.disabled = true;
+
+				try {
+					// Use environment (rear) camera if available, otherwise default
+					streamObj = await navigator.mediaDevices.getUserMedia({
+						video: { facingMode: "environment" }
+					});
+
+					vid.srcObject = streamObj;
+					vid.style.display = 'block';
+					controls.style.display = 'flex'; // Show capture/cancel buttons
+
+				} catch (err) {
+					console.error("Camera access error:", err);
+					alert("Could not access camera. Please check permissions or use file upload.");
+					stopCamera(); // Revert UI
+				}
+			}
+
+			function captureImage() {
+				const vid = document.getElementById('cameraStream');
+				const canvas = document.getElementById('canvas');
+
+				if (!streamObj) return;
+
+				// Set canvas size to video size
+				canvas.width = vid.videoWidth;
+				canvas.height = vid.videoHeight;
+
+				// Draw current video frame to canvas
+				const ctx = canvas.getContext('2d');
+				ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
+
+				// Convert to Data URL
+				const dataUrl = canvas.toDataURL('image/jpeg');
+				currentBase64Image = dataUrl;
+
+				// Stop camera and show the captured image
+				stopCameraStream();
+				showImagePreview(dataUrl);
+			}
+
+			function stopCamera() {
+				stopCameraStream();
+				// Reset UI to empty state if no previous image existed, or keep previous logic
+				document.getElementById('cameraStream').style.display = 'none';
+				document.getElementById('cameraControls').style.display = 'none';
+
+				if (currentBase64Image) {
+					document.getElementById('imagePreview').style.display = 'block';
+					document.getElementById('analyzeBtn').disabled = false;
+				} else {
+					document.querySelector('.upload-placeholder').style.display = 'block';
+				}
+			}
+
+			function stopCameraStream() {
+				if (streamObj) {
+					streamObj.getTracks().forEach(track => track.stop());
+					streamObj = null;
+				}
 			}
 
 			// --- API Logic ---
@@ -376,21 +526,22 @@
 				btn.innerHTML = '<span class="loading"></span> Analyzing...';
 				btn.disabled = true;
 
+				// UI Prep
 				document.getElementById('output-area').style.display = 'block';
 				document.getElementById('visualResult').className = 'result-box';
 				document.getElementById('visualResult').innerHTML = 'Processing...';
 				document.getElementById('jsonOutput').innerText = 'Waiting for response...';
+				document.getElementById('timingResult').innerText = '';
+
+				// --- TIMING START ---
+				const startTime = performance.now();
 
 				try {
-
 					const payload = {
 						model: model,
 						reasoning_effort: "none",
 						messages: [
-							{
-								role: "system",
-								content: sysPrompt
-							},
+							{ role: "system", content: sysPrompt },
 							{
 								role: "user",
 								content: [
@@ -412,6 +563,11 @@
 					});
 
 					const data = await response.json();
+
+					// --- TIMING END ---
+					const endTime = performance.now();
+					const duration = (endTime - startTime).toFixed(0);
+					document.getElementById('timingResult').innerText = `Request latency: ${duration} ms`;
 
 					// Show Raw JSON
 					document.getElementById('jsonOutput').innerText = JSON.stringify(data, null, 2);
