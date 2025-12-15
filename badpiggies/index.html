@@ -1,0 +1,42 @@
+<html>
+
+	<head>
+		<link rel="manifest" href="/manifest.json">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://map-l.github.io;">
+		<script>
+			appname = "Bad Piggies"
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+		<script src="/jsappapi/latest/main.js"></script>
+		<script defer>
+			const iframe = document.getElementById('game');
+			// Store the URL you actually want
+			const validUrl = iframe.src;
+			let isFirstLoad = true;
+
+			iframe.onload = function () {
+				if (isFirstLoad) {
+					// The initial load is finished. Now we arm the trap.
+					isFirstLoad = false;
+				} else {
+					// The iframe loaded a second time! This means it navigated away.
+					console.log("Iframe tried to navigate away. Resetting.");
+
+					// Force it back to the original URL
+					iframe.src = validUrl;
+				}
+			};
+		</script>
+	</head>
+
+	<body>
+		<header>
+			<p1 id="header"></p1>
+		</header>
+		<iframe id="game" style="border: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;"
+			src="https://map-l.github.io/play/bad-piggies/" onerror="location.reload()"
+			sandbox="allow-scripts"></iframe>
+	</body>
+
+</html>

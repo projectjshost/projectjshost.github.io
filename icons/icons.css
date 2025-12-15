@@ -154,3 +154,9 @@
 	background-repeat: no-repeat;
 	background-size: cover
 }
+
+.icon-badpiggies {
+	background: url("/icons/badpiggies.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
