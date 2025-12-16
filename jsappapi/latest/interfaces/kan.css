@@ -12,6 +12,7 @@ header {
 	overflow: hidden;
 	display: flex;
 	align-items: center;
+	min-height: 42px;
 }
 
 p1#header {
