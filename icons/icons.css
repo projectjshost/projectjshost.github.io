@@ -160,3 +160,9 @@
 	background-repeat: no-repeat;
 	background-size: cover
 }
+
+.icon-computer {
+	background: url("/icons/computer.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}
