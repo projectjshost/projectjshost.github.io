@@ -5,7 +5,7 @@
 const projectJS = {
 	version: "2.5",
 	type: "Release",
-	build: 251117,
+	build: 260131,
 	launcher: "appcenter",
 };
 
@@ -141,7 +141,7 @@ const closeDialog = (id) => {
 
 // Opens an App
 const openApp = (appName) => {
-	location.pathname = "/" + appName + "/";
+	window.location = `/${appName}/`;
 }
 
 const themeEngine = {

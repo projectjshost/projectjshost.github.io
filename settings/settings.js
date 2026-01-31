@@ -148,3 +148,4 @@ updateWallpaper()
 getWallpaperList();
 
 document.getElementById("versionString").innerText = `Version ${projectJS.version}.${projectJS.build}`;
+document.getElementById("versionStringJQ").innerText = `jQuery Version ${jQuery().jquery}`;
