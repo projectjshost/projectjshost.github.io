@@ -182,10 +182,14 @@ input[type="number"] {
 	border-radius: 5px;
 	color: var(--foreground);
 	padding: 0 7px;
-	margin-left: 5px;
+	margin: 5px;
 	height: 34px;
 	width: 280px;
 	transition: .1s
+}
+
+input[type="number"] {
+	width: 100px;
 }
 
 button,
@@ -295,7 +299,7 @@ button.deleteButton.main {
 }
 
 .headerButton:hover {
-	background: var(--background2)!important;
+	background: var(--background2) !important;
 }
 
 .headerButton:active {
