@@ -13,6 +13,7 @@ header {
 	display: flex;
 	align-items: center;
 	min-height: 42px;
+	pointer-events: none;
 }
 
 p1#header {
@@ -285,6 +286,7 @@ button.deleteButton.main {
 	z-index: 999;
 	border-radius: 50px;
 	overflow: hidden;
+	pointer-events: auto;
 }
 
 .headerButton {
