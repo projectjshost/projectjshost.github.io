@@ -15,6 +15,11 @@
 			<p1 id="header"></p1>
 		</header>
 		<div class="area">
+			<p2><span class="icon">home</span>Apps</p2>
+			<p>Restore all hidden apps on the App Center.</p>
+			<button onclick="localStorage.removeItem('hiddenApps');dialog('Restored all hidden apps.', 'info')"><span class="icon">restart_alt</span>Restore</button>
+		</div>
+		<div class="area">
 			<p2><span class="icon">palette</span>Theme</p2>
 			<p>To change the theme, open the Themes app.</p>
 			<button onclick="openApp('themeManager');"><span class="icon">open_in_new</span>Themes</button>

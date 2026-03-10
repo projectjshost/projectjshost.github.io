@@ -1,10 +1,8 @@
 // Project JS App API
-// Ver 2.5
 
 //      Project JS App Stuff
 const projectJS = {
 	version: "2.5",
-	type: "Release",
 	build: 260310,
 	launcher: "appcenter",
 };
@@ -177,6 +175,35 @@ const themes = {
 	}
 }
 
+const apps = [
+	{ "name": "Settings", "category": "Utilities", "target": "settings", "icon": "settings" },
+	{ "name": "Clock", "category": "Utilities", "target": "clock", "isClock": true },
+	{ "name": "Calculator", "category": "Utilities", "target": "calculator", "icon": "calculator" },
+	{ "name": "Random", "category": "Utilities", "target": "random", "icon": "dice" },
+	{ "name": "Compress Pics", "category": "Utilities", "target": "imageconverter", "icon": "zip" },
+	{ "name": "Encrypt Text", "category": "Utilities", "target": "safeencrypt", "icon": "key" },
+	{ "name": "Terminal", "category": "Utilities", "target": "terminal", "icon": "terminal" },
+	{ "name": "Virtual PC", "category": "Utilities", "target": "virtualpc", "icon": "computer" },
+	{ "name": "Notes", "category": "Create", "target": "quicknote", "icon": "note" },
+	{ "name": "Chat", "category": "Create", "target": "chat", "icon": "chat_ai" },
+	{ "name": "Generate Pics", "category": "Create", "target": "imagegenerator", "icon": "image" },
+	{ "name": "Code", "category": "Create", "target": "codepad", "icon": "code" },
+	{ "name": "Portal", "category": "Fun", "target": "portal", "icon": "portal" },
+	{ "name": "Minecraft", "category": "Fun", "target": "minecraft", "icon": "minecraft" },
+	{ "name": "Getting Over It", "category": "Fun", "target": "gettingoverit", "icon": "scratchcat" },
+	{ "name": "Bad Piggies", "category": "Fun", "target": "badpiggies", "icon": "badpiggies" },
+	{ "name": "Baldi's Basics", "category": "Fun", "target": "baldi", "icon": "baldi" },
+	{ "name": "Geometry", "category": "Fun", "target": "gdash", "icon": "gdash" },
+	{ "name": "Deltarune", "category": "Fun", "target": "deltarune", "icon": "deltarune" },
+	{ "name": "Subway", "category": "Fun", "target": "ssurfers", "icon": "ssurfers" },
+	{ "name": "Granny", "category": "Fun", "target": "granny", "icon": "granny" },
+	{ "name": "Fractal", "category": "Fun", "target": "fractal", "icon": "fractal" },
+	{ "name": "Mario", "category": "Fun", "target": "https://foss2016.github.io/", "icon": "questionblock" },
+	{ "name": "HexGL", "category": "Fun", "target": "https://hexgl.bkcore.com/play/", "icon": "hexgl" },
+	{ "name": "2048", "category": "Fun", "target": "https://2048-opera-pwa.surge.sh/", "icon": "2048" },
+	{ "name": "Tetris", "category": "Fun", "target": "https://tmaiadev-tetra.netlify.app/", "icon": "tetra" },
+	{ "name": "Mahjong", "category": "Fun", "target": "https://mahjong.jull.dev/", "icon": "mahjong" }
+]
 const themeEngine = {
 	default: "epilogue",
 	loadTheme: (name) => {

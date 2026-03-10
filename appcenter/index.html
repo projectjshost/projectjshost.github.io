@@ -8,146 +8,14 @@
 		</script>
 		<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 		<script src="/jsappapi/latest/main.js"></script>
-		<script src="clock.js" defer></script>
+		<script src="main.js" defer></script>
 	</head>
 
 	<body>
 		<header>
 			<p1 id="header"></p1>
 		</header>
-		<div class="appOverview">
-			<p2>Utilities</p2>
-			<div class="area">
-				<div class="appTile" onclick="openApp('settings')">
-					<div class="appIcon icon-settings"></div>
-					<p>Settings</p>
-				</div>
-				<div class="appTile" onclick="openApp('clock')">
-					<canvas class="appIcon" id="clockCanvas" width="70" height="70"></canvas>
-					<p>Clock</p>
-				</div>
-				<div class="appTile" onclick="openApp('calculator')">
-					<div class="appIcon icon-calculator"></div>
-					<p>Calculator</p>
-				</div>
-				<div class="appTile" onclick="openApp('random')">
-					<div class="appIcon icon-dice"></div>
-					<p>Random</p>
-				</div>
-				<div class="appTile" onclick="openApp('imageconverter')">
-					<div class="appIcon icon-zip"></div>
-					<p>Compress Pics</p>
-				</div>
-				<div class="appTile" onclick="openApp('safeencrypt')">
-					<div class="appIcon icon-key"></div>
-					<p>Encrypt Text</p>
-				</div>
-				<div class="appTile" onclick="openApp('terminal')">
-					<div class="appIcon icon-terminal"></div>
-					<p>Terminal</p>
-				</div>
-				<div class="appTile" onclick="openApp('virtualpc')">
-					<div class="appIcon icon-computer"></div>
-					<p>Virtual PC</p>
-				</div>
-			</div>
-
-			<p2>Create</p2>
-			<div class="area">
-				<div class="appTile" onclick="openApp('quicknote')">
-					<div class="appIcon icon-note"></div>
-					<p>Notes</p>
-				</div>
-				<div class="appTile" onclick="openApp('chat')">
-					<div class="appIcon icon-chat_ai"></div>
-					<p>Chat</p>
-				</div>
-				<div class="appTile" onclick="openApp('imagegenerator')">
-					<div class="appIcon icon-image"></div>
-					<p>Generate Pics</p>
-				</div>
-				<div class="appTile" onclick="openApp('codepad')">
-					<div class="appIcon icon-code"></div>
-					<p>Code</p>
-				</div>
-			</div>
-
-			<p2>Fun</p2>
-			<div class="area">
-				<div class="appTile" onclick="openApp('portal')">
-					<div class="appIcon icon-portal"></div>
-					<p>Portal</p>
-				</div>
-				<div class="appTile" onclick="openApp('minecraft')">
-					<div class="appIcon icon-minecraft"></div>
-					<p>Minecraft</p>
-				</div>
-				<div class="appTile" onclick="openApp('gettingoverit')">
-					<div class="appIcon icon-scratchcat"></div>
-					<p>Getting Over It</p>
-				</div>
-				<div class="appTile" onclick="openApp('badpiggies')">
-					<div class="appIcon icon-badpiggies"></div>
-					<p>Bad Piggies</p>
-				</div>
-				<div class="appTile" onclick="openApp('baldi')">
-					<div class="appIcon icon-baldi"></div>
-					<p>Baldi's Basics</p>
-				</div>
-				<div class="appTile" onclick="openApp('gdash')">
-					<div class="appIcon icon-gdash"></div>
-					<p>Geometry</p>
-				</div>
-				<div class="appTile" onclick="openApp('deltarune')">
-					<div class="appIcon icon-deltarune"></div>
-					<p>Deltarune</p>
-				</div>
-				<div class="appTile" onclick="openApp('ssurfers')">
-					<div class="appIcon icon-ssurfers"></div>
-					<p>Subway</p>
-				</div>
-				<div class="appTile" onclick="openApp('granny')">
-					<div class="appIcon icon-granny"></div>
-					<p>Granny</p>
-				</div>
-				<div class="appTile" onclick="openApp('fractal')">
-					<div class="appIcon icon-fractal"></div>
-					<p>Fractal</p>
-				</div>
-				<a href="https://foss2016.github.io/">
-					<div class="appTile">
-						<div class="appIcon icon-questionblock"></div>
-						<p>Mario</p>
-					</div>
-				</a>
-			</div>
-			<div class="area">
-				<a href="https://hexgl.bkcore.com/play/">
-					<div class="appTile">
-						<div class="appIcon icon-hexgl"></div>
-						<p>HexGL</p>
-					</div>
-				</a>
-				<a href="https://2048-opera-pwa.surge.sh/">
-					<div class="appTile">
-						<div class="appIcon icon-2048"></div>
-						<p>2048</p>
-					</div>
-				</a>
-				<a href="https://tmaiadev-tetra.netlify.app/">
-					<div class="appTile">
-						<div class="appIcon icon-tetra"></div>
-						<p>Tetris</p>
-					</div>
-				</a>
-				<a href="https://mahjong.jull.dev/">
-					<div class="appTile">
-						<div class="appIcon icon-mahjong"></div>
-						<p>Mahjong</p>
-					</div>
-				</a>
-			</div>
-		</div>
+		<div id="appOverview" class="appOverview"></div>
 	</body>
 
 </html>
