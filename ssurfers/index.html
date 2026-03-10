@@ -1,0 +1,22 @@
+<html>
+
+	<head>
+		<link rel="manifest" href="/manifest.json">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://map-l.github.io;">
+		<script>
+			appname = "Subway Surfers"
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+		<script src="/jsappapi/latest/main.js"></script>
+	</head>
+
+	<body>
+		<header>
+		</header>
+		<iframe id="game" style="border: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;"
+			src="https://map-l.github.io/play/subwaysurfers/" onerror="location.reload()"
+			></iframe>
+	</body>
+
+</html>

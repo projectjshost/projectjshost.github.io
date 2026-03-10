@@ -82,9 +82,9 @@ $(document).ready(() => {
 
 	$("header").append(`<div class='headerButtons'></div>`);
 
-	if (appname !== "Settings") {
-		$(".headerButtons").append(`<button class='headerButton icon' title='Settings' onclick='openApp("settings")'>settings</button>`);
-	}
+	// if (appname !== "Settings") {
+	// 	$(".headerButtons").append(`<button class='headerButton icon' title='Settings' onclick='openApp("settings")'>settings</button>`);
+	// }
 
 	if (location.pathname == `/${projectJS.launcher}/`) {
 		if (localStorage.wallpaper) {
