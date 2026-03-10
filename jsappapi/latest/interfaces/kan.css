@@ -233,7 +233,7 @@ button.main {
 
 button.deleteButton.main {
 	position: absolute;
-	right: 80px;
+	right: 90px;
 }
 
 :focus {
@@ -535,7 +535,7 @@ th {
 
 .listItem {
 	margin: 5px;
-	padding: 7px;
+	padding: 7px 12px;
 	background: var(--background2);
 	border-radius: 10px;
 	white-space: nowrap;

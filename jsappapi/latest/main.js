@@ -9,6 +9,218 @@ const projectJS = {
 	launcher: "appcenter",
 };
 
+const themes = {
+	"epilogue": {
+		"name": "Epilogue",
+		"background": "hsl(240,5%,5%)",
+		"background2": "hsl(240,5%,10%)",
+		"foreground": "hsl(210,5%,91%)",
+		"foreground2": "hsl(210,5%,61%)",
+		"border": "hsl(240,5%,25%)",
+		"element": "hsl(240,5%,17%)",
+		"active": "hsl(240,5%,24%)",
+		"accent": "hsl(210,100%,83%)"
+	},
+	"mintlight": {
+		"name": "Mint Light",
+		"background": "hsl(120, 5%, 95%)",
+		"background2": "hsl(120, 5%, 90%)",
+		"foreground": "hsl(120, 40%, 20%)",
+		"foreground2": "hsl(120, 15%, 40%)",
+		"border": "hsl(120, 8%, 75%)",
+		"element": "hsl(120, 10%, 82%)",
+		"active": "hsl(120, 10%, 77%)",
+		"accent": "hsl(150, 40%, 40%)"
+	},
+	"mintdark": {
+		"name": "Mint Dark",
+		"background": "hsl(120, 5%, 5%)",
+		"background2": "hsl(120, 5%, 10%)",
+		"foreground": "hsl(120, 40%, 80%)",
+		"foreground2": "hsl(120, 15%, 60%)",
+		"border": "hsl(120, 8%, 25%)",
+		"element": "hsl(120, 10%, 20%)",
+		"active": "hsl(120, 10%, 25%)",
+		"accent": "hsl(150, 75%, 60%)"
+	},
+	"catppuccin": {
+		"name": "Catppuccin",
+		"background": "hsl(254,  25%,  10%)",
+		"background2": "hsl(240,  21%,  15%)",
+		"foreground": "hsl(220,  38%,  89%)",
+		"foreground2": "hsl(285,  10%,  75%)",
+		"border": "hsl(254,  12%,  36%)",
+		"element": "hsl(249,  18%,  22%)",
+		"active": "hsl(254,  16%,  26%)",
+		"accent": "hsl(24,  88%,  78%)"
+	},
+	"gruvbox": {
+		"name": "Gruvbox",
+		"background": "#1d2021",
+		"background2": "#282828",
+		"foreground": "#ebdbb2",
+		"foreground2": "#bdae93",
+		"border": "#504945",
+		"element": "#3c3836",
+		"active": "#32302f",
+		"accent": "#fabd2f"
+	},
+	"nord": {
+		"name": "Nord",
+		"background": "#2e3440",
+		"background2": "#3b4252",
+		"foreground": "#eceff4",
+		"foreground2": "#d8dee9",
+		"border": "#5b677f",
+		"element": "#4c566a",
+		"active": "#434c5e",
+		"accent": "#a3be8c"
+	},
+	"mirai": {
+		"name": "Mirai",
+		"background": "hsl(220, 22%, 10%)",
+		"background2": "hsl(220, 23%, 15%)",
+		"foreground": "hsl(195, 50%, 91%)",
+		"foreground2": "hsl(195, 15%, 61%)",
+		"border": "hsl(195, 15%, 28%)",
+		"element": "hsl(220, 22%, 20%)",
+		"active": "hsl(220, 23%, 24%)",
+		"accent": "hsl(195, 55%, 83%)"
+	},
+	"zinc": {
+		"name": "Zinc",
+		"background": "hsl(0,0%,0%)",
+		"background2": "hsl(240,15%,5%)",
+		"foreground": "hsl(0,0%,100%)",
+		"foreground2": "hsl(210,10%,61%)",
+		"border": "hsl(240,10%,25%)",
+		"element": "hsl(240,10%,17%)",
+		"active": "hsl(240,10%,24%)",
+		"accent": "hsl(0,0%,100%)"
+	},
+	"mocha": {
+		"name": "Mocha",
+		"background": "#FCFBF9",
+		"background2": "#F5EFEA",
+		"foreground": "#31231E",
+		"foreground2": "#78645C",
+		"border": "#E8DCD6",
+		"element": "#F0E5DE",
+		"active": "#E6D8CE",
+		"accent": "#9E7A68"
+	},
+	"teal": {
+		"name": "Teal",
+		"background": "#061417",
+		"background2": "#0B1E23",
+		"foreground": "#E3F2F5",
+		"foreground2": "#84A7AD",
+		"border": "#1B3B42",
+		"element": "#122A30",
+		"active": "#17343C",
+		"accent": "#15B8B8"
+	},
+	"lavender": {
+		"name": "Lavender",
+		"background": "#12111A",
+		"background2": "#1A1926",
+		"foreground": "#EBEBF2",
+		"foreground2": "#9B9BAE",
+		"border": "#312F47",
+		"element": "#222033",
+		"active": "#2A283D",
+		"accent": "#E6E6FA"
+	},
+	"warm": {
+		"name": "Warm",
+		"background": "#F5E8D3",
+		"background2": "#EBE0CB",
+		"foreground": "#2C3E50",
+		"foreground2": "#6B7A8A",
+		"border": "#D9CEBC",
+		"element": "#E3D7C3",
+		"active": "#D9CDB9",
+		"accent": "#D4A5A5"
+	},
+	"acidforest": {
+		"name": "Acid Forest",
+		"background": "#0C1410",
+		"background2": "#111C16",
+		"foreground": "#E6F0E9",
+		"foreground2": "#8A9A5B",
+		"border": "#283C30",
+		"element": "#1A4D2E",
+		"active": "#1E5936",
+		"accent": "#DFFF00"
+	},
+	"cyberrose": {
+		"name": "Cyber Rose",
+		"background": "#16191B",
+		"background2": "#1E2225",
+		"foreground": "#F2F4F7",
+		"foreground2": "#8F98A8",
+		"border": "#3D444A",
+		"element": "#2D3436",
+		"active": "#374042",
+		"accent": "#EF5777"
+	},
+	"carbonmint": {
+		"name": "Carbon Mint",
+		"background": "#0A0A0A",
+		"background2": "#121212",
+		"foreground": "#F8F9FA",
+		"foreground2": "#4B79A1",
+		"border": "#2B2B2B",
+		"element": "#1A1A1A",
+		"active": "#222222",
+		"accent": "#00FFC2"
+	}
+}
+
+const themeEngine = {
+	default: "epilogue",
+	loadTheme: (name) => {
+		if (typeof name === "undefined") {
+			if (localStorage.theme) {
+				name = localStorage.theme
+			} else {
+				name = themeEngine.default
+			}
+		}
+		// Unload custom theme
+		document.querySelector(':root').removeAttribute('style');
+		let themeObject = themes[name];
+		if (name.substring(0, 12) == "customTheme_") {
+			themeObject = JSON.parse(localStorage.getItem(name));
+		}
+		themeEngine.loadFromJSON(themeObject);
+	},
+	loadFromJSON: (json) => {
+		const documentRoot = document.querySelector(':root');
+		documentRoot.style.setProperty(`--background`, json["background"]);
+		documentRoot.style.setProperty(`--background2`, json["background2"]);
+		documentRoot.style.setProperty(`--foreground`, json["foreground"]);
+		documentRoot.style.setProperty(`--foreground2`, json["foreground2"]);
+		documentRoot.style.setProperty(`--border`, json["border"]);
+		documentRoot.style.setProperty(`--element`, json["element"]);
+		documentRoot.style.setProperty(`--active`, json["active"]);
+		documentRoot.style.setProperty(`--accent`, json["accent"]);
+	},
+	setTheme: (name) => {
+		if (name !== localStorage.theme) {
+			if (typeof name == "undefined") {
+				name = themeEngine.default
+			}
+			localStorage.theme = name;
+			themeEngine.loadTheme(name)
+		}
+	}
+}
+if (!localStorage.theme) {
+	localStorage.theme = themeEngine.default
+}
+themeEngine.loadTheme();
+
 // Gets app Parameters
 const getAppParams = () => {
 	let vars = {};
@@ -60,20 +272,15 @@ const resizeApp = (x, y) => {
 	}
 }
 
-// Firstrun (sets localstorage)
-const firstRun = () => {
-	localStorage.lastUsedVersion = projectJS.version;
-	localStorage.theme = "epilogue";
-	localStorage.forceWallpaper = "false";
-	localStorage.blurWallpaper = "false";
-	localStorage.darkenWallpaper = "false";
-	location.reload()
-}
-
 // Initialize App
 $(document).ready(() => {
 	if (!localStorage.lastUsedVersion) {
-		firstRun();
+		localStorage.lastUsedVersion = projectJS.version;
+		localStorage.theme = "epilogue";
+		localStorage.forceWallpaper = "false";
+		localStorage.blurWallpaper = "false";
+		localStorage.darkenWallpaper = "false";
+		location.reload()
 	}
 
 	if (typeof appname == 'undefined') {
@@ -143,53 +350,6 @@ const closeDialog = (id) => {
 const openApp = (appName) => {
 	window.location = `/${appName}/`;
 }
-
-const themeEngine = {
-	default: "epilogue",
-	loadTheme: (name) => {
-		if (typeof name == "undefined") {
-			if (localStorage.theme) {
-				name = localStorage.theme
-			} else {
-				name = themeEngine.default
-			}
-		}
-		// Unload CSS theme
-		$("#JStheme").remove();
-		// Unload custom theme
-		document.querySelector(':root').removeAttribute('style');
-		// If the theme is custom use the loadFromJSON function else load it normally
-		if (name.substring(0, 12) == "customTheme_") {
-			themeEngine.loadFromJSON(JSON.parse(localStorage.getItem(name)));
-		} else {
-			$('head').append(`<link rel="stylesheet" id="JStheme" href="/themes/${name}.css">`);
-		}
-	},
-	loadFromJSON: (json) => {
-		const documentRoot = document.querySelector(':root');
-		documentRoot.style.setProperty(`--background`, json["background"]);
-		documentRoot.style.setProperty(`--background2`, json["background2"]);
-		documentRoot.style.setProperty(`--foreground`, json["foreground"]);
-		documentRoot.style.setProperty(`--foreground2`, json["foreground2"]);
-		documentRoot.style.setProperty(`--border`, json["border"]);
-		documentRoot.style.setProperty(`--element`, json["element"]);
-		documentRoot.style.setProperty(`--active`, json["active"]);
-		documentRoot.style.setProperty(`--accent`, json["accent"]);
-	},
-	setTheme: (name) => {
-		if (name !== localStorage.theme) {
-			if (typeof name == "undefined") {
-				name = themeEngine.default
-			}
-			localStorage.theme = name;
-			themeEngine.loadTheme(name)
-		}
-	}
-}
-if (!localStorage.theme) {
-	localStorage.theme = themeEngine.default
-}
-themeEngine.loadTheme();
 
 // Changes the name of the app
 const setAppName = (name) => {
