@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Hotel Layout Creator - Pro</title>
+		<style>
+			:root {
+				--cell-size: 50px;
+				--grid-cols: 20;
+				--grid-rows: 15;
+				--primary: #3b82f6;
+				--surface: #ffffff;
+				--bg: #f3f4f6;
+				--text: #1f2937;
+			}
+
+			body {
+				margin: 0;
+				font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+				background-color: var(--bg);
+				color: var(--text);
+				display: flex;
+				height: 100vh;
+				overflow: hidden;
+			}
+
+			/* Sidebar Controls */
+			.sidebar {
+				width: 350px;
+				background-color: var(--surface);
+				box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+				padding: 20px;
+				display: flex;
+				flex-direction: column;
+				gap: 15px;
+				z-index: 10;
+				overflow-y: auto;
+			}
+
+			.sidebar h2 {
+				margin-top: 0;
+				margin-bottom: 5px;
+				font-size: 20px;
+			}
+
+			.form-group {
+				display: flex;
+				flex-direction: column;
+				gap: 5px;
+			}
+
+			.form-group label {
+				font-weight: 600;
+				font-size: 13px;
+			}
+
+			select,
+			input[type="number"],
+			input[type="text"] {
+				padding: 8px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				font-size: 14px;
+				transition: border-color 0.2s;
+			}
+
+			select:focus,
+			input:focus {
+				border-color: var(--primary);
+				outline: none;
+			}
+
+			input:disabled {
+				background-color: #f3f4f6;
+				cursor: not-allowed;
+			}
+
+			.row-group {
+				display: flex;
+				gap: 10px;
+			}
+
+			.row-group>div {
+				flex: 1;
+			}
+
+			.btn {
+				padding: 10px;
+				border: none;
+				border-radius: 4px;
+				background-color: var(--primary);
+				color: white;
+				cursor: pointer;
+				font-weight: bold;
+				text-align: center;
+				transition: background 0.2s;
+			}
+
+			.btn:hover {
+				background-color: #2563eb;
+			}
+
+			.btn-danger {
+				background-color: #ef4444;
+			}
+
+			.btn-danger:hover {
+				background-color: #dc2626;
+			}
+
+			.btn-secondary {
+				background-color: #10b981;
+			}
+
+			.btn-secondary:hover {
+				background-color: #059669;
+			}
+
+			hr {
+				border: none;
+				border-top: 1px solid #e5e7eb;
+				margin: 5px 0;
+			}
+
+			/* Mode Selection */
+			.mode-selector {
+				display: flex;
+				gap: 10px;
+				background: #e5e7eb;
+				padding: 5px;
+				border-radius: 6px;
+			}
+
+			.mode-btn {
+				flex: 1;
+				text-align: center;
+				padding: 8px;
+				border-radius: 4px;
+				cursor: pointer;
+				font-size: 14px;
+			}
+
+			.mode-btn.active {
+				background: white;
+				box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+				font-weight: bold;
+			}
+
+			/* Editing Banner */
+			.selection-banner {
+				display: none;
+				background: #dbeafe;
+				border: 1px solid #bfdbfe;
+				color: #1e3a8a;
+				padding: 10px;
+				border-radius: 6px;
+				text-align: center;
+			}
+
+			.selection-banner.active {
+				display: block;
+			}
+
+			/* Grid Area */
+			.main-content {
+				flex: 1;
+				padding: 20px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				overflow: auto;
+			}
+
+			.grid-wrapper {
+				background: white;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				padding: 20px;
+				border-radius: 8px;
+			}
+
+			.grid-container {
+				position: relative;
+				width: calc(var(--cell-size) * var(--grid-cols));
+				height: calc(var(--cell-size) * var(--grid-rows));
+				background-image:
+					linear-gradient(#e5e7eb 1px, transparent 1px),
+					linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+				background-size: var(--cell-size) var(--cell-size);
+				border: 1px solid #d1d5db;
+				cursor: crosshair;
+			}
+
+			.grid-container::after {
+				content: "(1, 1)";
+				position: absolute;
+				left: -35px;
+				bottom: -25px;
+				font-size: 12px;
+				color: #9ca3af;
+			}
+
+			.room-element {
+				position: absolute;
+				box-sizing: border-box;
+				border: 2px solid rgba(0, 0, 0, 0.7);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				text-align: center;
+				font-size: 11px;
+				font-weight: 600;
+				color: #fff;
+				text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+				transition: transform 0.1s, box-shadow 0.1s;
+				user-select: none;
+			}
+
+			.room-element:hover {
+				transform: scale(0.95);
+				z-index: 5;
+				cursor: pointer;
+			}
+
+			.selected-room {
+				border: 3px dashed #fff !important;
+				box-shadow: 0 0 0 3px #ef4444, 0 4px 15px rgba(0, 0, 0, 0.4);
+				z-index: 10 !important;
+				transform: scale(1.02);
+			}
+
+			.selected-room:hover {
+				transform: scale(1.02);
+			}
+
+			/* Color Coding */
+			.bg-Cinema {
+				background-color: #8b5cf6;
+			}
+
+			.bg-Restaurant {
+				background-color: #f59e0b;
+			}
+
+			.bg-Fitness {
+				background-color: #10b981;
+			}
+
+			.bg-Room {
+				background-color: #3b82f6;
+			}
+
+			.bg-Lobby {
+				background-color: #eab308;
+			}
+
+			.bg-Lift {
+				background-color: #64748b;
+			}
+
+			.bg-Trap {
+				background-color: #a8a29e;
+			}
+
+			.json-output {
+				width: 100%;
+				height: 100px;
+				font-family: monospace;
+				font-size: 11px;
+				resize: vertical;
+				margin-top: 10px;
+				box-sizing: border-box;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="sidebar">
+			<h2>Layout Creator</h2>
+
+			<div class="mode-selector">
+				<div id="mode-place" class="mode-btn active" onclick="setMode('place')">✏️ Place / Edit</div>
+				<div id="mode-delete" class="mode-btn" onclick="setMode('delete')">🗑️ Delete</div>
+			</div>
+
+			<div id="selectionBanner" class="selection-banner">
+				<div style="font-weight: bold; margin-bottom: 8px;">Editing Selected Room</div>
+				<button class="btn" style="width: 100%; font-size: 12px; padding: 6px; background: #2563eb;" onclick="deselectItem()">Click to Deselect & Place New</button>
+			</div>
+
+			<div class="row-group">
+				<div class="form-group">
+					<label>Grid X</label>
+					<input type="number" id="posX" placeholder="Auto" disabled oninput="handleFieldChange('x', this.value)">
+				</div>
+				<div class="form-group">
+					<label>Grid Y</label>
+					<input type="number" id="posY" placeholder="Auto" disabled oninput="handleFieldChange('y', this.value)">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label>Area Type</label>
+				<select id="areaType" onchange="handleFieldChange('AreaType', this.value); updateDynamicFields()">
+					<option value="Room">Room</option>
+					<option value="Cinema">Cinema</option>
+					<option value="Restaurant">Restaurant</option>
+					<option value="Fitness">Fitness</option>
+					<option value="Lobby">Lobby</option>
+					<option value="Lift">Lift</option>
+					<option value="Trap">Trap (Stairs)</option>
+				</select>
+			</div>
+
+			<div class="row-group">
+				<div class="form-group">
+					<label>Width</label>
+					<input type="number" id="dimX" value="1" min="1" oninput="handleFieldChange('w', this.value)">
+				</div>
+				<div class="form-group">
+					<label>Height</label>
+					<input type="number" id="dimY" value="1" min="1" oninput="handleFieldChange('h', this.value)">
+				</div>
+			</div>
+
+			<div class="form-group" id="group-classification">
+				<label>Classification (Stars)</label>
+				<select id="classification" onchange="handleFieldChange('Classification', this.value)">
+					<option value="1 Star">1 Star</option>
+					<option value="2 Star">2 Star</option>
+					<option value="3 Star">3 Star</option>
+					<option value="4 Star">4 Star</option>
+					<option value="5 Star">5 Star</option>
+				</select>
+			</div>
+
+			<div class="form-group" id="group-capacity" style="display: none;">
+				<label>Capacity (Persons)</label>
+				<input type="number" id="capacity" value="0" min="0" oninput="handleFieldChange('Capacity', this.value)">
+			</div>
+
+			<hr>
+
+			<button class="btn btn-secondary" onclick="exportJSON()">💾 Download JSON</button>
+			<button class="btn btn-danger" onclick="clearGrid()">🗑️ Clear Grid</button>
+
+			<div class="form-group" style="margin-top: 5px;">
+				<label>Load from JSON</label>
+				<textarea id="jsonInput" class="json-output" placeholder="Paste JSON here to load..."></textarea>
+				<button class="btn" style="margin-top: 5px;" onclick="importJSON()">Load JSON</button>
+			</div>
+		</div>
+
+		<div class="main-content">
+			<div style="margin-bottom: 10px; text-align: center;">
+				<strong>Instructions:</strong> Setup settings & click grid to <b>Place</b>. Click existing rooms to <b>Edit</b> them.
+			</div>
+			<div class="grid-wrapper">
+				<div class="grid-container" id="grid" onclick="handleGridClick(event)">
+					<!-- Grid elements will be injected here via JavaScript -->
+				</div>
+			</div>
+		</div>
+
+		<script>
+			const CELL_SIZE = 50;
+			let mode = 'place';
+			let items = [];
+			let selectedItemId = null;
+
+			// DOM Elements
+			const grid = document.getElementById('grid');
+			const dimXInput = document.getElementById('dimX');
+			const dimYInput = document.getElementById('dimY');
+			const posXInput = document.getElementById('posX');
+			const posYInput = document.getElementById('posY');
+			const areaTypeInput = document.getElementById('areaType');
+			const classificationInput = document.getElementById('classification');
+			const capacityInput = document.getElementById('capacity');
+
+			const groupClassification = document.getElementById('group-classification');
+			const groupCapacity = document.getElementById('group-capacity');
+			const selectionBanner = document.getElementById('selectionBanner');
+
+			// Toggle UI fields based on selected AreaType
+			function updateDynamicFields() {
+				const type = areaTypeInput.value;
+				groupClassification.style.display = (type === 'Room') ? 'flex' : 'none';
+				groupCapacity.style.display = ['Cinema', 'Restaurant', 'Fitness', 'Lobby', 'Room'].includes(type) ? 'flex' : 'none';
+			}
+
+			// Change mode between Placing/Editing and Deleting
+			function setMode(newMode) {
+				mode = newMode;
+				document.getElementById('mode-place').classList.remove('active');
+				document.getElementById('mode-delete').classList.remove('active');
+				document.getElementById('mode-' + mode).classList.add('active');
+
+				grid.style.cursor = mode === 'place' ? 'crosshair' : 'not-allowed';
+
+				if (mode === 'delete') deselectItem();
+			}
+
+			// Handle clicks directly on the empty grid
+			function handleGridClick(event) {
+				if (mode === 'place') {
+					const rect = grid.getBoundingClientRect();
+					const clickX = event.clientX - rect.left;
+					const clickY = event.clientY - rect.top;
+
+					const gridX = Math.floor(clickX / CELL_SIZE) + 1;
+					const gridY = Math.floor((rect.height - clickY) / CELL_SIZE) + 1;
+
+					placeItem(gridX, gridY);
+				}
+			}
+
+			// Logic to insert an item into the array
+			function placeItem(x, y) {
+				deselectItem(); // clear selection before placing new
+
+				const w = parseInt(dimXInput.value) || 1;
+				const h = parseInt(dimYInput.value) || 1;
+
+				if (isColliding(x, y, w, h)) {
+					alert("Cannot place here: Overlaps with an existing room!");
+					return;
+				}
+
+				const areaType = areaTypeInput.value;
+				const capacity = parseInt(capacityInput.value) || 0;
+				const classification = classificationInput.value;
+
+				const newItem = {
+					id: Date.now() + Math.random(),
+					AreaType: areaType,
+					x: x, y: y, w: w, h: h,
+					Capacity: capacity,
+					Classification: classification
+				};
+
+				items.push(newItem);
+				selectItem(newItem.id); // Automatically select newly placed item to tweak
+			}
+
+			// Select an item for editing
+			function selectItem(id) {
+				if (mode !== 'place') return;
+
+				selectedItemId = id;
+				const item = items.find(i => i.id === id);
+				if (!item) return;
+
+				// Populate Form
+				posXInput.value = item.x; posXInput.disabled = false;
+				posYInput.value = item.y; posYInput.disabled = false;
+				dimXInput.value = item.w;
+				dimYInput.value = item.h;
+				areaTypeInput.value = item.AreaType;
+				classificationInput.value = item.Classification || '1 Star';
+				capacityInput.value = item.Capacity || 0;
+
+				selectionBanner.classList.add('active');
+				updateDynamicFields();
+				renderGrid();
+			}
+
+			function deselectItem() {
+				selectedItemId = null;
+				posXInput.value = ''; posXInput.disabled = true;
+				posYInput.value = ''; posYInput.disabled = true;
+				selectionBanner.classList.remove('active');
+				renderGrid();
+			}
+
+			// Fires when user changes values in the sidebar
+			function handleFieldChange(field, value) {
+				if (!selectedItemId) return; // Ignore if placing new items
+
+				const item = items.find(i => i.id === selectedItemId);
+				if (!item) return;
+
+				const oldVal = item[field];
+
+				// Format numbers
+				if (['w', 'h', 'x', 'y', 'Capacity'].includes(field)) {
+					item[field] = parseInt(value) || (field === 'Capacity' ? 0 : 1);
+				} else {
+					item[field] = value;
+				}
+
+				// If moving or resizing, check collisions
+				if (['w', 'h', 'x', 'y'].includes(field)) {
+					if (isColliding(item.x, item.y, item.w, item.h, item.id)) {
+						alert("Collision detected! Reverting change.");
+						item[field] = oldVal;
+						// Revert input field visual
+						document.getElementById(field === 'w' ? 'dimX' : field === 'h' ? 'dimY' : field === 'x' ? 'posX' : 'posY').value = oldVal;
+					}
+				}
+
+				renderGrid();
+			}
+
+			function deleteItem(id) {
+				items = items.filter(item => item.id !== id);
+				if (selectedItemId === id) deselectItem();
+				renderGrid();
+			}
+
+			function isColliding(x, y, w, h, ignoreId = null) {
+				for (let item of items) {
+					if (item.id === ignoreId) continue;
+					if (x < item.x + item.w &&
+						x + w > item.x &&
+						y < item.y + item.h &&
+						y + h > item.y) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			// Draws the blocks onto the screen
+			function renderGrid() {
+				grid.innerHTML = ''; // clear
+
+				items.forEach(item => {
+					const el = document.createElement('div');
+					el.className = `room-element bg-${item.AreaType}`;
+					if (item.id === selectedItemId) el.classList.add('selected-room');
+
+					el.style.left = `${(item.x - 1) * CELL_SIZE}px`;
+					el.style.bottom = `${(item.y - 1) * CELL_SIZE}px`;
+					el.style.width = `${item.w * CELL_SIZE}px`;
+					el.style.height = `${item.h * CELL_SIZE}px`;
+
+					// Text Info
+					let text = `<b>${item.AreaType}</b><br/>${item.w}x${item.h}`;
+					if (item.AreaType === 'Room' && item.Classification) text += `<br/>${item.Classification}`;
+					if (['Cinema', 'Restaurant', 'Fitness', 'Lobby'].includes(item.AreaType) && item.Capacity > 0) text += `<br/>Cap: ${item.Capacity}`;
+					el.innerHTML = text;
+
+					// Click handler
+					el.onclick = (e) => {
+						e.stopPropagation(); // prevent grid placing logic
+						if (mode === 'delete') {
+							deleteItem(item.id);
+						} else if (mode === 'place') {
+							selectItem(item.id);
+						}
+					};
+
+					grid.appendChild(el);
+				});
+			}
+
+			function clearGrid() {
+				if (confirm("Are you sure you want to clear the entire layout?")) {
+					items = [];
+					deselectItem();
+				}
+			}
+
+			// Export strictly formatted JSON 
+			function exportJSON() {
+				const outputArray = items.map(item => {
+					const obj = {};
+
+					// Assign properties based on Area Type rules shown in the example JSON
+					if (item.AreaType === 'Room') {
+						obj.Classification = item.Classification || '1 Star';
+					} else if (['Cinema', 'Restaurant', 'Fitness', 'Lobby'].includes(item.AreaType)) {
+						if (item.Capacity !== undefined && item.Capacity > 0) {
+							obj.Capacity = item.Capacity.toString();
+						}
+					}
+
+					obj.AreaType = item.AreaType;
+					obj.Position = `${item.x}, ${item.y}`;
+					obj.Dimension = `${item.w}, ${item.h}`;
+
+					return obj;
+				});
+
+				const jsonString = JSON.stringify(outputArray, null, '\t');
+
+				const blob = new Blob([jsonString], { type: 'application/json' });
+				const url = URL.createObjectURL(blob);
+				const a = document.createElement('a');
+				a.href = url;
+				a.download = 'hotel_layout.json';
+				a.click();
+				URL.revokeObjectURL(url);
+			}
+
+			// Import existing json layout
+			function importJSON() {
+				const raw = document.getElementById('jsonInput').value;
+				if (!raw) return;
+
+				try {
+					const data = JSON.parse(raw);
+					if (!Array.isArray(data)) throw new Error("JSON should be an array.");
+
+					items = data.map(item => {
+						const pos = item.Position.split(',').map(s => parseInt(s.trim()));
+						const dim = item.Dimension.split(',').map(s => parseInt(s.trim()));
+
+						return {
+							id: Date.now() + Math.random(),
+							AreaType: item.AreaType,
+							x: pos[0], y: pos[1],
+							w: dim[0], h: dim[1],
+							Capacity: item.Capacity ? parseInt(item.Capacity) : 0,
+							Classification: item.Classification || '1 Star'
+						};
+					});
+
+					deselectItem();
+					alert("Layout loaded successfully!");
+					document.getElementById('jsonInput').value = '';
+				} catch (err) {
+					alert("Error parsing JSON: " + err.message);
+				}
+			}
+
+			// Initialize state
+			updateDynamicFields();
+
+		</script>
+	</body>
+
+</html>
