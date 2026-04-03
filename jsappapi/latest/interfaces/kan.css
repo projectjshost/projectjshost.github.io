@@ -24,6 +24,7 @@ p1#header {
 	background: var(--background) !important;
 	padding: 5px 10px !important;
 	border-radius: 50px;
+	user-select: none;
 }
 
 html,
@@ -33,7 +34,6 @@ body {
 	background: var(--background);
 	font-family: 'Inter', Arial, sans-serif;
 	color: var(--foreground);
-	user-select: none;
 	overscroll-behavior: contain
 }
 
@@ -102,6 +102,7 @@ hr {
 }
 
 p {
+	color: var(--foreground2);
 	font-size: 14px;
 	margin: 10px
 }
@@ -336,7 +337,6 @@ a {
 }
 
 .appTile {
-	color: var(--foreground);
 	display: flex;
 	vertical-align: middle;
 	border-radius: 10px;
@@ -352,9 +352,11 @@ a {
 	align-content: center;
 	justify-content: center;
 	align-items: center;
+	user-select: none;
 }
 
 .appTile p {
+	color: var(--foreground);
 	font-size: 16.5px;
 	margin: 3px;
 	letter-spacing: -1px;
@@ -511,6 +513,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .user-select {
+	color: var(--foreground);
 	user-select: all !important;
 	font-family: monospace !important;
 	font-size: 16px;
@@ -700,4 +703,14 @@ th {
 	font-size: 18px;
 	margin-right: 8px;
 	color: var(--foreground2);
+}
+
+.window {
+	border: 1px solid var(--border);
+	border-radius: 10px;
+}
+
+.window .windowbody {
+	border: none;
+	width: 100%;
 }

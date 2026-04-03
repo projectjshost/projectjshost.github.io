@@ -7,10 +7,9 @@
    version="1.1"
    id="svg6"
    sodipodi:docname="code.svg"
-   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -29,29 +28,7 @@
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs10">
-    <linearGradient
-       id="linearGradient918"
-       inkscape:collect="always">
-      <stop
-         id="stop914"
-         offset="0"
-         style="stop-color:#66ffff;stop-opacity:1" />
-      <stop
-         id="stop916"
-         offset="1"
-         style="stop-color:#2121a4;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient918"
-       id="linearGradient912"
-       x1="2.0021963"
-       y1="5.9953313"
-       x2="21.93284"
-       y2="18.069632"
-       gradientUnits="userSpaceOnUse" />
-  </defs>
+     id="defs10" />
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -62,7 +39,7 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1920"
-     inkscape:window-height="1019"
+     inkscape:window-height="1020"
      id="namedview8"
      showgrid="true"
      inkscape:object-paths="true"
@@ -70,34 +47,33 @@
      inkscape:snap-smooth-nodes="true"
      inkscape:snap-midpoints="true"
      inkscape:zoom="27.812867"
-     inkscape:cx="1.9595247"
-     inkscape:cy="10.732443"
+     inkscape:cx="10.588624"
+     inkscape:cy="10.75042"
      inkscape:window-x="0"
-     inkscape:window-y="33"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g910"
+     inkscape:current-layer="svg6"
      inkscape:pagecheckerboard="1"
-     inkscape:object-nodes="false">
+     inkscape:object-nodes="false"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
     <inkscape:grid
        type="xygrid"
-       id="grid169" />
+       id="grid169"
+       originx="0"
+       originy="0"
+       spacingy="1"
+       spacingx="1"
+       units="px" />
   </sodipodi:namedview>
   <path
-     d="M0 0h24v24H0z"
-     fill="none"
-     id="path2" />
-  <g
-     style="fill:#000000"
-     id="g910">
-    <path
-       id="path896"
-       d="M 0,0 H 24 V 24 H 0 Z"
-       inkscape:connector-curvature="0"
-       style="fill:none" />
-    <path
-       id="path898"
-       d="M 9.4,16.6 4.8,12 9.4,7.4 8,6 2,12 8,18 Z m 5.2,0 L 19.2,12 14.6,7.4 16,6 l 6,6 -6,6 z"
-       inkscape:connector-curvature="0"
-       style="fill:url(#linearGradient912);fill-opacity:1" />
-  </g>
+     id="path898-5"
+     d="m 9.15,16.35 -4.6,-4.6 4.6,-4.6 -1.4,-1.4 -6,6 6,6 z m 5.2,0 4.6,-4.6 -4.6,-4.6 1.4,-1.4 6,6 -6,6 z"
+     inkscape:connector-curvature="0"
+     style="fill:#75a9d7;fill-opacity:1" />
+  <path
+     id="path898"
+     d="M 9.4,16.6 4.8,12 9.4,7.4 8,6 2,12 8,18 Z m 5.2,0 L 19.2,12 14.6,7.4 16,6 l 6,6 -6,6 z"
+     inkscape:connector-curvature="0"
+     style="fill:#4490d2;fill-opacity:1" />
 </svg>

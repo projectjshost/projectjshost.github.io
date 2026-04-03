@@ -31,14 +31,16 @@
 .icon-dice {
 	background: url("/icons/dice.svg");
 	background-repeat: no-repeat;
-	background-size: cover
+	background-size: cover;
+	scale: 1.1
 }
 
 .icon-questionblock {
 	background: url("/icons/questionblock.png");
 	background-repeat: no-repeat;
 	background-size: cover;
-	image-rendering: pixelated
+	image-rendering: pixelated;
+	scale: 1.2
 }
 
 .icon-hexgl {
