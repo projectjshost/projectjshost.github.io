@@ -12,11 +12,11 @@ body {
 	display: block;
 	text-align: center;
 	font-size: 24px;
-	color: var(--foreground2)
+	color: var(--text-color)
 }
 
 #tabs {
-	background: var(--background2);
+	background: var(--area-background-color);
 	position: fixed;
 	left: 0;
 	bottom: 0;
@@ -33,7 +33,7 @@ body {
 	flex: 1;
 	padding: 7px;
 	opacity: 0.5;
-	color: var(--foreground2);
+	color: var(--text-color);
 	cursor: pointer;
 	transition-property: color, opacity!important;
 	transition: 0.2s;
@@ -53,7 +53,7 @@ body {
 }
 
 .tab.active {
-	color: var(--foreground);
+	color: var(--title-color);
 	opacity: 1;
 }
 
@@ -88,12 +88,12 @@ body {
 	padding: 10px;
 	margin: 5px 0;
 	border-radius: 5px;
-	background: var(--background2);
+	background: var(--area-background-color);
 	cursor: pointer
 }
 
 .searchResult:hover {
-	background: var(--element)
+	background: var(--button-color)
 }
 
 #clocksContainer {
@@ -101,7 +101,7 @@ body {
 }
 
 .clock {
-	background: var(--background2);
+	background: var(--area-background-color);
 	padding: 10px;
 	margin: 5px;
 	border-radius: 10px;
@@ -110,7 +110,7 @@ body {
 }
 
 .clock > .label {
-	color: var(--foreground2)
+	color: var(--text-color)
 }
 
 .clock > .time {
@@ -143,12 +143,12 @@ body {
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background: var(--background2);
-    color: var(--foreground);
+    background: var(--area-background-color);
+    color: var(--title-color);
 }
 
 #timerControls button:hover, #stopwatchControls button:hover {
-    background: var(--element);
+    background: var(--button-color);
 }
 
 #timerInput {

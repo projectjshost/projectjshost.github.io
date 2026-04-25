@@ -1,18 +1,6 @@
-function getRandomStr(length, includeUpperCase, includeLowerCase, includeNumbers, includeSymbols) {
-	// Declare all characters
-	let chars = "";
-	if(includeUpperCase) chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	if(includeLowerCase) chars += "abcdefghijklmnopqrstuvwxyz";
-	if(includeNumbers) chars += "0123456789";
-	if(includeSymbols) chars += "!@#$%&";
+import $ from 'https://esm.sh/jquery';
 
-	// Pick characers randomly
-	let str = "";
-	while (length--) {
-		str += chars.charAt(Math.floor(Math.random() * chars.length));
-	}
-	return str;
-};
+import { getRandom, getRandomStr } from '../jsappapi/latest/random.js';
 
 function randomPassGen() {
 	const passwordLength = document.getElementById("randomPassLen").value;
@@ -29,3 +17,6 @@ function randomNumGen() {
 	const result = getRandom(randomNumMin, randomNumMax);
 	document.getElementById("randomNumResult").innerText = result;
 }
+
+$("#randomPassGen").on("click", randomPassGen);
+$("#randomNumGen").on("click", randomNumGen);

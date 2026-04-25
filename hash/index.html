@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<link rel="manifest" href="/manifest.json">
+		<script>appname = "Hash";</script>
+		<style>
+			html {
+				background: #000
+			}
+		</style>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<script src="/jsappapi/latest/main.js" type="module"></script>
+		<script src="main.js" type="module" defer></script>
+	</head>
+
+	<body>
+		<header>
+			<p1 id="header"></p1>
+		</header>
+		<div class="area">
+			<p2>Select file</p2>
+			<button id="importFile"><span class="icon">file_upload</span>Upload</button>
+
+			<div id="results" style="display: none;">
+				<p id="filename"></p>
+				<p id="filesize"></p>
+				<p id="duration"></p>
+				<hr/>
+				<p>MD5:</p>
+				<p class="user-select" id="outputHashMD5"></p>
+				<p>SHA-256:</p>
+				<p class="user-select" id="outputHashSHA256"></p>
+				<!-- <p>SHA-512:</p>
+				<p class="user-select" id="outputHashSHA512"></p> -->
+			</div>
+
+		</div>
+	</body>
+
+</html>

@@ -1,3 +1,6 @@
+import { apps } from "../jsappapi/latest/apps.js";
+import { openApp } from "../jsappapi/latest/main.js";
+
 let hiddenApps = JSON.parse(localStorage.getItem('hiddenApps') || '[]');
 let favoriteApps = JSON.parse(localStorage.getItem('favoriteApps') || '[]');
 
@@ -38,7 +41,7 @@ function renderApps() {
 
 			const appAction = app.target.startsWith("https://")
 				? `href="${app.target}"`
-				: `onclick="openApp('${app.target}')"`;
+				: `data-action="open"`;
 
 			const wrapperTag = app.target.startsWith("https://") ? "a" : "div";
 
@@ -95,7 +98,7 @@ function initClock() {
 		// Draw clock face
 		ctx.beginPath();
 		ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-		ctx.fillStyle = rootStyles.getPropertyValue('--element').trim() || "transparent";
+		ctx.fillStyle = rootStyles.getPropertyValue('--button-color').trim() || "transparent";
 		ctx.fill();
 
 		const now = new Date();
@@ -104,9 +107,9 @@ function initClock() {
 		const seconds = now.getSeconds();
 
 		// Draw hands
-		drawHand(hours * 30 + minutes * 0.5, radius * 0.5, 2, '--foreground');
-		drawHand(minutes * 6, radius * 0.7, 1.5, '--foreground');
-		drawHand(seconds * 6, radius * 0.9, 1, '--foreground2');
+		drawHand(hours * 30 + minutes * 0.5, radius * 0.5, 2, '--title-color');
+		drawHand(minutes * 6, radius * 0.7, 1.5, '--title-color');
+		drawHand(seconds * 6, radius * 0.9, 1, '--text-color');
 	}
 
 	function drawHand(angle, length, lineWidth, colorVar) {
@@ -209,6 +212,16 @@ document.getElementById('hideAppOption').addEventListener('mouseup', () => {
 document.addEventListener('click', (e) => {
 	if (!contextMenu.contains(e.target)) {
 		contextMenu.classList.add('hidden');
+	}
+});
+
+document.getElementById('appOverview').addEventListener('click', (e) => {
+	const trigger = e.target.closest('[data-action="open"]');
+
+	if (trigger) {
+		const appTile = trigger.querySelector('.appTile');
+		const target = appTile.dataset.target;
+		openApp(target);
 	}
 });
 

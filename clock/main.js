@@ -1,19 +1,45 @@
-// Timer variables
-let timerInterval;
-let timerTime = 0;
-let timerRunning = false;
+import $ from 'https://esm.sh/jquery';
+import moment from 'https://esm.sh/moment-timezone';
+import { setAppName } from '../jsappapi/latest/main.js';
 
-// Stopwatch variables
-let stopwatchInterval;
-let stopwatchTime = 0;
-let stopwatchRunning = false;
+let timerInterval, stopwatchInterval;
+let timerTime = 0, stopwatchTime = 0;
+let timerRunning = false, stopwatchRunning = false;
+let currentTab = "";
 
-// Timer functions
-const startTimer = () => {
-	if (!timerRunning) {
-		timerInterval = setInterval(updateTimer, 1000);
-		timerRunning = true;
+const timeFormat = "HH:mm:ss";
+const dateFormat = "dddd YYYY-MM-DD";
+
+const formatTime = (totalSeconds) => {
+	const hours = Math.floor(totalSeconds / 3600);
+	const minutes = Math.floor((totalSeconds % 3600) / 60);
+	const seconds = totalSeconds % 60;
+	return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+};
+
+const getClocks = () => {
+	try {
+		return JSON.parse(localStorage.clocks || "[]");
+	} catch (e) {
+		return [];
 	}
+};
+
+const saveClocks = (clocks) => {
+	localStorage.clocks = JSON.stringify(clocks);
+};
+
+const startTimer = () => {
+	if (timerRunning || timerTime <= 0) return;
+	timerInterval = setInterval(() => {
+		timerTime--;
+		$("#timerDisplay").text(formatTime(timerTime));
+		if (timerTime <= 0) {
+			stopTimer();
+			alert("Timer finished!");
+		}
+	}, 1000);
+	timerRunning = true;
 };
 
 const stopTimer = () => {
@@ -24,53 +50,28 @@ const stopTimer = () => {
 const resetTimer = () => {
 	stopTimer();
 	timerTime = 0;
-	updateTimerDisplay();
+	$("#timerDisplay").text(formatTime(timerTime));
 };
 
-const updateTimer = () => {
-	if (timerTime > 0) {
-		timerTime--;
-		updateTimerDisplay();
-	} else {
-		stopTimer();
-		alert("Timer finished!");
-	}
-};
-
-const updateTimerDisplay = () => {
-	const hours = Math.floor(timerTime / 3600);
-	const minutes = Math.floor((timerTime % 3600) / 60);
-	const seconds = timerTime % 60;
-	$("#timerDisplay").text(`${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`);
-};
-
-// Function to set the timer start time
 const setTimerTime = () => {
 	const input = $("#timerInput").val();
-	const timeParts = input.split(":");
+	const timeParts = input.split(":").map(part => parseInt(part, 10));
 
-	if (timeParts.length === 3) {
-		const hours = parseInt(timeParts[0], 10);
-		const minutes = parseInt(timeParts[1], 10);
-		const seconds = parseInt(timeParts[2], 10);
-
-		if (!isNaN(hours) && !isNaN(minutes) && !isNaN(seconds)) {
-			timerTime = hours * 3600 + minutes * 60 + seconds;
-			updateTimerDisplay();
-		} else {
-			alert("Invalid time format. Please use HH:MM:SS.");
-		}
+	if (timeParts.length === 3 && !timeParts.some(isNaN)) {
+		timerTime = timeParts[0] * 3600 + timeParts[1] * 60 + timeParts[2];
+		$("#timerDisplay").text(formatTime(timerTime));
 	} else {
 		alert("Invalid time format. Please use HH:MM:SS.");
 	}
 };
 
-// Stopwatch functions
 const startStopwatch = () => {
-	if (!stopwatchRunning) {
-		stopwatchInterval = setInterval(updateStopwatch, 1000);
-		stopwatchRunning = true;
-	}
+	if (stopwatchRunning) return;
+	stopwatchInterval = setInterval(() => {
+		stopwatchTime++;
+		$("#stopwatchDisplay").text(formatTime(stopwatchTime));
+	}, 1000);
+	stopwatchRunning = true;
 };
 
 const stopStopwatch = () => {
@@ -81,164 +82,168 @@ const stopStopwatch = () => {
 const resetStopwatch = () => {
 	stopStopwatch();
 	stopwatchTime = 0;
-	updateStopwatchDisplay();
+	$("#stopwatchDisplay").text(formatTime(stopwatchTime));
 };
-
-const updateStopwatch = () => {
-	stopwatchTime++;
-	updateStopwatchDisplay();
-};
-
-const updateStopwatchDisplay = () => {
-	const hours = Math.floor(stopwatchTime / 3600);
-	const minutes = Math.floor((stopwatchTime % 3600) / 60);
-	const seconds = stopwatchTime % 60;
-	$("#stopwatchDisplay").text(`${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`);
-};
-
-const timeFormat = "HH:mm:ss";
-
-const dateFormat = "dddd YYYY-MM-DD";
-
-if(!localStorage.clocks) localStorage.clocks = "[]";
 
 const addClock = (timezone) => {
-	const clocks = JSON.parse(localStorage.clocks);
-	if(clocks.includes(timezone)) return;
-	clocks.push(timezone);
-	localStorage.clocks = JSON.stringify(clocks);
-	switchTab("clock")
-}
-
-const removeClock = (timezone) => {
-	const clocks = JSON.parse(localStorage.clocks);
-	const index = clocks.indexOf(timezone);
-	if(index !== -1) {
-		clocks.splice(index, 1);
-		localStorage.clocks = JSON.stringify(clocks);
+	const clocks = getClocks();
+	if (!clocks.includes(timezone)) {
+		clocks.push(timezone);
+		saveClocks(clocks);
 	}
 	switchTab("clock");
-}
+};
 
-let currentTab = "";
-
-const switchTab = (tab) => {
-	$(`#${currentTab}_tab`).removeClass("active");
-
-	currentTab = tab;
-	document.getElementById("currentView").innerHTML = "";
-
-	$(`#${tab}_tab`).addClass("active");
-
-	const clocks = JSON.parse(localStorage.clocks);
-
-	switch (tab) {
-		case "clock":
-			setAppName("Clock");
-			$("#currentView").append('<span id="bigClock"></span>');
-			$("#currentView").append(`<span id="currentDate">${moment().format(dateFormat)}</span>`);
-			$("#currentView").append(`
-			<div id="addTimezoneContainer">
-				<button id="addTimezone" class="main" onmousedown="switchTab('add_clock')">
-					<span class="icon">add</span>Add clock
-				</button>
-			</div>`);
-
-			$("#currentView").append('<div id="clocksContainer"></div>');
-
-			const clocksContainer = document.getElementById("clocksContainer");
-
-			clocks.forEach((clock) => {
-				const friendlyName = clock.split("/")[clock.split("/").length - 1].replaceAll("_", " ");
-				$(clocksContainer).append(`
-				<div class="clock" id="${clock}">
-					<span class="label">${friendlyName} (${getLocalTimezoneOffsetDifference(clock)}h)</span>
-					<span class="time"></span>
-					<button onclick="removeClock('${clock}')"><span class="icon">delete</span></button>
-				</div>`)
-			});
-			updateClocks();
-			break;
-		case "add_clock":
-			setAppName("Add Clock");
-			const timezones = moment.tz.names();
-
-			$("#currentView").append(`
-			<input type="text" id="timezoneSearch" placeholder="Search timezones..." autofocus></input>
-			<div id="searchResultBox"></div>`);
-
-			const searchResultBox = document.getElementById("searchResultBox");
-
-			$("#timezoneSearch").on("input", (event) => {
-				const value = event.currentTarget.value;
-				searchResultBox.innerHTML = "";
-				if (value.length < 2) return;
-
-				const results = timezones.filter((timezone) => timezone.toLowerCase().replaceAll("_", " ").includes(value.toLowerCase()) && !clocks.includes(timezone));
-
-				results.forEach((result) => {
-					$(searchResultBox).append(`
-					<div class="searchResult" onclick="addClock('${result}')">
-					${result.replaceAll("_", " ")}
-					</div>
-					`)
-					console.log(result)
-				})
-			})
-
-			break;
-		case "timer":
-			setAppName("Timer");
-			$("#currentView").append(`
-				<div id="timerDisplay">00:00:00</div>
-				<div id="timerControls">
-					<input type="text" id="timerInput" placeholder="HH:MM:SS" />
-					<button onclick="setTimerTime()">Set Time</button>
-					<br>
-					<button onclick="startTimer()">Start</button>
-					<button onclick="stopTimer()">Stop</button>
-					<button onclick="resetTimer()">Reset</button>
-				</div>
-			`);
-			break;
-		case "stopwatch":
-			setAppName("Stopwatch");
-			$("#currentView").append(`
-				<div id="stopwatchDisplay">00:00:00</div>
-				<div id="stopwatchControls">
-					<button onclick="startStopwatch()">Start</button>
-					<button onclick="stopStopwatch()">Stop</button>
-					<button onclick="resetStopwatch()">Reset</button>
-				</div>
-			`);
-			break;
-	}
-}
+const removeClock = (timezone) => {
+	const clocks = getClocks();
+	const newClocks = clocks.filter(c => c !== timezone);
+	saveClocks(newClocks);
+	switchTab("clock");
+};
 
 const getLocalTimezoneOffsetDifference = (timezone2) => {
-	const localTime = moment();
-	const localOffset = localTime.utcOffset();
-
-	const momentTimezone2 = moment.tz(timezone2);
-	const offsetTimezone2 = momentTimezone2.utcOffset();
-
-	const differenceInHours = (localOffset - offsetTimezone2) / 60;
-	return differenceInHours*-1;
-}
+	const localOffset = moment().utcOffset();
+	const targetOffset = moment.tz(timezone2).utcOffset();
+	return ((localOffset - targetOffset) / 60) * -1;
+};
 
 const updateClocks = () => {
 	const time = moment().format(timeFormat);
 	document.title = time;
-	if(currentTab!=="clock") return;
+
+	if (currentTab !== "clock") return;
+
 	$("#bigClock").text(time);
 
-	const clocks = document.querySelectorAll("#clocksContainer>.clock");
+	$("#clocksContainer .clock").each(function () {
+		const tz = $(this).data("timezone");
+		$(this).find(".time").text(moment().tz(tz).format(timeFormat));
+	});
+};
 
+const renderClockTab = () => {
+	setAppName("Clock");
+	const view = $("#currentView").empty();
+	const clocks = getClocks();
+
+	view.append(`
+		<span id="bigClock"></span>
+		<span id="currentDate">${moment().format(dateFormat)}</span>
+		<div id="addTimezoneContainer">
+			<button id="btn-add-clock" class="main">
+				<span class="icon">add</span>Add clock
+			</button>
+		</div>
+		<div id="clocksContainer"></div>
+	`);
+
+	const container = $("#clocksContainer");
 	clocks.forEach((clock) => {
-		const elementId = clock.id.replaceAll("/", "\\/");
-		$(`#${elementId}>.time`).text(moment().tz(clock.id).format(timeFormat));
-	})
-}
+		const friendlyName = clock.split("/").pop().replace(/_/g, " ");
+		const offset = getLocalTimezoneOffsetDifference(clock);
+
+		container.append(`
+			<div class="clock" data-timezone="${clock}">
+				<span class="label">${friendlyName} (${offset > 0 ? '+' : ''}${offset}h)</span>
+				<span class="time"></span>
+				<button class="btn-remove-clock" data-timezone="${clock}">
+					<span class="icon">delete</span>
+				</button>
+			</div>
+		`);
+	});
+	updateClocks();
+};
+
+const renderAddClockTab = () => {
+	setAppName("Add Clock");
+	const view = $("#currentView").empty();
+	const clocks = getClocks();
+	const timezones = moment.tz.names();
+
+	view.append(`
+		<input type="text" id="timezoneSearch" placeholder="Search timezones..." autofocus>
+		<div id="searchResultBox"></div>
+	`);
+
+	$("#timezoneSearch").on("input", (e) => {
+		const value = e.target.value.toLowerCase();
+		const box = $("#searchResultBox").empty();
+
+		if (value.length < 2) return;
+
+		const results = timezones.filter((tz) =>
+			tz.toLowerCase().replace(/_/g, " ").includes(value) && !clocks.includes(tz)
+		);
+
+		results.forEach((result) => {
+			box.append(`
+				<div class="searchResult" data-timezone="${result}">
+					${result.replace(/_/g, " ")}
+				</div>
+			`);
+		});
+	});
+};
+
+const renderTimerTab = () => {
+	setAppName("Timer");
+	$("#currentView").empty().append(`
+		<div id="timerDisplay">${formatTime(timerTime)}</div>
+		<div id="timerControls">
+			<input type="text" id="timerInput" placeholder="HH:MM:SS" />
+			<button id="btn-set-timer">Set Time</button>
+			<br>
+			<button id="btn-start-timer">Start</button>
+			<button id="btn-stop-timer">Stop</button>
+			<button id="btn-reset-timer">Reset</button>
+		</div>
+	`);
+};
+
+const renderStopwatchTab = () => {
+	setAppName("Stopwatch");
+	$("#currentView").empty().append(`
+		<div id="stopwatchDisplay">${formatTime(stopwatchTime)}</div>
+		<div id="stopwatchControls">
+			<button id="btn-start-sw">Start</button>
+			<button id="btn-stop-sw">Stop</button>
+			<button id="btn-reset-sw">Reset</button>
+		</div>
+	`);
+};
+
+const switchTab = (tab) => {
+	if (currentTab) $(`#${currentTab}_tab`).removeClass("active");
+
+	currentTab = tab;
+	$(`#${tab}_tab`).addClass("active");
+
+	if (tab === "clock") renderClockTab();
+	else if (tab === "add_clock") renderAddClockTab();
+	else if (tab === "timer") renderTimerTab();
+	else if (tab === "stopwatch") renderStopwatchTab();
+};
 
 
-setInterval(updateClocks, 1000)
+$("#clock_tab").on("mousedown", () => switchTab('clock'));
+$("#timer_tab").on("mousedown", () => switchTab('timer'));
+$("#stopwatch_tab").on("mousedown", () => switchTab('stopwatch'));
+
+$("#currentView")
+	.on("click", "#btn-add-clock", () => switchTab('add_clock'))
+	.on("click", ".btn-remove-clock", function () { removeClock($(this).data("timezone")) })
+	.on("click", ".searchResult", function () { addClock($(this).data("timezone")) })
+
+	.on("click", "#btn-set-timer", setTimerTime)
+	.on("click", "#btn-start-timer", startTimer)
+	.on("click", "#btn-stop-timer", stopTimer)
+	.on("click", "#btn-reset-timer", resetTimer)
+
+	.on("click", "#btn-start-sw", startStopwatch)
+	.on("click", "#btn-stop-sw", stopStopwatch)
+	.on("click", "#btn-reset-sw", resetStopwatch);
+
+if (!localStorage.clocks) saveClocks([]);
+setInterval(updateClocks, 1000);
+switchTab("clock");

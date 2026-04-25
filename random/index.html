@@ -1,6 +1,7 @@
 <html>
 
 	<head>
+		<link rel="manifest" href="/manifest.json">
 		<script>appname = "Random"</script>
 		<style>
 			html {
@@ -8,9 +9,8 @@
 			}
 		</style>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-		<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-		<script src="/jsappapi/latest/main.js"></script>
-		<script src="./main.js"></script>
+		<script src="/jsappapi/latest/main.js" type="module"></script>
+		<script src="./main.js" type="module"></script>
 	</head>
 
 	<body>
@@ -23,7 +23,7 @@
 			<input type="number" min="0" value="1" id="randomNumMin">
 			<p>Max:</p>
 			<input type="number" min="1" value="10" id="randomNumMax"><br>
-			<button class="main" onclick="randomNumGen()"><span class="Icon">play_arrow</span>Generate</button>
+			<button class="main" id="randomNumGen"><span class="Icon">play_arrow</span>Generate</button>
 			<p>Result: </p><b>
 				<p id="randomNumResult" class="user-select"></p>
 			</b>
@@ -60,7 +60,7 @@
 				</label>
 				<label for="includeSymbols">Include symbols</label>
 			</div>
-			<button class="main" onclick="randomPassGen()"><span class="Icon">play_arrow</span>Generate</button>
+			<button class="main" id="randomPassGen"><span class="Icon">play_arrow</span>Generate</button>
 			<p>Result: </p><b>
 				<p id="randomPassResult" class="user-select"></p>
 			</b>

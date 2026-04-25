@@ -21,7 +21,7 @@ p1#header {
 	font-family: "Inter", Arial, sans-serif;
 	font-weight: 250;
 	font-size: 26px;
-	background: var(--background) !important;
+	background: var(--background-color) !important;
 	padding: 5px 10px !important;
 	border-radius: 50px;
 	user-select: none;
@@ -31,9 +31,9 @@ html,
 body {
 	margin: 0;
 	padding: 0;
-	background: var(--background);
+	background: var(--background-color);
 	font-family: 'Inter', Arial, sans-serif;
-	color: var(--foreground);
+	color: var(--title-color);
 	overscroll-behavior: contain
 }
 
@@ -56,7 +56,7 @@ div#wallpaperElement {
 	background-position: center;
 	background-repeat: no-repeat;
 	pointer-events: none;
-	background-color: var(--background);
+	background-color: var(--background-color);
 }
 
 div#wallpaperElement.blur {
@@ -88,26 +88,26 @@ e {
 
 r {
 	float: right;
-	color: var(--foreground2)
+	color: var(--text-color)
 }
 
 .alt {
-	color: var(--foreground2)
+	color: var(--text-color)
 }
 
 hr {
-	border: 1px solid var(--border);
+	border: 1px solid var(--border-color);
 	border-radius: 50px;
 	margin: 5px 5px;
 }
 
 p {
-	color: var(--foreground2);
+	color: var(--text-color);
 	font-size: 14px;
 	margin: 10px
 }
 
-p2 {
+p2, h2 {
 	display: block;
 	margin: 7px;
 	margin-left: 7px;
@@ -117,15 +117,8 @@ p2 {
 	width: max-content;
 }
 
-.dialog>p2 {
-	margin-left: 0;
-	margin-top: 0;
-	user-select: none;
-	text-shadow: none
-}
-
 .area {
-	background: var(--background2);
+	background: var(--area-background-color);
 	border-radius: 10px;
 	margin: 5px;
 	margin-top: 10px;
@@ -158,9 +151,9 @@ p2 {
 }
 
 textarea {
-	background: var(--background2);
+	background: var(--area-background-color);
 	border-radius: 10px;
-	color: var(--foreground);
+	color: var(--title-color);
 	width: -webkit-fill-available;
 	width: -moz-available;
 	min-height: 240px;
@@ -179,10 +172,10 @@ textarea {
 input[type="password"],
 input[type="text"],
 input[type="number"] {
-	background: var(--element);
+	background: var(--button-color);
 	border: none;
 	border-radius: 5px;
-	color: var(--foreground);
+	color: var(--title-color);
 	padding: 0 7px;
 	margin: 5px;
 	height: 34px;
@@ -200,11 +193,11 @@ select {
 	font-family: 'Inter', Arial;
 	font-size: 16px;
 	font-weight: 400;
-	background: var(--element);
+	background: var(--button-color);
 	padding: 7px 10px;
 	border: 0;
 	border-radius: 5px;
-	color: var(--foreground);
+	color: var(--title-color);
 	margin: 5px;
 	cursor: pointer;
 	transition: 0.1s;
@@ -215,38 +208,37 @@ button:disabled {
 	cursor: not-allowed !important;
 }
 
+button.main {
+	background: var(--accent-color);
+	color: var(--background-color);
+}
+button.text {
+	background: transparent;
+	color: var(--accent-color);
+}
+
 button.main:disabled {
-	background: var(--element) !important;
-	color: var(--foreground2);
+	background: var(--button-color) !important;
+	color: var(--text-color);
 	opacity: 1;
 }
 
 button:active,
 .button:active {
 	cursor: default;
-	background: var(--active) !important
+	filter: contrast(0.8) saturate(2);
 }
 
-button.main {
-	background: var(--accent) !important;
-	color: var(--background)
-}
-
-button.deleteButton.main {
-	position: absolute;
-	right: 90px;
-}
-
-:focus {
+/* :focus {
 	outline: 0
-}
+} */
 
 .dialog {
 	z-index: 9999;
 	padding: 10px;
 	position: fixed;
-	background: var(--background);
-	border: 1px solid var(--border);
+	background: var(--background-color);
+	border: 1px solid var(--border-color);
 	font-size: 15px !important;
 	border-radius: 5px;
 	width: 80%;
@@ -255,6 +247,13 @@ button.deleteButton.main {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	user-select: text;
+}
+
+.dialog>p2 {
+	margin-left: 0;
+	margin-top: 0;
+	user-select: none;
+	text-shadow: none
 }
 
 .dialog>button {
@@ -278,8 +277,16 @@ button.deleteButton.main {
 	backdrop-filter: blur(10px)saturate(0.8);
 }
 
+.dialog-message {
+	white-space: pre-wrap;
+}
+
+body.dialog-open {
+	overflow-y: hidden;
+}
+
 .headerButtons {
-	background: var(--background);
+	background: var(--background-color);
 	position: absolute;
 	right: 10px;
 	display: flex;
@@ -302,11 +309,11 @@ button.deleteButton.main {
 }
 
 .headerButton:hover {
-	background: var(--background2) !important;
+	background: var(--area-background-color) !important;
 }
 
 .headerButton:active {
-	background: var(--active) !important
+	filter: contrast(0.8) saturate(2);
 }
 
 button>.icon {
@@ -327,12 +334,12 @@ p>.icon {
 }
 
 a {
-	color: var(--accent);
+	color: var(--accent-color);
 	text-decoration: none
 }
 
 ::placeholder {
-	color: var(--foreground);
+	color: var(--title-color);
 	opacity: 0.4;
 }
 
@@ -356,7 +363,7 @@ a {
 }
 
 .appTile p {
-	color: var(--foreground);
+	color: var(--title-color);
 	font-size: 16.5px;
 	margin: 3px;
 	letter-spacing: -1px;
@@ -376,11 +383,11 @@ a {
 
 @media(hover: hover) {
 	.headerButton:hover {
-		color: var(--foreground);
+		color: var(--title-color);
 	}
 
 	a:hover {
-		color: var(--foreground);
+		color: var(--title-color);
 		text-decoration: underline;
 	}
 
@@ -391,8 +398,8 @@ a {
 }
 
 ::selection {
-	background: var(--accent);
-	color: var(--background)
+	background: var(--accent-color);
+	color: var(--background-color)
 }
 
 ::-webkit-scrollbar {
@@ -406,12 +413,12 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--active);
+	background: var(--button-color);
 	border-radius: 50px;
 }
 
 ::-webkit-scrollbar-thumb:active {
-	background: var(--element);
+	background: var(--button-color);
 }
 
 /* Toggle switch */
@@ -436,15 +443,15 @@ a {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: var(--background);
+	background: var(--background-color);
 	transition: .2s;
 	border-radius: 50px;
-	border: 1px solid var(--border);
+	border: 1px solid var(--border-color);
 }
 
 .slider:before {
 	font-family: 'Material Icons';
-	color: var(--background);
+	color: var(--background-color);
 	scale: 1.4;
 	font-size: 13px;
 	line-height: 14px;
@@ -454,21 +461,21 @@ a {
 	width: 13px;
 	left: 5px;
 	bottom: 5.25px;
-	background: var(--border);
+	background: var(--border-color);
 	transition: .2s;
 	border-radius: 50px;
 }
 
 input:checked+.slider {
-	background: var(--accent);
-	border-color: var(--accent);
+	background: var(--accent-color);
+	border-color: var(--accent-color);
 }
 
 input:checked+.slider:before {
 	content: "check";
-	color: var(--accent);
+	color: var(--accent-color);
 	transform: translateX(10.5px);
-	background: var(--background);
+	background: var(--background-color);
 }
 
 input[type="range"] {
@@ -478,7 +485,7 @@ input[type="range"] {
 	width: -webkit-fill-available;
 	min-width: 300px;
 	height: 10px;
-	background: var(--element);
+	background: var(--button-color);
 	outline: none;
 	-webkit-transition: .2s;
 	transition: opacity .2s;
@@ -490,7 +497,7 @@ input[type="range"]::-webkit-slider-thumb {
 	appearance: none;
 	width: 15px;
 	height: 15px;
-	background: var(--accent);
+	background: var(--accent-color);
 	border-radius: 50px;
 	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.8);
 }
@@ -513,7 +520,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .user-select {
-	color: var(--foreground);
+	color: var(--title-color);
 	user-select: all !important;
 	font-family: monospace !important;
 	font-size: 16px;
@@ -528,7 +535,7 @@ table {
 
 td,
 th {
-	border: 1px solid var(--border);
+	border: 1px solid var(--border-color);
 	margin: 0;
 }
 
@@ -536,71 +543,70 @@ th {
 	-webkit-tap-highlight-color: transparent;
 }
 
-.listItem {
+#themeList {
 	margin: 5px;
-	padding: 7px 12px;
-	background: var(--background2);
-	border-radius: 10px;
-	white-space: nowrap;
-	max-width: -webkit-fill-available;
-	overflow: hidden;
+	padding: 5px;
 	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	align-content: flex-start;
-	justify-content: flex-start;
-	align-items: flex-start;
+	flex-direction: row;
+	overflow-x: scroll;
 }
 
-.listItem.themeItem {
+.themeItem {
+	padding: 5px;
+	background: var(--area-background-color);
+	border-radius: 10px;
+	border: 1px solid transparent;
+	width: max-content;
+	overflow: clip;
+	display: flex;
 	position: relative;
 	flex-direction: row;
-	align-items: center;
 	justify-content: space-between;
 	z-index: 0;
+	cursor: pointer;
 }
 
-.listItem.themeItem.active {
-	color: var(--accent)
+.themeItem.active {
+	color: var(--accent-color);
+	border-color: var(--accent-color);
 }
 
-.listItem.themeItem.active::before {
+.themeItem.active::before {
 	display: block;
 	position: absolute;
 	content: "";
-	background: var(--accent);
+	background: var(--accent-color);
 	width: 100%;
 	height: 100%;
 	left: 0;
 	top: 0;
 	z-index: -1;
-	opacity: 0.1;
+	opacity: 0.2;
 }
 
-.listItem.themeItem.active>.applyButton {
+.themeItem.active>.applyButton {
 	visibility: hidden;
 }
 
-.listItem.themeItem>.theme>.preview {
+.themeItem>.theme>.preview {
 	height: 32px;
 	width: 32px;
 }
 
-.listItem.themeItem>.theme {
+.themeItem>.theme {
 	font-size: 20px;
 	display: flex;
 	align-items: center;
 }
 
-.listItem.themeItem>.theme>.preview:nth-of-type(1) {
+.themeItem>.theme>.preview:nth-of-type(1) {
 	border-radius: 50px;
 	position: absolute;
 	scale: 0.5;
 }
 
-.listItem.themeItem>.theme>.preview:nth-of-type(2) {
+.themeItem>.theme>.preview:nth-of-type(2) {
 	border-radius: 50px;
-	margin-right: 10px;
 }
 
 #wallpaperList {
@@ -622,7 +628,7 @@ th {
 }
 
 .wallpaperItem:hover {
-	border-color: var(--foreground2);
+	border-color: var(--text-color);
 }
 
 .wallpaperItem:active {
@@ -639,7 +645,7 @@ th {
 	height: 80px;
 	top: -85;
 	margin-bottom: -85px;
-	background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, var(--background) 100%);
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, var(--background-color) 100%);
 	padding: 0 5px;
 	padding-top: 5px;
 	z-index: 100;
@@ -652,7 +658,7 @@ th {
 .wallpaperItem>.wallpaperOverlay>.small {
 	font-size: 10px;
 	line-height: 10px;
-	color: var(--foreground2);
+	color: var(--text-color);
 }
 
 .wallpaperItem>.wallpaperOverlay:hover {
@@ -662,8 +668,8 @@ th {
 .context-menu {
 	position: absolute;
 	z-index: 10000;
-	background: var(--background);
-	border: 1px solid var(--border);
+	background: var(--background-color);
+	border: 1px solid var(--border-color);
 	border-radius: 10px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 	padding: 5px;
@@ -680,7 +686,7 @@ th {
 .context-menu-item {
 	padding: 8px 12px;
 	font-size: 14px;
-	color: var(--foreground);
+	color: var(--title-color);
 	background: transparent;
 	border-radius: 5px;
 	cursor: pointer;
@@ -691,22 +697,22 @@ th {
 }
 
 .context-menu-item:hover {
-	background: var(--element);
+	background: var(--button-color);
 }
 
 .context-menu-item:active {
-	background: var(--active);
+	filter: contrast(0.8) saturate(2);
 	cursor: default;
 }
 
 .context-menu-item>.icon {
 	font-size: 18px;
 	margin-right: 8px;
-	color: var(--foreground2);
+	color: var(--text-color);
 }
 
 .window {
-	border: 1px solid var(--border);
+	border: 1px solid var(--border-color);
 	border-radius: 10px;
 }
 

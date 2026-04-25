@@ -12,7 +12,7 @@ body {
 	user-select: text !important;
 	max-width: 330px;
 	overflow-x: auto;
-	background: var(--background);
+	background: var(--background-color);
 	border-radius: 5px;
 	padding: 5px 10px;
 	letter-spacing: -4px;
@@ -48,7 +48,7 @@ body {
 	font-size: 20px;
 	font-weight: 300;
 	border-radius: 50px;
-	background: var(--element);
+	background: var(--button-color);
 	font-family: "Inter";
 }
 
@@ -58,7 +58,7 @@ body {
 	font-size: 30px;
 	font-weight: 300;
 	border-radius: 50px;
-	background: var(--element);
+	background: var(--button-color);
 }
 
 .buttonWide {
@@ -75,8 +75,8 @@ body {
 }
 
 .buttonAlt2 {
-	background: var(--accent) !important;
-	color: var(--background);
+	background: var(--accent-color) !important;
+	color: var(--background-color);
 }
 
 .calcButtons>button:active {

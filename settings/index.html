@@ -1,13 +1,18 @@
 <html>
 
 	<head>
+		<link rel="manifest" href="/manifest.json">
 		<script>
 			appname = "Settings";
 		</script>
+		<style>
+			html {
+				background: #000
+			}
+		</style>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-		<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-		<script src="/jsappapi/latest/main.js"></script>
-		<script src="settings.js" defer></script>
+		<script src="/jsappapi/latest/main.js" type="module"></script>
+		<script src="settings.js" defer type="module"></script>
 	</head>
 
 	<body>
@@ -17,25 +22,28 @@
 		<div class="area">
 			<p2><span class="icon">home</span>Apps</p2>
 			<p>Restore all hidden apps on the App Center.</p>
-			<button onclick="localStorage.removeItem('hiddenApps');dialog('Restored all hidden apps.', 'info')"><span class="icon">restart_alt</span>Restore</button>
+			<button id="restoreHiddenAppsButton"><span class="icon">restart_alt</span>Restore</button>
 		</div>
 		<div class="area">
 			<p2><span class="icon">palette</span>Theme</p2>
-			<p>To change the theme, open the Themes app.</p>
-			<button onclick="openApp('themeManager');"><span class="icon">open_in_new</span>Themes</button>
+			<p id="selectedThemeLabel"></p>
+			<div id="themeList"></div>
+			<button id="editThemeButton"><span class="icon">brush</span>Create a custom theme</button>
+			<button id="deleteThemeButton"><span class="icon">delete</span>Delete custom theme</button>
+
 		</div>
 		<div class="area">
 			<p2><span class="icon">wallpaper</span>Wallpaper</p2>
 			<p id="wallpaperName">Current Wallpaper: None</p>
-			<button onclick="importWallpaper();"><span class="icon">file_upload</span>Import</button>
-			<button onclick="clearWallpaper();"><span class="icon">clear</span>Clear</button>
-			<button onclick="downloadWallpaper();"><span class="icon">download</span>Download</button>
-			<button id="getSource" onclick="getSource();"><span class="icon">launch</span>Source</button>
+			<button id="importWallpaperButton"><span class="icon">file_upload</span>Import</button>
+			<button id="clearWallpaperButton"><span class="icon">clear</span>Clear</button>
+			<button id="downloadWallpaperButton"><span class="icon">download</span>Download</button>
+			<button id="getSourceButton"><span class="icon">launch</span>Source</button>
 			<div class="area" id="wallpaperList"></div>
 
 			<div class="toggleSwitchContainer">
 				<label class="switch">
-					<input type="checkbox" id="forceWallpaper" onclick="updateCheckBoxes()">
+					<input type="checkbox" id="forceWallpaper">
 					<span class="slider"></span>
 				</label>
 				<label for="forceWallpaper">Display wallpaper on all apps</label>
@@ -43,7 +51,7 @@
 
 			<div class="toggleSwitchContainer">
 				<label class="switch">
-					<input type="checkbox" id="blurWallpaper" onclick="updateCheckBoxes()">
+					<input type="checkbox" id="blurWallpaper">
 					<span class="slider"></span>
 				</label>
 				<label for="blurWallpaper">Blur wallpaper</label>
@@ -51,7 +59,7 @@
 
 			<div class="toggleSwitchContainer">
 				<label class="switch">
-					<input type="checkbox" id="darkenWallpaper" onclick="updateCheckBoxes()">
+					<input type="checkbox" id="darkenWallpaper">
 					<span class="slider"></span>
 				</label>
 				<label for="blurWallpaper">Darken wallpaper</label>
@@ -61,7 +69,7 @@
 		<div class="area">
 			<p2><span class="icon">restart_alt</span>Reset</p2>
 			<p>All data from all apps will be deleted permanently!</p>
-			<button onclick="resetAll()"><span class="icon">warning_amber</span>Reset settings and delete all
+			<button id="resetAllButton"><span class="icon">warning_amber</span>Reset settings and delete all
 				data</button>
 		</div>
 
@@ -71,6 +79,7 @@
 			<p>Project JS App Center</p>
 			<p id="versionString"></p>
 			<p id="versionStringJQ"></p>
+			<p id="appCount"></p>
 		</div>
 
 	</body>

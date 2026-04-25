@@ -9,14 +9,14 @@
 }
 
 .message.userMessage {
-	background: var(--element);
+	background: var(--button-color);
 	margin-left: auto;
 	width: fit-content;
 	max-width: 70%;
 }
 
 .message .content {
-	color: var(--foreground);
+	color: var(--title-color);
 	user-select: text;
 	white-space: pre;
 	text-wrap: auto;

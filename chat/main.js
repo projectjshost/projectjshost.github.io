@@ -1,3 +1,6 @@
+import $ from 'https://esm.sh/jquery';
+
+
 const tools = [{
 	type: "function",
 	function: {

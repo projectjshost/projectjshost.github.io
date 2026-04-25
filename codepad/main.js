@@ -64,7 +64,7 @@ function downloadCode() {
 
 const isDarkTheme = () => {
 	const documentRoot = document.querySelector(':root');
-	return color(getComputedStyle(documentRoot).getPropertyValue("--background")).hsl().color[2] < 50;
+	return color(getComputedStyle(documentRoot).getPropertyValue("--background-color")).hsl().color[2] < 50;
 }
 
 async function init(mode) {
@@ -83,7 +83,7 @@ async function init(mode) {
 				break;
 			}
 			case "css": {
-				const res = await fetch("/jsappapi/latest/interfaces/kan.css");
+				const res = await fetch("/jsappapi/latest/interface.css");
 				content = await res.text();
 				break;
 			}

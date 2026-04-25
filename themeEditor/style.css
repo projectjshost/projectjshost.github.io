@@ -1,14 +1,14 @@
 
 p2, label {
 	margin:0px!important;
-	color: var(--foreground2);
+	color: var(--text-color);
 	font-weight: 400!important;
 	font-size: 16px!important;
 	display: inline!important;
 }
 input[type="text"] {
-	background: var(--element);
-	color: var(--foreground);
+	background: var(--button-color);
+	color: var(--title-color);
 	border: 0;
 	margin: 5px;
 	margin-right: 0;
@@ -23,14 +23,13 @@ input[type="text"] {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	align-content: center;
 	justify-content: flex-start;
 	align-items: center;
 }
 
 .combiBarContainer> input {
-	padding: 7px!important;
-	height: 34px!important;
+	margin-right: 0!important;
+	height: 36px!important;
 	border-radius: 5px 0 0 5px!important;
 	font-family: 'Inter';
 }
@@ -54,8 +53,8 @@ h2 {
 	align-items: center;
 }
 input[type="text"] {
-	background: var(--element);
-	color: var(--foreground);
+	background: var(--button-color);
+	color: var(--title-color);
 	border: 0;
 	margin: 5px;
 	margin-right: 0;
@@ -81,9 +80,9 @@ input[type="radio"]+label {
 
 input[type="radio"]:checked+label {
 	pointer-events: none;
-	color: var(--foreground);
+	color: var(--title-color);
 	font-weight: 600;
-	border-bottom: 3px solid var(--foreground);
+	border-bottom: 3px solid var(--title-color);
 	padding-right: 10px;
 }
 
@@ -110,34 +109,30 @@ input#hueSlider {
 	border: 2px solid #666;
 }
 
-.demoBox.background {
-	background: var(--background);
+.demoBox.background-color {
+	background: var(--background-color);
 }
 
-.demoBox.background2 {
-	background: var(--background2);
+.demoBox.area-background-color {
+	background: var(--area-background-color);
 }
 
-.demoBox.foreground {
-	background: var(--foreground);
+.demoBox.title-color {
+	background: var(--title-color);
 }
 
-.demoBox.foreground2 {
-	background: var(--foreground2);
+.demoBox.text-color {
+	background: var(--text-color);
 }
 
-.demoBox.border {
-	background: var(--border);
+.demoBox.border-color {
+	background: var(--border-color);
 }
 
-.demoBox.element {
-	background: var(--element);
+.demoBox.button-color {
+	background: var(--button-color);
 }
 
-.demoBox.active {
-	background: var(--active);
-}
-
-.demoBox.accent {
-	background: var(--accent);
+.demoBox.accent-color {
+	background: var(--accent-color);
 }

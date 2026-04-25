@@ -1,127 +1,143 @@
+import $ from 'https://esm.sh/jquery';
+import color from 'https://esm.sh/color';
+
+import { openApp } from '../jsappapi/latest/main.js';
+import { dialog } from '../jsappapi/latest/dialog.js';
+import themeEngine from '../jsappapi/latest/themeEngine.js';
+
+const THEME_COLORS = [
+	{ id: 'background-color', label: 'App background' },
+	{ id: 'area-background-color', label: 'Content background' },
+	{ id: 'title-color', label: 'Title text' },
+	{ id: 'text-color', label: 'Normal text' },
+	{ id: 'border-color', label: 'Borders' },
+	{ id: 'button-color', label: 'Elements' },
+	{ id: 'accent-color', label: 'Accent' },
+];
+
 const themeEditor = {
 	init: () => {
-		// const color = require('color')
-		const documentRoot = document.querySelector(':root');
+		const documentRoot = document.documentElement;
 
-		const selectedOptionChange = () => {
-			const selectedColor = document.querySelector('input[name="color"]:checked').value;
-			const currentColor = color(getComputedStyle(documentRoot).getPropertyValue(`--${selectedColor}`).replaceAll(" ","")).hsl();
-			hueSlider.value=currentColor.color[0];
-			saturationSlider.value=currentColor.color[1];
-			valueSlider.value=currentColor.color[2];
-			updateLabels()
-		}
-		
-		const sliderChange = () => {
-			const selectedColor = document.querySelector('input[name="color"]:checked').value;
-			const currentColor = color.hsl([parseInt(hueSlider.value), parseInt(saturationSlider.value), parseInt(valueSlider.value)]);
-			documentRoot.style.setProperty(`--${selectedColor}`, currentColor);
-			updateLabels()
-		}
+		const editorHTML = `
+			<div id="themeEditor" class="area">
+				<h2>Edit colors</h2>
+				<div id="colorSelect">
+					<div id="demoBoxes">
+						${THEME_COLORS.map(c => `<div class="demoBox ${c.id}"></div>`).join('')}
+					</div>
+					<div id="colorOptions">
+						${THEME_COLORS.map((c, i) => `
+							<input name="color" type="radio" id="option_${c.id}" value="${c.id}" ${i === 0 ? 'checked' : ''}>
+							<label for="option_${c.id}">${c.label}</label><br>
+						`).join('')}
+					</div>
+				</div>
+				
+				<p2 id="hueLabel" class="slider-label"></p2><br>
+				<input type="range" min="0" max="359" id="hueSlider"><br>
+				
+				<p2 id="saturationLabel" class="slider-label"></p2><br>
+				<input type="range" min="0" max="100" id="saturationSlider"><br>
+				
+				<p2 id="valueLabel" class="slider-label"></p2><br>
+				<input type="range" min="0" max="100" id="valueSlider">
+			</div>
+			
+			<div id="saveTheme" class="area">
+				<h2>Save theme</h2>
+				<div class="combiBarContainer">
+					<input id="themeName" type="text" spellcheck="false" placeholder="Theme name">
+					<button id="saveButton" class="main">
+						<span class="icon">done</span>Save
+					</button>
+				</div>
+			</div>
+		`;
+
+		$("#currentView").append(editorHTML);
+
+		const $hueSlider = $("#hueSlider");
+		const $saturationSlider = $("#saturationSlider");
+		const $valueSlider = $("#valueSlider");
+		const $hueLabel = $("#hueLabel");
+		const $saturationLabel = $("#saturationLabel");
+		const $valueLabel = $("#valueLabel");
+		const $themeName = $("#themeName");
 
 		const updateLabels = () => {
-			$("#hueLabel").text(`Hue: ${hueSlider.value}`);
-			$("#saturationLabel").text(`Saturation: ${saturationSlider.value}%`);
-			$("#valueLabel").text(`Brightness: ${valueSlider.value}%`);
-		}
-		
-		// Area
-		$("#currentView").append(`<div id="themeEditor" class="area"></div>`);
-		$("#themeEditor").append(`<h2><i data-feather="edit-2"></i>Edit colors</h2>`);
-		// Color options
-		$("#themeEditor").append(`<div id="colorSelect"></div>`);
-		$("#colorSelect").append(`<div id="demoBoxes"></div>`);
-			$("#demoBoxes").append(`<div class="demoBox background"></div>`);
-			$("#demoBoxes").append(`<div class="demoBox background2"></div>`);
-			$("#demoBoxes").append(`<div class="demoBox foreground"></div>`);
-			$("#demoBoxes").append(`<div class="demoBox foreground2"></div>`);
-			$("#demoBoxes").append(`<div class="demoBox border"></div>`);
-			$("#demoBoxes").append(`<div class="demoBox element"></div>`);
-			$("#demoBoxes").append(`<div class="demoBox active"></div>`);
-			$("#demoBoxes").append(`<div class="demoBox accent"></div>`);
-		$("#colorSelect").append(`<div id="colorOptions"></div>`);
+			$hueLabel.text(`Hue: ${$hueSlider.val()}`);
+			$saturationLabel.text(`Saturation: ${$saturationSlider.val()}%`);
+			$valueLabel.text(`Brightness: ${$valueSlider.val()}%`);
+		};
 
-		$("#colorOptions").append(`<input name="color" type="radio" id="option_background" value="background" checked="checked">`);
-		$("#colorOptions").append(`<label for="option_background">App background</label><br>`);
-		
-		$("#colorOptions").append(`<input name="color" type="radio" id="option_background2" value="background2">`);
-		$("#colorOptions").append(`<label for="option_background2">Content background</label><br>`);
-		
-		$("#colorOptions").append(`<input name="color" type="radio" id="option_foreground" value="foreground">`);
-		$("#colorOptions").append(`<label for="option_foreground">Main text</label><br>`);
-		
-		$("#colorOptions").append(`<input name="color" type="radio" id="option_foreground2" value="foreground2">`);
-		$("#colorOptions").append(`<label for="option_foreground2">Normal text</label><br>`);
-		
-		$("#colorOptions").append(`<input name="color" type="radio" id="option_border" value="border">`);
-		$("#colorOptions").append(`<label for="option_border">Borders</label><br>`);
-		
-		$("#colorOptions").append(`<input name="color" type="radio" id="option_element" value="element">`);
-		$("#colorOptions").append(`<label for="option_element">Elements</label><br>`);
-		
-		$("#colorOptions").append(`<input name="color" type="radio" id="option_active" value="active">`);
-		$("#colorOptions").append(`<label for="option_active">Pressed elements</label><br>`);
-		
-		$("#colorOptions").append(`<input name="color" type="radio" id="option_accent" value="accent">`);
-		$("#colorOptions").append(`<label for="option_accent">Accent</label><br>`);
-		
-		// HSV Sliders
-		$("#themeEditor").append(`<p2 id="hueLabel"></p2><br>`);
-		$("#themeEditor").append(`<input type="range" min="0" max="359" id="hueSlider"></input><br>`);
-		$("#themeEditor").append(`<p2 id="saturationLabel"></p2><br>`);
-		$("#themeEditor").append(`<input type="range" min="0" max="100" id="saturationSlider"></input><br>`);
-		$("#themeEditor").append(`<p2 id="valueLabel"></p2><br>`);
-		$("#themeEditor").append(`<input type="range" min="0" max="100" id="valueSlider"></input>`);
-		const hueSlider = document.getElementById("hueSlider");
-		const saturationSlider = document.getElementById("saturationSlider");
-		const valueSlider = document.getElementById("valueSlider");
-		selectedOptionChange()
-		
-		$(`input[name="color"]`).on('input', () => { 
-			selectedOptionChange()
-		});
-		
-		$(`#hueSlider, #saturationSlider, #valueSlider`).on('input', () => { 
-			sliderChange()
-		});
+		const selectedOptionChange = () => {
+			const selectedColor = $('input[name="color"]:checked').val();
+			const cssVarValue = getComputedStyle(documentRoot).getPropertyValue(`--${selectedColor}`).trim();
+			const currentColor = color(cssVarValue).hsl();
+
+			$hueSlider.val(currentColor.color[0]);
+			$saturationSlider.val(currentColor.color[1]);
+			$valueSlider.val(currentColor.color[2]);
+
+			updateLabels();
+		};
+
+		const sliderChange = () => {
+			const selectedColor = $('input[name="color"]:checked').val();
+			const currentColor = color.hsl([
+				parseInt($hueSlider.val()),
+				parseInt($saturationSlider.val()),
+				parseInt($valueSlider.val())
+			]);
+
+			documentRoot.style.setProperty(`--${selectedColor}`, currentColor);
+			updateLabels();
+		};
+
 		const saveTheme = () => {
-			const name = document.getElementById("themeName").value.slice(0,32);
-			const content = {
-				"background": getComputedStyle(documentRoot).getPropertyValue(`--background`),
-				"background2": getComputedStyle(documentRoot).getPropertyValue(`--background2`),
-				"foreground": getComputedStyle(documentRoot).getPropertyValue(`--foreground`),
-				"foreground2": getComputedStyle(documentRoot).getPropertyValue(`--foreground2`),
-				"border": getComputedStyle(documentRoot).getPropertyValue(`--border`),
-				"element": getComputedStyle(documentRoot).getPropertyValue(`--element`),
-				"active": getComputedStyle(documentRoot).getPropertyValue(`--active`),
-				"accent": getComputedStyle(documentRoot).getPropertyValue(`--accent`),
-			}
+			const name = $themeName.val().slice(0, 32) || "Untitled";
+
+			const content = {};
+			THEME_COLORS.forEach(c => {
+				content[c.id] = getComputedStyle(documentRoot).getPropertyValue(`--${c.id}`).trim();
+			});
+
 			try {
-				localStorage.setItem(`customTheme_${btoa(name)}`, JSON.stringify(content).replaceAll(" ",""))
-			}
-			catch (err) {
+				const safeNameBase64 = btoa(name);
+				const storageKey = `customTheme_${safeNameBase64}`;
+
+				localStorage.setItem(storageKey, JSON.stringify(content).replace(/\s/g, ""));
+				themeEngine.setTheme(storageKey);
+				openApp('settings');
+			} catch (err) {
+				console.error(err);
 				dialog(err.toString(), "error");
 			}
-			themeEngine.setTheme(`customTheme_${btoa(name)}`);
-			openApp('themeManager')
-		}
-		// Theme Saving
-		$("#currentView").append(`<div id="saveTheme" class="area"></div>`);
-		$("#saveTheme").append(`<h2><i data-feather="save"></i>Save theme</h2>`);
-		$("#saveTheme").append(`<div class="combiBarContainer"><input id="themeName" type="text" spellcheck="false" placeholder="Theme name"></input><button id="saveButton" class="main"><span class="icon">done</span>Save</button></div>`);
-		if(localStorage.theme.substring(0, 12) == "customTheme_") {
-			document.getElementById("themeName").value=atob(localStorage.theme.slice(12))
-		}
-		$("#saveTheme>.combiBarContainer>#saveButton").on('mousedown', () => {
-			saveTheme()
-		});
-		$("#themeName").on('keyup', (e) => {
-			if (e.key === 'Enter') {
-				saveTheme()
+		};
+
+		selectedOptionChange();
+
+		if (localStorage.theme?.startsWith("customTheme_")) {
+			try {
+				$themeName.val(atob(localStorage.theme.slice(12)));
+			} catch (e) {
+				console.warn("Could not decode theme name.");
 			}
+		}
+
+		$('#currentView').on('input', 'input[name="color"]', selectedOptionChange);
+		$hueSlider.add($saturationSlider).add($valueSlider).on('input', sliderChange);
+
+		$("#saveButton").on('mousedown', saveTheme);
+		$themeName.on('keyup', (e) => {
+			if (e.key === 'Enter') saveTheme();
 		});
 	}
-}
-$(document).ready(() =>{
-	themeEditor.init()
-})
+};
+
+themeEditor.init();
+
+$("#backButton").on("click", () => {
+	openApp("settings");
+});

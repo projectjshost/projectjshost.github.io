@@ -1,3 +1,12 @@
+import { $, jQuery } from 'https://esm.sh/jquery';
+import { projectJS, openApp } from '../jsappapi/latest/main.js';
+import { themes } from '../jsappapi/latest/themes.js';
+import themeEngine from '../jsappapi/latest/themeEngine.js';
+import { dialog } from '../jsappapi/latest/dialog.js';
+import { sanitizeText } from '../jsappapi/latest/sanitize.js';
+import { wallpaperCreated, deleteWallpaper, createWallpaper } from '../jsappapi/latest/wallpaper.js';
+import { apps } from '../jsappapi/latest/apps.js';
+
 const updateCheckBoxes = () => {
 	if (document.getElementById("forceWallpaper").checked == true) {
 		localStorage.forceWallpaper = "true";
@@ -21,7 +30,7 @@ const updateCheckBoxes = () => {
 }
 
 const recreateWallpaper = () => {
-	if(wallpaperCreated) {
+	if (wallpaperCreated) {
 		deleteWallpaper();
 	}
 
@@ -37,10 +46,10 @@ const updateWallpaper = () => {
 		$("#wallpaperName").text("Current Wallpaper: None");
 	}
 
-	if(!localStorage.wallpaperSource) {
-		$("#getSource").hide();
+	if (!localStorage.wallpaperSource) {
+		$("#getSourceButton").hide();
 	} else {
-		$("#getSource").show();
+		$("#getSourceButton").show();
 	}
 }
 
@@ -72,7 +81,7 @@ const importWallpaper = () => {
 	input.click();
 }
 
-const clearWallpaper = () => {
+export const clearWallpaper = () => {
 	localStorage.removeItem("wallpaper");
 	localStorage.removeItem("wallpaperName");
 	localStorage.removeItem("wallpaperSource");
@@ -81,18 +90,18 @@ const clearWallpaper = () => {
 }
 
 const getSource = () => {
-	dialog(`<a href="${localStorage.wallpaperSource}">${localStorage.wallpaperSource}</a>`,"custom","Image Source")
+	dialog(`<a href="${localStorage.wallpaperSource}">${localStorage.wallpaperSource}</a>`, "custom", "Image Source")
 }
 
 const downloadWallpaper = () => {
-	if(localStorage.wallpaper) {
+	if (localStorage.wallpaper) {
 		let title = "";
-		if(localStorage.wallpaperSource) {
+		if (localStorage.wallpaperSource) {
 			title = localStorage.wallpaperName + ".avif";
 		} else {
 			title = localStorage.wallpaperName;
 		}
-		dialog(`Download file: <a href="${localStorage.wallpaper}" download>${title}</a><br>Please note that the quality of the source is better.`,"custom","Download Wallpaper")
+		dialog(`Download file: <a href="${localStorage.wallpaper}" download>${title}</a><br>Please note that the quality of the source is better.`, "custom", "Download Wallpaper")
 	} else {
 		dialog("Select a wallpaper first!", "error")
 	}
@@ -111,11 +120,10 @@ const getWallpaperList = async () => {
 	} catch (e) {
 		$("#wallpaperList").append(`${e}`);
 	}
-	
 }
 
 const renderWallpaperList = (source) => {
-	for(let i = 0; i<source.length; i++) {
+	for (let i = 0; i < source.length; i++) {
 		let img = source[i];
 		let url = `/lib/wallpapers/${img.name}.avif`;
 		let thumb = `/lib/wallpapers/thumbnails/${img.name}.avif`;
@@ -134,18 +142,104 @@ const renderWallpaperList = (source) => {
 }
 
 const resetAll = () => {
-	if (confirm("Are you sure? This can't be undone.")) {
+	if (confirm("Are you sure? All data will be deleted. This can't be undone.")) {
 		localStorage.clear();
 		document.write("All data has been successfully deleted.")
 	}
 }
 
-document.getElementById("forceWallpaper").checked = localStorage.forceWallpaper=="true";
-document.getElementById("blurWallpaper").checked = localStorage.blurWallpaper=="true";
-document.getElementById("darkenWallpaper").checked = localStorage.darkenWallpaper=="true";
-updateWallpaper()
+const restoreHiddenApps = () => {
+	localStorage.removeItem('hiddenApps');
+	dialog('Restored all hidden apps.', 'info');
+}
+
+$("#restoreHiddenAppsButton").on('click', restoreHiddenApps);
+
+$("#editThemeButton").on('click', () => { openApp("themeEditor") });
+$("#deleteThemeButton").on('click', () => {
+	if (!confirm(`Are you sure you want to delete your custom theme: "${atob(localStorage.theme.slice(12))}"?`)) return;
+	localStorage.removeItem(localStorage.theme);
+	localStorage.theme = themeEngine.default;
+	themeEngine.loadTheme();
+	tminit();
+});
+
+$("#clearWallpaperButton").on('click', clearWallpaper);
+$("#importWallpaperButton").on('click', importWallpaper);
+$("#downloadWallpaperButton").on('click', downloadWallpaper);
+$("#getSourceButton").on('click', getSource);
+
+$("#resetAllButton").on('click', resetAll);
+
+$("input[type='checkbox']").on('click', updateCheckBoxes);
+
+document.getElementById("forceWallpaper").checked = localStorage.forceWallpaper == "true";
+document.getElementById("blurWallpaper").checked = localStorage.blurWallpaper == "true";
+document.getElementById("darkenWallpaper").checked = localStorage.darkenWallpaper == "true";
+updateWallpaper();
 
 getWallpaperList();
 
 document.getElementById("versionString").innerText = `Version ${projectJS.version}.${projectJS.build}`;
 document.getElementById("versionStringJQ").innerText = `jQuery Version ${jQuery().jquery}`;
+document.getElementById("appCount").innerText = `Installed Apps: ${apps.length}`;
+
+const tminit = () => {
+	const $currentView = $("#themeList");
+	$("#deleteThemeButton").hide();
+	$currentView.empty();
+
+	const defaultThemes = Object.entries(themes).map(([id, data]) => ({
+		id,
+		isCustom: false,
+		name: data.name,
+		background: data["background-color"],
+		accent: data["accent-color"]
+	}));
+
+	const customThemes = Object.keys(localStorage)
+		.filter(key => key.startsWith("customTheme_"))
+		.map(id => {
+			const localData = JSON.parse(localStorage.getItem(id) || "{}");
+			return {
+				id,
+				isCustom: true,
+				name: sanitizeText(atob(id.slice(12))),
+				background: localData["background-color"],
+				accent: localData["accent-color"]
+			};
+		});
+
+	const allThemes = [...customThemes, ...defaultThemes];
+
+	const $themeElements = allThemes.map(theme => {
+		const isActive = theme.id === localStorage.theme;
+
+		const $item = $(`
+				<div class="themeItem ${isActive ? 'active' : ''}" title="${theme.name}">
+					<div class="theme">
+						<div class="preview" style="background: ${theme.background}"></div>
+						<div class="preview" style="background: ${theme.accent}"></div>
+					</div>
+				</div>
+			`);
+
+		if (isActive) {
+			$("#selectedThemeLabel").text(`Selected theme: ${theme.name}`)
+			if (theme.isCustom) {
+				$("#deleteThemeButton").show();
+			}
+		}
+
+		$item.on("mousedown", () => {
+			themeEngine.setTheme(theme.id);
+			tminit();
+		});
+
+		return $item;
+	});
+
+	$currentView.append($themeElements);
+}
+
+tminit();

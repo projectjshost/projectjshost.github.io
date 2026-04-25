@@ -2,14 +2,17 @@
 <html lang="en">
 
 	<head>
-		<meta charset="UTF-8">
 		<link rel="manifest" href="/manifest.json">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 		<script>
 			appname = "Compress Image"
 		</script>
-		<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-		<script src="/jsappapi/latest/main.js"></script>
+		<style>
+			html {
+				background: #000
+			}
+		</style>
+		<script src="/jsappapi/latest/main.js" type="module"></script>
 		<style>
 			.image-container {
 				display: flex;
@@ -22,11 +25,11 @@
 				min-width: 100px;
 				max-width: 300px;
 				max-height: 300px;
-				border: 1px solid var(--border);
+				border: 1px solid var(--border-color);
 				border-radius: 5px;
 				padding: 5px;
 				object-fit: contain;
-				background-color: var(--background2);
+				background-color: var(--area-background-color);
 			}
 
 			.controls {
@@ -39,11 +42,11 @@
 			.size-info {
 				margin-top: 8px;
 				font-size: 0.9em;
-				color: var(--foreground2);
+				color: var(--text-color);
 			}
 
 			input[type="checkbox"] {
-				accent-color: var(--accent);
+				accent-color: var(--accent-color);
 			}
 		</style>
 	</head>
