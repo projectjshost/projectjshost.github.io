@@ -3,7 +3,7 @@
 //      Project JS App Stuff
 const projectJS = {
 	version: "2.5",
-	build: 260425,
+	build: 260427,
 	launcher: "appcenter",
 };
 
@@ -17,6 +17,16 @@ const themes = {
 		"border-color": "hsl(240,5%,25%)",
 		"button-color": "hsl(240,5%,17%)",
 		"accent-color": "hsl(210,100%,83%)"
+	},
+	"epiloguelight": {
+		"name": "Epilogue Light",
+		"background-color": "hsl(240,5%,95%)",
+		"area-background-color": "hsl(240,5%,90%)",
+		"title-color": "hsl(210,5%,10%)",
+		"text-color": "hsl(210,5%,35%)",
+		"border-color": "hsl(240,5%,75%)",
+		"button-color": "hsl(240,5%,83%)",
+		"accent-color": "hsl(210,50%,59%)"
 	},
 	"mintlight": {
 		"name": "Mint Light",
@@ -97,6 +107,16 @@ const themes = {
 		"border-color": "hsl(240,10%,25%)",
 		"button-color": "hsl(240,10%,17%)",
 		"accent-color": "hsl(0,0%,100%)"
+	},
+	"dreamscape": {
+		"name": "Dreamscape",
+		"background-color": "hsl(230, 70%, 8%)",
+		"area-background-color": "hsl(230, 60%, 15%)",
+		"title-color": "hsl(215, 80%, 90%)",
+		"text-color": "hsl(220, 40%, 70%)",
+		"border-color": "hsl(230, 50%, 25%)",
+		"button-color": "hsl(230, 50%, 20%)",
+		"accent-color": "hsl(335, 85%, 55%)"
 	},
 	"mocha": {
 		"name": "Mocha",

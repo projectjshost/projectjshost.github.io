@@ -8,13 +8,13 @@ import { createWallpaper } from './wallpaper.js';
 //      Project JS App Stuff
 export const projectJS = {
 	version: "2.6",
-	build: 260425,
+	build: 260427,
 	launcher: "appcenter",
 };
 
 // Pre-load
 if (!localStorage.theme) {
-	localStorage.theme = themeEngine.default
+	localStorage.theme = themeEngine.getDefault();
 }
 themeEngine.loadTheme();
 
@@ -39,7 +39,7 @@ $(document).ready(() => {
 	console.log("LocalStorage test passed!");
 	if (!localStorage.lastUsedVersion) {
 		localStorage.lastUsedVersion = projectJS.version;
-		localStorage.theme = "epilogue";
+		localStorage.theme = themeEngine.getDefault();
 		localStorage.forceWallpaper = "false";
 		localStorage.blurWallpaper = "false";
 		localStorage.darkenWallpaper = "false";

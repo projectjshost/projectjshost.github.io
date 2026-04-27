@@ -1,14 +1,20 @@
 import { themes } from "./themes.js";
 
 export default {
-	default: "epilogue",
+	getDefault() {
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			return "epilogue";
+		} else {
+			return "epiloguelight"
+		}
+	},
 
 	loadTheme(name) {
 		if (typeof name === "undefined") {
 			if (localStorage.theme) {
 				name = localStorage.theme;
 			} else {
-				name = this.default;
+				name = this.getDefault();
 			}
 		}
 		document.querySelector(':root').removeAttribute('style');
@@ -35,7 +41,7 @@ export default {
 	setTheme(name) {
 		if (name !== localStorage.theme) {
 			if (typeof name == "undefined") {
-				name = this.default;
+				name = this.getDefault();
 			}
 			localStorage.theme = name;
 			this.loadTheme(name);

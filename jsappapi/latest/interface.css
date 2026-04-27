@@ -147,7 +147,7 @@ p2, h2 {
 	margin: 5px !important;
 	font-size: 24px;
 	font-weight: 300;
-	text-shadow: 0 0 3px rgb(0 0 0 / 50%);
+	/* text-shadow: 0 0 3px rgb(0 0 0 / 50%); */
 }
 
 textarea {
@@ -367,7 +367,7 @@ a {
 	font-size: 16.5px;
 	margin: 3px;
 	letter-spacing: -1px;
-	text-shadow: 0 0 3px rgb(0 0 0 / 50%);
+	/* text-shadow: 0 0 3px rgb(0 0 0 / 50%); */
 }
 
 .appTile:active {

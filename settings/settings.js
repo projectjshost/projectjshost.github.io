@@ -159,7 +159,7 @@ $("#editThemeButton").on('click', () => { openApp("themeEditor") });
 $("#deleteThemeButton").on('click', () => {
 	if (!confirm(`Are you sure you want to delete your custom theme: "${atob(localStorage.theme.slice(12))}"?`)) return;
 	localStorage.removeItem(localStorage.theme);
-	localStorage.theme = themeEngine.default;
+	localStorage.theme = themeEngine.getDefault();
 	themeEngine.loadTheme();
 	tminit();
 });
