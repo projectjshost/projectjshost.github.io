@@ -107,7 +107,8 @@ p {
 	margin: 10px
 }
 
-p2, h2 {
+p2,
+h2 {
 	display: block;
 	margin: 7px;
 	margin-left: 7px;
@@ -212,6 +213,7 @@ button.main {
 	background: var(--accent-color);
 	color: var(--background-color);
 }
+
 button.text {
 	background: transparent;
 	color: var(--accent-color);
@@ -308,10 +310,6 @@ body.dialog-open {
 	box-shadow: none !important;
 }
 
-.headerButton:hover {
-	background: var(--area-background-color) !important;
-}
-
 .headerButton:active {
 	filter: contrast(0.8) saturate(2);
 }
@@ -351,12 +349,9 @@ a {
 	margin: 4px;
 	width: 110px;
 	height: 110px;
-	text-align: center;
 	cursor: pointer;
 	transition: ease-out 0.15s;
 	flex-direction: column;
-	flex-wrap: nowrap;
-	align-content: center;
 	justify-content: center;
 	align-items: center;
 	user-select: none;
@@ -395,6 +390,17 @@ a {
 		transform: scale(1.1);
 	}
 
+	.wallpaperItem>.wallpaperOverlay:hover {
+		opacity: 1;
+	}
+
+	.headerButton:hover {
+		background: var(--area-background-color) !important;
+	}
+
+	.context-menu-item:hover {
+		background: var(--button-color);
+	}
 }
 
 ::selection {
@@ -627,10 +633,6 @@ th {
 	margin-right: 5px;
 }
 
-.wallpaperItem:hover {
-	border-color: var(--text-color);
-}
-
 .wallpaperItem:active {
 	filter: brightness(0.8)
 }
@@ -659,10 +661,6 @@ th {
 	font-size: 10px;
 	line-height: 10px;
 	color: var(--text-color);
-}
-
-.wallpaperItem>.wallpaperOverlay:hover {
-	opacity: 1;
 }
 
 .context-menu {
@@ -694,10 +692,6 @@ th {
 	transition: 0.1s;
 	display: flex;
 	align-items: center;
-}
-
-.context-menu-item:hover {
-	background: var(--button-color);
 }
 
 .context-menu-item:active {
