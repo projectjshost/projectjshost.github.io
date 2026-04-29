@@ -51,23 +51,23 @@ export const themes = {
 	},
 	"gruvbox": {
 		"name": "Gruvbox",
-		"background-color": "#1d2021",
-		"area-background-color": "#282828",
-		"title-color": "#ebdbb2",
-		"text-color": "#bdae93",
-		"border-color": "#504945",
-		"button-color": "#3c3836",
-		"accent-color": "#fabd2f"
+		"background-color": "hsl(195, 6%, 12%)",
+		"area-background-color": "hsl(0, 0%, 16%)",
+		"title-color": "hsl(43, 59%, 81%)",
+		"text-color": "hsl(39, 24%, 66%)",
+		"border-color": "hsl(22, 7%, 29%)",
+		"button-color": "hsl(20, 5%, 22%)",
+		"accent-color": "hsl(42, 95%, 58%)"
 	},
 	"nord": {
 		"name": "Nord",
-		"background-color": "#2e3440",
-		"area-background-color": "#3b4252",
-		"title-color": "#eceff4",
-		"text-color": "#d8dee9",
-		"border-color": "#5b677f",
-		"button-color": "#4c566a",
-		"accent-color": "#a3be8c"
+		"background-color": "hsl(220, 16%, 22%)",
+		"area-background-color": "hsl(222, 16%, 28%)",
+		"title-color": "hsl(218, 27%, 94%)",
+		"text-color": "hsl(219, 28%, 88%)",
+		"border-color": "hsl(220, 17%, 43%)",
+		"button-color": "hsl(220, 16%, 36%)",
+		"accent-color": "hsl(92, 28%, 65%)"
 	},
 	"nordlight": {
 		"name": "Nord Light",
@@ -111,63 +111,63 @@ export const themes = {
 	},
 	"mocha": {
 		"name": "Mocha",
-		"background-color": "#FCFBF9",
-		"area-background-color": "#F5EFEA",
-		"title-color": "#31231E",
-		"text-color": "#78645C",
-		"border-color": "#E8DCD6",
-		"button-color": "#F0E5DE",
-		"accent-color": "#9E7A68"
+		"background-color": "hsl(40, 33%, 98%)",
+		"area-background-color": "hsl(27, 35%, 94%)",
+		"title-color": "hsl(16, 24%, 15%)",
+		"text-color": "hsl(17, 13%, 42%)",
+		"border-color": "hsl(20, 28%, 87%)",
+		"button-color": "hsl(23, 37%, 91%)",
+		"accent-color": "hsl(20, 22%, 51%)"
 	},
 	"teal": {
 		"name": "Teal",
-		"background-color": "#061417",
-		"area-background-color": "#0B1E23",
-		"title-color": "#E3F2F5",
-		"text-color": "#84A7AD",
-		"border-color": "#1B3B42",
-		"button-color": "#122A30",
-		"accent-color": "#15B8B8"
+		"background-color": "hsl(191, 59%, 6%)",
+		"area-background-color": "hsl(192, 52%, 9%)",
+		"title-color": "hsl(190, 47%, 93%)",
+		"text-color": "hsl(189, 20%, 60%)",
+		"border-color": "hsl(191, 42%, 18%)",
+		"button-color": "hsl(192, 45%, 13%)",
+		"accent-color": "hsl(180, 80%, 40%)"
 	},
 	"lavender": {
 		"name": "Lavender",
-		"background-color": "#12111A",
-		"area-background-color": "#1A1926",
-		"title-color": "#EBEBF2",
-		"text-color": "#9B9BAE",
-		"border-color": "#312F47",
-		"button-color": "#222033",
-		"accent-color": "#E6E6FA"
+		"background-color": "hsl(247, 21%, 8%)",
+		"area-background-color": "hsl(245, 21%, 12%)",
+		"title-color": "hsl(240, 21%, 94%)",
+		"text-color": "hsl(240, 10%, 65%)",
+		"border-color": "hsl(245, 20%, 23%)",
+		"button-color": "hsl(246, 23%, 16%)",
+		"accent-color": "hsl(240, 67%, 94%)"
 	},
 	"acidforest": {
 		"name": "Acid Forest",
-		"background-color": "#0C1410",
-		"area-background-color": "#111C16",
-		"title-color": "#E6F0E9",
-		"text-color": "#8A9A5B",
-		"border-color": "#283C30",
-		"button-color": "#1A4D2E",
-		"accent-color": "#DFFF00"
+		"background-color": "hsl(150, 25%, 6%)",
+		"area-background-color": "hsl(147, 24%, 9%)",
+		"title-color": "hsl(138, 25%, 92%)",
+		"text-color": "hsl(75, 26%, 48%)",
+		"border-color": "hsl(144, 20%, 20%)",
+		"button-color": "hsl(144, 50%, 20%)",
+		"accent-color": "hsl(68, 100%, 50%)"
 	},
 	"cyberrose": {
 		"name": "Cyber Rose",
-		"background-color": "#16191B",
-		"area-background-color": "#1E2225",
-		"title-color": "#F2F4F7",
-		"text-color": "#8F98A8",
-		"border-color": "#3D444A",
-		"button-color": "#2D3436",
-		"accent-color": "#EF5777"
+		"background-color": "hsl(204, 10%, 10%)",
+		"area-background-color": "hsl(206, 10%, 13%)",
+		"title-color": "hsl(216, 24%, 96%)",
+		"text-color": "hsl(218, 13%, 61%)",
+		"border-color": "hsl(208, 10%, 26%)",
+		"button-color": "hsl(193, 9%, 19%)",
+		"accent-color": "hsl(347, 83%, 64%)"
 	},
 	"carbonmint": {
 		"name": "Carbon Mint",
-		"background-color": "#0A0A0A",
-		"area-background-color": "#121212",
-		"title-color": "#F8F9FA",
-		"text-color": "#4B79A1",
-		"border-color": "#2B2B2B",
-		"button-color": "#1A1A1A",
-		"accent-color": "#00FFC2"
+		"background-color": "hsl(0, 0%, 4%)",
+		"area-background-color": "hsl(0, 0%, 7%)",
+		"title-color": "hsl(210, 17%, 98%)",
+		"text-color": "hsl(208, 36%, 46%)",
+		"border-color": "hsl(0, 0%, 17%)",
+		"button-color": "hsl(0, 0%, 10%)",
+		"accent-color": "hsl(166, 100%, 50%)"
 	},
 	"synthwave": {
 		"name": "Synthwave",
