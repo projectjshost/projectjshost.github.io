@@ -87,7 +87,7 @@ function initClock() {
 
 	const centerX = width / 2;
 	const centerY = height / 2;
-	const radius = Math.min(centerX, centerY) - 2;
+	const radius = Math.min(centerX, centerY);
 
 	const rootStyles = getComputedStyle(document.documentElement);
 

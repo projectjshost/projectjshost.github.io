@@ -25,6 +25,7 @@ p1#header {
 	padding: 5px 10px !important;
 	border-radius: 50px;
 	user-select: none;
+	backdrop-filter: var(--backdrop-filter);
 }
 
 html,
@@ -126,6 +127,7 @@ h2 {
 	margin-bottom: 0;
 	padding: 10px;
 	overflow: hidden;
+	backdrop-filter: var(--backdrop-filter);
 }
 
 .appOverview>.area {
@@ -141,7 +143,7 @@ h2 {
 	flex-wrap: wrap;
 	justify-content: center;
 	overflow: initial;
-	border: 0
+	backdrop-filter: none;
 }
 
 .appOverview>p2 {
@@ -164,6 +166,7 @@ textarea {
 	padding: 10px;
 	font-size: 16px;
 	border: none;
+	backdrop-filter: var(--backdrop-filter);
 }
 
 .textareabig {
@@ -297,6 +300,7 @@ body.dialog-open {
 	border-radius: 50px;
 	overflow: hidden;
 	pointer-events: auto;
+	backdrop-filter: var(--backdrop-filter);
 }
 
 .headerButton {
@@ -374,6 +378,11 @@ a {
 	font-size: 60px;
 	height: 70px;
 	width: 70px
+}
+
+#clockCanvas {
+	backdrop-filter: var(--backdrop-filter);
+	border-radius: 50px;
 }
 
 @media(hover: hover) {
@@ -559,7 +568,6 @@ th {
 
 .themeItem {
 	padding: 5px;
-	background: var(--area-background-color);
 	border-radius: 10px;
 	border: 1px solid transparent;
 	width: max-content;

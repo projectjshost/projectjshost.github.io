@@ -4,7 +4,7 @@ import { themes } from '../jsappapi/latest/themes.js';
 import themeEngine from '../jsappapi/latest/themeEngine.js';
 import { dialog } from '../jsappapi/latest/dialog.js';
 import { sanitizeText } from '../jsappapi/latest/sanitize.js';
-import { wallpaperCreated, deleteWallpaper, createWallpaper } from '../jsappapi/latest/wallpaper.js';
+import { deleteWallpaper, createWallpaper } from '../jsappapi/latest/wallpaper.js';
 import { apps } from '../jsappapi/latest/apps.js';
 
 const updateCheckBoxes = () => {
@@ -30,12 +30,11 @@ const updateCheckBoxes = () => {
 }
 
 const recreateWallpaper = () => {
-	if (wallpaperCreated) {
-		deleteWallpaper();
-	}
-
+	themeEngine.loadTheme();
 	if (localStorage.forceWallpaper === "true" && localStorage.wallpaper) {
 		createWallpaper(localStorage.wallpaper);
+	} else {
+		deleteWallpaper();
 	}
 }
 
