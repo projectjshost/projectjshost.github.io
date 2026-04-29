@@ -74,7 +74,8 @@ const themeEditor = {
 		const selectedOptionChange = () => {
 			const selectedColor = $('input[name="color"]:checked').val();
 			const cssVarValue = getComputedStyle(documentRoot).getPropertyValue(`--${selectedColor}`).trim();
-			const currentColor = color(cssVarValue).hsl();
+			// Strip alpha when reading current value
+			const currentColor = color(cssVarValue).alpha(1).hsl();
 
 			$hueSlider.val(currentColor.color[0]);
 			$saturationSlider.val(currentColor.color[1]);
@@ -89,9 +90,10 @@ const themeEditor = {
 				parseInt($hueSlider.val()),
 				parseInt($saturationSlider.val()),
 				parseInt($valueSlider.val())
-			]);
+			]).alpha(1); // Ensure alpha is 1
 
-			documentRoot.style.setProperty(`--${selectedColor}`, currentColor);
+			// Force HSL string format
+			documentRoot.style.setProperty(`--${selectedColor}`, currentColor.hsl().string());
 			updateLabels();
 		};
 
@@ -100,7 +102,9 @@ const themeEditor = {
 
 			const content = {};
 			THEME_COLORS.forEach(c => {
-				content[c.id] = getComputedStyle(documentRoot).getPropertyValue(`--${c.id}`).trim();
+				const rawVal = getComputedStyle(documentRoot).getPropertyValue(`--${c.id}`).trim();
+				// Ensure saved value is converted back to pure HSL string (ignores browser RGB conversion)
+				content[c.id] = color(rawVal).alpha(1).hsl().string();
 			});
 
 			try {
