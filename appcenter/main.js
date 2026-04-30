@@ -98,7 +98,7 @@ function initClock() {
 		// Draw clock face
 		ctx.beginPath();
 		ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-		ctx.fillStyle = rootStyles.getPropertyValue('--button-color').trim() || "transparent";
+		ctx.fillStyle = rootStyles.getPropertyValue('--button-color-transparent').trim() || "transparent";
 		ctx.fill();
 
 		const now = new Date();

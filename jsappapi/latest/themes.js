@@ -115,7 +115,7 @@ export const themes = {
 		"area-background-color": "hsl(27, 35%, 94%)",
 		"title-color": "hsl(16, 24%, 15%)",
 		"text-color": "hsl(17, 13%, 42%)",
-		"border-color": "hsl(20, 28%, 87%)",
+		"border-color": "hsl(20, 20%, 70%)",
 		"button-color": "hsl(23, 37%, 91%)",
 		"accent-color": "hsl(20, 22%, 51%)"
 	},

@@ -1,3 +1,9 @@
+import color from 'https://esm.sh/color';
+
+import { setAppName } from "../jsappapi/latest/main.js";
+import { runInSandboxString } from "../jsappapi/latest/sandbox.js";
+import { downloadAsFile } from "../jsappapi/latest/download.js";
+
 require.config({
 	paths: {
 		'vs': 'https://cdn.jsdelivr.net/npm/monaco-editor/min/vs'
@@ -6,7 +12,7 @@ require.config({
 
 let editor;
 
-async function runCode() {
+window.runCode = async () => {
 	switch (mode) {
 		case "typescript": {
 			const codetoRun = editor.getValue().trim();
@@ -27,7 +33,7 @@ async function runCode() {
 
 }
 
-function saveCode() {
+window.saveCode = () => {
 	try {
 		localStorage.setItem("CodePad_" + mode, btoa(editor.getValue()));
 	} catch (e) {
@@ -36,12 +42,12 @@ function saveCode() {
 
 }
 
-function deleteCode() {
+window.deleteCode = () => {
 	localStorage.removeItem("CodePad_" + mode);
 	editor.setValue("")
 }
 
-function downloadCode() {
+window.downloadCode = () => {
 	var codePadContent = editor.getValue();
 	switch (mode) {
 		case "typescript":
@@ -67,7 +73,7 @@ const isDarkTheme = () => {
 	return color(getComputedStyle(documentRoot).getPropertyValue("--background-color")).hsl().color[2] < 50;
 }
 
-async function init(mode) {
+window.init = async (mode) => {
 	window.mode = mode;
 	let content = "";
 	if (localStorage.getItem("CodePad_" + mode) !== null) {

@@ -21,7 +21,7 @@ p1#header {
 	font-family: "Inter", Arial, sans-serif;
 	font-weight: 250;
 	font-size: 26px;
-	background: var(--background-color) !important;
+	background: var(--background-color-transparent) !important;
 	padding: 5px 10px !important;
 	border-radius: 50px;
 	user-select: none;
@@ -120,8 +120,8 @@ h2 {
 }
 
 .area {
-	background: var(--area-background-color);
-	border-radius: 10px;
+	background: var(--area-background-color-transparent);
+	border-radius: 15px;
 	margin: 5px;
 	margin-top: 10px;
 	margin-bottom: 0;
@@ -154,8 +154,8 @@ h2 {
 }
 
 textarea {
-	background: var(--area-background-color);
-	border-radius: 10px;
+	background: var(--area-background-color-transparent);
+	border-radius: 15px;
 	color: var(--title-color);
 	width: -webkit-fill-available;
 	width: -moz-available;
@@ -176,7 +176,7 @@ textarea {
 input[type="password"],
 input[type="text"],
 input[type="number"] {
-	background: var(--button-color);
+	background: var(--button-color-transparent);
 	border: none;
 	border-radius: 5px;
 	color: var(--title-color);
@@ -197,10 +197,10 @@ select {
 	font-family: 'Inter', Arial;
 	font-size: 16px;
 	font-weight: 400;
-	background: var(--button-color);
+	background: var(--button-color-transparent);
 	padding: 7px 10px;
 	border: 0;
-	border-radius: 5px;
+	border-radius: 10px;
 	color: var(--title-color);
 	margin: 5px;
 	cursor: pointer;
@@ -223,7 +223,7 @@ button.text {
 }
 
 button.main:disabled {
-	background: var(--button-color) !important;
+	background: var(--button-color-transparent) !important;
 	color: var(--text-color);
 	opacity: 1;
 }
@@ -242,16 +242,17 @@ button:active,
 	z-index: 9999;
 	padding: 10px;
 	position: fixed;
-	background: var(--background-color);
+	background: var(--background-color-transparent);
 	border: 1px solid var(--border-color);
 	font-size: 15px !important;
-	border-radius: 5px;
+	border-radius: 15px;
 	width: 80%;
 	height: 50%;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	user-select: text;
+	backdrop-filter: var(--backdrop-filter);
 }
 
 .dialog>p2 {
@@ -291,7 +292,7 @@ body.dialog-open {
 }
 
 .headerButtons {
-	background: var(--background-color);
+	background: var(--background-color-transparent);
 	position: absolute;
 	right: 10px;
 	display: flex;
@@ -404,11 +405,11 @@ a {
 	}
 
 	.headerButton:hover {
-		background: var(--area-background-color) !important;
+		filter: contrast(0.8);
 	}
 
 	.context-menu-item:hover {
-		background: var(--button-color);
+		background: var(--button-color-transparent);
 	}
 }
 
@@ -440,7 +441,7 @@ a {
 .switch {
 	position: relative;
 	display: inline-block;
-	width: 40px;
+	min-width: 40px;
 	height: 25px;
 	margin: 4px;
 	cursor: pointer;
@@ -458,7 +459,7 @@ a {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: var(--background-color);
+	background: var(--background-color-transparent);
 	transition: .2s;
 	border-radius: 50px;
 	border: 1px solid var(--border-color);
@@ -500,7 +501,7 @@ input[type="range"] {
 	width: -webkit-fill-available;
 	min-width: 300px;
 	height: 10px;
-	background: var(--button-color);
+	background: var(--button-color-transparent);
 	outline: none;
 	-webkit-transition: .2s;
 	transition: opacity .2s;
@@ -570,60 +571,29 @@ th {
 	padding: 5px;
 	border-radius: 10px;
 	border: 1px solid transparent;
-	width: max-content;
-	overflow: clip;
-	display: flex;
 	position: relative;
-	flex-direction: row;
-	justify-content: space-between;
-	z-index: 0;
 	cursor: pointer;
 }
 
 .themeItem.active {
-	color: var(--accent-color);
+	background-color: color-mix(in srgb, var(--accent-color) 20%, transparent);
 	border-color: var(--accent-color);
 }
 
-.themeItem.active::before {
-	display: block;
-	position: absolute;
-	content: "";
-	background: var(--accent-color);
-	width: 100%;
-	height: 100%;
-	left: 0;
-	top: 0;
-	z-index: -1;
-	opacity: 0.2;
-}
-
-.themeItem.active>.applyButton {
-	visibility: hidden;
-}
-
 .themeItem>.theme>.preview {
+	border-radius: 50px;
 	height: 32px;
 	width: 32px;
 }
 
-.themeItem>.theme {
-	font-size: 20px;
-	display: flex;
-	align-items: center;
-}
-
 .themeItem>.theme>.preview:nth-of-type(1) {
-	border-radius: 50px;
 	position: absolute;
 	scale: 0.5;
 }
 
-.themeItem>.theme>.preview:nth-of-type(2) {
-	border-radius: 50px;
-}
-
 #wallpaperList {
+	background: none;
+	backdrop-filter: none;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;

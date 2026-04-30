@@ -8,6 +8,12 @@ import { deleteWallpaper, createWallpaper } from '../jsappapi/latest/wallpaper.j
 import { apps } from '../jsappapi/latest/apps.js';
 
 const updateCheckBoxes = () => {
+	if (document.getElementById("uiTransparency").checked == true) {
+		localStorage.uiTransparency = "true";
+	} else {
+		localStorage.uiTransparency = "false";
+	}
+
 	if (document.getElementById("forceWallpaper").checked == true) {
 		localStorage.forceWallpaper = "true";
 	} else {
@@ -172,6 +178,7 @@ $("#resetAllButton").on('click', resetAll);
 
 $("input[type='checkbox']").on('click', updateCheckBoxes);
 
+document.getElementById("uiTransparency").checked = localStorage.uiTransparency == "true";
 document.getElementById("forceWallpaper").checked = localStorage.forceWallpaper == "true";
 document.getElementById("blurWallpaper").checked = localStorage.blurWallpaper == "true";
 document.getElementById("darkenWallpaper").checked = localStorage.darkenWallpaper == "true";

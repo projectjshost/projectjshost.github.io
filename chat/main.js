@@ -1,5 +1,8 @@
 import $ from 'https://esm.sh/jquery';
 
+import { sanitizeText } from '../jsappapi/latest/sanitize.js';
+import { chat } from '../jsappapi/latest/chat.js';
+import { runInSandboxString } from '../jsappapi/latest/sandbox.js';
 
 const tools = [{
 	type: "function",

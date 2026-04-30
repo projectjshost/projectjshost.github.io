@@ -8,7 +8,7 @@ import { createWallpaper } from './wallpaper.js';
 //      Project JS App Stuff
 export const projectJS = {
 	version: "2.6",
-	build: 260427,
+	build: 260501,
 	launcher: "appcenter",
 };
 
@@ -40,6 +40,7 @@ $(document).ready(() => {
 	if (!localStorage.lastUsedVersion) {
 		localStorage.lastUsedVersion = projectJS.version;
 		localStorage.theme = themeEngine.getDefault();
+		localStorage.uiTransparency = "true";
 		localStorage.forceWallpaper = "false";
 		localStorage.blurWallpaper = "false";
 		localStorage.darkenWallpaper = "false";
