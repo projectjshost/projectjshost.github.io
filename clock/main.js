@@ -1,6 +1,7 @@
 import $ from 'https://esm.sh/jquery';
 import moment from 'https://esm.sh/moment-timezone';
 import { setAppName } from '../jsappapi/latest/main.js';
+import { dialog } from '../jsappapi/latest/dialog.js';
 
 let timerInterval, stopwatchInterval;
 let timerTime = 0, stopwatchTime = 0;
@@ -61,7 +62,7 @@ const setTimerTime = () => {
 		timerTime = timeParts[0] * 3600 + timeParts[1] * 60 + timeParts[2];
 		$("#timerDisplay").text(formatTime(timerTime));
 	} else {
-		alert("Invalid time format. Please use HH:MM:SS.");
+		dialog("Invalid time format. Please use HH:MM:SS.", "error");
 	}
 };
 
@@ -192,11 +193,11 @@ const renderTimerTab = () => {
 		<div id="timerDisplay">${formatTime(timerTime)}</div>
 		<div id="timerControls">
 			<input type="text" id="timerInput" placeholder="HH:MM:SS" />
-			<button id="btn-set-timer">Set Time</button>
+			<button id="btn-set-timer" class="main"><span class="icon">alarm_on</span>Set Time</button>
 			<br>
-			<button id="btn-start-timer">Start</button>
-			<button id="btn-stop-timer">Stop</button>
-			<button id="btn-reset-timer">Reset</button>
+			<button id="btn-start-timer"><span class="icon">play_arrow</span>Start</button>
+			<button id="btn-stop-timer"><span class="icon">stop</span>Stop</button>
+			<button id="btn-reset-timer"><span class="icon">restart_alt</span>Reset</button>
 		</div>
 	`);
 };
@@ -206,9 +207,9 @@ const renderStopwatchTab = () => {
 	$("#currentView").empty().append(`
 		<div id="stopwatchDisplay">${formatTime(stopwatchTime)}</div>
 		<div id="stopwatchControls">
-			<button id="btn-start-sw">Start</button>
-			<button id="btn-stop-sw">Stop</button>
-			<button id="btn-reset-sw">Reset</button>
+			<button id="btn-start-sw" class="main"><span class="icon">play_arrow</span>Start</button>
+			<button id="btn-stop-sw"><span class="icon">stop</span>Stop</button>
+			<button id="btn-reset-sw"><span class="icon">restart_alt</span>Reset</button>
 		</div>
 	`);
 };

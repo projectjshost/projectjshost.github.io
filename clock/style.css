@@ -1,5 +1,5 @@
 body {
-	padding-bottom: 50px!important;
+	padding-bottom: 50px !important;
 }
 
 #bigClock {
@@ -16,7 +16,7 @@ body {
 }
 
 #tabs {
-	background: var(--area-background-color);
+	background: var(--area-background-color-transparent);
 	position: fixed;
 	left: 0;
 	bottom: 0;
@@ -24,6 +24,7 @@ body {
 	height: 55px;
 	display: flex;
 	justify-content: center;
+	backdrop-filter: var(--backdrop-filter);
 }
 
 .tab {
@@ -35,16 +36,16 @@ body {
 	opacity: 0.5;
 	color: var(--text-color);
 	cursor: pointer;
-	transition-property: color, opacity!important;
+	transition-property: color, opacity !important;
 	transition: 0.2s;
 	max-width: 150px;
 }
 
-.tab > .label {
+.tab>.label {
 	font-size: 12px;
 }
 
-.tab > .icon {
+.tab>.icon {
 	font-size: 20px;
 }
 
@@ -57,7 +58,7 @@ body {
 	opacity: 1;
 }
 
-.tab.active > .label {
+.tab.active>.label {
 	font-weight: 500
 }
 
@@ -77,6 +78,7 @@ body {
 	right: 5px;
 	width: initial;
 	width: -moz-available;
+	backdrop-filter: var(--backdrop-filter);
 }
 
 #searchResultBox {
@@ -88,8 +90,9 @@ body {
 	padding: 10px;
 	margin: 5px 0;
 	border-radius: 5px;
-	background: var(--area-background-color);
-	cursor: pointer
+	background: var(--area-background-color-transparent);
+	cursor: pointer;
+	backdrop-filter: var(--backdrop-filter);
 }
 
 .searchResult:hover {
@@ -101,57 +104,50 @@ body {
 }
 
 .clock {
-	background: var(--area-background-color);
+	background: var(--area-background-color-transparent);
 	padding: 10px;
 	margin: 5px;
-	border-radius: 10px;
+	border-radius: 15px;
 	display: flex;
 	flex-direction: column;
+	backdrop-filter: var(--backdrop-filter);
 }
 
-.clock > .label {
+.clock>.label {
 	color: var(--text-color)
 }
 
-.clock > .time {
+.clock>.time {
 	font-size: 24px;
 }
 
-.clock > button {
+.clock>button {
 	position: absolute;
 	right: 5px;
 	background: none;
 }
 
-#timerDisplay, #stopwatchDisplay {
-    text-align: center;
-    display: block;
-    font-size: 56px;
-    margin-top: 20px;
+#timerDisplay,
+#stopwatchDisplay {
+	text-align: center;
+	display: block;
+	font-size: 56px;
+	margin-top: 20px;
 }
 
-#timerControls, #stopwatchControls {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+#timerControls,
+#stopwatchControls {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
 }
 
-#timerControls button, #stopwatchControls button {
-    margin: 0 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background: var(--area-background-color);
-    color: var(--title-color);
-}
-
-#timerControls button:hover, #stopwatchControls button:hover {
-    background: var(--button-color);
+#timerControls button,
+#stopwatchControls button {
+	backdrop-filter: var(--backdrop-filter);
 }
 
 #timerInput {
-    width: 100px;
-	height: 40px;
+	width: 100px;
+	backdrop-filter: var(--backdrop-filter);
 }

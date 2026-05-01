@@ -178,7 +178,7 @@ input[type="text"],
 input[type="number"] {
 	background: var(--button-color-transparent);
 	border: none;
-	border-radius: 5px;
+	border-radius: 10px;
 	color: var(--title-color);
 	padding: 0 7px;
 	margin: 5px;
@@ -196,7 +196,7 @@ button,
 select {
 	font-family: 'Inter', Arial;
 	font-size: 16px;
-	font-weight: 400;
+	font-weight: 300;
 	background: var(--button-color-transparent);
 	padding: 7px 10px;
 	border: 0;
@@ -322,7 +322,7 @@ body.dialog-open {
 button>.icon {
 	font-size: 18px;
 	vertical-align: sub;
-	margin-right: 2px;
+	margin-right: 5px;
 }
 
 p2>.icon {
