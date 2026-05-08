@@ -410,6 +410,7 @@ a {
 
 	.context-menu-item:hover {
 		background: var(--button-color-transparent);
+		color: var(--accent-color)
 	}
 }
 
@@ -644,7 +645,7 @@ th {
 .context-menu {
 	position: absolute;
 	z-index: 10000;
-	background: var(--background-color);
+	background: var(--background-color-transparent);
 	border: 1px solid var(--border-color);
 	border-radius: 10px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
@@ -653,6 +654,7 @@ th {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Inter', Arial, sans-serif;
+	backdrop-filter: var(--backdrop-filter);
 }
 
 .context-menu.hidden {
@@ -680,7 +682,6 @@ th {
 .context-menu-item>.icon {
 	font-size: 18px;
 	margin-right: 8px;
-	color: var(--text-color);
 }
 
 .window {
