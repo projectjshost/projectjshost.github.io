@@ -18,13 +18,15 @@ body {
 #tabs {
 	background: var(--area-background-color-transparent);
 	position: fixed;
-	left: 0;
-	bottom: 0;
-	right: 0;
+	bottom: 10px;
+	left: 50%;
+	transform: translate(-50%, 0);
 	height: 55px;
 	display: flex;
 	justify-content: center;
 	backdrop-filter: var(--backdrop-filter);
+	border-radius: 15px;
+	min-width: 300px;
 }
 
 .tab {
@@ -65,7 +67,7 @@ body {
 #addTimezoneContainer {
 	position: fixed;
 	display: flex;
-	bottom: 60px;
+	bottom: 70px;
 	left: 0;
 	right: 0;
 	justify-content: center;
@@ -111,6 +113,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	backdrop-filter: var(--backdrop-filter);
+	position: relative;
 }
 
 .clock>.label {

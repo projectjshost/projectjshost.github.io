@@ -8,7 +8,7 @@ import { createWallpaper } from './wallpaper.js';
 //      Project JS App Stuff
 export const projectJS = {
 	version: "2.6",
-	build: 260501,
+	build: 260518,
 	launcher: "appcenter",
 };
 
@@ -36,7 +36,6 @@ $(document).ready(() => {
 		alert(failMessage);
 		return;
 	}
-	console.log("LocalStorage test passed!");
 	if (!localStorage.lastUsedVersion) {
 		localStorage.lastUsedVersion = projectJS.version;
 		localStorage.theme = themeEngine.getDefault();
