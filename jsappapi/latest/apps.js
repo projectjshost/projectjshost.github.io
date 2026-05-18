@@ -12,6 +12,7 @@ export const apps = [
 	{ "name": "Chat", "category": "Create", "target": "chat", "icon": "chat_ai" },
 	{ "name": "Generate Pics", "category": "Create", "target": "imagegenerator", "icon": "image" },
 	{ "name": "Code", "category": "Create", "target": "codepad", "icon": "code" },
+	{ "name": "Scrum Escape", "category": "Fun", "target": "https://scrumescapegamets.pages.dev/", "icon": "scrumescape" },
 	{ "name": "Portal", "category": "Fun", "target": "portal", "icon": "portal" },
 	{ "name": "Minecraft", "category": "Fun", "target": "https://irv77.github.io/AmplerLauncher/mc/1.12.2/", "icon": "minecraft" },
 	{ "name": "Getting Over It", "category": "Fun", "target": "https://turbowarp.org/900802860/embed?autoplay&addons=remove-curved-stage-border%2Cpause", "icon": "scratchcat" },
