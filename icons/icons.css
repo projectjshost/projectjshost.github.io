@@ -110,9 +110,11 @@
 }
 
 .icon-minecraft {
-	background: url("/icons/minecraft.svg");
+	background: url("/icons/minecraft.png");
 	background-repeat: no-repeat;
-	background-size: cover
+	background-size: cover;
+	image-rendering: pixelated;
+	scale: 0.85;
 }
 
 .icon-zip {
