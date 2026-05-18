@@ -39,19 +39,19 @@ function renderApps() {
 				? `<canvas class="appIcon" id="clockCanvas" width="70" height="70"></canvas>`
 				: `<div class="appIcon icon-${app.icon}"></div>`;
 
-			const appAction = app.target.startsWith("https://")
-				? `href="${app.target}"`
-				: `data-action="open"`;
+			const isWebApp = app.target.startsWith("https://");
 
-			const wrapperTag = app.target.startsWith("https://") ? "a" : "div";
+			const dataAttributes = isWebApp
+				? `data-target="webapp" data-webapptarget="${app.target}"`
+				: `data-target="${app.target}"`;
 
 			const tileHtml = `
-				<${wrapperTag} ${appAction} class="app-wrapper">
-					<div class="appTile" data-target="${app.target}">
+				<div data-action="open" class="app-wrapper">
+					<div class="appTile" ${dataAttributes}>
 						${iconHtml}
 						<p>${app.name}</p>
 					</div>
-				</${wrapperTag}>
+				</div>
 			`;
 
 			currentArea.insertAdjacentHTML('beforeend', tileHtml);
@@ -221,6 +221,11 @@ document.getElementById('appOverview').addEventListener('click', (e) => {
 	if (trigger) {
 		const appTile = trigger.querySelector('.appTile');
 		const target = appTile.dataset.target;
+		const webAppTarget = appTile.dataset.webapptarget;
+		if (typeof webAppTarget === "string") {
+			openApp(target, { "name": appTile.innerText, "target": webAppTarget });
+			return;
+		}
 		openApp(target);
 	}
 });

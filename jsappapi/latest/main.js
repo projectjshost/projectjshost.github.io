@@ -70,7 +70,11 @@ $(document).ready(() => {
 });
 
 // Opens an App
-export const openApp = (appName) => {
+export const openApp = (appName, params) => {
+	if (typeof params === "object") {
+		window.location = `/${appName}/?${new URLSearchParams(params).toString()}`;
+		return;
+	}
 	window.location = `/${appName}/`;
 }
 
