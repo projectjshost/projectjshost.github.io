@@ -148,7 +148,7 @@ document.addEventListener('contextmenu', (e) => {
 	if (appTile) {
 		e.preventDefault();
 
-		const target = appTile.dataset.target;
+		const target = appTile.dataset.webapptarget || appTile.dataset.target;
 
 		if (target) {
 			contextTargetApp = target;
