@@ -184,3 +184,10 @@
 	border-radius: 15px;
 	scale: 0.85;
 }
+
+.icon-alicegaze {
+	background: url("/icons/alicegaze.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	image-rendering: pixelated;
+}
