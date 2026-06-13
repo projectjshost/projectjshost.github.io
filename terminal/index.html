@@ -7,11 +7,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 		<script src="/jsappapi/latest/main.js" type="module"></script>
 		<script src="/lib/ttty.iife.js"></script>
-		<style>
-			html {
-				background: #000
-			}
-		</style>
 	</head>
 
 	<body>
@@ -35,6 +30,11 @@
 				border-radius: 15px;
 				background: var(--background-color-transparent);
 				backdrop-filter: var(--backdrop-filter);
+			}
+
+			body.windowed #terminal {
+				background: none;
+				backdrop-filter: none;
 			}
 
 			:root {

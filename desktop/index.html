@@ -2,17 +2,26 @@
 
 	<head>
 		<link rel="manifest" href="/manifest.json">
-		<script>appname = "Notes"</script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<style>
+			html,
+			body {
+				overflow: hidden;
+				position: fixed;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				max-width: none!important;
+			}
+		</style>
 		<script src="/jsappapi/latest/main.js" type="module"></script>
+		<script src="main.js" type="module"></script>
 	</head>
 
-	<body>
+	<body class="">
 		<header>
-			<p1 id="header"></p1>
 		</header>
-		<textarea class="textareabig" spellcheck="false" id="text" autofocus onchange="saveNote()" placeholder="Type here..."></textarea>
-		<script src="./main.js"></script>
 	</body>
 
 </html>

@@ -1,5 +1,5 @@
 import { apps } from "../jsappapi/latest/apps.js";
-import { openApp } from "../jsappapi/latest/main.js";
+import { openApp, isWindowed } from "../jsappapi/latest/main.js";
 
 let hiddenApps = JSON.parse(localStorage.getItem('hiddenApps') || '[]');
 let favoriteApps = JSON.parse(localStorage.getItem('favoriteApps') || '[]');
@@ -16,6 +16,7 @@ function renderApps() {
 	apps.forEach(app => {
 		if (hiddenApps.includes(app.target)) return;
 		if (favoriteApps.includes(app.target)) return;
+		if (isWindowed && app.target.startsWith("http")) return;
 
 		if (!categories[app.category]) {
 			categories[app.category] = [];

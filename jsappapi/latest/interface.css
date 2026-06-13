@@ -1,6 +1,10 @@
 @import "/fonts/fonts.css";
 @import "/icons/icons.css";
 
+body.windowed header {
+	display: none;
+}
+
 header {
 	padding: 6px 10px;
 	position: fixed;
@@ -28,22 +32,23 @@ p1#header {
 	backdrop-filter: var(--backdrop-filter);
 }
 
-html,
 body {
 	margin: 0;
 	padding: 0;
 	background: var(--background-color);
 	font-family: 'Inter', Arial, sans-serif;
 	color: var(--title-color);
-	overscroll-behavior: contain
-}
-
-body {
+	overscroll-behavior: contain;
 	z-index: 0;
 	padding-top: 55px;
 	max-width: 900px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+body.windowed {
+	background: transparent;
+	padding-top: 0;
 }
 
 div#wallpaperElement {
@@ -430,7 +435,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--button-color);
+	background: var(--button-color-transparent);
 	border-radius: 50px;
 }
 
@@ -687,9 +692,194 @@ th {
 .window {
 	border: 1px solid var(--border-color);
 	border-radius: 10px;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	background: var(--background-color-transparent);
+	backdrop-filter: var(--backdrop-filter);
 }
 
-.window .windowbody {
+.window.maximized {
+	top: 0 !important;
+	left: 0 !important;
+	bottom: 0 !important;
+	right: 0 !important;
+	border: none;
+	border-radius: 0;
+}
+
+.window.maximized > .resizer {
+	display: none;
+}
+
+.window.minimized > .resizer {
+	display: none;
+}
+
+.window.minimized {
+	height: auto !important;
+}
+
+.window.minimized .windowbody {
+	display: none;
+}
+
+.window>.titlebar {
+	display: flex;
+	user-select: none;
+	justify-content: space-between;
+	padding: 2.5px 5px;
+}
+
+body.reverseTitlebar .window>.titlebar, body.reverseTitlebar .window>.titlebar>.captionButtons {
+	flex-direction: row-reverse;
+}
+
+body.trafficLightCaptionButtons .window>.titlebar>.captionButtons>button {
+	color: transparent;
+	scale: 0.67;
+	transition-property: color;
+	transition: 0.1s;
+	box-shadow: inset 0 0 0 1px hsl(0deg 0% 0% / 33%);
+}
+
+body.trafficLightCaptionButtons .window>.titlebar>.captionButtons>button:hover {
+	filter: brightness(1.2)
+}
+
+body.trafficLightCaptionButtons .window>.titlebar>.captionButtons:hover>button {
+	color: hsl(
+0deg 0% 0% / 50%);
+	-webkit-text-stroke: 0.5px;
+}
+
+body.trafficLightCaptionButtons .window>.titlebar>.captionButtons>.minimizeButton {
+	background: #34c759;
+}
+
+body.trafficLightCaptionButtons .window>.titlebar>.captionButtons>.maximizeButton {
+	background: #fac800;
+}
+
+body.trafficLightCaptionButtons .window>.titlebar>.captionButtons>.closeButton {
+	background: #ff5c5f!important;
+}
+
+.window>.titlebar:active {
+	cursor: grabbing
+}
+
+.window>.titlebar>.title {
+	font-weight: 300;
+	text-transform: capitalize;
+	margin-left: 2.5px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: -webkit-fill-available;
+}
+
+.window>.titlebar>.captionButtons {
+	display: flex;
+}
+
+.window>.titlebar>.captionButtons>button {
+	background: none;
+	padding: 0;
+	margin: 0;
+	width: 22px;
+	border-radius: 50px;
+	transition: none;
+	cursor: default;
+}
+
+.window>.titlebar>.captionButtons>button:hover {
+	background: var(--button-color);
+}
+
+.window>.titlebar>.captionButtons>button.closeButton:hover {
+	background: var(--accent-color);
+	color: var(--background-color);
+}
+
+.window>.titlebar>.captionButtons>button>.icon {
+	background: none;
+	padding: 0;
+	margin: 0;
+}
+
+.window>.windowbody {
 	border: none;
 	width: 100%;
+	flex-grow: 1;
+	border-radius: 0 0 10px 10px;
+}
+
+.resizer {
+	position: absolute;
+	z-index: 10;
+}
+
+.resizer.n {
+	top: -4px;
+	left: 0;
+	width: 100%;
+	height: 8px;
+	cursor: n-resize;
+}
+
+.resizer.s {
+	bottom: -4px;
+	left: 0;
+	width: 100%;
+	height: 8px;
+	cursor: s-resize;
+}
+
+.resizer.e {
+	top: 0;
+	right: -4px;
+	width: 8px;
+	height: 100%;
+	cursor: e-resize;
+}
+
+.resizer.w {
+	top: 0;
+	left: -4px;
+	width: 8px;
+	height: 100%;
+	cursor: w-resize;
+}
+
+.resizer.ne {
+	top: -4px;
+	right: -4px;
+	width: 12px;
+	height: 12px;
+	cursor: ne-resize;
+}
+
+.resizer.nw {
+	top: -4px;
+	left: -4px;
+	width: 12px;
+	height: 12px;
+	cursor: nw-resize;
+}
+
+.resizer.se {
+	bottom: -4px;
+	right: -4px;
+	width: 12px;
+	height: 12px;
+	cursor: se-resize;
+}
+
+.resizer.sw {
+	bottom: -4px;
+	left: -4px;
+	width: 12px;
+	height: 12px;
+	cursor: sw-resize;
 }

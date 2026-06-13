@@ -1,6 +1,6 @@
 import $ from 'https://esm.sh/jquery';
 
-import { projectJS } from './main.js';
+import { projectJS, isWindowed } from './main.js';
 
 export const shouldDrawWallpaper = () => {
 	return (location.pathname == `/${projectJS.launcher}/` | localStorage.forceWallpaper === "true") && localStorage.wallpaper;
@@ -8,7 +8,7 @@ export const shouldDrawWallpaper = () => {
 
 // Sets Wallpaper of App
 export const createWallpaper = (source) => {
-	if (!shouldDrawWallpaper()) return;
+	if (!shouldDrawWallpaper() || isWindowed) return;
 	$("#wallpaper").remove();
 	$("#wallpaperElement").remove();
 	$('html').append(`<div id="wallpaperElement"></div>`)

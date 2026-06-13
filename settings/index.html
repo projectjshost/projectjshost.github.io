@@ -5,14 +5,14 @@
 		<script>
 			appname = "Settings";
 		</script>
-		<style>
-			html {
-				background: #000
-			}
-		</style>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 		<script src="/jsappapi/latest/main.js" type="module"></script>
 		<script src="settings.js" defer type="module"></script>
+		<style>
+			body.windowed .desktopSettings {
+				display: block!important;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -23,6 +23,9 @@
 			<p2><span class="icon">home</span>Apps</p2>
 			<p>Restore all hidden apps on the App Center.</p>
 			<button id="restoreHiddenAppsButton"><span class="icon">restart_alt</span>Restore</button>
+		</div>
+		<div class="area desktopSettings" style="display: none;">
+			<p2><span class="icon">select_window_2</span>Desktop</p2>
 		</div>
 		<div class="area">
 			<p2><span class="icon">palette</span>Theme</p2>

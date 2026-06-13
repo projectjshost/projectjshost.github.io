@@ -8,8 +8,8 @@ import { createWallpaper } from './wallpaper.js';
 //      Project JS App Stuff
 export const projectJS = {
 	version: "2.6",
-	build: 260518,
-	launcher: "appcenter",
+	build: 260612,
+	launcher: localStorage.launcher ?? "appcenter",
 };
 
 // Pre-load
@@ -17,6 +17,21 @@ if (!localStorage.theme) {
 	localStorage.theme = themeEngine.getDefault();
 }
 themeEngine.loadTheme();
+
+window.addEventListener('storage', (event) => {
+
+	switch(event.key) {
+		case "uiTransparency":
+		case "theme":
+			themeEngine.loadTheme();
+			break;
+		case "wallpaper":
+			createWallpaper(localStorage.wallpaper);
+			break;
+	}
+});
+
+export const isWindowed = window.top.location.pathname.startsWith("/desktop") && !location.pathname.startsWith("/desktop");
 
 // Initialize App
 $(document).ready(() => {
@@ -61,6 +76,10 @@ $(document).ready(() => {
 		$("#launcherButton").on('click', () => { openApp(projectJS.launcher) })
 	}
 
+	if (isWindowed) {
+		$(document.body).addClass("windowed");
+	}
+
 	if (localStorage.forceWallpaper == "true" && localStorage.wallpaper) {
 		createWallpaper(localStorage.wallpaper)
 	}
@@ -70,6 +89,10 @@ $(document).ready(() => {
 
 // Opens an App
 export const openApp = (appName, params) => {
+	if (isWindowed) {
+		window.top.openAppWindow(appName, params);
+		return;
+	}
 	if (typeof params === "object") {
 		window.location = `/${appName}/?${new URLSearchParams(params).toString()}`;
 		return;
@@ -83,18 +106,3 @@ export const setAppName = (name) => {
 	$("#header").text(name);
 	document.title = `${name} - Project JS Apps`
 }
-
-// const openAppWindow = (target) => {
-// 	$("body").append(`
-// 		<div class="window">
-// 			<div class="titlebar">
-// 				<span class="title">${target}</span>
-// 				<div class="captionbuttons">
-// 					<button>Close</button>
-// 				</div>
-// 			</div>
-// 			<iframe class="windowbody" src="/${target}/?windowed=true">
-// 			</iframe>
-// 		</div>
-// 	`)
-// }
