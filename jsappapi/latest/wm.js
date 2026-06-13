@@ -2,23 +2,42 @@ import $ from 'https://esm.sh/jquery';
 
 let windowZIndex = 100;
 
-export const openAppWindow = (target, params) => {
-	if (typeof params === "object") {
+export const openAppWindow = (target, params, properties = {}) => {
+	const {
+		x = 50,
+		y = 50,
+		width = 400,
+		height = 600,
+		canClose = true,
+		canResize = true,
+		canMinimize = true
+	} = properties;
+
+	if (typeof params === "object" && params !== null) {
 		target = `${target}?${new URLSearchParams(params).toString()}`;
 	}
+
+	const resizersHtml = canResize ? `
+		<div class="resizer n" data-dir="n"></div><div class="resizer e" data-dir="e"></div>
+		<div class="resizer s" data-dir="s"></div><div class="resizer w" data-dir="w"></div>
+		<div class="resizer ne" data-dir="ne"></div><div class="resizer nw" data-dir="nw"></div>
+		<div class="resizer se" data-dir="se"></div><div class="resizer sw" data-dir="sw"></div>
+	` : '';
+
+	const minimizeButtonHtml = canMinimize ? `<button class="minimizeButton"><span class="icon">keyboard_arrow_down</span></button>` : '';
+	const maximizeButtonHtml = canResize ? `<button class="maximizeButton"><span class="icon">keyboard_arrow_up</span></button>` : '';
+	const closeButtonHtml = canClose ? `<button class="closeButton"><span class="icon">close_small</span></button>` : '';
+
 	const windowHtml = `
-        <div class="window" style="top: 50px; left: 50px; width: 400px; height: 600px; z-index: ${++windowZIndex};">
-            <div class="resizer n" data-dir="n"></div><div class="resizer e" data-dir="e"></div>
-            <div class="resizer s" data-dir="s"></div><div class="resizer w" data-dir="w"></div>
-            <div class="resizer ne" data-dir="ne"></div><div class="resizer nw" data-dir="nw"></div>
-            <div class="resizer se" data-dir="se"></div><div class="resizer sw" data-dir="sw"></div>
+        <div class="window" style="top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px; z-index: ${++windowZIndex};">
+            ${resizersHtml}
             
             <div class="titlebar">
                 <span class="title">${target}</span>
                 <div class="captionButtons">
-                    <button class="minimizeButton"><span class="icon">keyboard_arrow_down</span></button>
-                    <button class="maximizeButton"><span class="icon">keyboard_arrow_up</span></button>
-                    <button class="closeButton"><span class="icon">close_small</span></button>
+                    ${minimizeButtonHtml}
+                    ${maximizeButtonHtml}
+                    ${closeButtonHtml}
                 </div>
             </div>
             <iframe class="windowbody" src="/${target}"></iframe>
@@ -36,7 +55,6 @@ export const openAppWindow = (target, params) => {
 		try {
 			const iframeWindow = this.contentWindow;
 			if (iframeWindow) {
-
 				iframeWindow.addEventListener('mousedown', () => {
 					$win.trigger('mousedown');
 				}, true);

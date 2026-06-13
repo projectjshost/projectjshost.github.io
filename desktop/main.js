@@ -1,14 +1,14 @@
 import { openAppWindow } from "../jsappapi/latest/wm.js";
 import { apps } from "../jsappapi/latest/apps.js";
 
-if(localStorage.trafficLightCaptionButtons === "true") {
+if (localStorage.trafficLightCaptionButtons === "true") {
 	document.body.classList.add("trafficLightCaptionButtons");
 }
 
-if(localStorage.reverseTitlebar === "true") {
+if (localStorage.reverseTitlebar === "true") {
 	document.body.classList.add("reverseTitlebar");
 }
 
-openAppWindow("appcenter");
+openAppWindow("appcenter", null, { width: 500, height: 650, canClose: false });
 
 window.openAppWindow = openAppWindow;
