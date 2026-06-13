@@ -1,6 +1,8 @@
 import $ from 'https://esm.sh/jquery';
 
-let windowZIndex = 100;
+let baseZIndex = 1000;
+let bottomZIndex = 100;
+let topZIndex = 10000;
 
 export const openAppWindow = (target, params, properties = {}) => {
 	const {
@@ -10,7 +12,12 @@ export const openAppWindow = (target, params, properties = {}) => {
 		height = 600,
 		canClose = true,
 		canResize = true,
-		canMinimize = true
+		canMinimize = true,
+		canMove = true,
+		maximized = false,
+		minimized = false,
+		alwaysOnTop = false,
+		alwaysOnBottom = false
 	} = properties;
 
 	if (typeof params === "object" && params !== null) {
@@ -28,8 +35,17 @@ export const openAppWindow = (target, params, properties = {}) => {
 	const maximizeButtonHtml = canResize ? `<button class="maximizeButton"><span class="icon">keyboard_arrow_up</span></button>` : '';
 	const closeButtonHtml = canClose ? `<button class="closeButton"><span class="icon">close_small</span></button>` : '';
 
+	let initialZIndex;
+	if (alwaysOnTop) {
+		initialZIndex = ++topZIndex;
+	} else if (alwaysOnBottom) {
+		initialZIndex = ++bottomZIndex;
+	} else {
+		initialZIndex = ++baseZIndex;
+	}
+
 	const windowHtml = `
-        <div class="window" style="top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px; z-index: ${++windowZIndex};">
+        <div class="window" style="top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px; z-index: ${initialZIndex};">
             ${resizersHtml}
             
             <div class="titlebar">
@@ -47,9 +63,17 @@ export const openAppWindow = (target, params, properties = {}) => {
 	const $win = $(windowHtml);
 	const $iframe = $win.find('iframe');
 
-	$win.on('mousedown', () => {
-		$win.css('z-index', ++windowZIndex);
-	});
+	const updateZIndex = () => {
+		if (alwaysOnTop) {
+			$win.css('z-index', ++topZIndex);
+		} else if (alwaysOnBottom) {
+			$win.css('z-index', ++bottomZIndex);
+		} else {
+			$win.css('z-index', ++baseZIndex);
+		}
+	};
+
+	$win.on('mousedown', updateZIndex);
 
 	$iframe.on('load', function () {
 		try {
@@ -71,7 +95,13 @@ export const openAppWindow = (target, params, properties = {}) => {
 		$win.removeClass('maximized');
 	});
 
-	let preMaxState = {};
+	let preMaxState = {
+		top: `${y}px`,
+		left: `${x}px`,
+		width: `${width}px`,
+		height: `${height}px`
+	};
+
 	$win.find('.maximizeButton').on('click', () => {
 		if ($win.hasClass('maximized')) {
 			$win.removeClass('maximized');
@@ -81,33 +111,45 @@ export const openAppWindow = (target, params, properties = {}) => {
 				top: $win.css('top'), left: $win.css('left'),
 				width: $win.css('width'), height: $win.css('height')
 			};
-			$win.removeClass('minimized').addClass('maximized').removeAttr('style').css('z-index', ++windowZIndex);
+			$win.removeClass('minimized').addClass('maximized').removeAttr('style');
+			updateZIndex();
 		}
 	});
 
-	$win.find('.titlebar').on('mousedown', function (e) {
-		if ($win.hasClass('maximized') || $(e.target).closest('.captionButtons').length) return;
+	if (maximized) {
+		$win.addClass('maximized');
+		$win.css({ top: '', left: '', width: '', height: '' });
+	} else if (minimized) {
+		$win.addClass('minimized');
+	}
 
-		let startX = e.clientX, startY = e.clientY;
-		let startTop = parseInt($win.css('top'), 10) || 0;
-		let startLeft = parseInt($win.css('left'), 10) || 0;
+	if (canMove) {
+		$win.find('.titlebar').on('mousedown', function (e) {
+			if ($win.hasClass('maximized') || $(e.target).closest('.captionButtons').length) return;
 
-		$('.windowbody').css('pointer-events', 'none');
+			let startX = e.clientX, startY = e.clientY;
+			let startTop = parseInt($win.css('top'), 10) || 0;
+			let startLeft = parseInt($win.css('left'), 10) || 0;
 
-		const onMouseMove = (moveEvent) => {
-			$win.css({
-				top: startTop + (moveEvent.clientY - startY),
-				left: startLeft + (moveEvent.clientX - startX)
-			});
-		};
+			$('.windowbody').css('pointer-events', 'none');
 
-		const onMouseUp = () => {
-			$(document).off('mousemove', onMouseMove).off('mouseup', onMouseUp);
-			$('.windowbody').css('pointer-events', '');
-		};
+			const onMouseMove = (moveEvent) => {
+				$win.css({
+					top: startTop + (moveEvent.clientY - startY),
+					left: startLeft + (moveEvent.clientX - startX)
+				});
+			};
 
-		$(document).on('mousemove', onMouseMove).on('mouseup', onMouseUp);
-	});
+			const onMouseUp = () => {
+				$(document).off('mousemove', onMouseMove).off('mouseup', onMouseUp);
+				$('.windowbody').css('pointer-events', '');
+			};
+
+			$(document).on('mousemove', onMouseMove).on('mouseup', onMouseUp);
+		});
+	} else {
+		$win.find('.titlebar').css('cursor', 'default');
+	}
 
 	$win.find('.resizer').on('mousedown', function (e) {
 		e.preventDefault();
