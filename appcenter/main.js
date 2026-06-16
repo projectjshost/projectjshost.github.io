@@ -231,4 +231,14 @@ document.getElementById('appOverview').addEventListener('click', (e) => {
 	}
 });
 
+window.addEventListener('storage', (event) => {
+	console.log("event");
+	switch (event.key) {
+		case "favoriteApps":
+		case "hiddenApps":
+			// renderApps just does not want to work here for some reason
+			location.reload();
+	}
+});
+
 renderApps();
