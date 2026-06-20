@@ -37,7 +37,8 @@ export default {
 		];
 
 		if (uiTransparency) {
-			documentRoot.style.setProperty('--backdrop-filter', 'blur(20px)');
+			const radius = localStorage.blurRadius ?? 20;
+			documentRoot.style.setProperty('--backdrop-filter', `blur(${radius}px)`);
 
 			transparentProps.forEach(({ prop, opacity }) => {
 				documentRoot.style.setProperty(
