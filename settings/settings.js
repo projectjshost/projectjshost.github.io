@@ -32,6 +32,18 @@ const updateCheckBoxes = () => {
 		localStorage.darkenWallpaper = "false";
 	}
 
+	if (document.getElementById("reverseTitlebar").checked == true) {
+		localStorage.reverseTitlebar = "true";
+	} else {
+		localStorage.reverseTitlebar = "false";
+	}
+
+	if (document.getElementById("trafficLightCaptionButtons").checked == true) {
+		localStorage.trafficLightCaptionButtons = "true";
+	} else {
+		localStorage.trafficLightCaptionButtons = "false";
+	}
+
 	recreateWallpaper()
 }
 
@@ -182,6 +194,8 @@ document.getElementById("uiTransparency").checked = localStorage.uiTransparency 
 document.getElementById("forceWallpaper").checked = localStorage.forceWallpaper == "true";
 document.getElementById("blurWallpaper").checked = localStorage.blurWallpaper == "true";
 document.getElementById("darkenWallpaper").checked = localStorage.darkenWallpaper == "true";
+document.getElementById("reverseTitlebar").checked = localStorage.reverseTitlebar == "true";
+document.getElementById("trafficLightCaptionButtons").checked = localStorage.trafficLightCaptionButtons == "true";
 updateWallpaper();
 
 getWallpaperList();
