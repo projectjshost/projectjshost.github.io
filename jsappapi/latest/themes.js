@@ -39,6 +39,16 @@ export const themes = {
 		"button-color": "hsl(120, 10%, 20%)",
 		"accent-color": "hsl(150, 75%, 60%)"
 	},
+	"oceanicsky": {
+		"name": "Oceanic Sky",
+		"background-color": "hsl(220, 60%, 12%)",
+		"area-background-color": "hsl(215, 50%, 18%)",
+		"title-color": "hsl(195, 100%, 92%)",
+		"text-color": "hsl(200, 30%, 70%)",
+		"border-color": "hsl(210, 40%, 30%)",
+		"button-color": "hsl(215, 50%, 25%)",
+		"accent-color": "hsl(50, 95%, 55%)"
+	},
 	"catppuccin": {
 		"name": "Catppuccin",
 		"background-color": "hsl(254,  25%,  10%)",
