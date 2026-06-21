@@ -61,7 +61,7 @@ const updateWallpaper = () => {
 const importWallpaper = () => {
 	let input = document.createElement('input');
 	input.type = 'file';
-	input.accept = '.png,.jpg,.gif,.svg';
+	input.accept = '.avif,.webp,.jxl,.png,.jpg,.gif,.svg';
 
 	input.onchange = e => {
 		let file = e.target.files[0];
