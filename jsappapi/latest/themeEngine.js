@@ -30,20 +30,23 @@ export default {
 			if (json[prop]) documentRoot.style.setProperty(`--${prop}`, json[prop]);
 		});
 
+		const opacity = localStorage.opacity ?? 50;
+
 		const transparentProps = [
-			{ prop: "background-color", opacity: "50%" },
-			{ prop: "area-background-color", opacity: "75%" },
-			{ prop: "button-color", opacity: "50%" }
+			{ prop: "background-color", opacity },
+			{ prop: "area-background-color", opacity },
+			{ prop: "button-color", opacity }
 		];
 
 		if (uiTransparency) {
 			const radius = localStorage.blurRadius ?? 20;
-			documentRoot.style.setProperty('--backdrop-filter', `blur(${radius}px)`);
+			documentRoot.style.setProperty('--blur-radius', `${radius}px`);
+			documentRoot.style.setProperty('--backdrop-filter', `blur(var(--blur-radius))`);
 
 			transparentProps.forEach(({ prop, opacity }) => {
 				documentRoot.style.setProperty(
 					`--${prop}-transparent`,
-					`color-mix(in srgb, ${json[prop]} ${opacity}, transparent)`
+					`color-mix(in srgb, ${json[prop]} ${opacity}%, transparent)`
 				);
 			});
 		} else {
