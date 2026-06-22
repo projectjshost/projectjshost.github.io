@@ -1,5 +1,18 @@
 import $ from 'https://esm.sh/jquery';
 
+const syncDesktopClasses = () => {
+	document.body.classList.toggle("trafficLightCaptionButtons", localStorage.trafficLightCaptionButtons === "true");
+	document.body.classList.toggle("reverseTitlebar", localStorage.reverseTitlebar === "true");
+};
+
+syncDesktopClasses();
+
+window.addEventListener("storage", (e) => {
+	if (e.key === "trafficLightCaptionButtons" || e.key === "reverseTitlebar") {
+		syncDesktopClasses();
+	}
+});
+
 let baseZIndex = 1000;
 let bottomZIndex = 100;
 let topZIndex = 10000;
