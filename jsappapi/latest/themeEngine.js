@@ -1,3 +1,4 @@
+import { isWindowed } from "./main.js";
 import { themes } from "./themes.js";
 import { shouldDrawWallpaper } from './wallpaper.js';
 
@@ -21,7 +22,7 @@ export default {
 	},
 
 	loadFromJSON(json) {
-		const uiTransparency = shouldDrawWallpaper() && localStorage.uiTransparency === "true";
+		const uiTransparency = localStorage.uiTransparency === "true" && (isWindowed || shouldDrawWallpaper());
 		const documentRoot = document.querySelector(':root');
 
 		const props = ["background-color", "area-background-color", "title-color", "text-color", "border-color", "button-color", "accent-color"];

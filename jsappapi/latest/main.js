@@ -1,7 +1,10 @@
 import $ from 'https://esm.sh/jquery';
 
+export const isWindowed = window.top.location.pathname.startsWith("/desktop") && !location.pathname.startsWith("/desktop");
+
+
 import themeEngine from './themeEngine.js';
-import { createWallpaper } from './wallpaper.js';
+import { createWallpaper, deleteWallpaper } from './wallpaper.js';
 
 // Project JS App API
 
@@ -20,20 +23,24 @@ themeEngine.loadTheme();
 
 window.addEventListener('storage', (event) => {
 
-	switch(event.key) {
+	switch (event.key) {
 		case "uiTransparency":
 		case "theme":
 		case "blurRadius":
 		case "opacity":
 			themeEngine.loadTheme();
 			break;
+		case "blurWallpaper":
+		case "darkenWallpaper":
 		case "wallpaper":
-			createWallpaper(localStorage.wallpaper);
+			if (typeof localStorage.wallpaper === "string") {
+				createWallpaper(localStorage.wallpaper);
+			} else {
+				deleteWallpaper();
+			}
 			break;
 	}
 });
-
-export const isWindowed = window.top.location.pathname.startsWith("/desktop") && !location.pathname.startsWith("/desktop");
 
 // Initialize App
 $(document).ready(() => {

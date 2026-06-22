@@ -232,7 +232,6 @@ document.getElementById('appOverview').addEventListener('click', (e) => {
 });
 
 window.addEventListener('storage', (event) => {
-	console.log("event");
 	switch (event.key) {
 		case "favoriteApps":
 		case "hiddenApps":
