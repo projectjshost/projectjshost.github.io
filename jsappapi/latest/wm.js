@@ -1,4 +1,5 @@
 import $ from 'https://esm.sh/jquery';
+import BackdropRefraction from './blur.js';
 
 const syncDesktopClasses = () => {
 	document.body.classList.toggle("trafficLightCaptionButtons", localStorage.trafficLightCaptionButtons === "true");
@@ -11,11 +12,64 @@ window.addEventListener("storage", (e) => {
 	if (e.key === "trafficLightCaptionButtons" || e.key === "reverseTitlebar") {
 		syncDesktopClasses();
 	}
+	if (e.key === "blurType" || e.key === "blurRadius" || e.key === "uiTransparency" || e.key === "opacity") {
+		document.querySelectorAll('.window[id]').forEach(win => {
+			applyBlurToWindow(win.id);
+		});
+	}
 });
+
+const cleanupWindowBlur = (winId) => {
+	if (refractionInstances.has(winId)) {
+		const instance = refractionInstances.get(winId);
+		if (instance.resizeObserver) {
+			instance.resizeObserver.disconnect();
+		}
+		refractionInstances.delete(winId);
+	}
+	const el = document.getElementById(winId);
+	if (el) {
+		el.style.backdropFilter = '';
+		el.style.webkitBackdropFilter = '';
+	}
+};
+
+const applyBlurToWindow = (winId) => {
+	const blurType = localStorage.blurType || 'native';
+	const uiTransparency = localStorage.uiTransparency === 'true';
+
+	cleanupWindowBlur(winId);
+
+	if (!uiTransparency || blurType !== 'custom') {
+		return;
+	}
+
+	const el = document.getElementById(winId);
+	if (!el) return;
+
+	const blurRadius = parseFloat(localStorage.blurRadius) || 20;
+	const opacity = parseFloat(localStorage.opacity) || 50;
+
+	const blurAmt = (blurRadius / 20) * 3;
+	const strength = (blurRadius / 20) * 150;
+	const rgbFringing = (opacity / 100) * 0.5;
+
+	const instance = new BackdropRefraction(`#${winId}`, {
+		strength,
+		edgeSize: 150,
+		falloff: 6.0,
+		rgbFringing,
+		blurAmt
+	});
+	refractionInstances.set(winId, instance);
+};
 
 let baseZIndex = 1000;
 let bottomZIndex = 100;
 let topZIndex = 10000;
+
+let windowCounter = 0;
+const refractionInstances = new Map();
 
 export const openAppWindow = (target, params, properties = {}) => {
 	const {
@@ -57,8 +111,10 @@ export const openAppWindow = (target, params, properties = {}) => {
 		initialZIndex = ++baseZIndex;
 	}
 
+	const windowId = `window-${++windowCounter}`;
+
 	const windowHtml = `
-        <div class="window" style="top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px; z-index: ${initialZIndex};">
+        <div class="window" id="${windowId}" style="top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px; z-index: ${initialZIndex};">
             ${resizersHtml}
             
             <div class="titlebar">
@@ -101,7 +157,10 @@ export const openAppWindow = (target, params, properties = {}) => {
 		}
 	});
 
-	$win.find('.closeButton').on('click', () => $win.remove());
+	$win.find('.closeButton').on('click', () => {
+		cleanupWindowBlur(windowId);
+		$win.remove();
+	});
 
 	$win.find('.minimizeButton').on('click', () => {
 		$win.toggleClass('minimized');
@@ -203,4 +262,5 @@ export const openAppWindow = (target, params, properties = {}) => {
 	});
 
 	$("body").append($win);
+	applyBlurToWindow(windowId);
 };

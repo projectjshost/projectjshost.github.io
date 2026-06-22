@@ -23,6 +23,8 @@ window.addEventListener('storage', (event) => {
 	switch(event.key) {
 		case "uiTransparency":
 		case "theme":
+		case "blurRadius":
+		case "opacity":
 			themeEngine.loadTheme();
 			break;
 		case "wallpaper":

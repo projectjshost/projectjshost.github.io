@@ -7,6 +7,15 @@ import { sanitizeText } from '../jsappapi/latest/sanitize.js';
 import { deleteWallpaper, createWallpaper } from '../jsappapi/latest/wallpaper.js';
 import { apps } from '../jsappapi/latest/apps.js';
 
+const saveBlurSettings = () => {
+	localStorage.blurType = document.getElementById("blurType").value;
+	localStorage.blurRadius = document.getElementById("blurRadius").value;
+	localStorage.opacity = document.getElementById("opacity").value;
+
+	document.getElementById("blurRadiusValue").textContent = localStorage.blurRadius;
+	document.getElementById("opacityValue").textContent = localStorage.opacity;
+};
+
 const updateCheckBoxes = () => {
 	if (document.getElementById("uiTransparency").checked == true) {
 		localStorage.uiTransparency = "true";
@@ -44,6 +53,7 @@ const updateCheckBoxes = () => {
 		localStorage.trafficLightCaptionButtons = "false";
 	}
 
+	saveBlurSettings();
 	recreateWallpaper()
 }
 
@@ -190,12 +200,29 @@ $("#resetAllButton").on('click', resetAll);
 
 $("input[type='checkbox']").on('click', updateCheckBoxes);
 
+$("#blurType").on('change', () => {
+	saveBlurSettings();
+	recreateWallpaper();
+});
+
+$("#blurRadius, #opacity").on('input', () => {
+	saveBlurSettings();
+	recreateWallpaper();
+});
+
 document.getElementById("uiTransparency").checked = localStorage.uiTransparency == "true";
 document.getElementById("forceWallpaper").checked = localStorage.forceWallpaper == "true";
 document.getElementById("blurWallpaper").checked = localStorage.blurWallpaper == "true";
 document.getElementById("darkenWallpaper").checked = localStorage.darkenWallpaper == "true";
 document.getElementById("reverseTitlebar").checked = localStorage.reverseTitlebar == "true";
 document.getElementById("trafficLightCaptionButtons").checked = localStorage.trafficLightCaptionButtons == "true";
+
+document.getElementById("blurType").value = localStorage.blurType || "native";
+document.getElementById("blurRadius").value = localStorage.blurRadius || "20";
+document.getElementById("opacity").value = localStorage.opacity || "50";
+document.getElementById("blurRadiusValue").textContent = localStorage.blurRadius || "20";
+document.getElementById("opacityValue").textContent = localStorage.opacity || "50";
+
 updateWallpaper();
 
 getWallpaperList();
