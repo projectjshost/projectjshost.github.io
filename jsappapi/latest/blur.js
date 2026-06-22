@@ -63,18 +63,19 @@ export default class BackdropRefraction {
 			this.svgContainer.insertAdjacentHTML('beforeend', `
 				<filter id="${id}" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
 					<feImage id="img-${id}" href="${mapURL}" result="NORMAL_MAP" />
-					<feGaussianBlur id="blur-${id}" in="SourceGraphic" stdDeviation="${blurAmt}" result="BLURRED_BG" />
 					
-					<feColorMatrix in="BLURRED_BG" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="RED_CHANNEL"/>
-					<feColorMatrix in="BLURRED_BG" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="GREEN_CHANNEL"/>
-					<feColorMatrix in="BLURRED_BG" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="BLUE_CHANNEL"/>
+					<feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="RED_CHANNEL"/>
+					<feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="GREEN_CHANNEL"/>
+					<feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="BLUE_CHANNEL"/>
 
 					<feDisplacementMap id="disp-red-${id}" in="RED_CHANNEL" in2="NORMAL_MAP" scale="${scaleR}" xChannelSelector="R" yChannelSelector="G" result="DISP_R" />
 					<feDisplacementMap id="disp-green-${id}" in="GREEN_CHANNEL" in2="NORMAL_MAP" scale="${scaleG}" xChannelSelector="R" yChannelSelector="G" result="DISP_G" />
 					<feDisplacementMap id="disp-blue-${id}" in="BLUE_CHANNEL" in2="NORMAL_MAP" scale="${scaleB}" xChannelSelector="R" yChannelSelector="G" result="DISP_B" />
 
 					<feBlend mode="screen" in="DISP_R" in2="DISP_G" result="RG_COMBINED" />
-					<feBlend mode="screen" in="RG_COMBINED" in2="DISP_B" result="FINAL_RGB" />
+					<feBlend mode="screen" in="RG_COMBINED" in2="DISP_B" result="REFRACTED_SHARP" />
+					
+					<feGaussianBlur id="blur-${id}" in="REFRACTED_SHARP" stdDeviation="${blurAmt}" result="FINAL_RGB" />
 				</filter>
 			`);
 		} else {
