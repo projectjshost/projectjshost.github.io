@@ -22,15 +22,8 @@ window.addEventListener("storage", (e) => {
 const cleanupWindowBlur = (winId) => {
 	if (refractionInstances.has(winId)) {
 		const instance = refractionInstances.get(winId);
-		if (instance.resizeObserver) {
-			instance.resizeObserver.disconnect();
-		}
+		instance.destroy();
 		refractionInstances.delete(winId);
-	}
-	const el = document.getElementById(winId);
-	if (el) {
-		el.style.backdropFilter = '';
-		el.style.webkitBackdropFilter = '';
 	}
 };
 

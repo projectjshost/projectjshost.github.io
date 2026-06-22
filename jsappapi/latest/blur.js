@@ -1,4 +1,6 @@
 export default class BackdropRefraction {
+	static _globalCounter = 0;
+
 	constructor(selector, options = {}) {
 		this.options = {
 			strength: 150,
@@ -11,15 +13,28 @@ export default class BackdropRefraction {
 
 		this.elements = document.querySelectorAll(selector);
 		this.svgContainer = document.getElementById('refraction-svg-container') || this._createContainer();
-		this.counter = 0;
 
 		this.resizeObserver = new ResizeObserver(entries => {
 			entries.forEach(entry => this._applyEffect(entry.target));
 		});
 
 		this.elements.forEach(el => {
-			el.dataset.refractionId = `refract-filter-${++this.counter}`;
+			el.dataset.refractionId = `refract-filter-${++BackdropRefraction._globalCounter}`;
 			this.resizeObserver.observe(el);
+		});
+	}
+
+	destroy() {
+		this.resizeObserver.disconnect();
+		this.elements.forEach(el => {
+			const id = el.dataset.refractionId;
+			if (id) {
+				const filter = document.getElementById(id);
+				if (filter) filter.remove();
+				delete el.dataset.refractionId;
+			}
+			el.style.backdropFilter = '';
+			el.style.webkitBackdropFilter = '';
 		});
 	}
 
