@@ -107,25 +107,27 @@ export const openAppWindow = (target, params, properties = {}) => {
 	const windowId = `window-${++windowCounter}`;
 
 	const windowHtml = `
-        <div class="window" id="${windowId}" style="top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px; z-index: ${initialZIndex};">
-            ${resizersHtml}
-            
-            <div class="titlebar">
-                <span class="title">${target}</span>
-                <div class="captionButtons">
-                    ${minimizeButtonHtml}
-                    ${maximizeButtonHtml}
-                    ${closeButtonHtml}
-                </div>
-            </div>
-            <iframe class="windowbody" src="/${target}"></iframe>
-        </div>
-    `;
+		<div class="window" id="${windowId}" style="top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px; z-index: ${initialZIndex};">
+			${resizersHtml}
+			
+			<div class="titlebar">
+				<span class="title">${target}</span>
+				<div class="captionButtons">
+					${minimizeButtonHtml}
+					${maximizeButtonHtml}
+					${closeButtonHtml}
+				</div>
+			</div>
+			<iframe class="windowbody" src="/${target}"></iframe>
+		</div>
+	`;
 
 	const $win = $(windowHtml);
 	const $iframe = $win.find('iframe');
 
 	const updateZIndex = () => {
+		$('.window').removeClass('focused');
+		$win.addClass('focused');
 		if (alwaysOnTop) {
 			$win.css('z-index', ++topZIndex);
 		} else if (alwaysOnBottom) {
@@ -255,5 +257,6 @@ export const openAppWindow = (target, params, properties = {}) => {
 	});
 
 	$("body").append($win);
+	updateZIndex();
 	applyBlurToWindow(windowId);
 };

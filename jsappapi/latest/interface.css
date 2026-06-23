@@ -708,11 +708,11 @@ th {
 	border-radius: 0;
 }
 
-.window.maximized > .resizer {
+.window.maximized>.resizer {
 	display: none;
 }
 
-.window.minimized > .resizer {
+.window.minimized>.resizer {
 	display: none;
 }
 
@@ -724,14 +724,24 @@ th {
 	display: none;
 }
 
+.window.focused {
+	box-shadow: 0 0 100px -20px black;
+}
+
 .window>.titlebar {
 	display: flex;
 	user-select: none;
 	justify-content: space-between;
 	padding: 2.5px 5px;
+	color: var(--text-color);
 }
 
-body.reverseTitlebar .window>.titlebar, body.reverseTitlebar .window>.titlebar>.captionButtons {
+.window.focused>.titlebar {
+	color: var(--title-color);
+}
+
+body.reverseTitlebar .window>.titlebar,
+body.reverseTitlebar .window>.titlebar>.captionButtons {
 	flex-direction: row-reverse;
 }
 
@@ -748,8 +758,7 @@ body.trafficLightCaptionButtons .window>.titlebar>.captionButtons>button:hover {
 }
 
 body.trafficLightCaptionButtons .window>.titlebar>.captionButtons:hover>button {
-	color: hsl(
-0deg 0% 0% / 50%);
+	color: hsl(0deg 0% 0% / 50%);
 	-webkit-text-stroke: 0.5px;
 }
 
@@ -762,7 +771,7 @@ body.trafficLightCaptionButtons .window>.titlebar>.captionButtons>.maximizeButto
 }
 
 body.trafficLightCaptionButtons .window>.titlebar>.captionButtons>.closeButton {
-	background: #ff5c5f!important;
+	background: #ff5c5f !important;
 }
 
 .window>.titlebar:active {
@@ -784,6 +793,7 @@ body.trafficLightCaptionButtons .window>.titlebar>.captionButtons>.closeButton {
 }
 
 .window>.titlebar>.captionButtons>button {
+	color: inherit;
 	background: none;
 	padding: 0;
 	margin: 0;
