@@ -8,6 +8,8 @@ export default class BackdropRefraction {
 			falloff: 6.0,
 			rgbFringing: 0.5,
 			blurAmt: 3,
+			wobbleStrength: 0, // disabled, but 0.025 looks nice
+			wobbleScale: 0.15,
 			...options
 		};
 
@@ -57,7 +59,14 @@ export default class BackdropRefraction {
 
 		if (width === 0 || height === 0) return;
 
-		const mapURL = this._generateDisplacementMap(width, height, this.options.edgeSize, this.options.falloff);
+		const mapURL = this._generateDisplacementMap(
+			width,
+			height,
+			this.options.edgeSize,
+			this.options.falloff,
+			this.options.wobbleStrength,
+			this.options.wobbleScale
+		);
 
 		this._updateFilter(id, mapURL);
 
@@ -108,7 +117,7 @@ export default class BackdropRefraction {
 		return Math.min(Math.max(qx, qy), 0.0) + Math.sqrt(Math.pow(Math.max(qx, 0.0), 2) + Math.pow(Math.max(qy, 0.0), 2)) - r;
 	}
 
-	_generateDisplacementMap(w, h, edgeSize, normalPow) {
+	_generateDisplacementMap(w, h, edgeSize, normalPow, wobbleStr, wobbleScale) {
 		const canvas = document.createElement('canvas');
 		canvas.width = w;
 		canvas.height = h;
@@ -143,12 +152,25 @@ export default class BackdropRefraction {
 					normY = -gradY / len;
 				}
 
-				const dispX = normX * shaped;
-				const dispY = normY * shaped;
+				let finalDispX = normX * shaped;
+				let finalDispY = normY * shaped;
+
+				if (wobbleStr > 0) {
+					const nx = Math.sin(x * wobbleScale + Math.cos(y * wobbleScale))
+						+ Math.sin(x * wobbleScale * 1.3 + y * wobbleScale * 0.8);
+					const ny = Math.cos(y * wobbleScale + Math.sin(x * wobbleScale))
+						+ Math.cos(y * wobbleScale * 1.3 + x * wobbleScale * 0.8);
+
+					finalDispX += nx * 0.5 * wobbleStr;
+					finalDispY += ny * 0.5 * wobbleStr;
+				}
+
+				finalDispX = Math.max(-1.0, Math.min(1.0, finalDispX));
+				finalDispY = Math.max(-1.0, Math.min(1.0, finalDispY));
 
 				const i = (y * w + x) * 4;
-				imgData.data[i] = Math.round((dispX * 0.5 + 0.5) * 255);
-				imgData.data[i + 1] = Math.round((dispY * 0.5 + 0.5) * 255);
+				imgData.data[i] = Math.round((finalDispX * 0.5 + 0.5) * 255);
+				imgData.data[i + 1] = Math.round((finalDispY * 0.5 + 0.5) * 255);
 				imgData.data[i + 2] = 0;
 				imgData.data[i + 3] = 255;
 			}
