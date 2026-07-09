@@ -190,10 +190,14 @@ export const openAppWindow = (target, params, properties = {}) => {
 			$win.removeClass('maximized');
 			$win.css(preMaxState);
 		} else {
-			preMaxState = {
-				top: $win.css('top'), left: $win.css('left'),
-				width: $win.css('width'), height: $win.css('height')
-			};
+			// Only save preMaxState if not currently minimized,
+			// otherwise we'd capture the minimized (tiny) dimensions.
+			if (!$win.hasClass('minimized')) {
+				preMaxState = {
+					top: $win.css('top'), left: $win.css('left'),
+					width: $win.css('width'), height: $win.css('height')
+				};
+			}
 			$win.removeClass('minimized').addClass('maximized').removeAttr('style');
 			updateZIndex();
 		}
