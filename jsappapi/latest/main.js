@@ -11,7 +11,7 @@ import { createWallpaper, deleteWallpaper } from './wallpaper.js';
 //      Project JS App Stuff
 export const projectJS = {
 	version: "2.6",
-	build: 260612,
+	build: 260709,
 	launcher: localStorage.launcher ?? "appcenter",
 };
 
@@ -114,4 +114,7 @@ export const setAppName = (name) => {
 	window.appname = name
 	$("#header").text(name);
 	document.title = `${name} - Project JS Apps`
+	if (isWindowed) {
+		window.top.postMessage({ type: 'setAppName', name }, '*');
+	}
 }

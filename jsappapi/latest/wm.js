@@ -8,6 +8,22 @@ const syncDesktopClasses = () => {
 
 syncDesktopClasses();
 
+window.addEventListener("message", (e) => {
+	if (e.data?.type === 'setAppName' && typeof e.data.name === 'string') {
+		// Find the iframe that sent this message and update its parent window's titlebar
+		const iframe = Array.from(document.querySelectorAll('iframe.windowbody')).find(
+			f => f.contentWindow === e.source
+		);
+		if (iframe) {
+			const win = iframe.closest('.window');
+			if (win) {
+				const titleEl = win.querySelector('.titlebar .title');
+				if (titleEl) titleEl.textContent = e.data.name;
+			}
+		}
+	}
+});
+
 window.addEventListener("storage", (e) => {
 	if (e.key === "trafficLightCaptionButtons" || e.key === "reverseTitlebar") {
 		syncDesktopClasses();
