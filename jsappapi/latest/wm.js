@@ -19,6 +19,11 @@ window.addEventListener("message", (e) => {
 			if (win) {
 				const titleEl = win.querySelector('.titlebar .title');
 				if (titleEl) titleEl.textContent = e.data.name;
+				// Update window state title
+				if (win.id && windowStates.has(win.id)) {
+					windowStates.get(win.id).title = e.data.name;
+					notifyListeners();
+				}
 			}
 		}
 	}
@@ -79,6 +84,49 @@ let topZIndex = 10000;
 
 let windowCounter = 0;
 const refractionInstances = new Map();
+
+// Window state tracking for the desktop panel
+const windowStates = new Map();
+const changeListeners = new Set();
+
+const notifyListeners = () => {
+	const windows = getWindows();
+	changeListeners.forEach(fn => fn(windows));
+};
+
+export const onWindowChange = (callback) => {
+	changeListeners.add(callback);
+	// Immediately call with current state
+	callback(getWindows());
+};
+
+export const offWindowChange = (callback) => {
+	changeListeners.delete(callback);
+};
+
+export const getWindows = () => {
+	return [...windowStates.entries()].map(([id, state]) => ({
+		id,
+		...state
+	}));
+};
+
+export const focusWindow = (windowId) => {
+	const el = document.getElementById(windowId);
+	if (el) {
+		$(el).trigger('mousedown');
+	}
+};
+
+export const closeWindow = (windowId) => {
+	const el = document.getElementById(windowId);
+	if (el) {
+		cleanupWindowBlur(windowId);
+		windowStates.delete(windowId);
+		$(el).remove();
+		notifyListeners();
+	}
+};
 
 export const openAppWindow = (target, params, properties = {}) => {
 	const {
@@ -151,6 +199,11 @@ export const openAppWindow = (target, params, properties = {}) => {
 		} else {
 			$win.css('z-index', ++baseZIndex);
 		}
+		// Update focused state on all windows
+		windowStates.forEach((st, id) => {
+			st.focused = (id === windowId);
+		});
+		notifyListeners();
 	};
 
 	$win.on('mousedown', updateZIndex);
@@ -170,12 +223,20 @@ export const openAppWindow = (target, params, properties = {}) => {
 
 	$win.find('.closeButton').on('click', () => {
 		cleanupWindowBlur(windowId);
+		windowStates.delete(windowId);
 		$win.remove();
+		notifyListeners();
 	});
 
 	$win.find('.minimizeButton').on('click', () => {
 		$win.toggleClass('minimized');
 		$win.removeClass('maximized');
+		const state = windowStates.get(windowId);
+		if (state) {
+			state.minimized = $win.hasClass('minimized');
+			state.maximized = false;
+			notifyListeners();
+		}
 	});
 
 	let preMaxState = {
@@ -189,6 +250,11 @@ export const openAppWindow = (target, params, properties = {}) => {
 		if ($win.hasClass('maximized')) {
 			$win.removeClass('maximized');
 			$win.css(preMaxState);
+			const state = windowStates.get(windowId);
+			if (state) {
+				state.maximized = false;
+				notifyListeners();
+			}
 		} else {
 			// Only save preMaxState if not currently minimized,
 			// otherwise we'd capture the minimized (tiny) dimensions.
@@ -200,6 +266,12 @@ export const openAppWindow = (target, params, properties = {}) => {
 			}
 			$win.removeClass('minimized').addClass('maximized').removeAttr('style');
 			updateZIndex();
+			const state = windowStates.get(windowId);
+			if (state) {
+				state.minimized = false;
+				state.maximized = true;
+				notifyListeners();
+			}
 		}
 	});
 
@@ -277,6 +349,15 @@ export const openAppWindow = (target, params, properties = {}) => {
 	});
 
 	$("body").append($win);
+
+	// Track window state
+	windowStates.set(windowId, {
+		title: target,
+		minimized: !!minimized,
+		maximized: !!maximized,
+		focused: false
+	});
+
 	updateZIndex();
 	applyBlurToWindow(windowId);
 };
