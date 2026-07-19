@@ -892,3 +892,127 @@ body.trafficLightCaptionButtons .window>.titlebar>.captionButtons>.closeButton {
 	height: 12px;
 	cursor: sw-resize;
 }
+
+/* ── Desktop panel ─────────────────────────────────── */
+.desktop-panel {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 20000;
+	display: flex;
+	align-items: center;
+	padding: 0px 8px;
+	gap: 4px;
+	background: var(--background-color-transparent);
+	backdrop-filter: var(--backdrop-filter);
+	border-bottom: 1px solid var(--border-color);
+	pointer-events: auto;
+	user-select: none;
+}
+
+.panel-apps-button {
+	width: 32px;
+	height: 32px;
+	padding: 0;
+	margin: 2px 0;
+	background: none;
+	font-size: 22px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--title-color);
+	transition: 0.1s;
+}
+
+.panel-apps-button>.icon {
+	margin: 0;
+}
+
+.panel-apps-button:hover {
+	background: var(--button-color);
+}
+
+.panel-apps-button:active {
+	filter: contrast(0.8) saturate(2);
+}
+
+.panel-window-list {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	gap: 3px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	min-width: 0;
+}
+
+.panel-window-list::-webkit-scrollbar {
+	height: 4px;
+}
+
+.panel-window-list::-webkit-scrollbar-thumb {
+	background: var(--button-color);
+	border-radius: 50px;
+}
+
+.panel-window-item {
+	flex-shrink: 0;
+	max-width: 180px;
+	min-width: 100px;
+	height: 28px;
+	padding: 0 12px;
+	margin: 0;
+	font-size: 13px;
+	font-weight: 300;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	background: var(--button-color-transparent);
+	color: var(--text-color);
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: 0.1s;
+}
+
+.panel-window-item.active {
+	background: var(--button-color);
+	color: var(--title-color);
+}
+
+.panel-window-item.minimized {
+	opacity: 0.5;
+}
+
+.panel-window-item:hover {
+	background: var(--button-color);
+	color: var(--title-color);
+	filter: brightness(1.2);
+}
+
+.panel-window-item:active {
+	filter: contrast(0.8) saturate(2);
+}
+
+.panel-clock {
+	flex-shrink: 0;
+	font-size: 14px;
+	font-weight: 350;
+	color: var(--title-color);
+	white-space: nowrap;
+	min-width: 50px;
+	text-align: center;
+}
+
+#appsMenu {
+	position: fixed;
+	z-index: 21000;
+	padding: 8px;
+}
+
+#appsMenuInner {
+	border: none;
+	height: 500px;
+	width: 400px;
+}
