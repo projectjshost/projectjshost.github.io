@@ -1,6 +1,7 @@
 import { isWindowed } from "./main.js";
 import { themes } from "./themes.js";
 import { shouldDrawWallpaper } from './wallpaper.js';
+import { getImageColor } from './imageColor.js';
 
 export default {
 	getDefault() {
@@ -9,10 +10,43 @@ export default {
 			: "epiloguelight";
 	},
 
-	loadTheme(name) {
+	async loadTheme(name) {
 		name = name || localStorage.theme || this.getDefault();
 
 		document.querySelector(':root').removeAttribute('style');
+
+		if (name === "wallpaper") {
+			const color = await getImageColor(localStorage.wallpaper);
+			const hue = color.hue;
+			const isDark = color.isDark;
+
+			let themeObject;
+
+			if (isDark) {
+				themeObject = {
+					"background-color": `hsl(${hue}, 22%, 10%)`,
+					"area-background-color": `hsl(${hue}, 23%, 15%)`,
+					"title-color": `hsl(${hue}, 50%, 91%)`,
+					"text-color": `hsl(${hue}, 15%, 61%)`,
+					"border-color": `hsl(${hue}, 15%, 28%)`,
+					"button-color": `hsl(${hue}, 22%, 20%)`,
+					"accent-color": `hsl(${hue}, 55%, 83%)`
+				}
+			} else {
+				themeObject = {
+					"background-color": `hsl(${hue}, 22%, 95%)`,
+					"area-background-color": `hsl(${hue}, 22%, 90%)`,
+					"title-color": `hsl(${hue}, 50%, 15%)`,
+					"text-color": `hsl(${hue}, 25%, 35%)`,
+					"border-color": `hsl(${hue}, 20%, 75%)`,
+					"button-color": `hsl(${hue}, 22%, 83%)`,
+					"accent-color": `hsl(${hue}, 55%, 45%)`
+				}
+			}
+
+			this.loadFromJSON(themeObject);
+			return;
+		}
 
 		let themeObject = name.startsWith("customTheme_")
 			? JSON.parse(localStorage.getItem(name))

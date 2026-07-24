@@ -11,7 +11,7 @@ import { createWallpaper, deleteWallpaper } from './wallpaper.js';
 //      Project JS App Stuff
 export const projectJS = {
 	version: "2.6",
-	build: 260709,
+	build: 260724,
 	launcher: localStorage.launcher ?? "appcenter",
 };
 
