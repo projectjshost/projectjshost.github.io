@@ -6,6 +6,7 @@ import { dialog } from '../jsappapi/latest/dialog.js';
 import { sanitizeText } from '../jsappapi/latest/sanitize.js';
 import { deleteWallpaper, createWallpaper } from '../jsappapi/latest/wallpaper.js';
 import { apps } from '../jsappapi/latest/apps.js';
+import { getVersionString } from '../jsappapi/latest/version.js';
 
 const saveBlurSettings = () => {
 	localStorage.blurType = document.getElementById("blurType").value;
@@ -227,7 +228,7 @@ updateWallpaper();
 
 getWallpaperList();
 
-document.getElementById("versionString").innerText = `Version ${projectJS.version}.${projectJS.build}`;
+document.getElementById("versionString").innerText = `Version ${projectJS.version} (${await getVersionString()})`;
 document.getElementById("versionStringJQ").innerText = `jQuery Version ${jQuery().jquery}`;
 document.getElementById("appCount").innerText = `Installed Apps: ${apps.length}`;
 

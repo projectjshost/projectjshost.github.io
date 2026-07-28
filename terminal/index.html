@@ -49,19 +49,20 @@
 		import $ from 'https://esm.sh/jquery';
 
 		import { projectJS, setAppName, openApp } from '../jsappapi/latest/main.js';
+		import { getVersionString } from '../jsappapi/latest/version.js';
 
 		const terminalConfig = {
 			host: document.querySelector("#terminal"),
 			prompt: "> ",
-			welcomeMessage: `Terminal v${projectJS.version}.${projectJS.build}.<br>Type 'help' for a list of commands.`,
+			welcomeMessage: `Project JS Terminal v${projectJS.version}.<br>Type 'help' for a list of commands.`,
 			commands: {
 				info: {
 					name: "info",
 					description: "displays system info",
-					func: ({
+					func: async ({
 						print
 					}) => {
-						print(`Project JS App Center v${projectJS.version}, build ${projectJS.build}`)
+						print(`Project JS App Center v${projectJS.version} (${await getVersionString()})`)
 					}
 				},
 				clear: {
