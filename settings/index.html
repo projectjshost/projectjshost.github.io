@@ -43,21 +43,11 @@
 				<label for="trafficLightCaptionButtons">Traffic light caption buttons</label>
 			</div>
 
-				<label for="blurType">Blur method</label>
-				<select id="blurType">
-					<option value="native">Basic</option>
-					<option value="custom">Refraction+Chromatic Aberration</option>
-				</select>
-
-				<br/>
-
-				<label for="blurRadius">Blur radius: <span id="blurRadiusValue">20</span>px</label>
-				<input type="range" id="blurRadius" min="0" max="100" value="20" style="width: 150px;">
-
-				<br/>
-
-				<label for="opacity">Opacity: <span id="opacityValue">50</span>%</label>
-				<input type="range" id="opacity" min="0" max="100" value="50" style="width: 150px;">
+			<label for="blurType">Blur method</label>
+			<select id="blurType">
+				<option value="native">Basic</option>
+				<option value="custom">Refraction+Chromatic Aberration</option>
+			</select>
 		</div>
 		<div class="area">
 			<p2><span class="icon">palette</span>Theme</p2>
@@ -73,6 +63,16 @@
 				</label>
 				<label for="uiTransparency">Enable UI transparency (when wallpaper)</label>
 			</div>
+
+			<br />
+
+			<label for="blurRadius">Blur radius: <span id="blurRadiusValue">20</span>px</label>
+			<input type="range" id="blurRadius" min="0" max="100" value="20" style="width: 150px;">
+
+			<br />
+
+			<label for="opacity">Opacity: <span id="opacityValue">50</span>%</label>
+			<input type="range" id="opacity" min="0" max="100" value="50" style="width: 150px;">
 		</div>
 		<div class="area">
 			<p2><span class="icon">wallpaper</span>Wallpaper</p2>
