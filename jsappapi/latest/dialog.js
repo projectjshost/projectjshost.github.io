@@ -1,8 +1,30 @@
 import $ from 'https://esm.sh/jquery';
 
+/**
+ * Counter used to generate unique IDs for each dialog instance.
+ * @type {number}
+ */
 let dialogID = 0;
+
+/**
+ * Tracks the number of currently open dialogs to manage body scroll locks.
+ * @type {number}
+ */
 let activeDialogsCount = 0;
 
+/**
+ * Valid dialog types for styling and header configuration.
+ * @typedef {'info' | 'warn' | 'error' | 'custom'} DialogType
+ */
+
+/**
+ * Displays a modal dialog with a message, icon, title, and close button.
+ *
+ * @param {string} message - The message body to display inside the dialog (supports HTML).
+ * @param {DialogType} type - The predefined dialog type ('info', 'warn', 'error', or 'custom').
+ * @param {string} [customTitle=""] - Custom title text (only used if `type` is set to 'custom').
+ * @returns {void}
+ */
 export const dialog = (message, type, customTitle = "") => {
 	const currentID = dialogID++;
 	activeDialogsCount++;
@@ -60,6 +82,13 @@ export const dialog = (message, type, customTitle = "") => {
 	$dialog.find(".dialog-close-btn").focus();
 };
 
+/**
+ * Closes a specific dialog and its overlay by ID, animating them out and removing them from the DOM.
+ * Restores body scrolling when all dialogs are closed.
+ *
+ * @param {number} id - The unique ID of the dialog to close.
+ * @returns {void}
+ */
 export const closeDialog = (id) => {
 	$(`#overlay${id}`).fadeOut(200, function () { $(this).remove(); });
 	$(`#dialog${id}`).slideUp(200, function () {

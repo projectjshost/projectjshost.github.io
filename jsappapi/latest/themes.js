@@ -1,3 +1,19 @@
+/**
+ * @typedef {Object} ThemeDefinition
+ * @property {string} name - The display name of the theme.
+ * @property {string} background-color - Main background CSS color.
+ * @property {string} area-background-color - Container/panel background CSS color.
+ * @property {string} title-color - Header and title text CSS color.
+ * @property {string} text-color - Main body text CSS color.
+ * @property {string} border-color - Element border CSS color.
+ * @property {string} button-color - Button background CSS color.
+ * @property {string} accent-color - Main UI accent CSS color.
+ */
+
+/**
+ * Collection of built-in preset UI themes.
+ * @type {Record<string, ThemeDefinition>}
+ */
 export const themes = {
 	"epilogue": {
 		"name": "Epilogue",

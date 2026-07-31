@@ -1,5 +1,11 @@
 import CryptoJS from "https://esm.sh/crypto-js"
 
+/**
+ * Calculates the SHA-256 hash of a given ArrayBuffer using the Web Crypto API.
+ *
+ * @param {ArrayBuffer} arrayBuffer - The binary data buffer to hash.
+ * @returns {Promise<string>} A promise that resolves to the SHA-256 hash as a hex string.
+ */
 export const sha256 = async (arrayBuffer) => {
 	const hashBuffer = await crypto.subtle.digest('SHA-256', arrayBuffer);
 
@@ -9,10 +15,22 @@ export const sha256 = async (arrayBuffer) => {
 	return hashHex;
 }
 
+/**
+ * Calculates the SHA-256 hash of a string.
+ *
+ * @param {string} str - The string to hash.
+ * @returns {Promise<string>} A promise that resolves to the SHA-256 hash as a hex string.
+ */
 export const sha256string = async (str) => {
 	return await sha256(new TextEncoder().encode(str));
 }
 
+/**
+ * Calculates the SHA-512 hash of a given ArrayBuffer using the Web Crypto API.
+ *
+ * @param {ArrayBuffer} arrayBuffer - The binary data buffer to hash.
+ * @returns {Promise<string>} A promise that resolves to the SHA-512 hash as a hex string.
+ */
 export const sha512 = async (arrayBuffer) => {
 	const hashBuffer = await crypto.subtle.digest('SHA-512', arrayBuffer);
 
@@ -22,10 +40,22 @@ export const sha512 = async (arrayBuffer) => {
 	return hashHex;
 }
 
+/**
+ * Calculates the SHA-512 hash of a string.
+ *
+ * @param {string} str - The string to hash.
+ * @returns {Promise<string>} A promise that resolves to the SHA-512 hash as a hex string.
+ */
 export const sha512string = async (str) => {
 	return await sha512(new TextEncoder().encode(str));
 }
 
+/**
+ * Calculates the MD5 hash of an ArrayBuffer using CryptoJS.
+ *
+ * @param {ArrayBuffer} arrayBuffer - The binary data buffer to hash.
+ * @returns {string} The MD5 hash as a hex string.
+ */
 export const md5 = (arrayBuffer) => {
 	const uint8Array = new Uint8Array(arrayBuffer);
 
@@ -36,10 +66,24 @@ export const md5 = (arrayBuffer) => {
 	return hash.toString(CryptoJS.enc.Hex);
 }
 
+/**
+ * Calculates the MD5 hash of a string using CryptoJS.
+ *
+ * @param {string} str - The string to hash.
+ * @returns {string} The MD5 hash as a hex string.
+ */
 export const md5string = (str) => {
 	return CryptoJS.MD5(str).toString();
 }
 
+/**
+ * Generates a 53-bit hash for a given string (cyrb53 algorithm).
+ * Useful for fast non-cryptographic hashing (e.g., hash tables, cache keys).
+ *
+ * @param {string} str - The string to hash.
+ * @param {number} [seed=0] - Optional seed value.
+ * @returns {number} A 53-bit positive integer hash.
+ */
 export const cyrb53string = (str, seed = 0) => {
 	let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
 	for (let i = 0, ch; i < str.length; i++) {

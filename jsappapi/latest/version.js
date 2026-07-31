@@ -1,3 +1,11 @@
+/**
+ * Fetches the latest commit date for a GitHub repository and formats it as `YYYY-MM-DD HH:mm`.
+ *
+ * @param {string} owner - The GitHub repository owner or organization name.
+ * @param {string} repo - The GitHub repository name.
+ * @returns {Promise<string>} A promise that resolves to the formatted commit date string, 
+ *                            or a status/error message string.
+ */
 export async function getLatestCommitDate(owner, repo) {
 	const url = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=1`;
 
@@ -16,6 +24,11 @@ export async function getLatestCommitDate(owner, repo) {
 
 		const date = new Date(commits[0].commit.committer.date);
 
+		/**
+		 * Pads a number with a leading zero if it's less than 10.
+		 * @param {number} num - The number to pad.
+		 * @returns {string} The padded two-digit string.
+		 */
 		const pad = (num) => String(num).padStart(2, '0');
 
 		const year = date.getFullYear();
@@ -31,6 +44,15 @@ export async function getLatestCommitDate(owner, repo) {
 	}
 }
 
+/**
+ * Gets the version string based on the current environment's hostname (`window.location.hostname`).
+ *
+ * - Returns the latest GitHub commit date if hosted on **GitHub Pages** (`*.github.io`).
+ * - Returns `"dev"` if hosted on a **local environment** (`localhost`, `127.0.0.1`, `0.0.0.0`).
+ * - Returns `"unknown, <hostname>"` for **other environments**.
+ *
+ * @returns {Promise<string>} A promise that resolves to the version identifier string.
+ */
 export const getVersionString = async () => {
 	if (location.hostname.endsWith(".github.io")) {
 		return await getLatestCommitDate(location.hostname.split(".")[0], location.hostname);

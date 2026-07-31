@@ -1,6 +1,19 @@
+/**
+ * Executes a string of JavaScript code safely inside a hidden, sandboxed `<iframe>`.
+ *
+ * Uses `postMessage` to asynchronously communicate with the isolated iframe environment.
+ * If the evaluated result cannot be cloned via Structured Clone, it falls back to a serialized string.
+ *
+ * @param {string} code - The JavaScript source code to execute inside the sandbox.
+ * @returns {Promise<unknown>} A promise that resolves with the evaluated value (or its stringified fallback), or rejects if an error occurs.
+ */
 export const runInSandbox = (() => {
 	let counter = 0;
 
+	/**
+	 * @param {string} code
+	 * @returns {Promise<unknown>}
+	 */
 	return function runInSandbox(code) {
 		return new Promise((resolve, reject) => {
 			const iframe = document.createElement('iframe');
@@ -50,11 +63,19 @@ export const runInSandbox = (() => {
 
 			const id = `sandbox-${++counter}`;
 
+			/**
+			 * Cleans up event listeners and removes the iframe element from the DOM.
+			 */
 			const cleanup = () => {
 				window.removeEventListener('message', handleMessage);
 				iframe.remove();
 			};
 
+			/**
+			 * Event handler for messages returned from the sandboxed iframe.
+			 *
+			 * @param {MessageEvent} event - The message event received from the window.
+			 */
 			const handleMessage = (event) => {
 				if (event.source !== iframe.contentWindow || !event.data || event.data.id !== id) return;
 
@@ -82,12 +103,19 @@ export const runInSandbox = (() => {
 	};
 })();
 
+/**
+ * Executes JavaScript code in a sandboxed iframe and guarantees a formatted string output.
+ * Objects are formatted using `JSON.stringify`, and errors are caught and returned as an error string.
+ *
+ * @param {string} code - The JavaScript source code string to execute.
+ * @returns {Promise<string>} A promise that resolves to a formatted string representation of the output or error message.
+ */
 export const runInSandboxString = async (code) => {
 	let output;
 	try {
 		output = await runInSandbox(code);
 	} catch (error) {
-		return `Error: ${error.message}`;
+		return `Error: ${/** @type {Error} */ (error).message}`;
 	}
 
 	if (typeof output === 'string') {
@@ -104,4 +132,3 @@ export const runInSandboxString = async (code) => {
 
 	return String(output);
 };
-

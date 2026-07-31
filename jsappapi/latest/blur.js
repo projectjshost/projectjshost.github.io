@@ -1,7 +1,38 @@
+/**
+ * @typedef {Object} RefractionOptions
+ * @property {number} [strength=150] Displacement strength/intensity of refraction.
+ * @property {number} [edgeSize=150] Width of the edge region where refraction occurs (also radius for SDF).
+ * @property {number} [falloff=6.0] Falloff exponent controlling the shape/curve of the refraction edge.
+ * @property {number} [rgbFringing=0.5] Chromatic aberration multiplier (RGB splitting offset factor).
+ * @property {number} [blurAmt=3] Amount of Gaussian blur applied to the final result (stdDeviation).
+ * @property {number} [wobbleStrength=0] Intensity of procedural sine noise/wobble distortion.
+ * @property {number} [wobbleScale=0.15] Scale/frequency of the procedural wobble pattern.
+ */
+
+/**
+ * Class that applies dynamic, glass-like dynamic SVG displacement refraction 
+ * to elements using standard `backdrop-filter`.
+ */
 export default class BackdropRefraction {
+	/**
+	 * Counter used to generate unique SVG filter IDs across instances.
+	 * @type {number}
+	 * @private
+	 * @static
+	 */
 	static _globalCounter = 0;
 
+	/**
+	 * Creates an instance of `BackdropRefraction`.
+	 * 
+	 * @param {string} selector - CSS selector matching target DOM elements.
+	 * @param {RefractionOptions} [options={}] - Configuration options for refraction.
+	 */
 	constructor(selector, options = {}) {
+		/**
+		 * Active options configuration.
+		 * @type {Required<RefractionOptions>}
+		 */
 		this.options = {
 			strength: 150,
 			edgeSize: 150,
@@ -13,11 +44,24 @@ export default class BackdropRefraction {
 			...options
 		};
 
+		/**
+		 * Target DOM elements managed by this instance.
+		 * @type {NodeListOf<HTMLElement>}
+		 */
 		this.elements = document.querySelectorAll(selector);
+
+		/**
+		 * SVG DOM element containing dynamic filter markup.
+		 * @type {Element}
+		 */
 		this.svgContainer = document.getElementById('refraction-svg-container') || this._createContainer();
 
+		/**
+		 * ResizeObserver monitoring changes to target elements to recompute displacement maps.
+		 * @type {ResizeObserver}
+		 */
 		this.resizeObserver = new ResizeObserver(entries => {
-			entries.forEach(entry => this._applyEffect(entry.target));
+			entries.forEach(entry => this._applyEffect(/** @type {HTMLElement} */ (entry.target)));
 		});
 
 		this.elements.forEach(el => {
@@ -26,6 +70,11 @@ export default class BackdropRefraction {
 		});
 	}
 
+	/**
+	 * Cleans up DOM modifications, detaches observers, and removes dynamic SVG filters.
+	 * 
+	 * @returns {void}
+	 */
 	destroy() {
 		this.resizeObserver.disconnect();
 		this.elements.forEach(el => {
@@ -40,20 +89,41 @@ export default class BackdropRefraction {
 		});
 	}
 
+	/**
+	 * Merges partial options into current configuration and re-applies effect.
+	 * 
+	 * @param {RefractionOptions} [newOptions={}] - Partial options to apply.
+	 * @returns {void}
+	 */
 	update(newOptions = {}) {
 		this.options = { ...this.options, ...newOptions };
 		this.elements.forEach(el => this._applyEffect(el));
 	}
 
+	/**
+	 * Creates and appends an invisible SVG container element to the body if missing.
+	 * 
+	 * @private
+	 * @returns {Element} SVG container element.
+	 */
 	_createContainer() {
 		const div = document.createElement('div');
 		div.innerHTML = `<svg id="refraction-svg-container" style="position: absolute; width: 0; height: 0;" aria-hidden="true"></svg>`;
 		document.body.appendChild(div);
-		return div.firstChild;
+		return /** @type {Element} */ (div.firstChild);
 	}
 
+	/**
+	 * Computes displacement mapping and attaches `backdrop-filter` styles to an element.
+	 * 
+	 * @private
+	 * @param {HTMLElement} el - Target DOM element.
+	 * @returns {void}
+	 */
 	_applyEffect(el) {
 		const id = el.dataset.refractionId;
+		if (!id) return;
+
 		const width = el.offsetWidth || 600;
 		const height = el.offsetHeight || 400;
 
@@ -74,6 +144,14 @@ export default class BackdropRefraction {
 		el.style.webkitBackdropFilter = `url(#${id})`;
 	}
 
+	/**
+	 * Injects or updates the SVG filter definition containing RGBA dynamic displacement tags.
+	 * 
+	 * @private
+	 * @param {string} id - Unique SVG filter ID.
+	 * @param {string} mapURL - Data URL string of generated PNG displacement canvas map.
+	 * @returns {void}
+	 */
 	_updateFilter(id, mapURL) {
 		const { strength, rgbFringing, blurAmt } = this.options;
 
@@ -103,25 +181,50 @@ export default class BackdropRefraction {
 				</filter>
 			`);
 		} else {
-			document.getElementById(`img-${id}`).setAttribute('href', mapURL);
-			document.getElementById(`blur-${id}`).setAttribute('stdDeviation', blurAmt);
-			document.getElementById(`disp-red-${id}`).setAttribute('scale', scaleR);
-			document.getElementById(`disp-green-${id}`).setAttribute('scale', scaleG);
-			document.getElementById(`disp-blue-${id}`).setAttribute('scale', scaleB);
+			document.getElementById(`img-${id}`)?.setAttribute('href', mapURL);
+			document.getElementById(`blur-${id}`)?.setAttribute('stdDeviation', blurAmt.toString());
+			document.getElementById(`disp-red-${id}`)?.setAttribute('scale', scaleR.toString());
+			document.getElementById(`disp-green-${id}`)?.setAttribute('scale', scaleG.toString());
+			document.getElementById(`disp-blue-${id}`)?.setAttribute('scale', scaleB.toString());
 		}
 	}
 
+	/**
+	 * Signed Distance Function (SDF) for a rounded rectangle.
+	 * 
+	 * @private
+	 * @param {number} px - Point X coordinate relative to center.
+	 * @param {number} py - Point Y coordinate relative to center.
+	 * @param {number} bx - Half-width bound of rectangle.
+	 * @param {number} by - Half-height bound of rectangle.
+	 * @param {number} r - Corner radius.
+	 * @returns {number} Distance to rectangle edge (negative inside, positive outside).
+	 */
 	_sdRoundedRect(px, py, bx, by, r) {
 		let qx = Math.abs(px) - bx + r;
 		let qy = Math.abs(py) - by + r;
 		return Math.min(Math.max(qx, qy), 0.0) + Math.sqrt(Math.pow(Math.max(qx, 0.0), 2) + Math.pow(Math.max(qy, 0.0), 2)) - r;
 	}
 
+	/**
+	 * Renders displacement normals onto an offscreen canvas and converts it into a Data URL PNG.
+	 * 
+	 * @private
+	 * @param {number} w - Canvas pixel width.
+	 * @param {number} h - Canvas pixel height.
+	 * @param {number} edgeSize - Corner radius / edge refraction distance.
+	 * @param {number} normalPow - Falloff power calculation exponent.
+	 * @param {number} wobbleStr - Sine wobble noise magnitude.
+	 * @param {number} wobbleScale - Sine wobble noise frequency.
+	 * @returns {string} Image base64 data URL (`image/png`).
+	 */
 	_generateDisplacementMap(w, h, edgeSize, normalPow, wobbleStr, wobbleScale) {
 		const canvas = document.createElement('canvas');
 		canvas.width = w;
 		canvas.height = h;
 		const ctx = canvas.getContext('2d');
+		if (!ctx) return '';
+		
 		const imgData = ctx.createImageData(w, h);
 
 		const halfW = w / 2;

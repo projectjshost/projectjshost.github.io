@@ -1,28 +1,34 @@
-import $ from 'https://esm.sh/jquery';
-
 import { projectJS, isWindowed } from './main.js';
 
 export const shouldDrawWallpaper = () => {
-	return (location.pathname == `/${projectJS.launcher}/` | localStorage.forceWallpaper === "true") && localStorage.wallpaper;
-}
+	const isCorrectPath = location.pathname === `/${projectJS.launcher}/`;
+	const isForced = localStorage.getItem('forceWallpaper') === 'true';
+	const hasWallpaper = Boolean(localStorage.getItem('wallpaper'));
 
-// Sets Wallpaper of App
-export const createWallpaper = (source) => {
-	if (!shouldDrawWallpaper() || isWindowed) return;
-	$("#wallpaper").remove();
-	$("#wallpaperElement").remove();
-	$('html').append(`<div id="wallpaperElement"></div>`)
-	if (localStorage.blurWallpaper == "true") {
-		$('#wallpaperElement').addClass('blur');
-	}
-	if (localStorage.darkenWallpaper == "true") {
-		$('#wallpaperElement').addClass('dark');
-	}
-
-	$('head').append(`<style id="wallpaper">#wallpaperElement{background-image:url("` + source + `")!important}body{background:transparent!important}</style>`)
-}
+	return (isCorrectPath || isForced) && hasWallpaper;
+};
 
 export const deleteWallpaper = () => {
-	$("#wallpaper").remove();
-	$("#wallpaperElement").remove();
-}
+	document.getElementById('wallpaperElement')?.remove();
+	document.body.classList.remove('has-wallpaper');
+};
+
+export const createWallpaper = (source) => {
+	if (!shouldDrawWallpaper() || isWindowed) {
+		deleteWallpaper();
+		return;
+	}
+
+	let element = document.getElementById('wallpaperElement');
+	if (!element) {
+		element = document.createElement('div');
+		element.id = 'wallpaperElement';
+		document.body.appendChild(element);
+	}
+
+	element.classList.toggle('blur', localStorage.getItem('blurWallpaper') === 'true');
+	element.classList.toggle('dark', localStorage.getItem('darkenWallpaper') === 'true');
+	element.style.backgroundImage = `url("${source}")`;
+
+	document.body.classList.add('has-wallpaper');
+};

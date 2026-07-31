@@ -1,6 +1,47 @@
 import $ from 'https://esm.sh/jquery';
 import BackdropRefraction from './blur.js';
 
+/**
+ * State object representing a window's current UI status.
+ * @typedef {Object} WindowState
+ * @property {string} title - The current title of the window.
+ * @property {boolean} minimized - Whether the window is minimized.
+ * @property {boolean} maximized - Whether the window is maximized.
+ * @property {boolean} focused - Whether the window is currently focused.
+ */
+
+/**
+ * Window state extended with its unique identifier.
+ * @typedef {WindowState & { id: string }} WindowInfo
+ */
+
+/**
+ * Callback function invoked when window states are updated.
+ * @callback WindowChangeCallback
+ * @param {WindowInfo[]} windows - List of all current window states.
+ */
+
+/**
+ * Configuration options for creating a new window.
+ * @typedef {Object} WindowProperties
+ * @property {number} [x=50] - Initial X coordinate (left) in pixels.
+ * @property {number} [y=50] - Initial Y coordinate (top) in pixels.
+ * @property {number} [width=400] - Initial width in pixels.
+ * @property {number} [height=600] - Initial height in pixels.
+ * @property {boolean} [canClose=true] - Whether the window can be closed.
+ * @property {boolean} [canResize=true] - Whether the window can be resized.
+ * @property {boolean} [canMinimize=true] - Whether the window can be minimized.
+ * @property {boolean} [canMove=true] - Whether the window can be dragged.
+ * @property {boolean} [maximized=false] - Whether the window starts in a maximized state.
+ * @property {boolean} [minimized=false] - Whether the window starts in a minimized state.
+ * @property {boolean} [alwaysOnTop=false] - Whether to keep the window always on top.
+ * @property {boolean} [alwaysOnBottom=false] - Whether to keep the window always on bottom.
+ */
+
+/**
+ * Synchronizes body CSS classes based on preferences stored in `localStorage`.
+ * @returns {void}
+ */
 const syncDesktopClasses = () => {
 	document.body.classList.toggle("trafficLightCaptionButtons", localStorage.trafficLightCaptionButtons === "true");
 	document.body.classList.toggle("reverseTitlebar", localStorage.reverseTitlebar === "true");
@@ -8,11 +49,14 @@ const syncDesktopClasses = () => {
 
 syncDesktopClasses();
 
+/**
+ * Global message listener for iframe cross-origin requests (e.g. updating window titles).
+ */
 window.addEventListener("message", (e) => {
 	if (e.data?.type === 'setAppName' && typeof e.data.name === 'string') {
 		// Find the iframe that sent this message and update its parent window's titlebar
 		const iframe = Array.from(document.querySelectorAll('iframe.windowbody')).find(
-			f => f.contentWindow === e.source
+			f => /** @type {HTMLIFrameElement} */ (f).contentWindow === e.source
 		);
 		if (iframe) {
 			const win = iframe.closest('.window');
@@ -21,7 +65,8 @@ window.addEventListener("message", (e) => {
 				if (titleEl) titleEl.textContent = e.data.name;
 				// Update window state title
 				if (win.id && windowStates.has(win.id)) {
-					windowStates.get(win.id).title = e.data.name;
+					const state = windowStates.get(win.id);
+					if (state) state.title = e.data.name;
 					notifyListeners();
 				}
 			}
@@ -29,6 +74,9 @@ window.addEventListener("message", (e) => {
 	}
 });
 
+/**
+ * Global storage listener to handle settings updates across tabs/windows.
+ */
 window.addEventListener("storage", (e) => {
 	if (e.key === "trafficLightCaptionButtons" || e.key === "reverseTitlebar") {
 		syncDesktopClasses();
@@ -40,6 +88,12 @@ window.addEventListener("storage", (e) => {
 	}
 });
 
+/**
+ * Destroys and cleans up the `BackdropRefraction` blur instance for a given window.
+ * 
+ * @param {string} winId - The ID of the window to clean up.
+ * @returns {void}
+ */
 const cleanupWindowBlur = (winId) => {
 	if (refractionInstances.has(winId)) {
 		const instance = refractionInstances.get(winId);
@@ -48,6 +102,12 @@ const cleanupWindowBlur = (winId) => {
 	}
 };
 
+/**
+ * Applies custom backdrop refraction blur to a window based on `localStorage` preferences.
+ * 
+ * @param {string} winId - The ID of the target window DOM element.
+ * @returns {void}
+ */
 const applyBlurToWindow = (winId) => {
 	const blurType = localStorage.blurType || 'native';
 	const uiTransparency = localStorage.uiTransparency === 'true';
@@ -78,32 +138,64 @@ const applyBlurToWindow = (winId) => {
 	refractionInstances.set(winId, instance);
 };
 
+/** @type {number} */
 let baseZIndex = 1000;
+
+/** @type {number} */
 let bottomZIndex = 100;
+
+/** @type {number} */
 let topZIndex = 10000;
 
+/** @type {number} */
 let windowCounter = 0;
+
+/** @type {Map<string, InstanceType<typeof BackdropRefraction>>} */
 const refractionInstances = new Map();
 
-// Window state tracking for the desktop panel
+/** @type {Map<string, WindowState>} Window state tracking for the desktop panel */
 const windowStates = new Map();
+
+/** @type {Set<WindowChangeCallback>} */
 const changeListeners = new Set();
 
+/**
+ * Notifies all registered listeners about window state changes.
+ * @returns {void}
+ */
 const notifyListeners = () => {
 	const windows = getWindows();
 	changeListeners.forEach(fn => fn(windows));
 };
 
+/**
+ * Registers a callback listener to monitor window state changes.
+ * Executes the callback immediately upon registration with current window states.
+ * 
+ * @param {WindowChangeCallback} callback - Function to run when window state updates.
+ * @returns {void}
+ */
 export const onWindowChange = (callback) => {
 	changeListeners.add(callback);
 	// Immediately call with current state
 	callback(getWindows());
 };
 
+/**
+ * Unregisters a window change listener callback.
+ * 
+ * @param {WindowChangeCallback} callback - Function to remove from change listeners.
+ * @returns {void}
+ */
 export const offWindowChange = (callback) => {
 	changeListeners.delete(callback);
 };
 
+/**
+ * Retrieves all currently active window objects and their state metadata.
+ * 
+ * @returns {WindowInfo[]} An array of objects representing all active windows.
+ */
 export const getWindows = () => {
 	return [...windowStates.entries()].map(([id, state]) => ({
 		id,
@@ -111,6 +203,12 @@ export const getWindows = () => {
 	}));
 };
 
+/**
+ * Focuses a specific window by its ID, bringing it to the foreground.
+ * 
+ * @param {string} windowId - The DOM ID of the window to focus.
+ * @returns {void}
+ */
 export const focusWindow = (windowId) => {
 	const el = document.getElementById(windowId);
 	if (el) {
@@ -118,6 +216,12 @@ export const focusWindow = (windowId) => {
 	}
 };
 
+/**
+ * Closes a window, releasing its blur instance, removing state, and destroying its DOM element.
+ * 
+ * @param {string} windowId - The DOM ID of the window to close.
+ * @returns {void}
+ */
 export const closeWindow = (windowId) => {
 	const el = document.getElementById(windowId);
 	if (el) {
@@ -128,6 +232,14 @@ export const closeWindow = (windowId) => {
 	}
 };
 
+/**
+ * Creates, constructs, and opens a new application window inside the desktop environment.
+ * 
+ * @param {string} target - The URL or route for the application loaded within the iframe.
+ * @param {Record<string, string|number|boolean>|null} [params] - Optional query parameters to append to the target URL.
+ * @param {WindowProperties} [properties={}] - Additional configuration options for window dimensions and behaviors.
+ * @returns {void}
+ */
 export const openAppWindow = (target, params, properties = {}) => {
 	const {
 		x = 50,
@@ -145,7 +257,7 @@ export const openAppWindow = (target, params, properties = {}) => {
 	} = properties;
 
 	if (typeof params === "object" && params !== null) {
-		target = `${target}?${new URLSearchParams(params).toString()}`;
+		target = `${target}?${new URLSearchParams(/** @type {Record<string, string>} */ (params)).toString()}`;
 	}
 
 	const resizersHtml = canResize ? `
@@ -189,6 +301,10 @@ export const openAppWindow = (target, params, properties = {}) => {
 	const $win = $(windowHtml);
 	const $iframe = $win.find('iframe');
 
+	/**
+	 * Updates the window's z-index and brings it to focus status.
+	 * @returns {void}
+	 */
 	const updateZIndex = () => {
 		$('.window').removeClass('focused');
 		$win.addClass('focused');
@@ -210,7 +326,7 @@ export const openAppWindow = (target, params, properties = {}) => {
 
 	$iframe.on('load', function () {
 		try {
-			const iframeWindow = this.contentWindow;
+			const iframeWindow = /** @type {HTMLIFrameElement} */ (this).contentWindow;
 			if (iframeWindow) {
 				iframeWindow.addEventListener('mousedown', () => {
 					$win.trigger('mousedown');
@@ -260,8 +376,10 @@ export const openAppWindow = (target, params, properties = {}) => {
 			// otherwise we'd capture the minimized (tiny) dimensions.
 			if (!$win.hasClass('minimized')) {
 				preMaxState = {
-					top: $win.css('top'), left: $win.css('left'),
-					width: $win.css('width'), height: $win.css('height')
+					top: /** @type {string} */ ($win.css('top')),
+					left: /** @type {string} */ ($win.css('left')),
+					width: /** @type {string} */ ($win.css('width')),
+					height: /** @type {string} */ ($win.css('height'))
 				};
 			}
 			$win.removeClass('minimized').addClass('maximized').removeAttr('style');
@@ -287,11 +405,15 @@ export const openAppWindow = (target, params, properties = {}) => {
 			if ($win.hasClass('maximized') || $(e.target).closest('.captionButtons').length) return;
 
 			let startX = e.clientX, startY = e.clientY;
-			let startTop = parseInt($win.css('top'), 10) || 0;
-			let startLeft = parseInt($win.css('left'), 10) || 0;
+			let startTop = parseInt(/** @type {string} */ ($win.css('top')), 10) || 0;
+			let startLeft = parseInt(/** @type {string} */ ($win.css('left')), 10) || 0;
 
 			$('.windowbody').css('pointer-events', 'none');
 
+			/**
+			 * Handles window dragging movement.
+			 * @param {MouseEvent} moveEvent
+			 */
 			const onMouseMove = (moveEvent) => {
 				$win.css({
 					top: startTop + (moveEvent.clientY - startY),
@@ -299,6 +421,9 @@ export const openAppWindow = (target, params, properties = {}) => {
 				});
 			};
 
+			/**
+			 * Cleans up listeners when window drag ends.
+			 */
 			const onMouseUp = () => {
 				$(document).off('mousemove', onMouseMove).off('mouseup', onMouseUp);
 				$('.windowbody').css('pointer-events', '');
@@ -314,15 +439,19 @@ export const openAppWindow = (target, params, properties = {}) => {
 		e.preventDefault();
 		if ($win.hasClass('maximized') || $win.hasClass('minimized')) return;
 
-		const dir = $(this).data('dir');
+		const dir = String($(this).data('dir'));
 		let startX = e.clientX, startY = e.clientY;
-		let startTop = parseInt($win.css('top'), 10);
-		let startLeft = parseInt($win.css('left'), 10);
-		let startWidth = $win.width();
-		let startHeight = $win.height();
+		let startTop = parseInt(/** @type {string} */ ($win.css('top')), 10);
+		let startLeft = parseInt(/** @type {string} */ ($win.css('left')), 10);
+		let startWidth = /** @type {number} */ ($win.width());
+		let startHeight = /** @type {number} */ ($win.height());
 
 		$('.windowbody').css('pointer-events', 'none');
 
+		/**
+		 * Handles window resizing calculations based on direction handle.
+		 * @param {MouseEvent} moveEvent
+		 */
 		const onMouseMove = (moveEvent) => {
 			let dx = moveEvent.clientX - startX;
 			let dy = moveEvent.clientY - startY;
@@ -340,6 +469,9 @@ export const openAppWindow = (target, params, properties = {}) => {
 			}
 		};
 
+		/**
+		 * Cleans up listeners when window resize ends.
+		 */
 		const onMouseUp = () => {
 			$(document).off('mousemove', onMouseMove).off('mouseup', onMouseUp);
 			$('.windowbody').css('pointer-events', '');

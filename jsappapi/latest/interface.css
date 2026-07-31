@@ -51,6 +51,10 @@ body.windowed {
 	padding-top: 0;
 }
 
+body.has-wallpaper {
+	background: transparent !important;
+}
+
 div#wallpaperElement {
 	position: fixed;
 	top: -20px;
