@@ -88,7 +88,8 @@ export default {
 	 * @returns {void}
 	 */
 	loadFromJSON(json) {
-		const uiTransparency = localStorage.uiTransparency === "true" && (isWindowed || shouldDrawWallpaper());
+		const isThemeEditor = window.location.pathname.startsWith('/themeEditor');
+		const uiTransparency = !isThemeEditor && localStorage.uiTransparency === "true" && (isWindowed || shouldDrawWallpaper());
 		const documentRoot = document.querySelector(':root');
 
 		/** @type {Array<keyof ThemeObject>} */
@@ -122,7 +123,7 @@ export default {
 			documentRoot.style.removeProperty('--backdrop-filter');
 
 			transparentProps.forEach(({ prop }) => {
-				documentRoot.style.setProperty(`--${prop}-transparent`, json[prop]);
+				documentRoot.style.setProperty(`--${prop}-transparent`, `var(--${prop})`);
 			});
 		}
 	},
