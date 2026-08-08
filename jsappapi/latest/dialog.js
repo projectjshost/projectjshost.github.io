@@ -1,4 +1,4 @@
-import $ from 'https://esm.sh/jquery';
+import { fadeIn, fadeOut, slideDown, slideUp } from "./animation.js";
 
 /**
  * Counter used to generate unique IDs for each dialog instance.
@@ -16,6 +16,7 @@ let activeDialogsCount = 0;
  * Valid dialog types for styling and header configuration.
  * @typedef {'info' | 'warn' | 'error' | 'custom'} DialogType
  */
+
 
 /**
  * Displays a modal dialog with a message, icon, title, and close button.
@@ -56,30 +57,41 @@ export const dialog = (message, type, customTitle = "") => {
 
 	const headerHtml = title ? `<p2><span class="icon">${icon}</span> ${title}</p2>` : "";
 
-	const $overlay = $(`<div class="dialogOverlay" id="overlay${currentID}"></div>`);
-	const $dialog = $(`
-        <div class="dialog" id="dialog${currentID}" role="dialog" aria-modal="true">
-            ${headerHtml}
-            <div class="dialog-message"></div>
-            <button class="dialog-close-btn">${btnText}</button>
-        </div>
-    `);
+	// Create Overlay
+	const overlay = document.createElement("div");
+	overlay.className = "dialogOverlay";
+	overlay.id = `overlay${currentID}`;
 
-	$dialog.find(".dialog-message").html(message);
+	// Create Dialog
+	const dialogEl = document.createElement("div");
+	dialogEl.className = "dialog";
+	dialogEl.id = `dialog${currentID}`;
+	dialogEl.setAttribute("role", "dialog");
+	dialogEl.setAttribute("aria-modal", "true");
+	dialogEl.innerHTML = `
+        ${headerHtml}
+        <div class="dialog-message">${message}</div>
+        <button class="dialog-close-btn">${btnText}</button>
+    `;
 
 	const handleClose = () => closeDialog(currentID);
-	$overlay.on("click", handleClose);
-	$dialog.find(".dialog-close-btn").on("click", handleClose);
+	overlay.addEventListener("click", handleClose);
 
-	$("body")
-		.addClass("dialog-open")
-		.append($overlay.hide())
-		.append($dialog.hide());
+	const closeBtn = dialogEl.querySelector(".dialog-close-btn");
+	if (closeBtn) {
+		closeBtn.addEventListener("click", handleClose);
+	}
 
-	$overlay.fadeIn(200);
-	$dialog.slideDown(200);
+	document.body.classList.add("dialog-open");
+	document.body.appendChild(overlay);
+	document.body.appendChild(dialogEl);
 
-	$dialog.find(".dialog-close-btn").focus();
+	fadeIn(overlay, 200);
+	slideDown(dialogEl, 200);
+
+	if (closeBtn) {
+		closeBtn.focus();
+	}
 };
 
 /**
@@ -90,14 +102,22 @@ export const dialog = (message, type, customTitle = "") => {
  * @returns {void}
  */
 export const closeDialog = (id) => {
-	$(`#overlay${id}`).fadeOut(200, function () { $(this).remove(); });
-	$(`#dialog${id}`).slideUp(200, function () {
-		$(this).remove();
+	const overlay = document.getElementById(`overlay${id}`);
+	const dialogEl = document.getElementById(`dialog${id}`);
 
-		activeDialogsCount--;
-		if (activeDialogsCount <= 0) {
-			$("body").removeClass("dialog-open");
-			activeDialogsCount = 0;
-		}
-	});
+	if (overlay) {
+		fadeOut(overlay, 200).then(() => overlay.remove());
+	}
+
+	if (dialogEl) {
+		slideUp(dialogEl, 200).then(() => {
+			dialogEl.remove();
+
+			activeDialogsCount--;
+			if (activeDialogsCount <= 0) {
+				document.body.classList.remove("dialog-open");
+				activeDialogsCount = 0;
+			}
+		});
+	}
 };

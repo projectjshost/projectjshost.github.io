@@ -1,27 +1,26 @@
-import $ from 'https://esm.sh/jquery';
 import { encryptString, decryptString } from '../jsappapi/latest/crypto.js';
 
 // Encrypt with password
-const SafeEncryptPass = () => {
-	let encryptThis = document.getElementById("textpass").value;
-	let ENpassword = document.getElementById("pass").value;
-	let encrypted = encryptString(encryptThis, ENpassword);
-	document.getElementById('ResultPass').innerHTML = encrypted;
-	secureDelete();
+const encryptWithPassword = () => {
+	let textToEncrypt = document.getElementById("textpass").value;
+	let encryptionPassword = document.getElementById("pass").value;
+	let encryptedText = encryptString(textToEncrypt, encryptionPassword);
+	document.getElementById('ResultPass').innerHTML = encryptedText;
+	clearPassword();
 }
 
 // Decrypt with password
-const SafedecryptPass = () => {
-	let decryptThis = document.getElementById("textpass").value;
-	let DEpassword = document.getElementById("pass").value;
-	let decrypted = decryptString(decryptThis, DEpassword);
-	document.getElementById('ResultPass').innerHTML = decrypted;
-	secureDelete();
+const decryptWithPassword = () => {
+	let textToDecrypt = document.getElementById("textpass").value;
+	let decryptionPassword = document.getElementById("pass").value;
+	let decryptedText = decryptString(textToDecrypt, decryptionPassword);
+	document.getElementById('ResultPass').innerHTML = decryptedText;
+	clearPassword();
 }
 
-const secureDelete = () => {
+const clearPassword = () => {
 	document.getElementById("textpass").value = "";
 }
 
-$("#encryptButton").on("click", SafeEncryptPass);
-$("#decryptButton").on("click", SafedecryptPass);
+document.getElementById("encryptButton").addEventListener("click", encryptWithPassword);
+document.getElementById("decryptButton").addEventListener("click", decryptWithPassword);

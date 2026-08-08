@@ -1,4 +1,3 @@
-import $ from 'https://esm.sh/jquery';
 import BackdropRefraction from './blur.js';
 
 /**
@@ -56,7 +55,7 @@ window.addEventListener("message", (e) => {
 	if (e.data?.type === 'setAppName' && typeof e.data.name === 'string') {
 		// Find the iframe that sent this message and update its parent window's titlebar
 		const iframe = Array.from(document.querySelectorAll('iframe.windowbody')).find(
-			f => /** @type {HTMLIFrameElement} */ (f).contentWindow === e.source
+			f => /** @type {HTMLIFrameElement} */(f).contentWindow === e.source
 		);
 		if (iframe) {
 			const win = iframe.closest('.window');
@@ -212,7 +211,7 @@ export const getWindows = () => {
 export const focusWindow = (windowId) => {
 	const el = document.getElementById(windowId);
 	if (el) {
-		$(el).trigger('mousedown');
+		el.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
 	}
 };
 
@@ -227,7 +226,7 @@ export const closeWindow = (windowId) => {
 	if (el) {
 		cleanupWindowBlur(windowId);
 		windowStates.delete(windowId);
-		$(el).remove();
+		el.remove();
 		notifyListeners();
 	}
 };
@@ -257,7 +256,7 @@ export const openAppWindow = (target, params, properties = {}) => {
 	} = properties;
 
 	if (typeof params === "object" && params !== null) {
-		target = `${target}?${new URLSearchParams(/** @type {Record<string, string>} */ (params)).toString()}`;
+		target = `${target}?${new URLSearchParams(/** @type {Record<string, string>} */(params)).toString()}`;
 	}
 
 	const resizersHtml = canResize ? `
@@ -298,22 +297,24 @@ export const openAppWindow = (target, params, properties = {}) => {
 		</div>
 	`;
 
-	const $win = $(windowHtml);
-	const $iframe = $win.find('iframe');
+	const template = document.createElement('template');
+	template.innerHTML = windowHtml.trim();
+	const win = /** @type {HTMLElement} */ (template.content.firstElementChild);
+	const iframe = /** @type {HTMLIFrameElement} */ (win.querySelector('.windowbody'));
 
 	/**
 	 * Updates the window's z-index and brings it to focus status.
 	 * @returns {void}
 	 */
 	const updateZIndex = () => {
-		$('.window').removeClass('focused');
-		$win.addClass('focused');
+		document.querySelectorAll('.window').forEach(w => w.classList.remove('focused'));
+		win.classList.add('focused');
 		if (alwaysOnTop) {
-			$win.css('z-index', ++topZIndex);
+			win.style.zIndex = String(++topZIndex);
 		} else if (alwaysOnBottom) {
-			$win.css('z-index', ++bottomZIndex);
+			win.style.zIndex = String(++bottomZIndex);
 		} else {
-			$win.css('z-index', ++baseZIndex);
+			win.style.zIndex = String(++baseZIndex);
 		}
 		// Update focused state on all windows
 		windowStates.forEach((st, id) => {
@@ -322,14 +323,14 @@ export const openAppWindow = (target, params, properties = {}) => {
 		notifyListeners();
 	};
 
-	$win.on('mousedown', updateZIndex);
+	win.addEventListener('mousedown', updateZIndex);
 
-	$iframe.on('load', function () {
+	iframe?.addEventListener('load', function () {
 		try {
-			const iframeWindow = /** @type {HTMLIFrameElement} */ (this).contentWindow;
+			const iframeWindow = this.contentWindow;
 			if (iframeWindow) {
 				iframeWindow.addEventListener('mousedown', () => {
-					$win.trigger('mousedown');
+					win.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true }));
 				}, true);
 			}
 		} catch (err) {
@@ -337,19 +338,19 @@ export const openAppWindow = (target, params, properties = {}) => {
 		}
 	});
 
-	$win.find('.closeButton').on('click', () => {
+	win.querySelector('.closeButton')?.addEventListener('click', () => {
 		cleanupWindowBlur(windowId);
 		windowStates.delete(windowId);
-		$win.remove();
+		win.remove();
 		notifyListeners();
 	});
 
-	$win.find('.minimizeButton').on('click', () => {
-		$win.toggleClass('minimized');
-		$win.removeClass('maximized');
+	win.querySelector('.minimizeButton')?.addEventListener('click', () => {
+		win.classList.toggle('minimized');
+		win.classList.remove('maximized');
 		const state = windowStates.get(windowId);
 		if (state) {
-			state.minimized = $win.hasClass('minimized');
+			state.minimized = win.classList.contains('minimized');
 			state.maximized = false;
 			notifyListeners();
 		}
@@ -362,10 +363,10 @@ export const openAppWindow = (target, params, properties = {}) => {
 		height: `${height}px`
 	};
 
-	$win.find('.maximizeButton').on('click', () => {
-		if ($win.hasClass('maximized')) {
-			$win.removeClass('maximized');
-			$win.css(preMaxState);
+	win.querySelector('.maximizeButton')?.addEventListener('click', () => {
+		if (win.classList.contains('maximized')) {
+			win.classList.remove('maximized');
+			Object.assign(win.style, preMaxState);
 			const state = windowStates.get(windowId);
 			if (state) {
 				state.maximized = false;
@@ -374,15 +375,18 @@ export const openAppWindow = (target, params, properties = {}) => {
 		} else {
 			// Only save preMaxState if not currently minimized,
 			// otherwise we'd capture the minimized (tiny) dimensions.
-			if (!$win.hasClass('minimized')) {
+			if (!win.classList.contains('minimized')) {
+				const computed = getComputedStyle(win);
 				preMaxState = {
-					top: /** @type {string} */ ($win.css('top')),
-					left: /** @type {string} */ ($win.css('left')),
-					width: /** @type {string} */ ($win.css('width')),
-					height: /** @type {string} */ ($win.css('height'))
+					top: win.style.top || computed.top,
+					left: win.style.left || computed.left,
+					width: win.style.width || computed.width,
+					height: win.style.height || computed.height
 				};
 			}
-			$win.removeClass('minimized').addClass('maximized').removeAttr('style');
+			win.classList.remove('minimized');
+			win.classList.add('maximized');
+			win.removeAttribute('style');
 			updateZIndex();
 			const state = windowStates.get(windowId);
 			if (state) {
@@ -394,93 +398,114 @@ export const openAppWindow = (target, params, properties = {}) => {
 	});
 
 	if (maximized) {
-		$win.addClass('maximized');
-		$win.css({ top: '', left: '', width: '', height: '' });
+		win.classList.add('maximized');
+		win.style.top = '';
+		win.style.left = '';
+		win.style.width = '';
+		win.style.height = '';
 	} else if (minimized) {
-		$win.addClass('minimized');
+		win.classList.add('minimized');
 	}
 
-	if (canMove) {
-		$win.find('.titlebar').on('mousedown', function (e) {
-			if ($win.hasClass('maximized') || $(e.target).closest('.captionButtons').length) return;
+	const titlebar = win.querySelector('.titlebar');
+	if (canMove && titlebar) {
+		titlebar.addEventListener('mousedown', function (e) {
+			const mouseEvent = /** @type {MouseEvent} */ (e);
+			const targetEl = /** @type {HTMLElement} */ (e.target);
+			if (win.classList.contains('maximized') || targetEl.closest('.captionButtons')) return;
 
-			let startX = e.clientX, startY = e.clientY;
-			let startTop = parseInt(/** @type {string} */ ($win.css('top')), 10) || 0;
-			let startLeft = parseInt(/** @type {string} */ ($win.css('left')), 10) || 0;
+			let startX = mouseEvent.clientX, startY = mouseEvent.clientY;
+			let startTop = parseInt(win.style.top || getComputedStyle(win).top, 10) || 0;
+			let startLeft = parseInt(win.style.left || getComputedStyle(win).left, 10) || 0;
 
-			$('.windowbody').css('pointer-events', 'none');
+			document.querySelectorAll('.windowbody').forEach(el => {
+				/** @type {HTMLElement} */ (el).style.pointerEvents = 'none';
+			});
 
 			/**
 			 * Handles window dragging movement.
 			 * @param {MouseEvent} moveEvent
 			 */
 			const onMouseMove = (moveEvent) => {
-				$win.css({
-					top: startTop + (moveEvent.clientY - startY),
-					left: startLeft + (moveEvent.clientX - startX)
-				});
+				win.style.top = `${startTop + (moveEvent.clientY - startY)}px`;
+				win.style.left = `${startLeft + (moveEvent.clientX - startX)}px`;
 			};
 
 			/**
 			 * Cleans up listeners when window drag ends.
 			 */
 			const onMouseUp = () => {
-				$(document).off('mousemove', onMouseMove).off('mouseup', onMouseUp);
-				$('.windowbody').css('pointer-events', '');
+				document.removeEventListener('mousemove', onMouseMove);
+				document.removeEventListener('mouseup', onMouseUp);
+				document.querySelectorAll('.windowbody').forEach(el => {
+					/** @type {HTMLElement} */ (el).style.pointerEvents = '';
+				});
 			};
 
-			$(document).on('mousemove', onMouseMove).on('mouseup', onMouseUp);
+			document.addEventListener('mousemove', onMouseMove);
+			document.addEventListener('mouseup', onMouseUp);
 		});
-	} else {
-		$win.find('.titlebar').css('cursor', 'default');
+	} else if (titlebar) {
+		/** @type {HTMLElement} */ (titlebar).style.cursor = 'default';
 	}
 
-	$win.find('.resizer').on('mousedown', function (e) {
-		e.preventDefault();
-		if ($win.hasClass('maximized') || $win.hasClass('minimized')) return;
+	win.querySelectorAll('.resizer').forEach(resizer => {
+		resizer.addEventListener('mousedown', function (e) {
+			const mouseEvent = /** @type {MouseEvent} */ (e);
+			mouseEvent.preventDefault();
+			if (win.classList.contains('maximized') || win.classList.contains('minimized')) return;
 
-		const dir = String($(this).data('dir'));
-		let startX = e.clientX, startY = e.clientY;
-		let startTop = parseInt(/** @type {string} */ ($win.css('top')), 10);
-		let startLeft = parseInt(/** @type {string} */ ($win.css('left')), 10);
-		let startWidth = /** @type {number} */ ($win.width());
-		let startHeight = /** @type {number} */ ($win.height());
+			const dir = String(/** @type {HTMLElement} */(resizer).dataset.dir);
+			let startX = mouseEvent.clientX, startY = mouseEvent.clientY;
+			let startTop = parseInt(win.style.top || getComputedStyle(win).top, 10) || 0;
+			let startLeft = parseInt(win.style.left || getComputedStyle(win).left, 10) || 0;
+			let startWidth = win.offsetWidth;
+			let startHeight = win.offsetHeight;
 
-		$('.windowbody').css('pointer-events', 'none');
+			document.querySelectorAll('.windowbody').forEach(el => {
+				/** @type {HTMLElement} */ (el).style.pointerEvents = 'none';
+			});
 
-		/**
-		 * Handles window resizing calculations based on direction handle.
-		 * @param {MouseEvent} moveEvent
-		 */
-		const onMouseMove = (moveEvent) => {
-			let dx = moveEvent.clientX - startX;
-			let dy = moveEvent.clientY - startY;
+			/**
+			 * Handles window resizing calculations based on direction handle.
+			 * @param {MouseEvent} moveEvent
+			 */
+			const onMouseMove = (moveEvent) => {
+				let dx = moveEvent.clientX - startX;
+				let dy = moveEvent.clientY - startY;
 
-			let newWidth = Math.max(200, startWidth + (dir.includes('w') ? -dx : dx));
-			let newHeight = Math.max(200, startHeight + (dir.includes('n') ? -dy : dy));
+				let newWidth = Math.max(200, startWidth + (dir.includes('w') ? -dx : dx));
+				let newHeight = Math.max(200, startHeight + (dir.includes('n') ? -dy : dy));
 
-			if (dir.includes('e')) $win.css('width', newWidth);
-			if (dir.includes('s')) $win.css('height', newHeight);
-			if (dir.includes('w') && newWidth > 200) {
-				$win.css({ left: startLeft + dx, width: newWidth });
-			}
-			if (dir.includes('n') && newHeight > 200) {
-				$win.css({ top: startTop + dy, height: newHeight });
-			}
-		};
+				if (dir.includes('e')) win.style.width = `${newWidth}px`;
+				if (dir.includes('s')) win.style.height = `${newHeight}px`;
+				if (dir.includes('w') && newWidth > 200) {
+					win.style.left = `${startLeft + dx}px`;
+					win.style.width = `${newWidth}px`;
+				}
+				if (dir.includes('n') && newHeight > 200) {
+					win.style.top = `${startTop + dy}px`;
+					win.style.height = `${newHeight}px`;
+				}
+			};
 
-		/**
-		 * Cleans up listeners when window resize ends.
-		 */
-		const onMouseUp = () => {
-			$(document).off('mousemove', onMouseMove).off('mouseup', onMouseUp);
-			$('.windowbody').css('pointer-events', '');
-		};
+			/**
+			 * Cleans up listeners when window resize ends.
+			 */
+			const onMouseUp = () => {
+				document.removeEventListener('mousemove', onMouseMove);
+				document.removeEventListener('mouseup', onMouseUp);
+				document.querySelectorAll('.windowbody').forEach(el => {
+					/** @type {HTMLElement} */ (el).style.pointerEvents = '';
+				});
+			};
 
-		$(document).on('mousemove', onMouseMove).on('mouseup', onMouseUp);
+			document.addEventListener('mousemove', onMouseMove);
+			document.addEventListener('mouseup', onMouseUp);
+		});
 	});
 
-	$("body").append($win);
+	document.body.appendChild(win);
 
 	// Track window state
 	windowStates.set(windowId, {

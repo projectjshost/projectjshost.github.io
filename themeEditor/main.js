@@ -1,4 +1,3 @@
-import $ from 'https://esm.sh/jquery';
 import color from 'https://esm.sh/color';
 
 import { openApp } from '../jsappapi/latest/main.js';
@@ -55,41 +54,51 @@ const themeEditor = {
 			</div>
 		`;
 
-		$("#currentView").append(editorHTML);
+		const currentView = document.querySelector("#currentView");
+		if (currentView) {
+			currentView.insertAdjacentHTML('beforeend', editorHTML);
+		}
 
-		const $hueSlider = $("#hueSlider");
-		const $saturationSlider = $("#saturationSlider");
-		const $valueSlider = $("#valueSlider");
-		const $hueLabel = $("#hueLabel");
-		const $saturationLabel = $("#saturationLabel");
-		const $valueLabel = $("#valueLabel");
-		const $themeName = $("#themeName");
+		const hueSlider = document.querySelector("#hueSlider");
+		const saturationSlider = document.querySelector("#saturationSlider");
+		const valueSlider = document.querySelector("#valueSlider");
+		const hueLabel = document.querySelector("#hueLabel");
+		const saturationLabel = document.querySelector("#saturationLabel");
+		const valueLabel = document.querySelector("#valueLabel");
+		const themeName = document.querySelector("#themeName");
+		const saveButton = document.querySelector("#saveButton");
 
 		const updateLabels = () => {
-			$hueLabel.text(`Hue: ${$hueSlider.val()}`);
-			$saturationLabel.text(`Saturation: ${$saturationSlider.val()}%`);
-			$valueLabel.text(`Brightness: ${$valueSlider.val()}%`);
+			hueLabel.textContent = `Hue: ${hueSlider.value}`;
+			saturationLabel.textContent = `Saturation: ${saturationSlider.value}%`;
+			valueLabel.textContent = `Brightness: ${valueSlider.value}%`;
 		};
 
 		const selectedOptionChange = () => {
-			const selectedColor = $('input[name="color"]:checked').val();
+			const selectedInput = document.querySelector('input[name="color"]:checked');
+			if (!selectedInput) return;
+
+			const selectedColor = selectedInput.value;
 			const cssVarValue = getComputedStyle(documentRoot).getPropertyValue(`--${selectedColor}`).trim();
 			// Strip alpha when reading current value
 			const currentColor = color(cssVarValue).alpha(1).hsl();
 
-			$hueSlider.val(currentColor.color[0]);
-			$saturationSlider.val(currentColor.color[1]);
-			$valueSlider.val(currentColor.color[2]);
+			hueSlider.value = currentColor.color[0];
+			saturationSlider.value = currentColor.color[1];
+			valueSlider.value = currentColor.color[2];
 
 			updateLabels();
 		};
 
 		const sliderChange = () => {
-			const selectedColor = $('input[name="color"]:checked').val();
+			const selectedInput = document.querySelector('input[name="color"]:checked');
+			if (!selectedInput) return;
+
+			const selectedColor = selectedInput.value;
 			const currentColor = color.hsl([
-				parseInt($hueSlider.val()),
-				parseInt($saturationSlider.val()),
-				parseInt($valueSlider.val())
+				parseInt(hueSlider.value, 10),
+				parseInt(saturationSlider.value, 10),
+				parseInt(valueSlider.value, 10)
 			]).alpha(1); // Ensure alpha is 1
 
 			// Force HSL string format
@@ -98,7 +107,7 @@ const themeEditor = {
 		};
 
 		const saveTheme = () => {
-			const name = $themeName.val().slice(0, 32) || "Untitled";
+			const name = themeName.value.slice(0, 32) || "Untitled";
 
 			const content = {};
 			THEME_COLORS.forEach(c => {
@@ -124,17 +133,26 @@ const themeEditor = {
 
 		if (localStorage.theme?.startsWith("customTheme_")) {
 			try {
-				$themeName.val(atob(localStorage.theme.slice(12)));
+				themeName.value = atob(localStorage.theme.slice(12));
 			} catch (e) {
 				console.warn("Could not decode theme name.");
 			}
 		}
 
-		$('#currentView').on('input', 'input[name="color"]', selectedOptionChange);
-		$hueSlider.add($saturationSlider).add($valueSlider).on('input', sliderChange);
+		// Delegated listener on container for radio inputs
+		currentView?.addEventListener('input', (e) => {
+			if (e.target.matches('input[name="color"]')) {
+				selectedOptionChange();
+			}
+		});
 
-		$("#saveButton").on('mousedown', saveTheme);
-		$themeName.on('keyup', (e) => {
+		// Attach slider listeners
+		[hueSlider, saturationSlider, valueSlider].forEach(slider => {
+			slider?.addEventListener('input', sliderChange);
+		});
+
+		saveButton?.addEventListener('mousedown', saveTheme);
+		themeName?.addEventListener('keyup', (e) => {
 			if (e.key === 'Enter') saveTheme();
 		});
 	}
@@ -142,6 +160,6 @@ const themeEditor = {
 
 themeEditor.init();
 
-$("#backButton").on("click", () => {
+document.querySelector("#backButton")?.addEventListener("click", () => {
 	openApp("settings");
 });

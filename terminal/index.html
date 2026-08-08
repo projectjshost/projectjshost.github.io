@@ -46,8 +46,6 @@
 		</style>
 	</body>
 	<script type="module">
-		import $ from 'https://esm.sh/jquery';
-
 		import { projectJS, setAppName, openApp } from '../jsappapi/latest/main.js';
 		import { getVersionString } from '../jsappapi/latest/version.js';
 
@@ -247,17 +245,8 @@
 				}
 			}
 		}
-		var checkReady = function (callback) {
-			if (window.jQuery) {
-				callback(jQuery);
-			} else {
-				window.setTimeout(function () {
-					checkReady(callback);
-				}, 500);
-			}
-		}
-		var terminal = ttty.initTerminal(terminalConfig)
-		$("#terminal>.terminal-type>input")[0].focus()
+		const terminal = ttty.initTerminal(terminalConfig)
+		document.querySelector("#terminal > .terminal-type > input").focus();
 	</script>
 
 </html>

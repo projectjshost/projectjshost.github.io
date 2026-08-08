@@ -229,7 +229,6 @@ updateWallpaper();
 getWallpaperList();
 
 document.getElementById("versionString").innerText = `Version ${projectJS.version} (${await getVersionString()})`;
-document.getElementById("versionStringJQ").innerText = `jQuery Version ${jQuery().jquery}`;
 document.getElementById("appCount").innerText = `Installed Apps: ${apps.length}`;
 
 const tminit = () => {

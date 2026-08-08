@@ -1,5 +1,3 @@
-import $ from 'https://esm.sh/jquery';
-
 import { getRandom, getRandomStr } from '../jsappapi/latest/random.js';
 
 function randomPassGen() {
@@ -18,5 +16,5 @@ function randomNumGen() {
 	document.getElementById("randomNumResult").innerText = result;
 }
 
-$("#randomPassGen").on("click", randomPassGen);
-$("#randomNumGen").on("click", randomNumGen);
+document.getElementById("randomPassGen").addEventListener("click", randomPassGen);
+document.getElementById("randomNumGen").addEventListener("click", randomNumGen);

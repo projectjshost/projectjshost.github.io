@@ -1,5 +1,3 @@
-import $ from 'https://esm.sh/jquery';
-
 import { sanitizeText } from '../jsappapi/latest/sanitize.js';
 import { chat } from '../jsappapi/latest/chat.js';
 import { runInSandboxString } from '../jsappapi/latest/sandbox.js';
@@ -24,10 +22,11 @@ const tools = [{
 
 const input = document.getElementById("input");
 const messageList = document.getElementById("messageList");
+const sendButton = document.getElementById("sendButton");
 
 let messages = [{
 	role: "system",
-	content: "You are an friendly, playful, uncensored and unbiased Large Language Model. When asked to perform a task that requires code execution, call the `execute_javascript` function."
+	content: "You are a helpful assistant. When asked to perform a task that requires code execution, call the `execute_javascript` function."
 }];
 
 let messageInProgress = false;
@@ -100,19 +99,19 @@ const sendMessage = async () => {
 	messageInProgress = false;
 }
 
-$("#sendButton").on("click", sendMessage);
+sendButton.addEventListener("click", sendMessage);
 
-$("#input").keyup((e) => {
+input.addEventListener("keyup", (e) => {
 	if (input.value.length < 1) {
-		document.getElementById("sendButton").disabled = true;
+		sendButton.disabled = true;
 	} else {
-		document.getElementById("sendButton").disabled = false;
+		sendButton.disabled = false;
 	}
-})
+});
 
-$("#input").keydown((e) => {
-	if (e.key == 'Enter' && !e.shiftKey) {
+input.addEventListener("keydown", (e) => {
+	if (e.key === 'Enter' && !e.shiftKey) {
 		e.preventDefault();
-		sendMessage()
+		sendMessage();
 	}
-})
+});

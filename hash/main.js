@@ -1,20 +1,18 @@
-import $ from 'https://esm.sh/jquery';
 import { sha256, sha512, md5 } from '../jsappapi/latest/hash.js';
 import { getArrayBufferFromFilePicker } from '../jsappapi/latest/filepicker.js';
 
-$("#importFile").on("click", async () => {
+document.getElementById("importFile").addEventListener("click", async () => {
 	const file = await getArrayBufferFromFilePicker();
 
 	const start = performance.now();
 
-	$("#filename").text(`File: ${file.name}`);
-	$("#filesize").text(`Size: ${file.buffer.byteLength} bytes`);
-	$("#results").show();
+	document.getElementById("filename").textContent = `File: ${file.name}`;
+	document.getElementById("filesize").textContent = `Size: ${file.buffer.byteLength} bytes`;
+	document.getElementById("results").style.display = "block";
 
-	$("#outputHashMD5").text(await md5(file.buffer));
-	$("#outputHashSHA256").text(await sha256(file.buffer));
-	// $("#outputHashSHA512").text(await sha512(file.buffer));
+	document.getElementById("outputHashMD5").textContent = await md5(file.buffer);
+	document.getElementById("outputHashSHA256").textContent = await sha256(file.buffer);
 
 	const end = performance.now();
-	$("#duration").text(`Time: ${(end - start).toFixed(0)} ms`);
-})
+	document.getElementById("duration").textContent = `Time: ${(end - start).toFixed(0)} ms`;
+});

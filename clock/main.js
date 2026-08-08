@@ -1,4 +1,3 @@
-import $ from 'https://esm.sh/jquery';
 import moment from 'https://esm.sh/moment-timezone';
 import { setAppName } from '../jsappapi/latest/main.js';
 import { dialog } from '../jsappapi/latest/dialog.js';
@@ -34,7 +33,8 @@ const startTimer = () => {
 	if (timerRunning || timerTime <= 0) return;
 	timerInterval = setInterval(() => {
 		timerTime--;
-		$("#timerDisplay").text(formatTime(timerTime));
+		const display = document.getElementById("timerDisplay");
+		if (display) display.textContent = formatTime(timerTime);
 		if (timerTime <= 0) {
 			stopTimer();
 			alert("Timer finished!");
@@ -51,16 +51,19 @@ const stopTimer = () => {
 const resetTimer = () => {
 	stopTimer();
 	timerTime = 0;
-	$("#timerDisplay").text(formatTime(timerTime));
+	const display = document.getElementById("timerDisplay");
+	if (display) display.textContent = formatTime(timerTime);
 };
 
 const setTimerTime = () => {
-	const input = $("#timerInput").val();
+	const inputEl = document.getElementById("timerInput");
+	const input = inputEl ? inputEl.value : "";
 	const timeParts = input.split(":").map(part => parseInt(part, 10));
 
 	if (timeParts.length === 3 && !timeParts.some(isNaN)) {
 		timerTime = timeParts[0] * 3600 + timeParts[1] * 60 + timeParts[2];
-		$("#timerDisplay").text(formatTime(timerTime));
+		const display = document.getElementById("timerDisplay");
+		if (display) display.textContent = formatTime(timerTime);
 	} else {
 		dialog("Invalid time format. Please use HH:MM:SS.", "error");
 	}
@@ -70,7 +73,8 @@ const startStopwatch = () => {
 	if (stopwatchRunning) return;
 	stopwatchInterval = setInterval(() => {
 		stopwatchTime++;
-		$("#stopwatchDisplay").text(formatTime(stopwatchTime));
+		const display = document.getElementById("stopwatchDisplay");
+		if (display) display.textContent = formatTime(stopwatchTime);
 	}, 1000);
 	stopwatchRunning = true;
 };
@@ -83,7 +87,8 @@ const stopStopwatch = () => {
 const resetStopwatch = () => {
 	stopStopwatch();
 	stopwatchTime = 0;
-	$("#stopwatchDisplay").text(formatTime(stopwatchTime));
+	const display = document.getElementById("stopwatchDisplay");
+	if (display) display.textContent = formatTime(stopwatchTime);
 };
 
 const addClock = (timezone) => {
@@ -114,20 +119,24 @@ const updateClocks = () => {
 
 	if (currentTab !== "clock") return;
 
-	$("#bigClock").text(time);
+	const bigClock = document.getElementById("bigClock");
+	if (bigClock) bigClock.textContent = time;
 
-	$("#clocksContainer .clock").each(function () {
-		const tz = $(this).data("timezone");
-		$(this).find(".time").text(moment().tz(tz).format(timeFormat));
+	document.querySelectorAll("#clocksContainer .clock").forEach((clockEl) => {
+		const tz = clockEl.dataset.timezone;
+		const timeEl = clockEl.querySelector(".time");
+		if (timeEl) {
+			timeEl.textContent = moment().tz(tz).format(timeFormat);
+		}
 	});
 };
 
 const renderClockTab = () => {
 	setAppName("Clock");
-	const view = $("#currentView").empty();
+	const view = document.getElementById("currentView");
 	const clocks = getClocks();
 
-	view.append(`
+	view.innerHTML = `
 		<span id="bigClock"></span>
 		<span id="currentDate">${moment().format(dateFormat)}</span>
 		<div id="addTimezoneContainer">
@@ -136,14 +145,14 @@ const renderClockTab = () => {
 			</button>
 		</div>
 		<div id="clocksContainer"></div>
-	`);
+	`;
 
-	const container = $("#clocksContainer");
-	clocks.forEach((clock) => {
+	const container = document.getElementById("clocksContainer");
+	const clocksHTML = clocks.map((clock) => {
 		const friendlyName = clock.split("/").pop().replace(/_/g, " ");
 		const offset = getLocalTimezoneOffsetDifference(clock);
 
-		container.append(`
+		return `
 			<div class="clock" data-timezone="${clock}">
 				<span class="label">${friendlyName} (${offset > 0 ? '+' : ''}${offset}h)</span>
 				<span class="time"></span>
@@ -151,25 +160,28 @@ const renderClockTab = () => {
 					<span class="icon">delete</span>
 				</button>
 			</div>
-		`);
-	});
+		`;
+	}).join("");
+
+	container.innerHTML = clocksHTML;
 	updateClocks();
 };
 
 const renderAddClockTab = () => {
 	setAppName("Add Clock");
-	const view = $("#currentView").empty();
+	const view = document.getElementById("currentView");
 	const clocks = getClocks();
 	const timezones = moment.tz.names();
 
-	view.append(`
+	view.innerHTML = `
 		<input type="text" id="timezoneSearch" placeholder="Search timezones..." autofocus>
 		<div id="searchResultBox"></div>
-	`);
+	`;
 
-	$("#timezoneSearch").on("input", (e) => {
+	document.getElementById("timezoneSearch").addEventListener("input", (e) => {
 		const value = e.target.value.toLowerCase();
-		const box = $("#searchResultBox").empty();
+		const box = document.getElementById("searchResultBox");
+		box.innerHTML = "";
 
 		if (value.length < 2) return;
 
@@ -177,19 +189,17 @@ const renderAddClockTab = () => {
 			tz.toLowerCase().replace(/_/g, " ").includes(value) && !clocks.includes(tz)
 		);
 
-		results.forEach((result) => {
-			box.append(`
-				<div class="searchResult" data-timezone="${result}">
-					${result.replace(/_/g, " ")}
-				</div>
-			`);
-		});
+		box.innerHTML = results.map((result) => `
+			<div class="searchResult" data-timezone="${result}">
+				${result.replace(/_/g, " ")}
+			</div>
+		`).join("");
 	});
 };
 
 const renderTimerTab = () => {
 	setAppName("Timer");
-	$("#currentView").empty().append(`
+	document.getElementById("currentView").innerHTML = `
 		<div id="timerDisplay">${formatTime(timerTime)}</div>
 		<div id="timerControls">
 			<input type="text" id="timerInput" placeholder="HH:MM:SS" />
@@ -199,26 +209,30 @@ const renderTimerTab = () => {
 			<button id="btn-stop-timer"><span class="icon">stop</span>Stop</button>
 			<button id="btn-reset-timer"><span class="icon">restart_alt</span>Reset</button>
 		</div>
-	`);
+	`;
 };
 
 const renderStopwatchTab = () => {
 	setAppName("Stopwatch");
-	$("#currentView").empty().append(`
+	document.getElementById("currentView").innerHTML = `
 		<div id="stopwatchDisplay">${formatTime(stopwatchTime)}</div>
 		<div id="stopwatchControls">
 			<button id="btn-start-sw" class="main"><span class="icon">play_arrow</span>Start</button>
 			<button id="btn-stop-sw"><span class="icon">stop</span>Stop</button>
 			<button id="btn-reset-sw"><span class="icon">restart_alt</span>Reset</button>
 		</div>
-	`);
+	`;
 };
 
 const switchTab = (tab) => {
-	if (currentTab) $(`#${currentTab}_tab`).removeClass("active");
+	if (currentTab) {
+		const prevTab = document.getElementById(`${currentTab}_tab`);
+		if (prevTab) prevTab.classList.remove("active");
+	}
 
 	currentTab = tab;
-	$(`#${tab}_tab`).addClass("active");
+	const newTab = document.getElementById(`${tab}_tab`);
+	if (newTab) newTab.classList.add("active");
 
 	if (tab === "clock") renderClockTab();
 	else if (tab === "add_clock") renderAddClockTab();
@@ -226,24 +240,29 @@ const switchTab = (tab) => {
 	else if (tab === "stopwatch") renderStopwatchTab();
 };
 
+document.getElementById("clock_tab")?.addEventListener("mousedown", () => switchTab('clock'));
+document.getElementById("timer_tab")?.addEventListener("mousedown", () => switchTab('timer'));
+document.getElementById("stopwatch_tab")?.addEventListener("mousedown", () => switchTab('stopwatch'));
 
-$("#clock_tab").on("mousedown", () => switchTab('clock'));
-$("#timer_tab").on("mousedown", () => switchTab('timer'));
-$("#stopwatch_tab").on("mousedown", () => switchTab('stopwatch'));
+// Event delegation on #currentView using target.closest()
+document.getElementById("currentView")?.addEventListener("click", (e) => {
+	const addClockBtn = e.target.closest("#btn-add-clock");
+	const removeClockBtn = e.target.closest(".btn-remove-clock");
+	const searchResult = e.target.closest(".searchResult");
 
-$("#currentView")
-	.on("click", "#btn-add-clock", () => switchTab('add_clock'))
-	.on("click", ".btn-remove-clock", function () { removeClock($(this).data("timezone")) })
-	.on("click", ".searchResult", function () { addClock($(this).data("timezone")) })
+	if (addClockBtn) switchTab('add_clock');
+	else if (removeClockBtn) removeClock(removeClockBtn.dataset.timezone);
+	else if (searchResult) addClock(searchResult.dataset.timezone);
 
-	.on("click", "#btn-set-timer", setTimerTime)
-	.on("click", "#btn-start-timer", startTimer)
-	.on("click", "#btn-stop-timer", stopTimer)
-	.on("click", "#btn-reset-timer", resetTimer)
+	else if (e.target.closest("#btn-set-timer")) setTimerTime();
+	else if (e.target.closest("#btn-start-timer")) startTimer();
+	else if (e.target.closest("#btn-stop-timer")) stopTimer();
+	else if (e.target.closest("#btn-reset-timer")) resetTimer();
 
-	.on("click", "#btn-start-sw", startStopwatch)
-	.on("click", "#btn-stop-sw", stopStopwatch)
-	.on("click", "#btn-reset-sw", resetStopwatch);
+	else if (e.target.closest("#btn-start-sw")) startStopwatch();
+	else if (e.target.closest("#btn-stop-sw")) stopStopwatch();
+	else if (e.target.closest("#btn-reset-sw")) resetStopwatch();
+});
 
 if (!localStorage.clocks) saveClocks([]);
 setInterval(updateClocks, 1000);
