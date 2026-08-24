@@ -1,5 +1,6 @@
 export const apps = [
 	{ "name": "Settings", "category": "Utilities", "target": "settings", "icon": "settings" },
+	{ "name": "Files", "category": "Utilities", "target": "filemanager", "icon": "files" },
 	{ "name": "Clock", "category": "Utilities", "target": "clock", "isClock": true },
 	{ "name": "Calculator", "category": "Utilities", "target": "calculator", "icon": "calculator" },
 	{ "name": "Random", "category": "Utilities", "target": "random", "icon": "dice" },

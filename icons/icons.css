@@ -191,3 +191,9 @@
 	background-size: cover;
 	image-rendering: pixelated;
 }
+
+.icon-files {
+	background: url("/icons/files.svg");
+	background-repeat: no-repeat;
+	background-size: cover
+}

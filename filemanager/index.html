@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<script>
+			window.appname = "Files"
+		</script>
+		<script src="/jsappapi/latest/main.js" type="module"></script>
+		<script src="main.js" type="module" defer></script>
+		<link href="styles.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<header>
+			<p1 id="header"></p1>
+		</header>
+		<div class="area app-container">
+			<div class="toolbar">
+				<button id="btnUp" title="Go Up" disabled><span class="icon">arrow_upward</span></button>
+				<button id="btnRefresh" title="Refresh"><span class="icon">refresh</span></button>
+				<div class="path-display" id="pathDisplay">/</div>
+				<button id="btnUpload" title="Upload"><span class="icon">upload</span> Upload</button>
+			</div>
+			<div class="file-list" id="fileList">
+			</div>
+		</div>
+
+		<input type="file" id="fileUploadInput" multiple style="display: none;">
+		<input type="file" id="folderUploadInput" webkitdirectory directory multiple style="display: none;">
+
+		<div id="overlay" class="dialogOverlay" style="display: none;"></div>
+
+		<div id="uploadDialog" class="dialog" style="display: none; height: auto; min-height: 140px;">
+			<p2 id="uploadTitle">Upload</p2>
+			<div class="upload-options">
+				<button id="btnUploadFiles"><span class="icon">upload_file</span> Files</button>
+				<button id="btnUploadFolder"><span class="icon">drive_folder_upload</span> Folder</button>
+			</div>
+			<div class="dialog-actions">
+				<button id="btnUploadCancel">Cancel</button>
+			</div>
+		</div>
+
+		<div id="promptDialog" class="dialog" style="display: none; height: auto; min-height: 140px;">
+			<p2 id="promptTitle">Enter name</p2>
+			<input type="text" id="promptInput" style="width: 90%; margin-top: 15px;" placeholder="Name...">
+			<div class="dialog-actions">
+				<button id="btnPromptCancel">Cancel</button>
+				<button class="main" id="btnPromptConfirm">OK</button>
+			</div>
+		</div>
+
+		<div id="confirmDialog" class="dialog" style="display: none; height: auto; min-height: 120px;">
+			<p2 id="confirmTitle">Are you sure?</p2>
+			<p id="confirmMessage">This action cannot be undone.</p>
+			<div class="dialog-actions">
+				<button id="btnConfirmCancel">No</button>
+				<button class="main" id="btnConfirmOk">Yes</button>
+			</div>
+		</div>
+
+		<div id="editorDialog" class="dialog" style="display: none; width: 90%; height: 80%;">
+			<p2 id="editorTitle">Filename.txt</p2>
+			<textarea id="editorContent" class="textareabig" style="height: calc(100% - 100px); width: calc(100% - 30px); margin-top: 10px;" spellcheck="false"></textarea>
+			<div class="dialog-actions">
+				<button id="btnEditorCancel">Close</button>
+				<button class="main" id="btnEditorSave">Save</button>
+			</div>
+		</div>
+
+		<div id="imageViewerDialog" class="dialog" style="display: none; width: 90%; height: 80%;">
+			<p2 id="imageViewerTitle">Image</p2>
+			<div class="image-viewer-container">
+				<img id="imageViewerImg" src="" alt="Preview">
+			</div>
+			<div class="dialog-actions">
+				<button id="btnImageViewerClose">Close</button>
+			</div>
+		</div>
+
+		<div id="ctxMenu" class="context-menu hidden">
+			<div class="context-menu-item" id="ctxNewFile"><span class="icon">note_add</span> New File</div>
+			<div class="context-menu-item" id="ctxNewFolder"><span class="icon">create_new_folder</span> New Folder</div>
+			<div class="context-menu-item" id="ctxRename"><span class="icon">edit</span> Rename</div>
+			<div class="context-menu-item" id="ctxDownload"><span class="icon">download</span> Download</div>
+			<div class="context-menu-item" id="ctxDelete"><span class="icon">delete</span> Delete</div>
+		</div>
+	</body>
+
+</html>
