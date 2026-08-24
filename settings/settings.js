@@ -169,10 +169,19 @@ const renderWallpaperList = (source) => {
 	}
 }
 
-const resetAll = () => {
+const resetAll = async () => {
 	if (confirm("Are you sure? All data will be deleted. This can't be undone.")) {
 		localStorage.clear();
-		document.write("All data has been successfully deleted.")
+		try {
+			const root = await navigator.storage.getDirectory();
+			for await (const name of root.keys()) {
+				await root.removeEntry(name, { recursive: true });
+			}
+			console.log("OPFS cleared successfully.");
+		} catch (error) {
+			console.error("Failed to clear OPFS:", error);
+		}
+		document.write("All data has been successfully deleted.");
 	}
 }
 
