@@ -7,7 +7,7 @@ export const apps = [
 	{ "name": "Compress Pics", "category": "Utilities", "target": "imageconverter", "icon": "zip" },
 	{ "name": "Encrypt Text", "category": "Utilities", "target": "safeencrypt", "icon": "key" },
 	{ "name": "Terminal", "category": "Utilities", "target": "terminal", "icon": "terminal" },
-	{ "name": "Virtual PC", "category": "Utilities", "target": "https://browser7.win/", "icon": "computer" },
+	{ "name": "Desktop", "category": "Utilities", "target": "desktop", "icon": "computer" },
 	{ "name": "Notes", "category": "Create", "target": "quicknote", "icon": "note" },
 	{ "name": "Chat", "category": "Create", "target": "chat", "icon": "chat_ai" },
 	{ "name": "Generate Pics", "category": "Create", "target": "imagegenerator", "icon": "image" },
