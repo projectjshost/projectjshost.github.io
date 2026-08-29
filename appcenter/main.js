@@ -16,6 +16,7 @@ function renderApps() {
 	apps.forEach(app => {
 		if (hiddenApps.includes(app.target)) return;
 		if (favoriteApps.includes(app.target)) return;
+		if (isWindowed && app.target === "desktop") return;
 
 		if (!categories[app.category]) {
 			categories[app.category] = [];
