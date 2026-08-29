@@ -117,3 +117,30 @@ export const setAppName = (name) => {
 		window.top.postMessage({ type: 'setAppName', name }, '*');
 	}
 }
+
+if (localStorage.getItem("overridesEnabled") === "true") {
+	if ('serviceWorker' in navigator) {
+		window.addEventListener('load', async () => {
+			try {
+				const reg = await navigator.serviceWorker.register('/sw.js', { scope: '/' });
+				console.log('Service Worker registered with scope:', reg.scope);
+			} catch (err) {
+				console.error('Service Worker registration failed:', err);
+			}
+		});
+	}
+} else {
+	try {
+		const root = await navigator.storage.getDirectory();
+		await root.removeEntry(".overrides", { recursive: true });
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.getRegistrations().then((registrations) => {
+				for (const registration of registrations) {
+					registration.unregister();
+					console.log('Service Worker unregistered');
+				}
+			});
+		}
+		if (navigator.serviceWorker.controller !== null) location.reload();
+	} catch { }
+}
