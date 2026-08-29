@@ -58,6 +58,12 @@ const updateCheckBoxes = () => {
 	recreateWallpaper()
 }
 
+const updateLauncher = () => {
+	const launcher = document.getElementById("launcherSelect").value;
+	localStorage.launcher = launcher;
+	projectJS.launcher = launcher;
+}
+
 const recreateWallpaper = () => {
 	themeEngine.loadTheme();
 	if (localStorage.forceWallpaper === "true" && localStorage.wallpaper) {
@@ -190,6 +196,7 @@ const restoreHiddenApps = () => {
 	dialog('Restored all hidden apps.', 'info');
 }
 
+$("#launcherSelect").on('change', updateLauncher);
 $("#restoreHiddenAppsButton").on('click', restoreHiddenApps);
 
 $("#editThemeButton").on('click', () => { openApp("themeEditor") });
@@ -219,6 +226,8 @@ $("#blurRadius, #opacity").on('input', () => {
 	saveBlurSettings();
 	recreateWallpaper();
 });
+
+document.getElementById("launcherSelect").value = projectJS.launcher;
 
 document.getElementById("uiTransparency").checked = localStorage.uiTransparency == "true";
 document.getElementById("forceWallpaper").checked = localStorage.forceWallpaper == "true";

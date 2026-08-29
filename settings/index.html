@@ -21,8 +21,13 @@
 		</header>
 		<div class="area">
 			<p2><span class="icon">home</span>Apps</p2>
-			<p>Restore all hidden apps on the App Center.</p>
-			<button id="restoreHiddenAppsButton"><span class="icon">restart_alt</span>Restore</button>
+			<label for="launcher">Default app launcher:</label>
+			<select name="launcher" id="launcherSelect">
+				<option value="appcenter">App Center</option>
+				<option value="desktop">Desktop</option>
+			</select>
+			<br>
+			<button id="restoreHiddenAppsButton"><span class="icon">restart_alt</span>Restore all hidden apps</button>
 		</div>
 		<div class="area desktopSettings" style="display: none;">
 			<p2><span class="icon">select_window_2</span>Desktop</p2>
