@@ -24,7 +24,7 @@ export const apps = [
 	{ "name": "Deltarune", "category": "Fun", "target": "https://map-l.github.io/play/deltarune/", "icon": "deltarune", "iconSymbolic": "favorite" },
 	{ "name": "Subway", "category": "Fun", "target": "https://map-l.github.io/play/subwaysurfers/", "icon": "ssurfers", "iconSymbolic": "subway" },
 	{ "name": "Granny", "category": "Fun", "target": "https://map-l.github.io/play/granny/", "icon": "granny", "iconSymbolic": "elderly_woman" },
-	{ "name": "Fractal", "category": "Fun", "target": "fractal", "icon": "fractal", "iconSymbolic": "code" },
+	{ "name": "Fractal", "category": "Fun", "target": "fractal", "icon": "fractal", "iconSymbolic": "ac_unit" },
 	{ "name": "Mario", "category": "Fun", "target": "https://foss2016.github.io/", "icon": "questionblock", "iconSymbolic": "help_center" },
 	{ "name": "HexGL", "category": "Fun", "target": "https://hexgl.bkcore.com/play/", "icon": "hexgl", "iconSymbolic": "sports_score" },
 	{ "name": "2048", "category": "Fun", "target": "https://2048-opera-pwa.surge.sh/", "icon": "2048", "iconSymbolic": "looks_two" },
