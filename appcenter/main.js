@@ -244,6 +244,7 @@ window.addEventListener('storage', (event) => {
 		case "favoriteApps":
 		case "hiddenApps":
 		case "symbolicIcons":
+		case "hideWebApps":
 			location.reload();
 	}
 });
