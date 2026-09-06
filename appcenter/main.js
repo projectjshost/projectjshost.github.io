@@ -7,6 +7,8 @@ let favoriteApps = JSON.parse(localStorage.getItem('favoriteApps') || '[]');
 function renderApps() {
 	const container = document.getElementById('appOverview');
 	const categories = {};
+	const useSymbolicIcons = localStorage.symbolicIcons === "true";
+	const hideWebApps = localStorage.hideWebApps === "true";
 
 	const favs = apps.filter(app => favoriteApps.includes(app.target) && !hiddenApps.includes(app.target));
 	if (favs.length > 0) {
@@ -36,11 +38,17 @@ function renderApps() {
 		currentArea.className = 'area';
 
 		appsList.forEach(app => {
-			const iconHtml = app.isClock
-				? `<canvas class="appIcon" id="clockCanvas" width="70" height="70"></canvas>`
-				: `<div class="appIcon icon-${app.icon}"></div>`;
-
 			const isWebApp = app.target.startsWith("https://");
+			if (hideWebApps && isWebApp) return;
+			let iconHtml;
+
+			if (useSymbolicIcons && app.iconSymbolic) {
+				iconHtml = `<div class="appIcon icon">${app.iconSymbolic}</div>`;
+			} else if (app.isClock) {
+				iconHtml = `<canvas class="appIcon" id="clockCanvas" width="70" height="70"></canvas>`;
+			} else {
+				iconHtml = `<div class="appIcon icon-${app.icon}"></div>`;
+			}
 
 			const dataAttributes = isWebApp
 				? `data-target="webapp" data-webapptarget="${app.target}"`
@@ -235,7 +243,7 @@ window.addEventListener('storage', (event) => {
 	switch (event.key) {
 		case "favoriteApps":
 		case "hiddenApps":
-			// renderApps just does not want to work here for some reason
+		case "symbolicIcons":
 			location.reload();
 	}
 });

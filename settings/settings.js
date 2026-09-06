@@ -18,6 +18,16 @@ const saveBlurSettings = () => {
 };
 
 const updateCheckBoxes = () => {
+	if (document.getElementById("symbolicIcons").checked == true) {
+		localStorage.symbolicIcons = "true";
+	} else {
+		localStorage.symbolicIcons = "false";
+	}
+	if (document.getElementById("hideWebApps").checked == true) {
+		localStorage.hideWebApps = "true";
+	} else {
+		localStorage.hideWebApps = "false";
+	}
 	if (document.getElementById("uiTransparency").checked == true) {
 		localStorage.uiTransparency = "true";
 	} else {
@@ -229,6 +239,8 @@ $("#blurRadius, #opacity").on('input', () => {
 
 document.getElementById("launcherSelect").value = projectJS.launcher;
 
+document.getElementById("symbolicIcons").checked = localStorage.symbolicIcons == "true";
+document.getElementById("hideWebApps").checked = localStorage.hideWebApps == "true";
 document.getElementById("uiTransparency").checked = localStorage.uiTransparency == "true";
 document.getElementById("forceWallpaper").checked = localStorage.forceWallpaper == "true";
 document.getElementById("blurWallpaper").checked = localStorage.blurWallpaper == "true";

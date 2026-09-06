@@ -26,7 +26,20 @@
 				<option value="appcenter">App Center</option>
 				<option value="desktop">Desktop</option>
 			</select>
-			<br>
+			<div class="toggleSwitchContainer">
+				<label class="switch">
+					<input type="checkbox" id="symbolicIcons">
+					<span class="slider"></span>
+				</label>
+				<label for="symbolicIcons">Use symbolic icons</label>
+			</div>
+			<div class="toggleSwitchContainer">
+				<label class="switch">
+					<input type="checkbox" id="hideWebApps">
+					<span class="slider"></span>
+				</label>
+				<label for="hideWebApps">Hide webapps</label>
+			</div>
 			<button id="restoreHiddenAppsButton"><span class="icon">restart_alt</span>Restore all hidden apps</button>
 		</div>
 		<div class="area desktopSettings" style="display: none;">
