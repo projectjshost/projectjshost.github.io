@@ -1,4 +1,3 @@
-import { $, jQuery } from 'https://esm.sh/jquery';
 import { projectJS, openApp } from '../jsappapi/latest/main.js';
 import { themes } from '../jsappapi/latest/themes.js';
 import themeEngine from '../jsappapi/latest/themeEngine.js';
@@ -18,61 +17,24 @@ const saveBlurSettings = () => {
 };
 
 const updateCheckBoxes = () => {
-	if (document.getElementById("symbolicIcons").checked == true) {
-		localStorage.symbolicIcons = "true";
-	} else {
-		localStorage.symbolicIcons = "false";
-	}
-	if (document.getElementById("hideWebApps").checked == true) {
-		localStorage.hideWebApps = "true";
-	} else {
-		localStorage.hideWebApps = "false";
-	}
-	if (document.getElementById("uiTransparency").checked == true) {
-		localStorage.uiTransparency = "true";
-	} else {
-		localStorage.uiTransparency = "false";
-	}
-
-	if (document.getElementById("forceWallpaper").checked == true) {
-		localStorage.forceWallpaper = "true";
-	} else {
-		localStorage.forceWallpaper = "false";
-	}
-
-	if (document.getElementById("blurWallpaper").checked == true) {
-		localStorage.blurWallpaper = "true";
-	} else {
-		localStorage.blurWallpaper = "false";
-	}
-
-	if (document.getElementById("darkenWallpaper").checked == true) {
-		localStorage.darkenWallpaper = "true";
-	} else {
-		localStorage.darkenWallpaper = "false";
-	}
-
-	if (document.getElementById("reverseTitlebar").checked == true) {
-		localStorage.reverseTitlebar = "true";
-	} else {
-		localStorage.reverseTitlebar = "false";
-	}
-
-	if (document.getElementById("trafficLightCaptionButtons").checked == true) {
-		localStorage.trafficLightCaptionButtons = "true";
-	} else {
-		localStorage.trafficLightCaptionButtons = "false";
-	}
+	localStorage.symbolicIcons = String(document.getElementById("symbolicIcons").checked);
+	localStorage.hideWebApps = String(document.getElementById("hideWebApps").checked);
+	localStorage.uiTransparency = String(document.getElementById("uiTransparency").checked);
+	localStorage.forceWallpaper = String(document.getElementById("forceWallpaper").checked);
+	localStorage.blurWallpaper = String(document.getElementById("blurWallpaper").checked);
+	localStorage.darkenWallpaper = String(document.getElementById("darkenWallpaper").checked);
+	localStorage.reverseTitlebar = String(document.getElementById("reverseTitlebar").checked);
+	localStorage.trafficLightCaptionButtons = String(document.getElementById("trafficLightCaptionButtons").checked);
 
 	saveBlurSettings();
-	recreateWallpaper()
-}
+	recreateWallpaper();
+};
 
 const updateLauncher = () => {
 	const launcher = document.getElementById("launcherSelect").value;
 	localStorage.launcher = launcher;
 	projectJS.launcher = launcher;
-}
+};
 
 const recreateWallpaper = () => {
 	themeEngine.loadTheme();
@@ -81,21 +43,24 @@ const recreateWallpaper = () => {
 	} else {
 		deleteWallpaper();
 	}
-}
+};
 
 const updateWallpaper = () => {
+	const wallpaperNameEl = document.getElementById("wallpaperName");
+	const getSourceButton = document.getElementById("getSourceButton");
+
 	if (localStorage.getItem("wallpaperName") !== null) {
-		$("#wallpaperName").text("Current Wallpaper: " + localStorage.wallpaperName);
+		wallpaperNameEl.textContent = "Current Wallpaper: " + localStorage.wallpaperName;
 	} else {
-		$("#wallpaperName").text("Current Wallpaper: None");
+		wallpaperNameEl.textContent = "Current Wallpaper: None";
 	}
 
 	if (!localStorage.wallpaperSource) {
-		$("#getSourceButton").hide();
+		getSourceButton.style.display = "none";
 	} else {
-		$("#getSourceButton").show();
+		getSourceButton.style.display = "";
 	}
-}
+};
 
 const importWallpaper = () => {
 	let input = document.createElement('input');
@@ -116,42 +81,37 @@ const importWallpaper = () => {
 				localStorage.removeItem("wallpaperSource");
 			} catch (err) {
 				dialog(err.message, "error");
-				clearWallpaper()
+				clearWallpaper();
 			}
-			updateWallpaper()
-		}
-
-	}
+			updateWallpaper();
+		};
+	};
 	input.click();
-}
+};
 
 export const clearWallpaper = () => {
 	localStorage.removeItem("wallpaper");
 	localStorage.removeItem("wallpaperName");
 	localStorage.removeItem("wallpaperSource");
 	updateWallpaper();
-	deleteWallpaper()
-}
+	deleteWallpaper();
+};
 
 const getSource = () => {
-	dialog(`<a href="${localStorage.wallpaperSource}">${localStorage.wallpaperSource}</a>`, "custom", "Image Source")
-}
+	dialog(`<a href="${localStorage.wallpaperSource}">${localStorage.wallpaperSource}</a>`, "custom", "Image Source");
+};
 
 const downloadWallpaper = () => {
 	if (localStorage.wallpaper) {
-		let title = "";
-		if (localStorage.wallpaperSource) {
-			title = localStorage.wallpaperName + ".avif";
-		} else {
-			title = localStorage.wallpaperName;
-		}
-		dialog(`Download file: <a href="${localStorage.wallpaper}" download>${title}</a><br>Please note that the quality of the source is better.`, "custom", "Download Wallpaper")
+		let title = localStorage.wallpaperSource ? localStorage.wallpaperName + ".avif" : localStorage.wallpaperName;
+		dialog(`Download file: <a href="${localStorage.wallpaper}" download>${title}</a><br>Please note that the quality of the source is better.`, "custom", "Download Wallpaper");
 	} else {
-		dialog("Select a wallpaper first!", "error")
+		dialog("Select a wallpaper first!", "error");
 	}
-}
+};
 
 const getWallpaperList = async () => {
+	const wallpaperList = document.getElementById("wallpaperList");
 	try {
 		let response = await fetch(`/lib/wallpapers.json`);
 		if (response.ok) {
@@ -159,31 +119,41 @@ const getWallpaperList = async () => {
 			renderWallpaperList(json);
 		} else {
 			console.error(response);
-			$("#wallpaperList").append(`${response.status} ${response.statusText}`);
+			wallpaperList.append(`${response.status} ${response.statusText}`);
 		}
 	} catch (e) {
-		$("#wallpaperList").append(`${e}`);
+		wallpaperList.append(`${e}`);
 	}
-}
+};
 
 const renderWallpaperList = (source) => {
+	const wallpaperList = document.getElementById("wallpaperList");
+
 	for (let i = 0; i < source.length; i++) {
 		let img = source[i];
 		let url = `/lib/wallpapers/${img.name}.avif`;
 		let thumb = `/lib/wallpapers/thumbnails/${img.name}.avif`;
 		let codeName = img.name.replaceAll(" ", "_");
-		$("#wallpaperList").append(`<div class="wallpaperItem" id="wallpaperItem${codeName}"></div>`);
-		$(`#wallpaperItem${codeName}`).append(`<img src="${thumb}" alt="${img.name}">`);
-		$(`#wallpaperItem${codeName}`).append(`<div class="wallpaperOverlay">${img.name}<div class="small">${img.author}</div></div>`);
-		$(`#wallpaperItem${codeName}`).on('click', () => {
+
+		const item = document.createElement("div");
+		item.className = "wallpaperItem";
+		item.id = `wallpaperItem${codeName}`;
+		item.innerHTML = `
+			<img src="${thumb}" alt="${img.name}">
+			<div class="wallpaperOverlay">${img.name}<div class="small">${img.author}</div></div>
+		`;
+
+		item.addEventListener('click', () => {
 			localStorage.setItem("wallpaper", url);
 			localStorage.setItem("wallpaperName", img.name);
 			localStorage.setItem("wallpaperSource", img.source);
 			updateWallpaper();
 			recreateWallpaper();
-		})
+		});
+
+		wallpaperList.appendChild(item);
 	}
-}
+};
 
 const resetAll = async () => {
 	if (confirm("Are you sure? All data will be deleted. This can't be undone.")) {
@@ -199,18 +169,19 @@ const resetAll = async () => {
 		}
 		document.write("All data has been successfully deleted.");
 	}
-}
+};
 
 const restoreHiddenApps = () => {
 	localStorage.removeItem('hiddenApps');
 	dialog('Restored all hidden apps.', 'info');
-}
+};
 
-$("#launcherSelect").on('change', updateLauncher);
-$("#restoreHiddenAppsButton").on('click', restoreHiddenApps);
+// Event Listeners
+document.getElementById("launcherSelect").addEventListener('change', updateLauncher);
+document.getElementById("restoreHiddenAppsButton").addEventListener('click', restoreHiddenApps);
 
-$("#editThemeButton").on('click', () => { openApp("themeEditor") });
-$("#deleteThemeButton").on('click', () => {
+document.getElementById("editThemeButton").addEventListener('click', () => { openApp("themeEditor"); });
+document.getElementById("deleteThemeButton").addEventListener('click', () => {
 	if (!confirm(`Are you sure you want to delete your custom theme: "${atob(localStorage.theme.slice(12))}"?`)) return;
 	localStorage.removeItem(localStorage.theme);
 	localStorage.theme = themeEngine.getDefault();
@@ -218,35 +189,40 @@ $("#deleteThemeButton").on('click', () => {
 	tminit();
 });
 
-$("#clearWallpaperButton").on('click', clearWallpaper);
-$("#importWallpaperButton").on('click', importWallpaper);
-$("#downloadWallpaperButton").on('click', downloadWallpaper);
-$("#getSourceButton").on('click', getSource);
+document.getElementById("clearWallpaperButton").addEventListener('click', clearWallpaper);
+document.getElementById("importWallpaperButton").addEventListener('click', importWallpaper);
+document.getElementById("downloadWallpaperButton").addEventListener('click', downloadWallpaper);
+document.getElementById("getSourceButton").addEventListener('click', getSource);
 
-$("#resetAllButton").on('click', resetAll);
+document.getElementById("resetAllButton").addEventListener('click', resetAll);
 
-$("input[type='checkbox']").on('click', updateCheckBoxes);
+document.querySelectorAll("input[type='checkbox']").forEach(checkbox => {
+	checkbox.addEventListener('click', updateCheckBoxes);
+});
 
-$("#blurType").on('change', () => {
+document.getElementById("blurType").addEventListener('change', () => {
 	saveBlurSettings();
 	recreateWallpaper();
 });
 
-$("#blurRadius, #opacity").on('input', () => {
-	saveBlurSettings();
-	recreateWallpaper();
+["blurRadius", "opacity"].forEach(id => {
+	document.getElementById(id).addEventListener('input', () => {
+		saveBlurSettings();
+		recreateWallpaper();
+	});
 });
 
+// Initial element state assignments
 document.getElementById("launcherSelect").value = projectJS.launcher;
 
-document.getElementById("symbolicIcons").checked = localStorage.symbolicIcons == "true";
-document.getElementById("hideWebApps").checked = localStorage.hideWebApps == "true";
-document.getElementById("uiTransparency").checked = localStorage.uiTransparency == "true";
-document.getElementById("forceWallpaper").checked = localStorage.forceWallpaper == "true";
-document.getElementById("blurWallpaper").checked = localStorage.blurWallpaper == "true";
-document.getElementById("darkenWallpaper").checked = localStorage.darkenWallpaper == "true";
-document.getElementById("reverseTitlebar").checked = localStorage.reverseTitlebar == "true";
-document.getElementById("trafficLightCaptionButtons").checked = localStorage.trafficLightCaptionButtons == "true";
+document.getElementById("symbolicIcons").checked = localStorage.symbolicIcons === "true";
+document.getElementById("hideWebApps").checked = localStorage.hideWebApps === "true";
+document.getElementById("uiTransparency").checked = localStorage.uiTransparency === "true";
+document.getElementById("forceWallpaper").checked = localStorage.forceWallpaper === "true";
+document.getElementById("blurWallpaper").checked = localStorage.blurWallpaper === "true";
+document.getElementById("darkenWallpaper").checked = localStorage.darkenWallpaper === "true";
+document.getElementById("reverseTitlebar").checked = localStorage.reverseTitlebar === "true";
+document.getElementById("trafficLightCaptionButtons").checked = localStorage.trafficLightCaptionButtons === "true";
 
 document.getElementById("blurType").value = localStorage.blurType || "native";
 document.getElementById("blurRadius").value = localStorage.blurRadius || "20";
@@ -255,16 +231,18 @@ document.getElementById("blurRadiusValue").textContent = localStorage.blurRadius
 document.getElementById("opacityValue").textContent = localStorage.opacity || "50";
 
 updateWallpaper();
-
 getWallpaperList();
 
 document.getElementById("versionString").innerText = `Version ${projectJS.version} (${await getVersionString()})`;
 document.getElementById("appCount").innerText = `Installed Apps: ${apps.length}`;
 
 const tminit = () => {
-	const $currentView = $("#themeList");
-	$("#deleteThemeButton").hide();
-	$currentView.empty();
+	const currentView = document.getElementById("themeList");
+	const deleteThemeButton = document.getElementById("deleteThemeButton");
+	const selectedThemeLabel = document.getElementById("selectedThemeLabel");
+
+	deleteThemeButton.style.display = "none";
+	currentView.replaceChildren();
 
 	const defaultThemes = Object.entries(themes).map(([id, data]) => ({
 		id,
@@ -289,34 +267,33 @@ const tminit = () => {
 
 	const allThemes = [...customThemes, ...defaultThemes];
 
-	const $themeElements = allThemes.map(theme => {
+	allThemes.forEach(theme => {
 		const isActive = theme.id === localStorage.theme;
 
-		const $item = $(`
-				<div class="themeItem ${isActive ? 'active' : ''}" title="${theme.name}">
-					<div class="theme">
-						<div class="preview" style="background: ${theme.background}"></div>
-						<div class="preview" style="background: ${theme.accent}"></div>
-					</div>
-				</div>
-			`);
+		const item = document.createElement("div");
+		item.className = `themeItem ${isActive ? 'active' : ''}`;
+		item.title = theme.name;
+		item.innerHTML = `
+			<div class="theme">
+				<div class="preview" style="background: ${theme.background}"></div>
+				<div class="preview" style="background: ${theme.accent}"></div>
+			</div>
+		`;
 
 		if (isActive) {
-			$("#selectedThemeLabel").text(`Selected theme: ${theme.name}`)
+			selectedThemeLabel.textContent = `Selected theme: ${theme.name}`;
 			if (theme.isCustom) {
-				$("#deleteThemeButton").show();
+				deleteThemeButton.style.display = "";
 			}
 		}
 
-		$item.on("mousedown", () => {
+		item.addEventListener("mousedown", () => {
 			themeEngine.setTheme(theme.id);
 			tminit();
 		});
 
-		return $item;
+		currentView.appendChild(item);
 	});
-
-	$currentView.append($themeElements);
-}
+};
 
 tminit();
