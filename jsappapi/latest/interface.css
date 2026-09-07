@@ -378,9 +378,15 @@ a {
 }
 
 .appIcon {
-	font-size: 60px;
+	font-size: 58px;
 	height: 70px;
 	width: 70px
+}
+
+.appIcon.icon {
+	background: var(--button-color-transparent);
+	backdrop-filter: var(--backdrop-filter);
+	border-radius: 15px;
 }
 
 #clockCanvas {
