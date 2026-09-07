@@ -14,7 +14,7 @@ export const apps = [
 	{ "name": "Generate Pics", "category": "Create", "target": "imagegenerator", "icon": "image", "iconSymbolic": "image" },
 	{ "name": "Code", "category": "Create", "target": "codepad", "icon": "code", "iconSymbolic": "code" },
 	{ "name": "Scrum Escape", "category": "Fun", "target": "https://scrumescapegamets.pages.dev/", "icon": "scrumescape", "iconSymbolic": "directions_run" },
-	{ "name": "Alice's Gaze", "category": "Fun", "target": "https://alicegaze.pages.dev", "icon": "alicegaze", "iconSymbolic": "girl" },
+	{ "name": "Alice's Gaze", "category": "Fun", "target": "https://alicegaze.pages.dev", "icon": "alicegaze", "iconSymbolic": "visibility" },
 	{ "name": "Portal", "category": "Fun", "target": "portal", "icon": "portal", "iconSymbolic": "circle" },
 	{ "name": "Minecraft", "category": "Fun", "target": "https://irv77.github.io/AmplerLauncher/mc/1.12.2/", "icon": "minecraft", "iconSymbolic": "deployed_code" },
 	{ "name": "Getting Over It", "category": "Fun", "target": "https://turbowarp.org/900802860/embed?autoplay&addons=remove-curved-stage-border%2Cpause", "icon": "scratchcat", "iconSymbolic": "cleaning_bucket" },
