@@ -1,4 +1,4 @@
-import { setAppName } from "../jsappapi/latest/main.js";
+import { setAppName, addHeaderButton } from "../jsappapi/latest/main.js";
 import { getAppParam } from "../jsappapi/latest/params.js";
 import { dialog } from "../jsappapi/latest/dialog.js";
 
@@ -30,3 +30,12 @@ if (typeof target === "string") {
 const name = getAppParam("name");
 
 if (typeof name === "string") setAppName(decodeURIComponent(name).replaceAll("+", " "));
+
+addHeaderButton({
+	"icon": "open_in_new",
+	"id": "openExternally",
+	"title": "Open in New Tab",
+	"onClick": () => {
+		window.open(target, "_blank");
+	}
+});

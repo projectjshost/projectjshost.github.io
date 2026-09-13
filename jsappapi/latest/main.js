@@ -53,12 +53,39 @@ export const openApp = (appName, params) => {
 // Changes the name of the app
 export const setAppName = (name) => {
 	window.appname = name;
-	document.getElementById("header").textContent = name;
 	document.title = `${name} - Project JS Apps`;
 	if (isWindowed) {
 		window.top.postMessage({ type: 'setAppName', name }, '*');
 	}
+	try {
+		document.getElementById("header").textContent = name;
+	} catch { }
 }
+
+// Adds an app-specific header button
+export const addHeaderButton = ({ icon, title, id, onClick, className = '' }) => {
+	const headerButtons = document.querySelector(".headerButtons");
+	if (!headerButtons) return null;
+
+	const btn = document.createElement("button");
+	btn.className = `headerButton icon ${className}`.trim();
+	if (id) btn.id = id;
+	if (title) btn.title = title;
+	btn.textContent = icon;
+
+	if (typeof onClick === "function") {
+		btn.addEventListener("click", onClick);
+	}
+
+	const launcherButton = document.getElementById("launcherButton");
+	if (launcherButton) {
+		headerButtons.insertBefore(btn, launcherButton);
+	} else {
+		headerButtons.appendChild(btn);
+	}
+
+	return btn;
+};
 
 if (localStorage.getItem("overridesEnabled") === "true") {
 	if ('serviceWorker' in navigator) {
@@ -110,8 +137,8 @@ if (location.pathname == `/${projectJS.launcher}/`) {
 	}
 } else {
 	document.getElementsByClassName("headerButtons")[0].insertAdjacentHTML("beforeend", `<button class='headerButton icon' id='launcherButton' title='Home'>home</button>`);
-	document.getElementById("launcherButton").addEventListener('click', () => { 
-		openApp(projectJS.launcher); 
+	document.getElementById("launcherButton").addEventListener('click', () => {
+		openApp(projectJS.launcher);
 	});
 }
 
