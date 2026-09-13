@@ -1,7 +1,4 @@
-import $ from 'https://esm.sh/jquery';
-
 export const isWindowed = window.top.location.pathname.startsWith("/desktop") && !location.pathname.startsWith("/desktop");
-
 
 import themeEngine from './themeEngine.js';
 import { createWallpaper, deleteWallpaper } from './wallpaper.js';
@@ -21,7 +18,6 @@ if (!localStorage.theme) {
 themeEngine.loadTheme();
 
 window.addEventListener('storage', (event) => {
-
 	switch (event.key) {
 		case "uiTransparency":
 		case "theme":
@@ -41,60 +37,6 @@ window.addEventListener('storage', (event) => {
 	}
 });
 
-// Initialize App
-$(document).ready(() => {
-	try {
-		if (typeof window.localStorage === "undefined") throw new Error();
-		const testItemName = "__internal_ls_test__";
-		localStorage.setItem(testItemName, "test");
-		if (localStorage.getItem(testItemName) !== "test") throw new Error();
-		localStorage[testItemName] = "test2";
-		if (localStorage[testItemName] !== "test2") throw new Error();
-		localStorage.removeItem(testItemName);
-	} catch {
-		const failMessage = "LocalStorage is not working properly. Please exit private/incognito mode, check your browser settings, or create a new profile.";
-		console.error("LocalStorage test failed!");
-		document.write(failMessage);
-		window.stop();
-		alert(failMessage);
-		return;
-	}
-	if (!localStorage.lastUsedVersion) {
-		localStorage.lastUsedVersion = projectJS.version;
-		localStorage.theme = themeEngine.getDefault();
-		localStorage.uiTransparency = "true";
-		localStorage.forceWallpaper = "false";
-		localStorage.blurWallpaper = "false";
-		localStorage.darkenWallpaper = "false";
-		location.reload()
-	}
-
-	if (typeof window.appname == 'undefined') {
-		window.appname = "Project JS App"
-	}
-
-	$("header").append(`<div class='headerButtons'></div>`);
-
-	if (location.pathname == `/${projectJS.launcher}/`) {
-		if (localStorage.wallpaper) {
-			createWallpaper(localStorage.wallpaper);
-		}
-	} else {
-		$(".headerButtons").append(`<button class='headerButton icon' id='launcherButton' title='Home'>home</button>`);
-		$("#launcherButton").on('click', () => { openApp(projectJS.launcher) })
-	}
-
-	if (isWindowed) {
-		$(document.body).addClass("windowed");
-	}
-
-	if (localStorage.forceWallpaper == "true" && localStorage.wallpaper) {
-		createWallpaper(localStorage.wallpaper)
-	}
-	$('head').append(`<link rel="stylesheet" id="JSinterface" href="/jsappapi/latest/interface.css">`);
-	setAppName(appname)
-});
-
 // Opens an App
 export const openApp = (appName, params) => {
 	if (isWindowed) {
@@ -110,9 +52,9 @@ export const openApp = (appName, params) => {
 
 // Changes the name of the app
 export const setAppName = (name) => {
-	window.appname = name
-	$("#header").text(name);
-	document.title = `${name} - Project JS Apps`
+	window.appname = name;
+	document.getElementById("header").textContent = name;
+	document.title = `${name} - Project JS Apps`;
 	if (isWindowed) {
 		window.top.postMessage({ type: 'setAppName', name }, '*');
 	}
@@ -144,3 +86,43 @@ if (localStorage.getItem("overridesEnabled") === "true") {
 		if (navigator.serviceWorker.controller !== null) location.reload();
 	} catch { }
 }
+
+// Initialize App
+if (!localStorage.lastUsedVersion) {
+	localStorage.lastUsedVersion = projectJS.version;
+	localStorage.theme = themeEngine.getDefault();
+	localStorage.uiTransparency = "true";
+	localStorage.forceWallpaper = "false";
+	localStorage.blurWallpaper = "false";
+	localStorage.darkenWallpaper = "false";
+	location.reload();
+}
+
+if (typeof window.appname == 'undefined') {
+	window.appname = "Project JS App";
+}
+
+document.getElementsByTagName("header")[0].insertAdjacentHTML("beforeend", `<div class='headerButtons'></div>`);
+
+if (location.pathname == `/${projectJS.launcher}/`) {
+	if (localStorage.wallpaper) {
+		createWallpaper(localStorage.wallpaper);
+	}
+} else {
+	document.getElementsByClassName("headerButtons")[0].insertAdjacentHTML("beforeend", `<button class='headerButton icon' id='launcherButton' title='Home'>home</button>`);
+	document.getElementById("launcherButton").addEventListener('click', () => { 
+		openApp(projectJS.launcher); 
+	});
+}
+
+if (isWindowed) {
+	document.body.classList.add("windowed");
+}
+
+if (localStorage.forceWallpaper == "true" && localStorage.wallpaper) {
+	createWallpaper(localStorage.wallpaper);
+}
+
+document.head.insertAdjacentHTML("beforeend", `<link rel="stylesheet" id="JSinterface" href="/jsappapi/latest/interface.css">`);
+
+setAppName(appname);
