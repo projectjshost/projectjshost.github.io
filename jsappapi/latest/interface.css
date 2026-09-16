@@ -1,6 +1,10 @@
 @import "/fonts/fonts.css";
 @import "/icons/icons.css";
 
+:root {
+	--font-family: "Inter", Arial, sans-serif;
+}
+
 body.windowed header {
 	display: none;
 }
@@ -22,7 +26,7 @@ header {
 
 p1#header {
 	letter-spacing: -1.5px;
-	font-family: "Inter", Arial, sans-serif;
+	font-family: var(--font-family);
 	font-weight: 250;
 	font-size: 26px;
 	background: var(--background-color-transparent) !important;
@@ -36,7 +40,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background: var(--background-color);
-	font-family: 'Inter', Arial, sans-serif;
+	font-family: var(--font-family);
 	color: var(--title-color);
 	overscroll-behavior: contain;
 	z-index: 0;
@@ -196,7 +200,7 @@ input[type="number"] {
 button,
 .button,
 select {
-	font-family: 'Inter', Arial;
+	font-family: var(--font-family);
 	font-size: 16px;
 	font-weight: 300;
 	background: var(--button-color-transparent);
@@ -661,7 +665,6 @@ th {
 	min-width: 150px;
 	display: flex;
 	flex-direction: column;
-	font-family: 'Inter', Arial, sans-serif;
 	backdrop-filter: var(--backdrop-filter);
 }
 
