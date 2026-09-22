@@ -1,6 +1,6 @@
 // Project JS Calculator App
 const display = document.getElementById('display');
-const π = 3.14592;
+const π = Math.PI;
 let lastresult = 0;
 let dispInit = true;
 
