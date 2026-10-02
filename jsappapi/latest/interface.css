@@ -104,7 +104,8 @@ hr {
 	margin: 5px 5px;
 }
 
-p, label {
+p,
+label {
 	color: var(--text-color);
 	font-size: 14px;
 	margin: 10px
@@ -112,6 +113,12 @@ p, label {
 
 label {
 	margin: 0 0 0 5px;
+}
+
+label[for="blurRadius"],
+label[for="opacity"] {
+	width: 120px;
+	display: inline-block;
 }
 
 p2,
@@ -712,7 +719,7 @@ th {
 	right: 0 !important;
 	border: none;
 	border-radius: 0;
-	box-shadow: none!important;
+	box-shadow: none !important;
 }
 
 .window.maximized>.resizer {
